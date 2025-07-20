@@ -2,12 +2,15 @@
 
 import { TLoginResponse } from "@/services/auth/types";
 import * as React from "react";
-
 import { create } from "zustand";
 
 export type TAuthIsLogin = boolean;
 
-export type TAuthUser = TLoginResponse["user"];
+// Extended user type with role field
+export type TAuthUser = TLoginResponse["user"] & {
+  role?: "community" | "individual";
+  name?: string;
+};
 
 interface ICreateStoreParams {
   isLogin: TAuthIsLogin;
@@ -19,6 +22,7 @@ type ICreateStore = ICreateStoreParams & {
   setIsLogin: (isLogin: boolean) => void;
   setUser: (user: TAuthUser) => void;
   setAccessToken: (accessToken: string) => void;
+  logout: () => void;
 };
 
 function createStore({ isLogin, accessToken, user }: ICreateStoreParams) {
@@ -29,6 +33,12 @@ function createStore({ isLogin, accessToken, user }: ICreateStoreParams) {
     setAccessToken: (accessToken) => set({ accessToken }),
     user,
     setUser: (user) => set({ user }),
+    logout: () =>
+      set({
+        isLogin: false,
+        accessToken: "",
+        user: null,
+      }),
   }));
 }
 
@@ -42,6 +52,11 @@ export function useAuth() {
   }
 
   return React.useContext(AuthContext)!();
+}
+
+// Add useAuthStore hook for compatibility with existing components
+export function useAuthStore() {
+  return useAuth();
 }
 
 type IAuthProviderProps = ICreateStoreParams & {
