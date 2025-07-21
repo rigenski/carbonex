@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { useAuthStore } from "@/stores/auth";
 
 // Mock data for carbon issued projects
 const mockCarbonProjects = [
@@ -139,7 +138,6 @@ const mockCarbonProjects = [
 const projectStatuses = ["All", "Issued", "Retired"];
 
 export default function CarbonIssuedPage() {
-  const { user } = useAuthStore();
   const [projects] = useState(mockCarbonProjects);
   const [filteredProjects, setFilteredProjects] = useState(mockCarbonProjects);
   const [searchTerm, setSearchTerm] = useState("");

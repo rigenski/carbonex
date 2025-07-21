@@ -123,7 +123,7 @@ export default function VerifyEmailPage() {
             Verify Your Email
           </h2>
           <p className="mb-8 text-gray-600">
-            We've sent a verification code to your email address. Please enter
+            We&apos;ve sent a verification code to your email address. Please enter
             the 6-digit code below.
           </p>
         </div>
@@ -161,7 +161,7 @@ export default function VerifyEmailPage() {
           {/* Resend Code */}
           <div className="text-center">
             <p className="mb-2 text-sm text-gray-600">
-              Didn't receive the code?
+              Didn&apos;t receive the code?
             </p>
             {canResend ? (
               <button
@@ -212,7 +212,7 @@ export default function VerifyEmailPage() {
               </h3>
               <div className="mt-2 text-sm text-blue-700">
                 <ul className="list-disc space-y-1 pl-5">
-                  <li>Check your spam folder if you don't see the email</li>
+                  <li>Check your spam folder if you don&apos;t see the email</li>
                   <li>The code expires in 10 minutes</li>
                   <li>You can request a new code after 60 seconds</li>
                 </ul>

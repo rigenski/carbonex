@@ -179,7 +179,7 @@ export default function Container() {
             {/* Register Link */}
             <div className="text-center">
               <p className="text-sm text-gray-600">
-                Don't have an account?{" "}
+                Don&apos;t have an account?{" "}
                 <Link
                   href="/register"
                   className="font-medium text-green-600 hover:text-green-700"

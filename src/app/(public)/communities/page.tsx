@@ -131,13 +131,6 @@ export default function CommunitiesPage() {
     setFilteredCommunities(filtered);
   }, [communities, searchTerm, sortBy]);
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-    });
-  };
-
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
@@ -200,7 +193,7 @@ export default function CommunitiesPage() {
                 type="checkbox"
                 id="verified-only"
                 checked={true} // All communities are verified
-                onChange={(e) => {}}
+                onChange={() => {}}
                 className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
               />
               <label

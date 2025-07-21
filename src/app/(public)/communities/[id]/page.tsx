@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useAuthStore } from "@/stores/auth";
 
@@ -61,9 +60,8 @@ We believe that effective conservation requires collaboration between communitie
 };
 
 export default function CommunityDetailPage() {
-  const params = useParams();
   const { user } = useAuthStore();
-  const [community, setCommunity] = useState(mockCommunity);
+  const [community] = useState(mockCommunity);
   const [activeTab, setActiveTab] = useState("overview");
   const [isFollowing, setIsFollowing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);

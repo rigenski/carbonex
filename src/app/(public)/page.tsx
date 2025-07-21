@@ -458,7 +458,7 @@ export default function Home() {
               Globally Recognized Quality Assurance
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Your carbon investments are backed by the world's most trusted
+              Your carbon investments are backed by the world&apos;s most trusted
               certification bodies. Every credit meets international standards
               for maximum impact and credibility.
             </p>

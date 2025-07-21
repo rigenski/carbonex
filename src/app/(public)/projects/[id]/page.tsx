@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useAuthStore } from "@/stores/auth";
 
@@ -71,9 +70,8 @@ The project follows international carbon credit standards and will be verified b
 };
 
 export default function ProjectDetailPage() {
-  const params = useParams();
   const { user } = useAuthStore();
-  const [project, setProject] = useState(mockProject);
+  const [project] = useState(mockProject);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState("overview");
   const [isJoined, setIsJoined] = useState(false);
@@ -333,7 +331,7 @@ export default function ProjectDetailPage() {
                     ) : (
                       <div className="space-y-2">
                         <div className="w-full rounded-lg bg-green-100 px-6 py-3 text-center font-semibold text-green-800">
-                          ✓ You've Joined This Project
+                          ✓ You&apos;ve Joined This Project
                         </div>
                         <button
                           onClick={handleLeaveProject}

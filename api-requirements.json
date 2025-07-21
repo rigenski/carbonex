@@ -1,0 +1,1205 @@
+{
+  "project_info": {
+    "name": "CarbonEx",
+    "description": "Premium Carbon Credits & Environmental Impact Platform",
+    "base_url": "process.env.NEXT_PUBLIC_BE_URL",
+    "frontend_url": "process.env.NEXT_PUBLIC_FE_URL"
+  },
+  "authentication_apis": {
+    "description": "User authentication and session management",
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/login",
+        "description": "User login authentication",
+        "request_body": {
+          "email": "string (required)",
+          "password": "string (required)"
+        },
+        "response": {
+          "content": {
+            "user": {
+              "id": "string",
+              "fullName": "string",
+              "email": "string",
+              "status": "string",
+              "role": "string (community | individual)"
+            },
+            "token": "string (JWT token)"
+          },
+          "message": "string",
+          "errors": "array | null"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/register",
+        "description": "User registration",
+        "request_body": {
+          "email": "string (required)",
+          "password": "string (required)",
+          "fullName": "string (required)",
+          "role": "string (community | individual)",
+          "phone": "string",
+          "address": "string",
+          "idCard": "file (for verification)",
+          "organizationName": "string (for communities)",
+          "website": "string (for communities)",
+          "description": "string (for communities)"
+        },
+        "response": {
+          "content": {
+            "user": {
+              "id": "string",
+              "email": "string",
+              "status": "pending_verification"
+            }
+          },
+          "message": "string"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/verify-token",
+        "description": "Verify user token validity",
+        "request_body": {
+          "token": "string (required)"
+        },
+        "response": {
+          "content": {
+            "user": {
+              "id": "string",
+              "fullName": "string",
+              "email": "string",
+              "status": "string",
+              "role": "string"
+            },
+            "token": "string"
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/verify-email",
+        "description": "Verify user email address",
+        "request_body": {
+          "email": "string (required)",
+          "verificationCode": "string (required)"
+        },
+        "response": {
+          "message": "string"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/resend-verification",
+        "description": "Resend email verification code",
+        "request_body": {
+          "email": "string (required)"
+        },
+        "response": {
+          "message": "string"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/logout",
+        "description": "User logout",
+        "response": {
+          "message": "string"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/forgot-password",
+        "description": "Request password reset",
+        "request_body": {
+          "email": "string (required)"
+        },
+        "response": {
+          "message": "string"
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/reset-password",
+        "description": "Reset user password",
+        "request_body": {
+          "email": "string (required)",
+          "resetCode": "string (required)",
+          "newPassword": "string (required)"
+        },
+        "response": {
+          "message": "string"
+        }
+      }
+    ]
+  },
+  "projects_apis": {
+    "description": "Project management and participation",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/projects",
+        "description": "Get list of projects with filters",
+        "query_params": {
+          "page": "number (optional)",
+          "limit": "number (optional)",
+          "search": "string (optional)",
+          "status": "string (optional: Active, Planning, Completed)",
+          "projectType": "string (optional: Reforestation, Renewable Energy, etc.)",
+          "location": "string (optional)",
+          "needsVolunteers": "boolean (optional)",
+          "sortBy": "string (optional: name, carbon, date, volunteers)",
+          "sortOrder": "string (optional: asc, desc)"
+        },
+        "response": {
+          "content": {
+            "projects": [
+              {
+                "id": "string",
+                "name": "string",
+                "description": "string",
+                "image": "string",
+                "images": ["string"],
+                "address": {
+                  "full": "string",
+                  "city": "string",
+                  "province": "string",
+                  "country": "string"
+                },
+                "estimateCarbon": "number",
+                "registeredVolunteers": "number",
+                "maxVolunteers": "number",
+                "needsVolunteers": "boolean",
+                "estimateDate": {
+                  "start": "string (ISO date)",
+                  "end": "string (ISO date)"
+                },
+                "status": "string",
+                "projectType": "string",
+                "community": {
+                  "id": "string",
+                  "name": "string"
+                }
+              }
+            ],
+            "pagination": {
+              "page": "number",
+              "limit": "number",
+              "total": "number",
+              "pages": "number"
+            }
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/projects/{id}",
+        "description": "Get project details",
+        "response": {
+          "content": {
+            "project": {
+              "id": "string",
+              "name": "string",
+              "description": "string",
+              "fullDescription": "string",
+              "images": ["string"],
+              "address": {
+                "full": "string",
+                "regional": "string",
+                "province": "string",
+                "city": "string",
+                "district": "string",
+                "postalCode": "string"
+              },
+              "estimateCarbon": "number",
+              "totalVolunteers": "number",
+              "currentVolunteers": "number",
+              "estimateDate": {
+                "start": "string (ISO date)",
+                "end": "string (ISO date)"
+              },
+              "status": "string",
+              "projectType": "string",
+              "treeStatus": "string",
+              "community": {
+                "id": "string",
+                "name": "string",
+                "verified": "boolean"
+              },
+              "verificationStandards": ["string"],
+              "timeline": [
+                {
+                  "date": "string (ISO date)",
+                  "milestone": "string",
+                  "description": "string"
+                }
+              ],
+              "impact": {
+                "carbonSequestered": "number",
+                "treesPlanted": "number",
+                "areaRestored": "number"
+              }
+            }
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/projects",
+        "description": "Create new project (community only)",
+        "request_body": {
+          "name": "string (required)",
+          "description": "string (required)",
+          "fullDescription": "string (required)",
+          "images": "array of files",
+          "address": {
+            "full": "string (required)",
+            "province": "string (required)",
+            "city": "string (required)",
+            "district": "string",
+            "postalCode": "string"
+          },
+          "estimateCarbon": "number (required)",
+          "maxVolunteers": "number (required)",
+          "estimateDate": {
+            "start": "string (ISO date, required)",
+            "end": "string (ISO date, required)"
+          },
+          "projectType": "string (required)",
+          "verificationStandards": ["string"],
+          "budget": "number",
+          "fundingGoal": "number"
+        },
+        "response": {
+          "content": {
+            "project": {
+              "id": "string",
+              "name": "string",
+              "status": "Planning"
+            }
+          }
+        }
+      },
+      {
+        "method": "PUT",
+        "path": "/projects/{id}",
+        "description": "Update project (community owner only)",
+        "request_body": {
+          "name": "string",
+          "description": "string",
+          "fullDescription": "string",
+          "status": "string",
+          "maxVolunteers": "number"
+        },
+        "response": {
+          "content": {
+            "project": {
+              "id": "string",
+              "updated": "boolean"
+            }
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/projects/{id}/join",
+        "description": "Join project as volunteer (individual only)",
+        "response": {
+          "content": {
+            "joined": "boolean",
+            "volunteerId": "string"
+          }
+        }
+      },
+      {
+        "method": "DELETE",
+        "path": "/projects/{id}/leave",
+        "description": "Leave project (individual only)",
+        "response": {
+          "content": {
+            "left": "boolean"
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/projects/{id}/volunteers",
+        "description": "Get project volunteers",
+        "response": {
+          "content": {
+            "volunteers": [
+              {
+                "id": "string",
+                "fullName": "string",
+                "joinedDate": "string (ISO date)",
+                "contributionHours": "number"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/projects/{id}/progress",
+        "description": "Update project progress (community owner only)",
+        "request_body": {
+          "carbonSequestered": "number",
+          "treesPlanted": "number",
+          "areaRestored": "number",
+          "milestone": "string",
+          "description": "string",
+          "evidence": "array of files"
+        },
+        "response": {
+          "content": {
+            "progressId": "string",
+            "updated": "boolean"
+          }
+        }
+      }
+    ]
+  },
+  "communities_apis": {
+    "description": "Community management and discovery",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/communities",
+        "description": "Get list of communities",
+        "query_params": {
+          "page": "number (optional)",
+          "limit": "number (optional)",
+          "search": "string (optional)",
+          "location": "string (optional)",
+          "verified": "boolean (optional)",
+          "sortBy": "string (optional: name, projects, carbon, established)",
+          "sortOrder": "string (optional: asc, desc)"
+        },
+        "response": {
+          "content": {
+            "communities": [
+              {
+                "id": "string",
+                "name": "string",
+                "description": "string",
+                "image": "string",
+                "location": "string",
+                "projectCount": "number",
+                "verified": "boolean",
+                "carbonOffset": "number",
+                "establishedYear": "number",
+                "followers": "number"
+              }
+            ],
+            "pagination": {
+              "page": "number",
+              "limit": "number",
+              "total": "number",
+              "pages": "number"
+            }
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/communities/{id}",
+        "description": "Get community details",
+        "response": {
+          "content": {
+            "community": {
+              "id": "string",
+              "name": "string",
+              "description": "string",
+              "fullDescription": "string",
+              "image": "string",
+              "coverImage": "string",
+              "location": "string",
+              "projectCount": "number",
+              "totalCarbonOffset": "number",
+              "established": "string (ISO date)",
+              "verified": "boolean",
+              "email": "string",
+              "phone": "string",
+              "website": "string",
+              "followers": "number",
+              "projects": [
+                {
+                  "id": "string",
+                  "name": "string",
+                  "status": "string",
+                  "carbonOffset": "number",
+                  "volunteers": "number",
+                  "image": "string"
+                }
+              ],
+              "verificationDetails": {
+                "verifiedBy": "string",
+                "verificationDate": "string (ISO date)",
+                "standards": ["string"]
+              }
+            }
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/communities/{id}/follow",
+        "description": "Follow community (individual only)",
+        "response": {
+          "content": {
+            "following": "boolean",
+            "followId": "string"
+          }
+        }
+      },
+      {
+        "method": "DELETE",
+        "path": "/communities/{id}/unfollow",
+        "description": "Unfollow community (individual only)",
+        "response": {
+          "content": {
+            "unfollowed": "boolean"
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/communities/{id}/followers",
+        "description": "Get community followers",
+        "response": {
+          "content": {
+            "followers": [
+              {
+                "id": "string",
+                "fullName": "string",
+                "followedDate": "string (ISO date)"
+              }
+            ],
+            "total": "number"
+          }
+        }
+      },
+      {
+        "method": "PUT",
+        "path": "/communities/{id}/profile",
+        "description": "Update community profile (community owner only)",
+        "request_body": {
+          "name": "string",
+          "description": "string",
+          "fullDescription": "string",
+          "image": "file",
+          "coverImage": "file",
+          "website": "string",
+          "phone": "string"
+        },
+        "response": {
+          "content": {
+            "updated": "boolean"
+          }
+        }
+      }
+    ]
+  },
+  "carbon_credits_apis": {
+    "description": "Carbon credits tracking and marketplace",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/carbon-credits",
+        "description": "Get list of issued carbon credits",
+        "query_params": {
+          "page": "number (optional)",
+          "limit": "number (optional)",
+          "search": "string (optional)",
+          "status": "string (optional: Issued, Retired)",
+          "projectType": "string (optional)",
+          "sortBy": "string (optional: issueDate, name, carbon)",
+          "sortOrder": "string (optional: asc, desc)",
+          "minCarbon": "number (optional)",
+          "maxCarbon": "number (optional)"
+        },
+        "response": {
+          "content": {
+            "carbonCredits": [
+              {
+                "id": "string",
+                "projectId": "string",
+                "name": "string",
+                "image": "string",
+                "address": "string",
+                "estimateCarbon": "number",
+                "issuedCarbon": "number",
+                "issueDate": "string (ISO date)",
+                "retiredDate": "string (ISO date, nullable)",
+                "status": "string",
+                "community": {
+                  "id": "string",
+                  "name": "string"
+                },
+                "verificationStandard": "string",
+                "certificateUrl": "string",
+                "price": "number (per ton)",
+                "available": "number"
+              }
+            ],
+            "pagination": {
+              "page": "number",
+              "limit": "number",
+              "total": "number",
+              "pages": "number"
+            },
+            "statistics": {
+              "totalCredits": "number",
+              "totalCarbon": "number",
+              "averagePrice": "number"
+            }
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/carbon-credits/{id}",
+        "description": "Get carbon credit details",
+        "response": {
+          "content": {
+            "carbonCredit": {
+              "id": "string",
+              "projectId": "string",
+              "serialNumber": "string",
+              "issuedCarbon": "number",
+              "issueDate": "string (ISO date)",
+              "retiredDate": "string (ISO date, nullable)",
+              "status": "string",
+              "verificationDetails": {
+                "standard": "string",
+                "verifiedBy": "string",
+                "verificationDate": "string (ISO date)",
+                "certificateUrl": "string"
+              },
+              "project": {
+                "id": "string",
+                "name": "string",
+                "description": "string",
+                "location": "string",
+                "community": "string"
+              },
+              "pricing": {
+                "pricePerTon": "number",
+                "totalPrice": "number",
+                "currency": "string"
+              },
+              "retirement": {
+                "retiredBy": "string",
+                "retiredFor": "string",
+                "retirementDate": "string (ISO date)"
+              }
+            }
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/carbon-credits/{id}/purchase",
+        "description": "Purchase carbon credits",
+        "request_body": {
+          "quantity": "number (required)",
+          "retireImmediately": "boolean",
+          "retirementNote": "string",
+          "paymentMethod": "string"
+        },
+        "response": {
+          "content": {
+            "transactionId": "string",
+            "quantity": "number",
+            "totalPrice": "number",
+            "status": "string"
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/carbon-credits/{id}/retire",
+        "description": "Retire owned carbon credits",
+        "request_body": {
+          "quantity": "number (required)",
+          "retirementNote": "string (required)",
+          "retireFor": "string"
+        },
+        "response": {
+          "content": {
+            "retirementId": "string",
+            "quantity": "number",
+            "retiredDate": "string (ISO date)"
+          }
+        }
+      }
+    ]
+  },
+  "dashboard_apis": {
+    "description": "User dashboard and analytics",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/dashboard/overview",
+        "description": "Get user dashboard overview",
+        "response": {
+          "content": {
+            "user": {
+              "id": "string",
+              "fullName": "string",
+              "role": "string"
+            },
+            "statistics": {
+              "projectsJoined": "number (for individuals)",
+              "projectsCreated": "number (for communities)",
+              "carbonOffset": "number",
+              "volunteersManaged": "number (for communities)",
+              "creditsOwned": "number",
+              "creditsRetired": "number"
+            },
+            "recentActivity": [
+              {
+                "id": "string",
+                "type": "string",
+                "description": "string",
+                "date": "string (ISO date)",
+                "projectId": "string (optional)"
+              }
+            ],
+            "upcomingEvents": [
+              {
+                "id": "string",
+                "projectId": "string",
+                "projectName": "string",
+                "eventType": "string",
+                "date": "string (ISO date)"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/dashboard/projects",
+        "description": "Get user's projects (joined or created)",
+        "response": {
+          "content": {
+            "projects": [
+              {
+                "id": "string",
+                "name": "string",
+                "status": "string",
+                "role": "string (owner, volunteer)",
+                "carbonOffset": "number",
+                "lastActivity": "string (ISO date)"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/dashboard/carbon-portfolio",
+        "description": "Get user's carbon credit portfolio",
+        "response": {
+          "content": {
+            "portfolio": {
+              "totalOwned": "number",
+              "totalRetired": "number",
+              "totalValue": "number",
+              "credits": [
+                {
+                  "id": "string",
+                  "projectName": "string",
+                  "quantity": "number",
+                  "purchaseDate": "string (ISO date)",
+                  "status": "string",
+                  "value": "number"
+                }
+              ]
+            }
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/dashboard/analytics",
+        "description": "Get user analytics and insights",
+        "query_params": {
+          "period": "string (7d, 30d, 90d, 1y)"
+        },
+        "response": {
+          "content": {
+            "analytics": {
+              "carbonTrend": [
+                {
+                  "date": "string (ISO date)",
+                  "carbon": "number"
+                }
+              ],
+              "projectContributions": [
+                {
+                  "projectId": "string",
+                  "projectName": "string",
+                  "contribution": "number"
+                }
+              ],
+              "impactMetrics": {
+                "treesEquivalent": "number",
+                "carsOffRoad": "number",
+                "energySaved": "number"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "user_profile_apis": {
+    "description": "User profile management",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/profile",
+        "description": "Get user profile",
+        "response": {
+          "content": {
+            "user": {
+              "id": "string",
+              "fullName": "string",
+              "email": "string",
+              "phone": "string",
+              "address": "string",
+              "role": "string",
+              "profileImage": "string",
+              "bio": "string",
+              "preferences": {
+                "notifications": "boolean",
+                "emailUpdates": "boolean",
+                "projectTypes": ["string"]
+              },
+              "verification": {
+                "status": "string",
+                "documents": ["string"]
+              }
+            }
+          }
+        }
+      },
+      {
+        "method": "PUT",
+        "path": "/profile",
+        "description": "Update user profile",
+        "request_body": {
+          "fullName": "string",
+          "phone": "string",
+          "address": "string",
+          "bio": "string",
+          "profileImage": "file",
+          "preferences": {
+            "notifications": "boolean",
+            "emailUpdates": "boolean",
+            "projectTypes": ["string"]
+          }
+        },
+        "response": {
+          "content": {
+            "updated": "boolean"
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/profile/change-password",
+        "description": "Change user password",
+        "request_body": {
+          "currentPassword": "string (required)",
+          "newPassword": "string (required)"
+        },
+        "response": {
+          "message": "string"
+        }
+      }
+    ]
+  },
+  "notifications_apis": {
+    "description": "User notifications management",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/notifications",
+        "description": "Get user notifications",
+        "query_params": {
+          "page": "number (optional)",
+          "limit": "number (optional)",
+          "unread": "boolean (optional)"
+        },
+        "response": {
+          "content": {
+            "notifications": [
+              {
+                "id": "string",
+                "type": "string",
+                "title": "string",
+                "message": "string",
+                "read": "boolean",
+                "createdAt": "string (ISO date)",
+                "data": {
+                  "projectId": "string (optional)",
+                  "communityId": "string (optional)"
+                }
+              }
+            ],
+            "unreadCount": "number"
+          }
+        }
+      },
+      {
+        "method": "PUT",
+        "path": "/notifications/{id}/read",
+        "description": "Mark notification as read",
+        "response": {
+          "content": {
+            "marked": "boolean"
+          }
+        }
+      },
+      {
+        "method": "PUT",
+        "path": "/notifications/mark-all-read",
+        "description": "Mark all notifications as read",
+        "response": {
+          "content": {
+            "marked": "number"
+          }
+        }
+      }
+    ]
+  },
+  "file_upload_apis": {
+    "description": "File upload and management",
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/upload/image",
+        "description": "Upload image file",
+        "request_body": {
+          "file": "file (required)",
+          "category": "string (profile, project, community, verification)"
+        },
+        "response": {
+          "content": {
+            "fileId": "string",
+            "url": "string",
+            "filename": "string",
+            "size": "number"
+          }
+        }
+      },
+      {
+        "method": "POST",
+        "path": "/upload/document",
+        "description": "Upload document file",
+        "request_body": {
+          "file": "file (required)",
+          "category": "string (verification, certificate, evidence)"
+        },
+        "response": {
+          "content": {
+            "fileId": "string",
+            "url": "string",
+            "filename": "string",
+            "size": "number"
+          }
+        }
+      },
+      {
+        "method": "DELETE",
+        "path": "/upload/{fileId}",
+        "description": "Delete uploaded file",
+        "response": {
+          "content": {
+            "deleted": "boolean"
+          }
+        }
+      }
+    ]
+  },
+  "chatbot_apis": {
+    "description": "AI chatbot for carbon credit assistance",
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/chatbot/message",
+        "description": "Send message to chatbot",
+        "request_body": {
+          "message": "string (required)",
+          "sessionId": "string (optional)",
+          "context": {
+            "page": "string (optional)",
+            "projectId": "string (optional)",
+            "communityId": "string (optional)"
+          }
+        },
+        "response": {
+          "content": {
+            "reply": "string",
+            "sessionId": "string",
+            "suggestions": ["string"],
+            "quickActions": [
+              {
+                "text": "string",
+                "action": "string",
+                "data": "object"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/chatbot/session/{sessionId}",
+        "description": "Get chatbot conversation history",
+        "response": {
+          "content": {
+            "messages": [
+              {
+                "id": "string",
+                "message": "string",
+                "isUser": "boolean",
+                "timestamp": "string (ISO date)"
+              }
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "search_apis": {
+    "description": "Global search functionality",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/search",
+        "description": "Global search across projects, communities, and carbon credits",
+        "query_params": {
+          "q": "string (required)",
+          "type": "string (optional: projects, communities, credits, all)",
+          "page": "number (optional)",
+          "limit": "number (optional)"
+        },
+        "response": {
+          "content": {
+            "results": {
+              "projects": [
+                {
+                  "id": "string",
+                  "name": "string",
+                  "description": "string",
+                  "type": "project"
+                }
+              ],
+              "communities": [
+                {
+                  "id": "string",
+                  "name": "string",
+                  "description": "string",
+                  "type": "community"
+                }
+              ],
+              "carbonCredits": [
+                {
+                  "id": "string",
+                  "name": "string",
+                  "description": "string",
+                  "type": "carbon_credit"
+                }
+              ]
+            },
+            "total": "number"
+          }
+        }
+      }
+    ]
+  },
+  "verification_apis": {
+    "description": "Project and community verification",
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/verification/request",
+        "description": "Request verification for project or community",
+        "request_body": {
+          "entityType": "string (project | community)",
+          "entityId": "string (required)",
+          "documents": ["string (file IDs)"],
+          "notes": "string"
+        },
+        "response": {
+          "content": {
+            "verificationId": "string",
+            "status": "pending"
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/verification/{id}/status",
+        "description": "Get verification status",
+        "response": {
+          "content": {
+            "verification": {
+              "id": "string",
+              "status": "string (pending, approved, rejected)",
+              "feedback": "string",
+              "verifiedDate": "string (ISO date)",
+              "verifiedBy": "string"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "admin_apis": {
+    "description": "Admin panel APIs (admin role only)",
+    "endpoints": [
+      {
+        "method": "GET",
+        "path": "/admin/overview",
+        "description": "Get admin dashboard overview",
+        "response": {
+          "content": {
+            "statistics": {
+              "totalUsers": "number",
+              "totalProjects": "number",
+              "totalCommunities": "number",
+              "totalCarbonCredits": "number",
+              "pendingVerifications": "number"
+            }
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/admin/users",
+        "description": "Get all users for admin management",
+        "query_params": {
+          "page": "number (optional)",
+          "limit": "number (optional)",
+          "search": "string (optional)",
+          "role": "string (optional)",
+          "status": "string (optional)"
+        },
+        "response": {
+          "content": {
+            "users": [
+              {
+                "id": "string",
+                "fullName": "string",
+                "email": "string",
+                "role": "string",
+                "status": "string",
+                "createdAt": "string (ISO date)"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "method": "PUT",
+        "path": "/admin/users/{id}/status",
+        "description": "Update user status",
+        "request_body": {
+          "status": "string (active, suspended, banned)"
+        },
+        "response": {
+          "content": {
+            "updated": "boolean"
+          }
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/admin/verifications",
+        "description": "Get pending verifications",
+        "response": {
+          "content": {
+            "verifications": [
+              {
+                "id": "string",
+                "entityType": "string",
+                "entityId": "string",
+                "entityName": "string",
+                "status": "string",
+                "submittedAt": "string (ISO date)"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "method": "PUT",
+        "path": "/admin/verifications/{id}",
+        "description": "Process verification request",
+        "request_body": {
+          "status": "string (approved, rejected)",
+          "feedback": "string"
+        },
+        "response": {
+          "content": {
+            "processed": "boolean"
+          }
+        }
+      }
+    ]
+  },
+  "environmental_variables": {
+    "required": [
+      "NEXT_PUBLIC_BE_URL",
+      "NEXT_PUBLIC_FE_URL",
+      "DATABASE_URL",
+      "JWT_SECRET",
+      "EMAIL_SERVICE_API_KEY",
+      "FILE_STORAGE_API_KEY",
+      "CHATBOT_API_KEY"
+    ],
+    "optional": [
+      "STRIPE_SECRET_KEY",
+      "STRIPE_PUBLISHABLE_KEY",
+      "CARBON_API_KEY",
+      "VERIFICATION_API_KEY"
+    ]
+  },
+  "authentication_flow": {
+    "description": "Authentication flow using JWT tokens",
+    "headers": {
+      "Authorization": "Bearer {token}",
+      "Content-Type": "application/json"
+    },
+    "token_expiration": "24 hours",
+    "refresh_mechanism": "Re-authentication required"
+  },
+  "error_handling": {
+    "standard_error_format": {
+      "message": "string",
+      "errors": [
+        {
+          "field": "string",
+          "message": "string"
+        }
+      ]
+    },
+    "http_status_codes": {
+      "200": "Success",
+      "201": "Created",
+      "400": "Bad Request",
+      "401": "Unauthorized",
+      "403": "Forbidden",
+      "404": "Not Found",
+      "422": "Validation Error",
+      "500": "Internal Server Error"
+    }
+  }
+} 
