@@ -81,9 +81,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body
-        className={`${inter.variable} antialiased`}
-      >
+      <body className={`${inter.variable} antialiased`}>
         <Providers config={config as TConfig}>{children}</Providers>
         <Chatbot />
       </body>
