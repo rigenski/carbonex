@@ -213,9 +213,10 @@ export default function CarbonIssuedPage() {
                 Pasar Kredit Karbon Premium
               </h1>
               <p className="mt-2 text-gray-600">
-                Akses kredit karbon berkualitas tinggi triple-verified siap untuk
-                pembelian langsung. Setiap kredit mewakili pengurangan CO₂ yang
-                terukur dengan keaslian terjamin dan dampak lingkungan maksimal.
+                Akses kredit karbon berkualitas tinggi triple-verified siap
+                untuk pembelian langsung. Setiap kredit mewakili pengurangan CO₂
+                yang terukur dengan keaslian terjamin dan dampak lingkungan
+                maksimal.
               </p>
             </div>
           </div>
@@ -252,7 +253,11 @@ export default function CarbonIssuedPage() {
               >
                 {projectStatuses.map((status) => (
                   <option key={status} value={status}>
-                    {status === "All" ? "Semua" : status === "Issued" ? "Terbit" : "Pensiun"}
+                    {status === "All"
+                      ? "Semua"
+                      : status === "Issued"
+                        ? "Terbit"
+                        : "Pensiun"}
                   </option>
                 ))}
               </select>
@@ -263,12 +268,14 @@ export default function CarbonIssuedPage() {
           <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Menampilkan {filteredProjects.length} dari {projects.length} proyek
-                kredit karbon
+                Menampilkan {filteredProjects.length} dari {projects.length}{" "}
+                proyek kredit karbon
               </span>
             </div>
             <div className="mt-4 flex items-center space-x-2 sm:mt-0">
-              <span className="text-sm text-gray-600">Urutkan berdasarkan:</span>
+              <span className="text-sm text-gray-600">
+                Urutkan berdasarkan:
+              </span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
@@ -374,7 +381,7 @@ export default function CarbonIssuedPage() {
                     <td className="px-6 py-4">
                       <Link
                         href={`/projects/${project.id}`}
-                        className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
+                        className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-nowrap text-white shadow-sm hover:bg-blue-700"
                       >
                         Lihat Detail
                       </Link>

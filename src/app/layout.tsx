@@ -3,10 +3,10 @@ import Chatbot from "@/components/chatbot";
 import { TConfig } from "@/stores/config";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 
-const inter = Inter({
-  variable: "--font-inter",
+const plusJakartaSans = Plus_Jakarta_Sans({
+  variable: "--font-plus-jakarta-sans",
   subsets: ["latin"],
 });
 
@@ -81,7 +81,11 @@ export default async function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.variable} antialiased`}>
+      <head>
+        <link rel="icon" href="/logo.png" type="image/png" />
+        <link rel="apple-touch-icon" href="/logo.png" />
+      </head>
+      <body className={`${plusJakartaSans.variable} antialiased`}>
         <Providers config={config as TConfig}>{children}</Providers>
         <Chatbot />
       </body>

@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
 import { useAuthStore } from "@/stores/auth";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 // Mock project data (in real app, this would come from API)
 const mockProject = {
@@ -10,7 +10,6 @@ const mockProject = {
   name: "Forest Restoration Initiative",
   images: [
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop&crop=center",
-    "https://images.unsplash.com/photo-1574263867128-9c1a5c5f4cf3?w=800&h=400&fit=crop&crop=center",
     "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=400&fit=crop&crop=center",
   ],
   address: {

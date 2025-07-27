@@ -38,21 +38,27 @@ export default function Header() {
             <div className="flex items-baseline space-x-8">
               <Link
                 href="/projects"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
+                className="rounded-md px-3 py-2 text-nowrap text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
               >
                 Proyek
               </Link>
               <Link
                 href="/carbon-issued"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
+                className="rounded-md px-3 py-2 text-nowrap text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
               >
                 Karbon Terbit
               </Link>
               <Link
                 href="/communities"
-                className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
+                className="rounded-md px-3 py-2 text-nowrap text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
               >
                 Komunitas
+              </Link>
+              <Link
+                href="/register"
+                className="rounded-md px-3 py-2 text-nowrap text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
+              >
+                Daftar
               </Link>
             </div>
           </div>
@@ -100,16 +106,22 @@ export default function Header() {
               ) : (
                 <div className="flex items-center space-x-4">
                   <Link
-                    href="/login"
+                    href="/admin/dashboard"
                     className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
                   >
-                    Masuk
+                    Admin
                   </Link>
                   <Link
-                    href="/register"
+                    href="/community/dashboard"
+                    className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
+                  >
+                    Community
+                  </Link>
+                  <Link
+                    href="/individual/dashboard"
                     className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
                   >
-                    Daftar
+                    Individual
                   </Link>
                 </div>
               )}
@@ -209,16 +221,22 @@ export default function Header() {
               ) : (
                 <div className="space-y-1 border-t pt-3">
                   <Link
-                    href="/login"
+                    href="/admin/dashboard"
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
                   >
-                    Masuk
+                    Admin
                   </Link>
                   <Link
-                    href="/register"
+                    href="/community/dashboard"
+                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
+                  >
+                    Community
+                  </Link>
+                  <Link
+                    href="/individual/dashboard"
                     className="block rounded-md bg-green-600 px-3 py-2 text-base font-medium text-white transition-colors hover:bg-green-700"
                   >
-                    Daftar
+                    Individual
                   </Link>
                 </div>
               )}

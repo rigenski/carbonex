@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-green-50 to-blue-50 py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <section className="flex min-h-screen items-center bg-gradient-to-br from-green-50 to-blue-50">
+        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
               <h1 className="mb-6 text-5xl font-bold text-gray-900">
@@ -23,13 +23,13 @@ export default function Home() {
                   href="/projects"
                   className="rounded-lg bg-green-600 px-8 py-3 text-center font-semibold text-white transition-colors hover:bg-green-700"
                 >
-                  Mulai Offset Hari Ini
+                  Mulai Kontribusi
                 </Link>
                 <Link
                   href="/communities"
                   className="rounded-lg border border-green-600 px-8 py-3 text-center font-semibold text-green-600 transition-colors hover:bg-green-50"
                 >
-                  Lihat Kisah Sukses
+                  Lihat Komunitas
                 </Link>
               </div>
               <div className="mt-8 flex items-center space-x-8">
