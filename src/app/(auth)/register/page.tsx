@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
@@ -122,18 +123,22 @@ export default function RegisterPage() {
         <div className="relative z-10 flex flex-col justify-center px-12 text-white">
           <div className="mb-8">
             <div className="mb-6 flex items-center">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white">
-                <span className="font-bold text-green-600">C</span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="CarbonEx Logo"
+                width={40}
+                height={40}
+                className="h-10 w-10"
+              />
               <span className="ml-3 text-2xl font-bold">CarbonEx</span>
             </div>
             <h1 className="mb-4 text-4xl font-bold">
-              Join the Climate Action Movement
+              Bergabung dengan Gerakan Aksi Iklim
             </h1>
             <p className="mb-8 text-xl text-green-100">
-              Connect with communities and individuals worldwide to create
-              verified carbon offset projects and make a real impact on our
-              planet&apos;s future.
+              Terhubung dengan komunitas dan individu di seluruh dunia untuk
+              menciptakan proyek offset karbon terverifikasi dan membuat
+              dampak nyata pada masa depan planet kita.
             </p>
           </div>
 
@@ -148,7 +153,7 @@ export default function RegisterPage() {
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span>Verified carbon credit projects</span>
+              <span>Proyek kredit karbon terverifikasi</span>
             </div>
             <div className="flex items-center space-x-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500">
@@ -160,7 +165,7 @@ export default function RegisterPage() {
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span>Community-driven initiatives</span>
+              <span>Inisiatif berbasis komunitas</span>
             </div>
             <div className="flex items-center space-x-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500">
@@ -172,7 +177,7 @@ export default function RegisterPage() {
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span>Real-time impact tracking</span>
+              <span>Pelacakan dampak real-time</span>
             </div>
           </div>
         </div>
@@ -180,14 +185,14 @@ export default function RegisterPage() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex w-full items-center justify-center p-8 lg:w-1/2">
+      <div className="flex w-full items-center justify-center bg-white p-8 lg:w-1/2">
         <div className="w-full max-w-md">
           <div className="mb-8 text-center">
             <h2 className="mb-2 text-3xl font-bold text-gray-900">
-              Create Your Account
+              Buat Akun Anda
             </h2>
             <p className="text-gray-600">
-              Start your journey towards a sustainable future
+              Mulai perjalanan Anda menuju masa depan yang berkelanjutan
             </p>
           </div>
 
@@ -195,7 +200,7 @@ export default function RegisterPage() {
             {/* Role Selection */}
             <div>
               <label className="mb-3 block text-sm font-medium text-gray-700">
-                I am registering as:
+                Saya mendaftar sebagai:
               </label>
               <div className="grid grid-cols-2 gap-3">
                 <button
@@ -207,8 +212,8 @@ export default function RegisterPage() {
                       : "border-gray-300 hover:border-gray-400"
                   }`}
                 >
-                  <div className="font-semibold">Individual</div>
-                  <div className="text-xs text-gray-500">Personal account</div>
+                  <div className="font-semibold">Individu</div>
+                  <div className="text-xs text-gray-500">Akun pribadi</div>
                 </button>
                 <button
                   type="button"
@@ -219,9 +224,9 @@ export default function RegisterPage() {
                       : "border-gray-300 hover:border-gray-400"
                   }`}
                 >
-                  <div className="font-semibold">Community</div>
+                  <div className="font-semibold">Komunitas</div>
                   <div className="text-xs text-gray-500">
-                    Organization account
+                    Akun organisasi
                   </div>
                 </button>
               </div>
@@ -232,8 +237,8 @@ export default function RegisterPage() {
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
                 {selectedRole === "community"
-                  ? "Organization ID/Tax ID"
-                  : "ID Card"}{" "}
+                  ? "ID Organisasi/NPWP"
+                  : "Kartu Identitas"}{" "}
                 *
               </label>
               <div
@@ -259,7 +264,7 @@ export default function RegisterPage() {
                         onClick={removeIdCard}
                         className="text-sm font-medium text-red-600 hover:text-red-700"
                       >
-                        Remove
+                        Hapus
                       </button>
                     </div>
                   </div>
@@ -281,12 +286,12 @@ export default function RegisterPage() {
                     <div>
                       <p className="text-gray-600">
                         <span className="font-medium text-green-600">
-                          Click to upload
+                          Klik untuk unggah
                         </span>{" "}
-                        or drag and drop
+                        atau seret dan lepas
                       </p>
                       <p className="text-sm text-gray-500">
-                        PNG, JPG, JPEG up to 10MB
+                        PNG, JPG, JPEG hingga 10MB
                       </p>
                     </div>
                   </div>
@@ -294,7 +299,7 @@ export default function RegisterPage() {
                 <input
                   type="file"
                   accept="image/*"
-                  {...register("idCard", { required: "ID card is required" })}
+                  {...register("idCard", { required: "Kartu identitas wajib diisi" })}
                   onChange={handleFileChange}
                   className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                 />
@@ -310,18 +315,18 @@ export default function RegisterPage() {
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">
                 {selectedRole === "community"
-                  ? "Organization Name"
-                  : "Full Name"}{" "}
+                  ? "Nama Organisasi"
+                  : "Nama Lengkap"}{" "}
                 *
               </label>
               <input
                 type="text"
-                {...register("name", { required: "Name is required" })}
+                {...register("name", { required: "Nama wajib diisi" })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 placeholder={
                   selectedRole === "community"
-                    ? "Enter organization name"
-                    : "Enter your full name"
+                    ? "Masukkan nama organisasi"
+                    : "Masukkan nama lengkap Anda"
                 }
               />
               {errors.name && (
@@ -334,15 +339,15 @@ export default function RegisterPage() {
             {/* Phone Number */}
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">
-                Phone Number *
+                Nomor Telepon *
               </label>
               <input
                 type="tel"
                 {...register("phoneNumber", {
-                  required: "Phone number is required",
+                  required: "Nomor telepon wajib diisi",
                 })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Enter your phone number"
+                placeholder="Masukkan nomor telepon Anda"
               />
               {errors.phoneNumber && (
                 <p className="mt-1 text-sm text-red-600">
@@ -354,19 +359,19 @@ export default function RegisterPage() {
             {/* Email */}
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">
-                Email Address *
+                Alamat Email *
               </label>
               <input
                 type="email"
                 {...register("email", {
-                  required: "Email is required",
+                  required: "Email wajib diisi",
                   pattern: {
                     value: /^\S+@\S+$/i,
-                    message: "Please enter a valid email address",
+                    message: "Silakan masukkan alamat email yang valid",
                   },
                 })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Enter your email address"
+                placeholder="Masukkan alamat email Anda"
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-600">
@@ -378,13 +383,13 @@ export default function RegisterPage() {
             {/* Address */}
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">
-                Address *
+                Alamat *
               </label>
               <textarea
-                {...register("address", { required: "Address is required" })}
+                {...register("address", { required: "Alamat wajib diisi" })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 rows={3}
-                placeholder="Enter your complete address"
+                placeholder="Masukkan alamat lengkap Anda"
               />
               {errors.address && (
                 <p className="mt-1 text-sm text-red-600">
@@ -396,19 +401,19 @@ export default function RegisterPage() {
             {/* Password */}
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">
-                Password *
+                Kata Sandi *
               </label>
               <input
                 type="password"
                 {...register("password", {
-                  required: "Password is required",
+                  required: "Kata sandi wajib diisi",
                   minLength: {
                     value: 8,
-                    message: "Password must be at least 8 characters",
+                    message: "Kata sandi minimal 8 karakter",
                   },
                 })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Create a password"
+                placeholder="Buat kata sandi"
               />
               {errors.password && (
                 <p className="mt-1 text-sm text-red-600">
@@ -420,17 +425,17 @@ export default function RegisterPage() {
             {/* Confirm Password */}
             <div>
               <label className="mb-1 block text-sm font-medium text-gray-700">
-                Confirm Password *
+                Konfirmasi Kata Sandi *
               </label>
               <input
                 type="password"
                 {...register("confirmPassword", {
-                  required: "Please confirm your password",
+                  required: "Silakan konfirmasi kata sandi Anda",
                   validate: (value) =>
-                    value === password || "Passwords do not match",
+                    value === password || "Kata sandi tidak cocok",
                 })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Confirm your password"
+                placeholder="Konfirmasi kata sandi Anda"
               />
               {errors.confirmPassword && (
                 <p className="mt-1 text-sm text-red-600">
@@ -445,18 +450,18 @@ export default function RegisterPage() {
               disabled={isLoading}
               className="w-full rounded-md bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {isLoading ? "Creating Account..." : "Create Account"}
+              {isLoading ? "Membuat Akun..." : "Buat Akun"}
             </button>
 
             {/* Login Link */}
             <div className="text-center">
               <p className="text-sm text-gray-600">
-                Already have an account?{" "}
+                Sudah punya akun?{" "}
                 <Link
                   href="/login"
                   className="font-medium text-green-600 hover:text-green-700"
                 >
-                  Sign in here
+                  Masuk di sini
                 </Link>
               </p>
             </div>

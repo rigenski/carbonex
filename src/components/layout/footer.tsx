@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -8,15 +9,19 @@ export default function Footer() {
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
             <div className="mb-4 flex items-center">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-600">
-                <span className="text-sm font-bold text-white">C</span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="CarbonEx Logo"
+                width={32}
+                height={32}
+                className="h-8 w-8"
+              />
               <span className="ml-2 text-xl font-bold">CarbonEx</span>
             </div>
             <p className="max-w-md text-gray-400">
-              Connecting communities and individuals to create a sustainable
-              future through verified carbon credit projects. Together, we can
-              make a difference for our planet.
+              Menghubungkan komunitas dan individu untuk menciptakan masa depan
+              yang berkelanjutan melalui proyek kredit karbon terverifikasi.
+              Bersama, kita dapat membuat perbedaan untuk planet kita.
             </p>
             <div className="mt-6 flex space-x-4">
               <a
@@ -60,14 +65,14 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold">Quick Links</h3>
+            <h3 className="mb-4 text-lg font-semibold">Tautan Cepat</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/"
                   className="text-gray-400 transition-colors hover:text-white"
                 >
-                  Home
+                  Beranda
                 </Link>
               </li>
               <li>
@@ -75,7 +80,7 @@ export default function Footer() {
                   href="/projects"
                   className="text-gray-400 transition-colors hover:text-white"
                 >
-                  Projects
+                  Proyek
                 </Link>
               </li>
               <li>
@@ -83,7 +88,7 @@ export default function Footer() {
                   href="/communities"
                   className="text-gray-400 transition-colors hover:text-white"
                 >
-                  Communities
+                  Komunitas
                 </Link>
               </li>
               <li>
@@ -91,7 +96,7 @@ export default function Footer() {
                   href="/about"
                   className="text-gray-400 transition-colors hover:text-white"
                 >
-                  About Us
+                  Tentang Kami
                 </Link>
               </li>
             </ul>
@@ -99,14 +104,14 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold">Support</h3>
+            <h3 className="mb-4 text-lg font-semibold">Dukungan</h3>
             <ul className="space-y-2">
               <li>
                 <Link
                   href="/help"
                   className="text-gray-400 transition-colors hover:text-white"
                 >
-                  Help Center
+                  Pusat Bantuan
                 </Link>
               </li>
               <li>
@@ -114,7 +119,7 @@ export default function Footer() {
                   href="/contact"
                   className="text-gray-400 transition-colors hover:text-white"
                 >
-                  Contact Us
+                  Hubungi Kami
                 </Link>
               </li>
               <li>
@@ -122,7 +127,7 @@ export default function Footer() {
                   href="/privacy"
                   className="text-gray-400 transition-colors hover:text-white"
                 >
-                  Privacy Policy
+                  Kebijakan Privasi
                 </Link>
               </li>
               <li>
@@ -130,7 +135,7 @@ export default function Footer() {
                   href="/terms"
                   className="text-gray-400 transition-colors hover:text-white"
                 >
-                  Terms of Service
+                  Ketentuan Layanan
                 </Link>
               </li>
             </ul>
@@ -139,11 +144,11 @@ export default function Footer() {
 
         <div className="mt-8 flex flex-col items-center justify-between border-t border-gray-800 pt-8 md:flex-row">
           <p className="text-sm text-gray-400">
-            © 2024 CarbonEx. All rights reserved.
+            © 2024 CarbonEx. Semua hak dilindungi.
           </p>
           <div className="mt-4 flex space-x-6 md:mt-0">
             <span className="text-sm text-gray-400">
-              Made with ❤️ for the planet
+              Dibuat dengan ❤️ untuk planet
             </span>
           </div>
         </div>

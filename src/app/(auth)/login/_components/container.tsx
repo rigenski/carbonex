@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Container() {
   const form = useForm<TLoginRequest>();
@@ -42,17 +43,21 @@ export default function Container() {
         <div className="relative z-10 flex flex-col justify-center px-12 text-white">
           <div className="mb-8">
             <div className="mb-6 flex items-center">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-white">
-                <span className="font-bold text-green-600">C</span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="CarbonEx Logo"
+                width={40}
+                height={40}
+                className="h-10 w-10"
+              />
               <span className="ml-3 text-2xl font-bold">CarbonEx</span>
             </div>
             <h1 className="mb-4 text-4xl font-bold">
-              Welcome Back to the Climate Action Community
+              Selamat Datang Kembali ke Komunitas Aksi Iklim
             </h1>
             <p className="mb-8 text-xl text-green-100">
-              Continue your journey in creating sustainable impact through
-              verified carbon credit projects.
+              Lanjutkan perjalanan Anda dalam menciptakan dampak berkelanjutan
+              melalui proyek kredit karbon terverifikasi.
             </p>
           </div>
 
@@ -67,7 +72,7 @@ export default function Container() {
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span>Track your carbon offset impact</span>
+              <span>Lacak dampak offset karbon Anda</span>
             </div>
             <div className="flex items-center space-x-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500">
@@ -79,7 +84,7 @@ export default function Container() {
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span>Access exclusive project updates</span>
+              <span>Akses pembaruan proyek eksklusif</span>
             </div>
             <div className="flex items-center space-x-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500">
@@ -91,7 +96,7 @@ export default function Container() {
                   <path d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <span>Connect with global communities</span>
+              <span>Terhubung dengan komunitas global</span>
             </div>
           </div>
         </div>
@@ -99,11 +104,11 @@ export default function Container() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex w-full items-center justify-center p-8 lg:w-1/2">
+      <div className="flex w-full items-center justify-center bg-white p-8 lg:w-1/2">
         <div className="w-full max-w-md">
           <div className="mb-8 text-center">
-            <h2 className="mb-2 text-3xl font-bold text-gray-900">Sign In</h2>
-            <p className="text-gray-600">Access your CarbonEx account</p>
+            <h2 className="mb-2 text-3xl font-bold text-gray-900">Masuk</h2>
+            <p className="text-gray-600">Akses akun CarbonEx Anda</p>
           </div>
 
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
@@ -113,14 +118,14 @@ export default function Container() {
                 htmlFor="email"
                 className="mb-1 block text-sm font-medium text-gray-700"
               >
-                Email Address
+                Alamat Email
               </label>
               <input
                 type="email"
                 id="email"
                 {...form.register("email", { required: true })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Enter your email address"
+                placeholder="Masukkan alamat email Anda"
               />
             </div>
 
@@ -130,14 +135,14 @@ export default function Container() {
                 htmlFor="password"
                 className="mb-1 block text-sm font-medium text-gray-700"
               >
-                Password
+                Kata Sandi
               </label>
               <input
                 type="password"
                 id="password"
                 {...form.register("password", { required: true })}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Enter your password"
+                placeholder="Masukkan kata sandi Anda"
               />
             </div>
 
@@ -154,7 +159,7 @@ export default function Container() {
                   htmlFor="remember-me"
                   className="ml-2 block text-sm text-gray-700"
                 >
-                  Remember me
+                  Ingat saya
                 </label>
               </div>
               <div className="text-sm">
@@ -162,7 +167,7 @@ export default function Container() {
                   href="/forgot-password"
                   className="font-medium text-green-600 hover:text-green-700"
                 >
-                  Forgot password?
+                  Lupa kata sandi?
                 </Link>
               </div>
             </div>
@@ -173,18 +178,18 @@ export default function Container() {
               disabled={authLoginMutation.isPending}
               className="w-full rounded-md bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             >
-              {authLoginMutation.isPending ? "Signing In..." : "Sign In"}
+              {authLoginMutation.isPending ? "Sedang Masuk..." : "Masuk"}
             </button>
 
             {/* Register Link */}
             <div className="text-center">
               <p className="text-sm text-gray-600">
-                Don&apos;t have an account?{" "}
+                Tidak punya akun?{" "}
                 <Link
                   href="/register"
                   className="font-medium text-green-600 hover:text-green-700"
                 >
-                  Create one here
+                  Buat akun di sini
                 </Link>
               </p>
             </div>

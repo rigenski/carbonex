@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { useAuthStore } from "@/stores/auth";
 
@@ -19,9 +20,13 @@ export default function Header() {
           {/* Logo */}
           <div className="flex flex-1 justify-start">
             <Link href="/" className="flex items-center">
-              <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-green-600">
-                <span className="text-sm font-bold text-white">C</span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="CarbonEx Logo"
+                width={32}
+                height={32}
+                className="h-8 w-8"
+              />
               <span className="ml-2 text-xl font-bold text-gray-900">
                 CarbonEx
               </span>
@@ -35,19 +40,19 @@ export default function Header() {
                 href="/projects"
                 className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
               >
-                Projects
+                Proyek
               </Link>
               <Link
                 href="/carbon-issued"
                 className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
               >
-                Carbon Issued
+                Karbon Terbit
               </Link>
               <Link
                 href="/communities"
                 className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
               >
-                Communities
+                Komunitas
               </Link>
             </div>
           </div>
@@ -62,7 +67,7 @@ export default function Header() {
                       href="/projects/create"
                       className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
                     >
-                      Create Project
+                      Buat Proyek
                     </Link>
                   )}
                   <div className="group relative">
@@ -73,7 +78,7 @@ export default function Header() {
                         </span>
                       </div>
                       <span className="text-sm font-medium">
-                        {user.name || user.fullName || "User"}
+                        {user.name || user.fullName || "Pengguna"}
                       </span>
                     </button>
                     <div className="invisible absolute right-0 mt-2 w-48 rounded-md bg-white py-1 opacity-0 shadow-lg transition-all duration-200 group-hover:visible group-hover:opacity-100">
@@ -81,13 +86,13 @@ export default function Header() {
                         href="/dashboard"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Dashboard
+                        Dasbor
                       </Link>
                       <button
                         onClick={handleLogout}
                         className="block w-full px-4 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
                       >
-                        Logout
+                        Keluar
                       </button>
                     </div>
                   </div>
@@ -98,13 +103,13 @@ export default function Header() {
                     href="/login"
                     className="rounded-md px-3 py-2 text-sm font-medium text-gray-700 transition-colors hover:text-green-600"
                   >
-                    Login
+                    Masuk
                   </Link>
                   <Link
                     href="/register"
                     className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
                   >
-                    Register
+                    Daftar
                   </Link>
                 </div>
               )}
@@ -147,25 +152,25 @@ export default function Header() {
                 href="/"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
               >
-                Home
+                Beranda
               </Link>
               <Link
                 href="/projects"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
               >
-                Projects
+                Proyek
               </Link>
               <Link
                 href="/carbon-issued"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
               >
-                Carbon Issued
+                Karbon Terbit
               </Link>
               <Link
                 href="/communities"
                 className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
               >
-                Communities
+                Komunitas
               </Link>
 
               {user ? (
@@ -177,7 +182,7 @@ export default function Header() {
                       </span>
                     </div>
                     <span className="ml-2 text-sm font-medium text-gray-700">
-                      {user.name || user.fullName || "User"}
+                      {user.name || user.fullName || "Pengguna"}
                     </span>
                   </div>
                   {user.role === "community" && (
@@ -185,20 +190,20 @@ export default function Header() {
                       href="/projects/create"
                       className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
                     >
-                      Create Project
+                      Buat Proyek
                     </Link>
                   )}
                   <Link
                     href="/dashboard"
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
                   >
-                    Dashboard
+                    Dasbor
                   </Link>
                   <button
                     onClick={handleLogout}
                     className="block w-full rounded-md px-3 py-2 text-left text-base font-medium text-gray-700 hover:text-green-600"
                   >
-                    Logout
+                    Keluar
                   </button>
                 </div>
               ) : (
@@ -207,13 +212,13 @@ export default function Header() {
                     href="/login"
                     className="block rounded-md px-3 py-2 text-base font-medium text-gray-700 hover:text-green-600"
                   >
-                    Login
+                    Masuk
                   </Link>
                   <Link
                     href="/register"
                     className="block rounded-md bg-green-600 px-3 py-2 text-base font-medium text-white transition-colors hover:bg-green-700"
                   >
-                    Register
+                    Daftar
                   </Link>
                 </div>
               )}

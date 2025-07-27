@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 export default function VerifyEmailPage() {
@@ -60,7 +61,7 @@ export default function VerifyEmailPage() {
 
     const otpCode = otp.join("");
     if (otpCode.length !== 6) {
-      alert("Please enter all 6 digits");
+      alert("Silakan masukkan semua 6 digit");
       return;
     }
 
@@ -76,7 +77,7 @@ export default function VerifyEmailPage() {
       router.push("/login");
     } catch (error) {
       console.error("Verification failed:", error);
-      alert("Verification failed. Please try again.");
+      alert("Verifikasi gagal. Silakan coba lagi.");
     } finally {
       setIsLoading(false);
     }
@@ -110,9 +111,13 @@ export default function VerifyEmailPage() {
           {/* Logo */}
           <div className="mb-6 flex justify-center">
             <div className="flex items-center">
-              <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-green-600">
-                <span className="text-lg font-bold text-white">C</span>
-              </div>
+              <Image
+                src="/logo.png"
+                alt="CarbonEx Logo"
+                width={48}
+                height={48}
+                className="h-12 w-12"
+              />
               <span className="ml-3 text-2xl font-bold text-gray-900">
                 CarbonEx
               </span>
@@ -120,11 +125,11 @@ export default function VerifyEmailPage() {
           </div>
 
           <h2 className="mb-2 text-3xl font-bold text-gray-900">
-            Verify Your Email
+            Verifikasi Email Anda
           </h2>
           <p className="mb-8 text-gray-600">
-            We&apos;ve sent a verification code to your email address. Please enter
-            the 6-digit code below.
+            Kami telah mengirim kode verifikasi ke alamat email Anda. Silakan
+            masukkan kode 6 digit di bawah ini.
           </p>
         </div>
 
@@ -155,14 +160,12 @@ export default function VerifyEmailPage() {
             disabled={isLoading || otp.join("").length !== 6}
             className="w-full rounded-lg bg-green-600 px-4 py-3 font-semibold text-white transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {isLoading ? "Verifying..." : "Verify Email"}
+            {isLoading ? "Memverifikasi..." : "Verifikasi Email"}
           </button>
 
           {/* Resend Code */}
           <div className="text-center">
-            <p className="mb-2 text-sm text-gray-600">
-              Didn&apos;t receive the code?
-            </p>
+            <p className="mb-2 text-sm text-gray-600">Tidak menerima kode?</p>
             {canResend ? (
               <button
                 type="button"
@@ -170,11 +173,11 @@ export default function VerifyEmailPage() {
                 disabled={resendLoading}
                 className="text-sm font-medium text-green-600 hover:text-green-700 disabled:opacity-50"
               >
-                {resendLoading ? "Sending..." : "Resend Code"}
+                {resendLoading ? "Mengirim..." : "Kirim Ulang Kode"}
               </button>
             ) : (
               <span className="text-sm text-gray-500">
-                Resend code in {countdown}s
+                Kirim ulang kode dalam {countdown}s
               </span>
             )}
           </div>
@@ -185,7 +188,7 @@ export default function VerifyEmailPage() {
               href="/register"
               className="text-sm text-gray-600 hover:text-gray-800"
             >
-              ← Back to Registration
+              ← Kembali ke Pendaftaran
             </Link>
           </div>
         </form>
@@ -208,13 +211,13 @@ export default function VerifyEmailPage() {
             </div>
             <div className="ml-3">
               <h3 className="text-sm font-medium text-blue-800">
-                Tips for verification
+                Tips untuk verifikasi
               </h3>
               <div className="mt-2 text-sm text-blue-700">
                 <ul className="list-disc space-y-1 pl-5">
-                  <li>Check your spam folder if you don&apos;t see the email</li>
-                  <li>The code expires in 10 minutes</li>
-                  <li>You can request a new code after 60 seconds</li>
+                  <li>Periksa folder spam jika Anda tidak melihat email</li>
+                  <li>Kode berlaku selama 10 menit</li>
+                  <li>Anda dapat meminta kode baru setelah 60 detik</li>
                 </ul>
               </div>
             </div>

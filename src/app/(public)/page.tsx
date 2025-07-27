@@ -9,26 +9,27 @@ export default function Home() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
               <h1 className="mb-6 text-5xl font-bold text-gray-900">
-                Transform Your Carbon Footprint Into{" "}
-                <span className="text-green-600">Real Impact</span>
+                Ubah Jejak Karbon Anda Menjadi{" "}
+                <span className="text-green-600">Dampak Nyata</span>
               </h1>
               <p className="mb-8 text-xl text-gray-600">
-                Access premium verified carbon offset projects that deliver
-                measurable environmental results. Join 890+ organizations
-                already making a difference through our proven platform.
+                Akses proyek offset karbon terverifikasi premium yang memberikan
+                hasil lingkungan yang terukur. Bergabunglah dengan 890+
+                organisasi yang sudah membuat perbedaan melalui platform kami
+                yang terbukti.
               </p>
               <div className="flex flex-col gap-4 sm:flex-row">
                 <Link
                   href="/projects"
                   className="rounded-lg bg-green-600 px-8 py-3 text-center font-semibold text-white transition-colors hover:bg-green-700"
                 >
-                  Start Offsetting Today
+                  Mulai Offset Hari Ini
                 </Link>
                 <Link
                   href="/communities"
                   className="rounded-lg border border-green-600 px-8 py-3 text-center font-semibold text-green-600 transition-colors hover:bg-green-50"
                 >
-                  View Success Stories
+                  Lihat Kisah Sukses
                 </Link>
               </div>
               <div className="mt-8 flex items-center space-x-8">
@@ -36,17 +37,17 @@ export default function Home() {
                   <div className="text-2xl font-bold text-green-600">
                     1,234+
                   </div>
-                  <div className="text-gray-600">Verified Projects</div>
+                  <div className="text-gray-600">Proyek Terverifikasi</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-green-600">
                     56,789
                   </div>
-                  <div className="text-gray-600">Tons CO₂ Removed</div>
+                  <div className="text-gray-600">Ton CO₂ Dihilangkan</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-green-600">890+</div>
-                  <div className="text-gray-600">Success Partners</div>
+                  <div className="text-gray-600">Mitra Sukses</div>
                 </div>
               </div>
             </div>
@@ -70,10 +71,8 @@ export default function Home() {
                     </svg>
                   </div>
                   <div>
-                    <div className="font-semibold">Verified Projects</div>
-                    <div className="text-sm text-gray-600">
-                      100% Transparent
-                    </div>
+                    <div className="font-semibold">Proyek Terverifikasi</div>
+                    <div className="text-sm text-gray-600">100% Transparan</div>
                   </div>
                 </div>
               </div>
@@ -87,11 +86,11 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Why 890+ Organizations Choose CarbonEx
+              Mengapa 890+ Organisasi Memilih CarbonEx
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              The only platform you need for premium carbon credits with
-              guaranteed ROI on your sustainability investments.
+              Satu-satunya platform yang Anda butuhkan untuk kredit karbon
+              premium dengan ROI terjamin pada investasi keberlanjutan Anda.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -106,12 +105,12 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="mb-3 text-xl font-semibold">
-                Triple-Verified Quality
+                Kualitas Triple-Verified
               </h3>
               <p className="text-gray-600">
-                Every project meets international standards with third-party
-                verification. Your investment is protected with 100%
-                transparency and measurable results.
+                Setiap proyek memenuhi standar internasional dengan verifikasi
+                pihak ketiga. Investasi Anda dilindungi dengan 100% transparansi
+                dan hasil yang terukur.
               </p>
             </div>
             <div className="p-6 text-center">
@@ -125,12 +124,12 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="mb-3 text-xl font-semibold">
-                Instant Scale & Impact
+                Skala & Dampak Instan
               </h3>
               <p className="text-gray-600">
-                Launch your carbon program in minutes, not months. Connect with
-                vetted communities and see immediate environmental impact with
-                real-time tracking.
+                Luncurkan program karbon Anda dalam hitungan menit, bukan bulan.
+                Terhubung dengan komunitas yang telah diverifikasi dan lihat
+                dampak lingkungan langsung dengan pelacakan real-time.
               </p>
             </div>
             <div className="p-6 text-center">
@@ -143,11 +142,11 @@ export default function Home() {
                   <path d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               </div>
-              <h3 className="mb-3 text-xl font-semibold">Proven ROI Results</h3>
+              <h3 className="mb-3 text-xl font-semibold">Hasil ROI Terbukti</h3>
               <p className="text-gray-600">
-                Enhance brand value, meet compliance requirements, and attract
-                eco-conscious customers. Our clients report 40% increase in
-                sustainability metrics.
+                Tingkatkan nilai merek, penuhi persyaratan kepatuhan, dan
+                menarik pelanggan yang sadar lingkungan. Klien kami melaporkan
+                peningkatan 40% dalam metrik keberlanjutan.
               </p>
             </div>
           </div>
@@ -159,12 +158,12 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Join Industry Leaders Making Real Change
+              Bergabung dengan Pemimpin Industri yang Membuat Perubahan Nyata
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              From Fortune 500 companies to emerging startups - see how
-              organizations worldwide achieve their sustainability goals faster
-              with CarbonEx.
+              Dari perusahaan Fortune 500 hingga startup yang berkembang - lihat
+              bagaimana organisasi di seluruh dunia mencapai tujuan
+              keberlanjutan mereka lebih cepat dengan CarbonEx.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
@@ -229,19 +228,19 @@ export default function Home() {
                 <div className="mb-2 text-3xl font-bold text-green-600">
                   500+
                 </div>
-                <div className="text-gray-600">Corporate Partners</div>
+                <div className="text-gray-600">Mitra Korporat</div>
               </div>
               <div className="rounded-lg bg-white p-6 shadow-sm">
                 <div className="mb-2 text-3xl font-bold text-green-600">
                   95%
                 </div>
-                <div className="text-gray-600">Client Satisfaction</div>
+                <div className="text-gray-600">Kepuasan Klien</div>
               </div>
               <div className="rounded-lg bg-white p-6 shadow-sm">
                 <div className="mb-2 text-3xl font-bold text-green-600">
                   150M
                 </div>
-                <div className="text-gray-600">Tons CO₂ Offset Together</div>
+                <div className="text-gray-600">Ton CO₂ Offset Bersama</div>
               </div>
             </div>
           </div>
@@ -253,11 +252,11 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              How It Works
+              Cara Kerjanya
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Simple steps to start making a difference in the fight against
-              climate change.
+              Langkah sederhana untuk mulai membuat perbedaan dalam melawan
+              perubahan iklim.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
@@ -265,40 +264,39 @@ export default function Home() {
               <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-white">
                 1
               </div>
-              <h3 className="mb-3 text-lg font-semibold">Register</h3>
+              <h3 className="mb-3 text-lg font-semibold">Daftar</h3>
               <p className="text-gray-600">
-                Sign up as a community or individual to start your carbon offset
-                journey.
+                Daftar sebagai komunitas atau individu untuk memulai perjalanan
+                offset karbon Anda.
               </p>
             </div>
             <div className="text-center">
               <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-white">
                 2
               </div>
-              <h3 className="mb-3 text-lg font-semibold">Explore Projects</h3>
+              <h3 className="mb-3 text-lg font-semibold">Jelajahi Proyek</h3>
               <p className="text-gray-600">
-                Browse verified carbon credit projects in your area or create
-                your own.
+                Jelajahi proyek kredit karbon terverifikasi di area Anda atau
+                buat proyek Anda sendiri.
               </p>
             </div>
             <div className="text-center">
               <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-white">
                 3
               </div>
-              <h3 className="mb-3 text-lg font-semibold">Participate</h3>
+              <h3 className="mb-3 text-lg font-semibold">Berpartisipasi</h3>
               <p className="text-gray-600">
-                Join projects as a volunteer or contribute to community
-                initiatives.
+                Bergabung dengan proyek sebagai relawan atau berkontribusi pada
+                inisiatif komunitas.
               </p>
             </div>
             <div className="text-center">
               <div className="mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full bg-green-600 text-2xl font-bold text-white">
                 4
               </div>
-              <h3 className="mb-3 text-lg font-semibold">Track Impact</h3>
+              <h3 className="mb-3 text-lg font-semibold">Lacak Dampak</h3>
               <p className="text-gray-600">
-                Monitor your carbon offset contributions and see the real
-                impact.
+                Pantau kontribusi offset karbon Anda dan lihat dampak nyata.
               </p>
             </div>
           </div>
@@ -311,7 +309,7 @@ export default function Home() {
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
               <h2 className="mb-6 text-4xl font-bold text-gray-900">
-                Powerful Features for Climate Action
+                Fitur Kuat untuk Aksi Iklim
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start space-x-4">
@@ -326,11 +324,11 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="mb-2 text-lg font-semibold">
-                      Project Verification
+                      Verifikasi Proyek
                     </h3>
                     <p className="text-gray-600">
-                      Independent verification ensures all projects meet
-                      international carbon credit standards.
+                      Verifikasi independen memastikan semua proyek memenuhi
+                      standar kredit karbon internasional.
                     </p>
                   </div>
                 </div>
@@ -346,11 +344,11 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="mb-2 text-lg font-semibold">
-                      Real-time Monitoring
+                      Pemantauan Real-time
                     </h3>
                     <p className="text-gray-600">
-                      Track project progress and carbon reduction in real-time
-                      with detailed analytics.
+                      Lacak kemajuan proyek dan pengurangan karbon secara
+                      real-time dengan analitik detail.
                     </p>
                   </div>
                 </div>
@@ -366,11 +364,11 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="mb-2 text-lg font-semibold">
-                      Community Connection
+                      Koneksi Komunitas
                     </h3>
                     <p className="text-gray-600">
-                      Connect with like-minded communities and individuals for
-                      greater impact.
+                      Terhubung dengan komunitas dan individu yang berpikiran
+                      sama untuk dampak yang lebih besar.
                     </p>
                   </div>
                 </div>
@@ -392,11 +390,11 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Latest Projects
+              Proyek Terbaru
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Discover the newest carbon credit projects making a difference
-              around the world.
+              Temukan proyek kredit karbon terbaru yang membuat perbedaan di
+              seluruh dunia.
             </p>
           </div>
           <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
@@ -413,27 +411,27 @@ export default function Home() {
                 <div className="p-6">
                   <div className="mb-2 flex items-center justify-between">
                     <span className="rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
-                      Active
+                      Aktif
                     </span>
                     <span className="text-sm text-gray-500">
-                      Project #{project}23
+                      Proyek #{project}23
                     </span>
                   </div>
                   <h3 className="mb-2 text-lg font-semibold">
-                    Forest Restoration Initiative
+                    Inisiatif Restorasi Hutan
                   </h3>
                   <p className="mb-3 text-sm text-gray-600">
-                    Jakarta, Indonesia • 1,200 tons CO₂ estimated
+                    Jakarta, Indonesia • 1,200 ton CO₂ diperkirakan
                   </p>
                   <div className="mb-4 flex items-center justify-between text-sm text-gray-500">
-                    <span>45 volunteers</span>
-                    <span>Dec 2024 - Jun 2025</span>
+                    <span>45 relawan</span>
+                    <span>Des 2024 - Jun 2025</span>
                   </div>
                   <Link
                     href={`/projects/${project}`}
                     className="block w-full rounded-md bg-green-600 py-2 text-center text-white transition-colors hover:bg-green-700"
                   >
-                    View Details
+                    Lihat Detail
                   </Link>
                 </div>
               </div>
@@ -444,7 +442,7 @@ export default function Home() {
               href="/projects"
               className="rounded-lg bg-green-600 px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700"
             >
-              View All Projects
+              Lihat Semua Proyek
             </Link>
           </div>
         </div>
@@ -455,12 +453,12 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-16 text-center">
             <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Globally Recognized Quality Assurance
+              Jaminan Kualitas yang Diakui Secara Global
             </h2>
             <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Your carbon investments are backed by the world&apos;s most trusted
-              certification bodies. Every credit meets international standards
-              for maximum impact and credibility.
+              Investasi karbon Anda didukung oleh badan sertifikasi paling
+              terpercaya di dunia. Setiap kredit memenuhi standar internasional
+              untuk dampak dan kredibilitas maksimal.
             </p>
           </div>
           <div className="grid grid-cols-2 items-center gap-8 md:grid-cols-4">
@@ -479,7 +477,7 @@ export default function Home() {
                   </div>
                 </div>
                 <h3 className="font-semibold text-gray-900">{validator}</h3>
-                <p className="text-sm text-gray-600">Premium Certification</p>
+                <p className="text-sm text-gray-600">Sertifikasi Premium</p>
               </div>
             ))}
           </div>
@@ -490,25 +488,25 @@ export default function Home() {
       <section className="bg-green-600 py-20">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <h2 className="mb-4 text-4xl font-bold text-white">
-            Start Your Carbon Impact Journey Today
+            Mulai Perjalanan Dampak Karbon Anda Hari Ini
           </h2>
           <p className="mx-auto mb-8 max-w-3xl text-xl text-green-100">
-            Join 890+ organizations already achieving their sustainability
-            goals. Get instant access to premium carbon credits and see
-            measurable results in weeks, not years.
+            Bergabunglah dengan 890+ organisasi yang sudah mencapai tujuan
+            keberlanjutan mereka. Dapatkan akses instan ke kredit karbon premium
+            dan lihat hasil terukur dalam hitungan minggu, bukan tahun.
           </p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Link
               href="/register"
               className="rounded-lg bg-white px-8 py-3 font-semibold text-green-600 transition-colors hover:bg-gray-100"
             >
-              Start Free Today
+              Mulai Gratis Hari Ini
             </Link>
             <Link
               href="/projects"
               className="rounded-lg border border-white px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700"
             >
-              Browse Premium Projects
+              Jelajahi Proyek Premium
             </Link>
           </div>
         </div>
