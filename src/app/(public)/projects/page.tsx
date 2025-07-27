@@ -3,12 +3,13 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuthStore } from "@/stores/auth";
+import Image from "next/image";
 
 // Mock data for projects
 const mockProjects = [
   {
     id: "PRJ001",
-    name: "Forest Restoration Initiative",
+    name: "Inisiatif Restorasi Hutan",
     image:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&crop=center",
     address: "Jakarta, Indonesia",
@@ -20,14 +21,14 @@ const mockProjects = [
       start: "2024-12-01",
       end: "2025-06-30",
     },
-    status: "Active",
+    status: "Aktif",
     description:
-      "Large-scale forest restoration project to combat deforestation and create carbon sinks.",
-    community: "Green Earth Indonesia",
+      "Proyek restorasi hutan skala besar untuk memerangi deforestasi dan menciptakan penyerap karbon.",
+    community: "Bumi Hijau Indonesia",
   },
   {
     id: "PRJ002",
-    name: "Solar Panel Community Project",
+    name: "Proyek Panel Surya Komunitas",
     image:
       "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=250&fit=crop&crop=center",
     address: "Bandung, Indonesia",
@@ -39,14 +40,14 @@ const mockProjects = [
       start: "2024-11-15",
       end: "2025-05-15",
     },
-    status: "Active",
+    status: "Aktif",
     description:
-      "Installing solar panels in rural communities to reduce carbon emissions.",
-    community: "Solar Future Collective",
+      "Pemasangan panel surya di komunitas pedesaan untuk mengurangi emisi karbon.",
+    community: "Kolektif Masa Depan Surya",
   },
   {
     id: "PRJ003",
-    name: "Waste Management Program",
+    name: "Program Pengelolaan Sampah",
     image:
       "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=250&fit=crop&crop=center",
     address: "Surabaya, Indonesia",
@@ -58,14 +59,14 @@ const mockProjects = [
       start: "2024-10-01",
       end: "2025-03-31",
     },
-    status: "Planning",
+    status: "Perencanaan",
     description:
-      "Comprehensive waste management and recycling program for urban areas.",
-    community: "Clean City Initiative",
+      "Program pengelolaan sampah dan daur ulang komprehensif untuk area perkotaan.",
+    community: "Inisiatif Kota Bersih",
   },
   {
     id: "PRJ004",
-    name: "Ocean Conservation Project",
+    name: "Proyek Konservasi Laut",
     image:
       "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=400&h=250&fit=crop&crop=center",
     address: "Bali, Indonesia",
@@ -77,14 +78,14 @@ const mockProjects = [
       start: "2024-12-15",
       end: "2025-08-15",
     },
-    status: "Active",
+    status: "Aktif",
     description:
-      "Marine ecosystem restoration and plastic waste cleanup initiative.",
-    community: "Ocean Guardians Bali",
+      "Inisiatif restorasi ekosistem laut dan pembersihan sampah plastik.",
+    community: "Penjaga Laut Bali",
   },
   {
     id: "PRJ005",
-    name: "Urban Tree Planting",
+    name: "Penanaman Pohon Perkotaan",
     image:
       "https://images.unsplash.com/photo-1574263867128-9c1a5c5f4cf3?w=400&h=250&fit=crop&crop=center",
     address: "Yogyakarta, Indonesia",
@@ -96,14 +97,14 @@ const mockProjects = [
       start: "2024-11-01",
       end: "2025-04-30",
     },
-    status: "Active",
+    status: "Aktif",
     description:
-      "Community-driven initiative to plant trees in urban areas and public spaces.",
-    community: "Green City Movement",
+      "Inisiatif berbasis komunitas untuk menanam pohon di area perkotaan dan ruang publik.",
+    community: "Gerakan Kota Hijau",
   },
   {
     id: "PRJ006",
-    name: "Wind Farm Development",
+    name: "Pengembangan Pembangkit Listrik Tenaga Angin",
     image:
       "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=400&h=250&fit=crop&crop=center",
     address: "Makassar, Indonesia",
@@ -115,14 +116,14 @@ const mockProjects = [
       start: "2025-01-01",
       end: "2025-12-31",
     },
-    status: "Planning",
+    status: "Perencanaan",
     description:
-      "Large-scale wind farm project to generate clean energy for coastal communities.",
-    community: "Wind Power Alliance",
+      "Proyek pembangkit listrik tenaga angin skala besar untuk menghasilkan energi bersih bagi komunitas pesisir.",
+    community: "Aliansi Tenaga Angin",
   },
   {
     id: "PRJ007",
-    name: "Corporate Carbon Offset",
+    name: "Offset Karbon Korporat",
     image:
       "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=400&h=250&fit=crop&crop=center",
     address: "Medan, Indonesia",
@@ -134,14 +135,14 @@ const mockProjects = [
       start: "2024-09-01",
       end: "2026-09-01",
     },
-    status: "Active",
+    status: "Aktif",
     description:
-      "Corporate-funded reforestation project with professional management team.",
-    community: "EcoBalance Corp",
+      "Proyek reforestasi yang didanai korporat dengan tim manajemen profesional.",
+    community: "Korporasi Keseimbangan Ekologi",
   },
   {
     id: "PRJ008",
-    name: "Community Composting Hub",
+    name: "Pusat Kompos Komunitas",
     image:
       "https://images.unsplash.com/photo-1542838132-92c53300491e?w=400&h=250&fit=crop&crop=center",
     address: "Semarang, Indonesia",
@@ -153,14 +154,14 @@ const mockProjects = [
       start: "2024-10-15",
       end: "2025-10-15",
     },
-    status: "Active",
+    status: "Aktif",
     description:
-      "Neighborhood composting program to reduce organic waste and create fertilizer.",
-    community: "Zero Waste Semarang",
+      "Program kompos lingkungan untuk mengurangi sampah organik dan menciptakan pupuk.",
+    community: "Semarang Bebas Sampah",
   },
   {
     id: "PRJ009",
-    name: "Automated Carbon Capture",
+    name: "Penangkapan Karbon Otomatis",
     image:
       "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=400&h=250&fit=crop&crop=center",
     address: "Palembang, Indonesia",
@@ -172,14 +173,14 @@ const mockProjects = [
       start: "2025-02-01",
       end: "2027-02-01",
     },
-    status: "Planning",
+    status: "Perencanaan",
     description:
-      "High-tech carbon capture facility using advanced automation technology.",
-    community: "TechCarbon Solutions",
+      "Fasilitas penangkapan karbon berteknologi tinggi menggunakan teknologi otomasi canggih.",
+    community: "Solusi Karbon Teknologi",
   },
   {
     id: "PRJ010",
-    name: "Mangrove Restoration",
+    name: "Restorasi Mangrove",
     image:
       "https://images.unsplash.com/photo-1590845947670-c009801ffa74?w=400&h=250&fit=crop&crop=center",
     address: "Balikpapan, Indonesia",
@@ -191,14 +192,14 @@ const mockProjects = [
       start: "2024-11-30",
       end: "2025-11-30",
     },
-    status: "Active",
+    status: "Aktif",
     description:
-      "Coastal mangrove ecosystem restoration to protect shorelines and wildlife.",
-    community: "Coastal Guardians",
+      "Restorasi ekosistem mangrove pesisir untuk melindungi garis pantai dan satwa liar.",
+    community: "Penjaga Pesisir",
   },
   {
     id: "PRJ011",
-    name: "Bike Sharing Program",
+    name: "Program Berbagi Sepeda",
     image:
       "https://images.unsplash.com/photo-1571068316344-75bc76f77890?w=400&h=250&fit=crop&crop=center",
     address: "Denpasar, Indonesia",
@@ -210,14 +211,14 @@ const mockProjects = [
       start: "2024-12-01",
       end: "2025-12-01",
     },
-    status: "Planning",
+    status: "Perencanaan",
     description:
-      "City-wide bike sharing program to reduce vehicle emissions and promote clean transport.",
-    community: "Green Transport Bali",
+      "Program berbagi sepeda kota untuk mengurangi emisi kendaraan dan mempromosikan transportasi bersih.",
+    community: "Transportasi Hijau Bali",
   },
   {
     id: "PRJ012",
-    name: "Industrial Solar Installation",
+    name: "Pemasangan Panel Surya Industri",
     image:
       "https://images.unsplash.com/photo-1509391366360-2e959784a276?w=400&h=250&fit=crop&crop=center",
     address: "Batam, Indonesia",
@@ -229,23 +230,24 @@ const mockProjects = [
       start: "2025-03-01",
       end: "2025-09-01",
     },
-    status: "Planning",
+    status: "Perencanaan",
     description:
-      "Large-scale solar panel installation for industrial complexes with contractor teams.",
-    community: "Industrial Green Energy",
+      "Pemasangan panel surya skala besar untuk kompleks industri dengan tim kontraktor.",
+    community: "Energi Hijau Industri",
   },
 ];
 
-const projectStatuses = ["All", "Active", "Planning", "Completed"];
-const volunteerOptions = ["All", "Need Volunteers", "No Need for Volunteers"];
+const projectStatuses = ["Semua", "Aktif", "Perencanaan", "Selesai"];
+const volunteerOptions = ["Semua", "Butuh Relawan", "Tidak Butuh Relawan"];
 
 export default function ProjectsPage() {
   const { user } = useAuthStore();
   const [projects] = useState(mockProjects);
   const [filteredProjects, setFilteredProjects] = useState(mockProjects);
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("All");
-  const [selectedVolunteerFilter, setSelectedVolunteerFilter] = useState("All");
+  const [selectedStatus, setSelectedStatus] = useState("Semua");
+  const [selectedVolunteerFilter, setSelectedVolunteerFilter] =
+    useState("Semua");
   const [sortBy, setSortBy] = useState("name");
 
   useEffect(() => {
@@ -262,19 +264,19 @@ export default function ProjectsPage() {
     }
 
     // Filter by status
-    if (selectedStatus !== "All") {
+    if (selectedStatus !== "Semua") {
       filtered = filtered.filter(
         (project) => project.status === selectedStatus,
       );
     }
 
     // Filter by volunteer availability
-    if (selectedVolunteerFilter !== "All") {
-      if (selectedVolunteerFilter === "Need Volunteers") {
+    if (selectedVolunteerFilter !== "Semua") {
+      if (selectedVolunteerFilter === "Butuh Relawan") {
         filtered = filtered.filter(
           (project) => project.needsVolunteers === true,
         );
-      } else if (selectedVolunteerFilter === "No Need for Volunteers") {
+      } else if (selectedVolunteerFilter === "Tidak Butuh Relawan") {
         filtered = filtered.filter(
           (project) => project.needsVolunteers === false,
         );
@@ -305,11 +307,11 @@ export default function ProjectsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Active":
+      case "Aktif":
         return "bg-green-100 text-green-800";
-      case "Planning":
+      case "Perencanaan":
         return "bg-yellow-100 text-yellow-800";
-      case "Completed":
+      case "Selesai":
         return "bg-blue-100 text-blue-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -405,11 +407,7 @@ export default function ProjectsPage() {
               >
                 {volunteerOptions.map((option) => (
                   <option key={option} value={option}>
-                    {option === "All"
-                      ? "Semua"
-                      : option === "Need Volunteers"
-                        ? "Butuh Relawan"
-                        : "Tidak Butuh Relawan"}
+                    {option}
                   </option>
                 ))}
               </select>
@@ -449,10 +447,12 @@ export default function ProjectsPage() {
               key={project.id}
               className="overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md"
             >
-              <img
+              <Image
                 src={project.image}
                 alt={project.name}
                 className="h-48 w-full object-cover"
+                width={480}
+                height={480}
               />
               <div className="p-6">
                 <div className="mb-3 flex items-center justify-between">
@@ -553,7 +553,7 @@ export default function ProjectsPage() {
 
                 <div className="flex items-center justify-between">
                   <span className="text-xs text-gray-500">
-                    by {project.community}
+                    oleh {project.community}
                   </span>
                   <Link
                     href={`/projects/${project.id}`}

@@ -137,8 +137,8 @@ export default function RegisterPage() {
             </h1>
             <p className="mb-8 text-xl text-green-100">
               Terhubung dengan komunitas dan individu di seluruh dunia untuk
-              menciptakan proyek offset karbon terverifikasi dan membuat
-              dampak nyata pada masa depan planet kita.
+              menciptakan proyek offset karbon terverifikasi dan membuat dampak
+              nyata pada masa depan planet kita.
             </p>
           </div>
 
@@ -225,9 +225,7 @@ export default function RegisterPage() {
                   }`}
                 >
                   <div className="font-semibold">Komunitas</div>
-                  <div className="text-xs text-gray-500">
-                    Akun organisasi
-                  </div>
+                  <div className="text-xs text-gray-500">Akun organisasi</div>
                 </button>
               </div>
               <input type="hidden" {...register("role")} />
@@ -253,10 +251,12 @@ export default function RegisterPage() {
               >
                 {idCardPreview ? (
                   <div className="space-y-4">
-                    <img
+                    <Image
                       src={idCardPreview}
                       alt="ID Card Preview"
                       className="mx-auto h-32 w-auto rounded-lg border object-cover"
+                      width={240}
+                      height={240}
                     />
                     <div className="flex justify-center space-x-2">
                       <button
@@ -299,7 +299,9 @@ export default function RegisterPage() {
                 <input
                   type="file"
                   accept="image/*"
-                  {...register("idCard", { required: "Kartu identitas wajib diisi" })}
+                  {...register("idCard", {
+                    required: "Kartu identitas wajib diisi",
+                  })}
                   onChange={handleFileChange}
                   className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                 />

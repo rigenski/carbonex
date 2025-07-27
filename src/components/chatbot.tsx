@@ -14,7 +14,7 @@ export default function Chatbot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       id: "1",
-      text: "Hi! I'm CarbonBot, your AI assistant for carbon credit projects. How can I help you today?",
+      text: "Hai! Saya CarbonBot, asisten AI Anda untuk proyek kredit karbon. Bagaimana saya bisa membantu Anda hari ini?",
       isUser: false,
       timestamp: new Date(),
     },
@@ -48,11 +48,11 @@ export default function Chatbot() {
     // Simulate AI response
     setTimeout(() => {
       const responses = [
-        "I can help you find carbon credit projects that match your interests. What type of project are you looking for?",
-        "Great question! Our platform offers verified carbon credit projects in reforestation, renewable energy, and waste reduction. Would you like me to show you some examples?",
-        "You can browse projects by location, type, or carbon impact. The Projects page has detailed filters to help you find exactly what you're looking for.",
-        "All our projects are verified by internationally recognized organizations like Verra and Gold Standard. Would you like to know more about our verification process?",
-        "To get started, you can explore our active projects or register as a community to create your own carbon credit project. What interests you most?",
+        "Saya dapat membantu Anda menemukan proyek kredit karbon yang sesuai dengan minat Anda. Jenis proyek apa yang Anda cari?",
+        "Pertanyaan bagus! Platform kami menawarkan proyek kredit karbon terverifikasi dalam reforestasi, energi terbarukan, dan pengurangan sampah. Apakah Anda ingin saya tunjukkan beberapa contoh?",
+        "Anda dapat menjelajahi proyek berdasarkan lokasi, jenis, atau dampak karbon. Halaman Proyek memiliki filter detail untuk membantu Anda menemukan tepat apa yang Anda cari.",
+        "Semua proyek kami diverifikasi oleh organisasi yang diakui secara internasional seperti Verra dan Gold Standard. Apakah Anda ingin tahu lebih lanjut tentang proses verifikasi kami?",
+        "Untuk memulai, Anda dapat menjelajahi proyek aktif kami atau mendaftar sebagai komunitas untuk membuat proyek kredit karbon Anda sendiri. Apa yang paling menarik minat Anda?",
       ];
 
       const randomResponse =
@@ -96,7 +96,7 @@ export default function Chatbot() {
               </div>
               <div>
                 <h3 className="font-semibold text-white">CarbonBot</h3>
-                <p className="text-xs text-green-100">AI Assistant</p>
+                <p className="text-xs text-green-100">Asisten AI</p>
               </div>
             </div>
           </div>
@@ -159,7 +159,7 @@ export default function Chatbot() {
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyPress={handleKeyPress}
-                placeholder="Ask me about carbon credits..."
+                placeholder="Tanyakan saya tentang kredit karbon..."
                 className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-2 focus:ring-green-500 focus:outline-none"
               />
               <button

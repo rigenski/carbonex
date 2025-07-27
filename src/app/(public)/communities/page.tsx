@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuthStore } from "@/stores/auth";
 
 // Mock data for communities
 const mockCommunities = [
   {
     id: "COM001",
-    name: "Green Earth Indonesia",
+    name: "Bumi Hijau Indonesia",
     image:
       "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=250&fit=crop&crop=center",
     location: "Jakarta, Indonesia",
@@ -17,11 +18,11 @@ const mockCommunities = [
     carbonOffset: 15420,
     establishedYear: 2019,
     description:
-      "Leading environmental organization focused on forest restoration and carbon sequestration projects across Indonesia.",
+      "Organisasi lingkungan terkemuka yang berfokus pada proyek restorasi hutan dan penyerapan karbon di seluruh Indonesia.",
   },
   {
     id: "COM002",
-    name: "Solar Future Collective",
+    name: "Kolektif Masa Depan Surya",
     image:
       "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=400&h=250&fit=crop&crop=center",
     location: "Bandung, Indonesia",
@@ -30,11 +31,11 @@ const mockCommunities = [
     carbonOffset: 9800,
     establishedYear: 2020,
     description:
-      "Community-driven initiative promoting renewable energy adoption through solar panel installations.",
+      "Inisiatif berbasis komunitas yang mempromosikan adopsi energi terbarukan melalui pemasangan panel surya.",
   },
   {
     id: "COM003",
-    name: "Clean City Initiative",
+    name: "Inisiatif Kota Bersih",
     image:
       "https://images.unsplash.com/photo-1573348722427-f1d6819fdf98?w=400&h=250&fit=crop&crop=center",
     location: "Surabaya, Indonesia",
@@ -43,11 +44,11 @@ const mockCommunities = [
     carbonOffset: 12650,
     establishedYear: 2018,
     description:
-      "Urban sustainability organization focusing on waste management and circular economy solutions.",
+      "Organisasi keberlanjutan perkotaan yang berfokus pada pengelolaan sampah dan solusi ekonomi sirkular.",
   },
   {
     id: "COM004",
-    name: "Ocean Guardians Bali",
+    name: "Penjaga Laut Bali",
     image:
       "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=400&h=250&fit=crop&crop=center",
     location: "Bali, Indonesia",
@@ -56,11 +57,11 @@ const mockCommunities = [
     carbonOffset: 3400,
     establishedYear: 2021,
     description:
-      "Marine conservation group dedicated to protecting coastal ecosystems and reducing ocean plastic.",
+      "Kelompok konservasi laut yang berdedikasi untuk melindungi ekosistem pesisir dan mengurangi sampah plastik laut.",
   },
   {
     id: "COM005",
-    name: "Wind Power Alliance",
+    name: "Aliansi Tenaga Angin",
     image:
       "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=400&h=250&fit=crop&crop=center",
     location: "Makassar, Indonesia",
@@ -69,11 +70,11 @@ const mockCommunities = [
     carbonOffset: 18900,
     establishedYear: 2017,
     description:
-      "Regional coalition promoting wind energy development and sustainable power generation.",
+      "Koalisi regional yang mempromosikan pengembangan energi angin dan pembangkit listrik berkelanjutan.",
   },
   {
     id: "COM006",
-    name: "Green City Movement",
+    name: "Gerakan Kota Hijau",
     image:
       "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=250&fit=crop&crop=center",
     location: "Yogyakarta, Indonesia",
@@ -82,7 +83,7 @@ const mockCommunities = [
     carbonOffset: 7200,
     establishedYear: 2019,
     description:
-      "Urban sustainability movement creating green spaces and promoting environmental awareness in cities.",
+      "Gerakan keberlanjutan perkotaan yang menciptakan ruang hijau dan mempromosikan kesadaran lingkungan di kota-kota.",
   },
 ];
 
@@ -187,22 +188,7 @@ export default function CommunitiesPage() {
           </div>
 
           {/* Additional Filters */}
-          <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
-            <div className="flex items-center">
-              <input
-                type="checkbox"
-                id="verified-only"
-                checked={true} // All communities are verified
-                onChange={() => {}}
-                className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-              />
-              <label
-                htmlFor="verified-only"
-                className="ml-2 text-sm text-gray-700"
-              >
-                Tampilkan hanya komunitas terverifikasi
-              </label>
-            </div>
+          <div className="mt-6 flex flex-col items-start justify-end border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
             <div className="mt-4 sm:mt-0">
               <span className="text-sm text-gray-600">
                 Menampilkan {filteredCommunities.length} dari{" "}
@@ -219,10 +205,12 @@ export default function CommunitiesPage() {
               key={community.id}
               className="overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md"
             >
-              <img
+              <Image
                 src={community.image}
                 alt={community.name}
                 className="h-48 w-full object-cover"
+                width={480}
+                height={480}
               />
               <div className="p-6">
                 <div className="mb-3 flex items-center justify-between">
@@ -333,7 +321,8 @@ export default function CommunitiesPage() {
               Tidak ada komunitas ditemukan
             </h3>
             <p className="mt-2 text-gray-600">
-              Coba sesuaikan kriteria pencarian atau filter untuk menemukan komunitas.
+              Coba sesuaikan kriteria pencarian atau filter untuk menemukan
+              komunitas.
             </p>
           </div>
         )}

@@ -2,12 +2,13 @@
 
 import { useAuthStore } from "@/stores/auth";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 // Mock project data (in real app, this would come from API)
 const mockProject = {
   id: "PRJ001",
-  name: "Forest Restoration Initiative",
+  name: "Inisiatif Restorasi Hutan",
   images: [
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop&crop=center",
     "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=400&fit=crop&crop=center",
@@ -27,41 +28,46 @@ const mockProject = {
     start: "2024-12-01",
     end: "2025-06-30",
   },
-  status: "Active",
-  projectType: "Reforestation", // Changed from type to projectType
-  treeStatus: "35,000 trees planted", // Changed from trees planted number to status
+  status: "Aktif",
+  projectType: "Reforestasi",
+  treeStatus: "35.000 pohon ditanam",
   shortDescription:
-    "Large-scale forest restoration project to combat deforestation and create carbon sinks.",
-  fullDescription: `This comprehensive forest restoration initiative aims to restore 500 hectares of degraded forestland in the Jakarta metropolitan area. The project focuses on native species reforestation, soil rehabilitation, and community engagement to create sustainable carbon sequestration solutions.
+    "Proyek restorasi hutan skala besar untuk memerangi deforestasi dan menciptakan penyerap karbon.",
+  fullDescription: `Inisiatif restorasi hutan komprehensif ini bertujuan untuk memulihkan 500 hektar lahan hutan yang terdegradasi di area metropolitan Jakarta. Proyek ini berfokus pada reforestasi spesies asli, rehabilitasi tanah, dan keterlibatan komunitas untuk menciptakan solusi penyerapan karbon yang berkelanjutan.
 
-Our approach combines scientific research with traditional ecological knowledge to ensure the highest success rate for tree survival and ecosystem restoration. The project includes nursery development, community training programs, and long-term monitoring systems.
+Pendekatan kami menggabungkan penelitian ilmiah dengan pengetahuan ekologi tradisional untuk memastikan tingkat keberhasilan tertinggi untuk kelangsungan hidup pohon dan restorasi ekosistem. Proyek ini mencakup pengembangan pembibitan, program pelatihan komunitas, dan sistem pemantauan jangka panjang.
 
-Key objectives include:
-- Restore 500 hectares of degraded forest
-- Plant 100,000 native trees
-- Engage 1,000+ community members
-- Create 50 local employment opportunities
-- Establish sustainable carbon monitoring systems
+Tujuan utama meliputi:
+- Memulihkan 500 hektar hutan yang terdegradasi
+- Menanam 100.000 pohon asli
+- Melibatkan 1.000+ anggota komunitas
+- Menciptakan 50 peluang kerja lokal
+- Menetapkan sistem pemantauan karbon yang berkelanjutan
 
-The project follows international carbon credit standards and will be verified by independent third-party organizations throughout its implementation.`,
+Proyek ini mengikuti standar kredit karbon internasional dan akan diverifikasi oleh organisasi pihak ketiga independen sepanjang implementasinya.`,
   community: {
-    name: "Green Earth Indonesia",
+    name: "Bumi Hijau Indonesia",
     verified: true,
     description:
-      "Leading environmental organization focused on forest conservation and restoration across Indonesia.",
+      "Organisasi lingkungan terkemuka yang berfokus pada konservasi dan restorasi hutan di seluruh Indonesia.",
     projects: 23,
   },
   volunteers: [
-    { name: "John Doe", role: "Team Lead", joinDate: "2024-10-15", hours: 120 },
     {
-      name: "Jane Smith",
-      role: "Volunteer",
+      name: "Budi Santoso",
+      role: "Ketua Tim",
+      joinDate: "2024-10-15",
+      hours: 120,
+    },
+    {
+      name: "Siti Nurhaliza",
+      role: "Relawan",
       joinDate: "2024-11-01",
       hours: 45,
     },
     {
       name: "Ahmad Rahman",
-      role: "Local Coordinator",
+      role: "Koordinator Lokal",
       joinDate: "2024-10-01",
       hours: 200,
     },
@@ -117,11 +123,11 @@ export default function ProjectDetailPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Active":
+      case "Aktif":
         return "bg-green-100 text-green-800";
-      case "Planning":
+      case "Perencanaan":
         return "bg-yellow-100 text-yellow-800";
-      case "Completed":
+      case "Selesai":
         return "bg-blue-100 text-blue-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -129,7 +135,7 @@ export default function ProjectDetailPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
+    return new Date(dateString).toLocaleDateString("id-ID", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -146,7 +152,7 @@ export default function ProjectDetailPage() {
             <ol className="flex items-center space-x-4">
               <li>
                 <Link href="/" className="text-gray-500 hover:text-gray-700">
-                  Home
+                  Beranda
                 </Link>
               </li>
               <li>
@@ -157,7 +163,7 @@ export default function ProjectDetailPage() {
                   href="/projects"
                   className="text-gray-500 hover:text-gray-700"
                 >
-                  Projects
+                  Proyek
                 </Link>
               </li>
               <li>
@@ -175,24 +181,13 @@ export default function ProjectDetailPage() {
             {/* Images */}
             <div>
               <div className="relative">
-                <img
+                <Image
                   src={project.images[activeImageIndex]}
                   alt={project.name}
                   className="h-96 w-full rounded-lg object-cover"
+                  height={480}
+                  width={480}
                 />
-                <div className="absolute bottom-4 left-4 flex space-x-2">
-                  {project.images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => setActiveImageIndex(index)}
-                      className={`h-3 w-3 rounded-full ${
-                        activeImageIndex === index
-                          ? "bg-white"
-                          : "bg-opacity-50 bg-white"
-                      }`}
-                    />
-                  ))}
-                </div>
               </div>
               <div className="mt-4 flex space-x-2">
                 {project.images.map((image, index) => (
@@ -205,10 +200,12 @@ export default function ProjectDetailPage() {
                         : "border-gray-200"
                     }`}
                   >
-                    <img
+                    <Image
                       src={image}
                       alt={`${project.name} ${index + 1}`}
                       className="h-full w-full object-cover"
+                      height={480}
+                      width={480}
                     />
                   </button>
                 ))}
@@ -239,31 +236,31 @@ export default function ProjectDetailPage() {
                   <div className="text-2xl font-bold text-green-600">
                     {project.estimateCarbon.toLocaleString()}
                   </div>
-                  <div className="text-sm text-gray-600">Tons CO₂ Target</div>
+                  <div className="text-sm text-gray-600">Target Ton CO₂</div>
                 </div>
                 <div className="rounded-lg bg-blue-50 p-4">
                   <div className="text-2xl font-bold text-blue-600">
                     {project.currentVolunteers}/{project.totalVolunteers}
                   </div>
-                  <div className="text-sm text-gray-600">Volunteers</div>
+                  <div className="text-sm text-gray-600">Relawan</div>
                 </div>
                 <div className="rounded-lg bg-purple-50 p-4">
                   <div className="text-2xl font-bold text-purple-600">
                     {project.projectType}
                   </div>
-                  <div className="text-sm text-gray-600">Project Type</div>
+                  <div className="text-sm text-gray-600">Jenis Proyek</div>
                 </div>
                 <div className="rounded-lg bg-orange-50 p-4">
                   <div className="text-2xl font-bold text-orange-600">
                     {project.treeStatus}
                   </div>
-                  <div className="text-sm text-gray-600">Trees Planted</div>
+                  <div className="text-sm text-gray-600">Pohon Ditanam</div>
                 </div>
               </div>
 
               {/* Location */}
               <div className="mb-6">
-                <h3 className="mb-2 font-semibold text-gray-900">Location</h3>
+                <h3 className="mb-2 font-semibold text-gray-900">Lokasi</h3>
                 <p className="text-gray-600">{project.address.full}</p>
                 <p className="text-sm text-gray-500">
                   {project.address.district}, {project.address.city},{" "}
@@ -274,7 +271,7 @@ export default function ProjectDetailPage() {
               {/* Duration */}
               <div className="mb-6">
                 <h3 className="mb-2 font-semibold text-gray-900">
-                  Project Duration
+                  Durasi Proyek
                 </h3>
                 <p className="text-gray-600">
                   {formatDate(project.estimateDate.start)} -{" "}
@@ -285,7 +282,7 @@ export default function ProjectDetailPage() {
               {/* Community */}
               <div className="mb-6">
                 <h3 className="mb-2 font-semibold text-gray-900">
-                  Organized By
+                  Diselenggarakan Oleh
                 </h3>
                 <div className="flex items-center space-x-3">
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
@@ -309,7 +306,7 @@ export default function ProjectDetailPage() {
                       )}
                     </div>
                     <p className="text-sm text-gray-600">
-                      {project.community.projects} projects
+                      {project.community.projects} proyek
                     </p>
                   </div>
                 </div>
@@ -325,19 +322,21 @@ export default function ProjectDetailPage() {
                         disabled={isLoading}
                         className="w-full rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        {isLoading ? "Joining..." : "Join This Project"}
+                        {isLoading
+                          ? "Bergabung..."
+                          : "Bergabung dengan Proyek Ini"}
                       </button>
                     ) : (
                       <div className="space-y-2">
                         <div className="w-full rounded-lg bg-green-100 px-6 py-3 text-center font-semibold text-green-800">
-                          ✓ You&apos;ve Joined This Project
+                          ✓ Anda Telah Bergabung dengan Proyek Ini
                         </div>
                         <button
                           onClick={handleLeaveProject}
                           disabled={isLoading}
                           className="w-full rounded-lg border border-red-300 px-6 py-2 font-medium text-red-600 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
                         >
-                          {isLoading ? "Leaving..." : "Leave Project"}
+                          {isLoading ? "Keluar..." : "Keluar dari Proyek"}
                         </button>
                       </div>
                     )}
@@ -347,10 +346,10 @@ export default function ProjectDetailPage() {
                 {user?.role === "community" && (
                   <div className="space-y-2">
                     <button className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700">
-                      Manage Project
+                      Kelola Proyek
                     </button>
                     <button className="w-full rounded-lg border border-gray-300 px-6 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50">
-                      View Analytics
+                      Lihat Analitik
                     </button>
                   </div>
                 )}
@@ -361,13 +360,13 @@ export default function ProjectDetailPage() {
                       href="/register"
                       className="block w-full rounded-lg bg-green-600 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-green-700"
                     >
-                      Register to Join
+                      Daftar untuk Bergabung
                     </Link>
                     <Link
                       href="/login"
                       className="block w-full rounded-lg border border-gray-300 px-6 py-2 text-center font-medium text-gray-700 transition-colors hover:bg-gray-50"
                     >
-                      Sign In
+                      Masuk
                     </Link>
                   </div>
                 )}
@@ -382,8 +381,8 @@ export default function ProjectDetailPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8" aria-label="Tabs">
             {[
-              { id: "overview", label: "Overview" },
-              { id: "volunteers", label: "Volunteers" },
+              { id: "overview", label: "Ringkasan" },
+              { id: "volunteers", label: "Relawan" },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -406,7 +405,7 @@ export default function ProjectDetailPage() {
         {activeTab === "overview" && (
           <div className="prose max-w-none">
             <h2 className="mb-4 text-2xl font-bold text-gray-900">
-              Project Overview
+              Ringkasan Proyek
             </h2>
             <div className="whitespace-pre-line text-gray-600">
               {project.fullDescription}
@@ -417,23 +416,17 @@ export default function ProjectDetailPage() {
         {activeTab === "volunteers" && (
           <div>
             <h2 className="mb-6 text-2xl font-bold text-gray-900">
-              Project Volunteers
+              Relawan Proyek
             </h2>
             <div className="overflow-hidden rounded-lg bg-white shadow-sm">
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Volunteer
+                      Relawan
                     </th>
                     <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Role
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Join Date
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Hours
+                      Tanggal Bergabung
                     </th>
                   </tr>
                 </thead>
@@ -454,14 +447,8 @@ export default function ProjectDetailPage() {
                           </div>
                         </div>
                       </td>
-                      <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                        {volunteer.role}
-                      </td>
                       <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
                         {formatDate(volunteer.joinDate)}
-                      </td>
-                      <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
-                        {volunteer.hours}h
                       </td>
                     </tr>
                   ))}

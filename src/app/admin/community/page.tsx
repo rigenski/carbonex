@@ -34,6 +34,34 @@ export default function AdminCommunity() {
       projects: 8,
       members: 89,
     },
+    {
+      id: "COM003",
+      name: "Bumi Hijau Indonesia",
+      location: "Jakarta, DKI Jakarta",
+      projects: 15,
+      members: 234,
+    },
+    {
+      id: "COM004",
+      name: "Kolektif Masa Depan Surya",
+      location: "Surabaya, Jawa Timur",
+      projects: 6,
+      members: 67,
+    },
+    {
+      id: "COM005",
+      name: "Inisiatif Kota Bersih",
+      location: "Yogyakarta, DI Yogyakarta",
+      projects: 9,
+      members: 123,
+    },
+    {
+      id: "COM006",
+      name: "Penjaga Pesisir",
+      location: "Balikpapan, Kalimantan Timur",
+      projects: 11,
+      members: 178,
+    },
   ];
 
   const handleViewDetail = (community: Community) => {
@@ -77,57 +105,100 @@ export default function AdminCommunity() {
             />
           </div>
         </div>
-        <div className="table-container">
-          <table className="responsive-table">
-            <thead className="table-header">
-              <tr>
-                <th>ID</th>
-                <th>Nama Komunitas</th>
-                <th>Lokasi</th>
-                <th>Proyek</th>
-                <th>Anggota</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
-              {communities.map((community) => (
-                <tr key={community.id} className="hover:bg-gray-50">
-                  <td className="text-gray-900">{community.id}</td>
-                  <td className="font-medium text-gray-900">
-                    {community.name}
-                  </td>
-                  <td className="text-gray-500">{community.location}</td>
-                  <td className="text-gray-500">{community.projects}</td>
-                  <td className="text-gray-500">{community.members}</td>
-                  <td className="font-medium">
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() => handleViewDetail(community)}
-                        className="text-blue-600 hover:text-blue-900"
-                        title="Lihat Detail"
-                      >
-                        <EyeIcon className="h-4 w-4" />
-                      </button>
-                      <button
-                        onClick={() => handleEdit(community)}
-                        className="text-green-600 hover:text-green-900"
-                        title="Edit"
-                      >
-                        <PencilIcon className="h-4 w-4" />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(community)}
-                        className="text-red-600 hover:text-red-900"
-                        title="Hapus"
-                      >
-                        <TrashIcon className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </td>
+        <div className="overflow-hidden rounded-lg bg-white shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    ID
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Nama Komunitas
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Lokasi
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Proyek
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Anggota
+                  </th>
+                  <th className="w-32 px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Aksi
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {communities.map((community) => (
+                  <tr key={community.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-sm text-gray-900">
+                      {community.id}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {community.name}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-500">
+                        <svg
+                          className="mr-1 inline h-3 w-3"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                        {community.location}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {community.projects}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        proyek aktif
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {community.members}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        anggota terdaftar
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => handleViewDetail(community)}
+                          className="text-blue-600 hover:text-blue-900"
+                          title="Lihat Detail"
+                        >
+                          <EyeIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleEdit(community)}
+                          className="text-green-600 hover:text-green-900"
+                          title="Edit"
+                        >
+                          <PencilIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(community)}
+                          className="text-red-600 hover:text-red-900"
+                          title="Hapus"
+                        >
+                          <TrashIcon className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

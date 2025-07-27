@@ -36,6 +36,38 @@ export default function AdminIndividual() {
       projectsJoined: 3,
       status: "Aktif",
     },
+    {
+      id: "IND003",
+      name: "Budi Santoso",
+      email: "budi.santoso@email.com",
+      location: "Surabaya, Indonesia",
+      projectsJoined: 7,
+      status: "Aktif",
+    },
+    {
+      id: "IND004",
+      name: "Dewi Kartika",
+      email: "dewi.kartika@email.com",
+      location: "Semarang, Indonesia",
+      projectsJoined: 2,
+      status: "Nonaktif",
+    },
+    {
+      id: "IND005",
+      name: "Rudi Hermawan",
+      email: "rudi.hermawan@email.com",
+      location: "Yogyakarta, Indonesia",
+      projectsJoined: 4,
+      status: "Aktif",
+    },
+    {
+      id: "IND006",
+      name: "Siti Nurhaliza",
+      email: "siti.nurhaliza@email.com",
+      location: "Medan, Indonesia",
+      projectsJoined: 6,
+      status: "Aktif",
+    },
   ];
 
   const handleViewDetail = (individual: Individual) => {
@@ -77,69 +109,111 @@ export default function AdminIndividual() {
             />
           </div>
         </div>
-        <div className="table-container">
-          <table className="responsive-table">
-            <thead className="table-header">
-              <tr>
-                <th>ID</th>
-                <th>Nama</th>
-                <th>Email</th>
-                <th>Lokasi</th>
-                <th>Proyek Bergabung</th>
-                <th>Status</th>
-                <th>Aksi</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-gray-200 bg-white">
-              {individuals.map((individual) => (
-                <tr key={individual.id} className="hover:bg-gray-50">
-                  <td className="text-gray-900">{individual.id}</td>
-                  <td className="font-medium text-gray-900">
-                    {individual.name}
-                  </td>
-                  <td className="text-gray-500">{individual.email}</td>
-                  <td className="text-gray-500">{individual.location}</td>
-                  <td className="text-gray-500">{individual.projectsJoined}</td>
-                  <td>
-                    <span
-                      className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                        individual.status === "Aktif"
-                          ? "bg-green-100 text-green-800"
-                          : "bg-red-100 text-red-800"
-                      }`}
-                    >
-                      {individual.status}
-                    </span>
-                  </td>
-                  <td className="font-medium">
-                    <div className="flex space-x-2">
-                      <button
-                        onClick={() => handleViewDetail(individual)}
-                        className="text-blue-600 hover:text-blue-900"
-                        title="Lihat Detail"
-                      >
-                        <EyeIcon className="h-4 w-4" />
-                      </button>
-                      <button
-                        onClick={() => handleEdit(individual)}
-                        className="text-green-600 hover:text-green-900"
-                        title="Edit"
-                      >
-                        <PencilIcon className="h-4 w-4" />
-                      </button>
-                      <button
-                        onClick={() => handleDelete(individual)}
-                        className="text-red-600 hover:text-red-900"
-                        title="Hapus"
-                      >
-                        <TrashIcon className="h-4 w-4" />
-                      </button>
-                    </div>
-                  </td>
+        <div className="overflow-hidden rounded-lg bg-white shadow-sm">
+          <div className="overflow-x-auto">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    ID
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Nama
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Email
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Lokasi
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Proyek Bergabung
+                  </th>
+                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Status
+                  </th>
+                  <th className="w-32 px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                    Aksi
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-gray-200 bg-white">
+                {individuals.map((individual) => (
+                  <tr key={individual.id} className="hover:bg-gray-50">
+                    <td className="px-6 py-4 text-sm text-gray-900">
+                      {individual.id}
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {individual.name}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-500">
+                        {individual.email}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm text-gray-500">
+                        <svg
+                          className="mr-1 inline h-3 w-3"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
+                        </svg>
+                        {individual.location}
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {individual.projectsJoined}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        proyek bergabung
+                      </div>
+                    </td>
+                    <td className="px-6 py-4">
+                      <span
+                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
+                          individual.status === "Aktif"
+                            ? "bg-green-100 text-green-800"
+                            : "bg-red-100 text-red-800"
+                        }`}
+                      >
+                        {individual.status}
+                      </span>
+                    </td>
+                    <td className="px-6 py-4">
+                      <div className="flex space-x-2">
+                        <button
+                          onClick={() => handleViewDetail(individual)}
+                          className="text-blue-600 hover:text-blue-900"
+                          title="Lihat Detail"
+                        >
+                          <EyeIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleEdit(individual)}
+                          className="text-green-600 hover:text-green-900"
+                          title="Edit"
+                        >
+                          <PencilIcon className="h-4 w-4" />
+                        </button>
+                        <button
+                          onClick={() => handleDelete(individual)}
+                          className="text-red-600 hover:text-red-900"
+                          title="Hapus"
+                        >
+                          <TrashIcon className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
 

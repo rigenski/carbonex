@@ -3,20 +3,21 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuthStore } from "@/stores/auth";
+import Image from "next/image";
 
 // Mock community data
 const mockCommunity = {
   id: "COM001",
-  name: "Green Earth Indonesia",
+  name: "Bumi Hijau Indonesia",
   description:
-    "Leading environmental organization focused on forest conservation and restoration across Indonesia.",
-  fullDescription: `Green Earth Indonesia is a pioneering environmental organization established in 2018 with a mission to combat climate change through community-driven forest conservation and restoration initiatives. Our organization brings together environmental scientists, local communities, and conservation enthusiasts to create lasting positive impact on Indonesia's ecosystems.
+    "Organisasi lingkungan terkemuka yang berfokus pada konservasi dan restorasi hutan di seluruh Indonesia.",
+  fullDescription: `Bumi Hijau Indonesia adalah organisasi lingkungan perintis yang didirikan pada tahun 2018 dengan misi untuk memerangi perubahan iklim melalui inisiatif konservasi dan restorasi hutan berbasis komunitas. Organisasi kami menghimpun ilmuwan lingkungan, komunitas lokal, dan penggemar konservasi untuk menciptakan dampak positif yang berkelanjutan pada ekosistem Indonesia.
 
-Our approach combines scientific research with traditional ecological knowledge to develop sustainable solutions for forest degradation, biodiversity loss, and climate change. We work closely with local communities to ensure that conservation efforts provide both environmental benefits and economic opportunities for residents.
+Pendekatan kami menggabungkan penelitian ilmiah dengan pengetahuan ekologi tradisional untuk mengembangkan solusi berkelanjutan untuk degradasi hutan, hilangnya keanekaragaman hayati, dan perubahan iklim. Kami bekerja erat dengan komunitas lokal untuk memastikan bahwa upaya konservasi memberikan manfaat lingkungan dan peluang ekonomi bagi penduduk.
 
-Since our establishment, we have successfully restored over 2,000 hectares of degraded forestland, planted more than 500,000 native trees, and engaged thousands of community members in conservation activities. Our projects follow international standards for carbon credit verification and contribute significantly to Indonesia's climate goals.
+Sejak pendirian kami, kami telah berhasil memulihkan lebih dari 2.000 hektar lahan hutan yang terdegradasi, menanam lebih dari 500.000 pohon asli, dan melibatkan ribuan anggota komunitas dalam kegiatan konservasi. Proyek kami mengikuti standar internasional untuk verifikasi kredit karbon dan berkontribusi signifikan terhadap tujuan iklim Indonesia.
 
-We believe that effective conservation requires collaboration between communities, government, and private sector partners. Through our network of 50+ community partnerships, we continue to expand our impact and create sustainable models for environmental restoration that can be replicated across Southeast Asia.`,
+Kami percaya bahwa konservasi yang efektif memerlukan kolaborasi antara komunitas, pemerintah, dan mitra sektor swasta. Melalui jaringan 50+ kemitraan komunitas kami, kami terus memperluas dampak dan menciptakan model berkelanjutan untuk restorasi lingkungan yang dapat direplikasi di seluruh Asia Tenggara.`,
   image:
     "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=800&h=400&fit=crop&crop=center",
   coverImage:
@@ -31,8 +32,8 @@ We believe that effective conservation requires collaboration between communitie
   projects: [
     {
       id: "PRJ001",
-      name: "Forest Restoration Initiative",
-      status: "Active",
+      name: "Inisiatif Restorasi Hutan",
+      status: "Aktif",
       carbonOffset: 1200,
       volunteers: 45,
       image:
@@ -40,8 +41,8 @@ We believe that effective conservation requires collaboration between communitie
     },
     {
       id: "PRJ005",
-      name: "Mangrove Conservation Project",
-      status: "Active",
+      name: "Proyek Konservasi Mangrove",
+      status: "Aktif",
       carbonOffset: 800,
       volunteers: 32,
       image:
@@ -49,8 +50,8 @@ We believe that effective conservation requires collaboration between communitie
     },
     {
       id: "PRJ008",
-      name: "Community Education Program",
-      status: "Planning",
+      name: "Program Pendidikan Komunitas",
+      status: "Perencanaan",
       carbonOffset: 400,
       volunteers: 28,
       image:
@@ -106,7 +107,7 @@ export default function CommunityDetailPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
+    return new Date(dateString).toLocaleDateString("id-ID", {
       year: "numeric",
       month: "long",
       day: "numeric",
@@ -115,11 +116,11 @@ export default function CommunityDetailPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Active":
+      case "Aktif":
         return "bg-green-100 text-green-800";
-      case "Planning":
+      case "Perencanaan":
         return "bg-yellow-100 text-yellow-800";
-      case "Completed":
+      case "Selesai":
         return "bg-blue-100 text-blue-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -130,10 +131,12 @@ export default function CommunityDetailPage() {
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
       <div className="relative">
-        <img
+        <Image
           src={community.coverImage}
           alt={community.name}
           className="h-64 w-full object-cover md:h-80"
+          width={480}
+          height={480}
         />
         <div className="bg-opacity-40 absolute inset-0 bg-black"></div>
         <div className="absolute right-0 bottom-0 left-0 p-6 md:p-8">
@@ -142,7 +145,7 @@ export default function CommunityDetailPage() {
               <ol className="flex items-center space-x-4 text-white">
                 <li>
                   <Link href="/" className="hover:text-gray-300">
-                    Home
+                    Beranda
                   </Link>
                 </li>
                 <li>
@@ -150,7 +153,7 @@ export default function CommunityDetailPage() {
                 </li>
                 <li>
                   <Link href="/communities" className="hover:text-gray-300">
-                    Communities
+                    Komunitas
                   </Link>
                 </li>
                 <li>
@@ -163,10 +166,12 @@ export default function CommunityDetailPage() {
             </nav>
 
             <div className="flex flex-col items-start space-y-4 md:flex-row md:items-end md:space-y-0 md:space-x-6">
-              <img
+              <Image
                 src={community.image}
                 alt={community.name}
                 className="h-24 w-24 rounded-lg border-4 border-white md:h-32 md:w-32"
+                width={480}
+                height={480}
               />
               <div className="flex-1">
                 <div className="mb-2 flex items-center space-x-3">
@@ -187,10 +192,10 @@ export default function CommunityDetailPage() {
                   {community.description}
                 </p>
                 <div className="flex items-center space-x-4 text-gray-300">
-                  <span>{community.projectCount} projects</span>
+                  <span>{community.projectCount} proyek</span>
                   <span>•</span>
                   <span>
-                    {community.totalCarbonOffset.toLocaleString()} tons CO₂
+                    {community.totalCarbonOffset.toLocaleString()} ton CO₂
                     offset
                   </span>
                 </div>
@@ -214,11 +219,11 @@ export default function CommunityDetailPage() {
                   <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <span className="text-sm font-medium text-green-600">
-                  Verified Organization
+                  Organisasi Terverifikasi
                 </span>
               </div>
               <span className="text-sm text-gray-600">
-                Established {formatDate(community.established)}
+                Didirikan {formatDate(community.established)}
               </span>
             </div>
 
@@ -231,19 +236,21 @@ export default function CommunityDetailPage() {
                       disabled={isLoading}
                       className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
                     >
-                      {isLoading ? "Following..." : "Follow Community"}
+                      {isLoading ? "Mengikuti..." : "Ikuti Komunitas"}
                     </button>
                   ) : (
                     <div className="flex items-center space-x-2">
                       <span className="rounded-lg bg-green-100 px-4 py-2 font-semibold text-green-800">
-                        ✓ Following
+                        ✓ Mengikuti
                       </span>
                       <button
                         onClick={handleUnfollowCommunity}
                         disabled={isLoading}
                         className="rounded-lg border border-gray-300 px-4 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                       >
-                        {isLoading ? "Unfollowing..." : "Unfollow"}
+                        {isLoading
+                          ? "Berhenti Mengikuti..."
+                          : "Berhenti Mengikuti"}
                       </button>
                     </div>
                   )}
@@ -251,16 +258,10 @@ export default function CommunityDetailPage() {
               ) : (
                 <div className="flex items-center space-x-2">
                   <Link
-                    href="/register"
-                    className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700"
-                  >
-                    Join to Follow
-                  </Link>
-                  <Link
                     href="/login"
                     className="rounded-lg border border-gray-300 px-4 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50"
                   >
-                    Sign In
+                    Masuk
                   </Link>
                 </div>
               )}
@@ -274,8 +275,8 @@ export default function CommunityDetailPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <nav className="flex space-x-8" aria-label="Tabs">
             {[
-              { id: "overview", label: "Overview" },
-              { id: "projects", label: "Projects" },
+              { id: "overview", label: "Ringkasan" },
+              { id: "projects", label: "Proyek" },
             ].map((tab) => (
               <button
                 key={tab.id}
@@ -300,7 +301,7 @@ export default function CommunityDetailPage() {
             <div className="lg:col-span-2">
               <div className="mb-6 rounded-lg bg-white p-6 shadow-sm">
                 <h2 className="mb-4 text-2xl font-bold text-gray-900">
-                  About {community.name}
+                  Tentang {community.name}
                 </h2>
                 <div className="prose max-w-none text-gray-600">
                   {community.fullDescription
@@ -318,23 +319,23 @@ export default function CommunityDetailPage() {
               {/* Stats */}
               <div className="rounded-lg bg-white p-6 shadow-sm">
                 <h3 className="mb-4 text-lg font-semibold text-gray-900">
-                  Community Stats
+                  Statistik Komunitas
                 </h3>
                 <div className="space-y-4">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Active Projects</span>
+                    <span className="text-gray-600">Proyek Aktif</span>
                     <span className="font-semibold">
                       {community.projectCount}
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Carbon Offset</span>
+                    <span className="text-gray-600">Offset Karbon</span>
                     <span className="font-semibold">
-                      {community.totalCarbonOffset.toLocaleString()} tons CO₂
+                      {community.totalCarbonOffset.toLocaleString()} ton CO₂
                     </span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Established</span>
+                    <span className="text-gray-600">Didirikan</span>
                     <span className="font-semibold">
                       {new Date(community.established).getFullYear()}
                     </span>
@@ -345,7 +346,7 @@ export default function CommunityDetailPage() {
               {/* Contact Info */}
               <div className="rounded-lg bg-white p-6 shadow-sm">
                 <h3 className="mb-4 text-lg font-semibold text-gray-900">
-                  Contact Information
+                  Informasi Kontak
                 </h3>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
@@ -393,14 +394,8 @@ export default function CommunityDetailPage() {
           <div>
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-2xl font-bold text-gray-900">
-                Community Projects
+                Proyek Komunitas
               </h2>
-              <Link
-                href="/projects"
-                className="font-medium text-green-600 hover:text-green-700"
-              >
-                View All Projects →
-              </Link>
             </div>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
               {community.projects.map((project) => (
@@ -408,9 +403,11 @@ export default function CommunityDetailPage() {
                   key={project.id}
                   className="overflow-hidden rounded-lg bg-white shadow-sm"
                 >
-                  <img
+                  <Image
                     src={project.image}
                     alt={project.name}
+                    width={240}
+                    height={240}
                     className="h-48 w-full object-cover"
                   />
                   <div className="p-6">
@@ -429,13 +426,13 @@ export default function CommunityDetailPage() {
                     </h3>
                     <div className="mb-4 space-y-2 text-sm text-gray-600">
                       <div className="flex justify-between">
-                        <span>Carbon Offset:</span>
+                        <span>Offset Karbon:</span>
                         <span className="font-medium">
-                          {project.carbonOffset} tons CO₂
+                          {project.carbonOffset} ton CO₂
                         </span>
                       </div>
                       <div className="flex justify-between">
-                        <span>Volunteers:</span>
+                        <span>Relawan:</span>
                         <span className="font-medium">
                           {project.volunteers}
                         </span>
@@ -445,7 +442,7 @@ export default function CommunityDetailPage() {
                       href={`/projects/${project.id}`}
                       className="block w-full rounded-md bg-green-600 py-2 text-center text-white transition-colors hover:bg-green-700"
                     >
-                      View Project
+                      Lihat Proyek
                     </Link>
                   </div>
                 </div>

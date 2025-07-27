@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-
+import Image from "next/image";
 // Mock data for carbon issued projects
 const mockCarbonProjects = [
   {
     id: "CRB001",
-    name: "Forest Restoration Initiative",
+    name: "Inisiatif Restorasi Hutan",
     image:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&crop=center",
     address: "Jakarta, Indonesia",
@@ -21,14 +21,14 @@ const mockCarbonProjects = [
       end: "2024-06-30",
     },
     issueDate: "2024-07-15",
-    status: "Issued",
+    status: "Diterbitkan",
     description:
-      "Large-scale forest restoration project that successfully sequestered carbon and earned verified credits.",
-    community: "Green Earth Indonesia",
+      "Proyek restorasi hutan skala besar yang berhasil menyerap karbon dan mendapatkan kredit terverifikasi.",
+    community: "Bumi Hijau Indonesia",
   },
   {
     id: "CRB002",
-    name: "Solar Panel Community Project",
+    name: "Proyek Panel Surya Komunitas",
     image:
       "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=250&fit=crop&crop=center",
     address: "Bandung, Indonesia",
@@ -42,14 +42,14 @@ const mockCarbonProjects = [
       end: "2024-05-15",
     },
     issueDate: "2024-06-01",
-    status: "Issued",
+    status: "Diterbitkan",
     description:
-      "Successfully installed solar panels reducing carbon emissions and generating verified credits.",
-    community: "Solar Future Collective",
+      "Berhasil memasang panel surya yang mengurangi emisi karbon dan menghasilkan kredit terverifikasi.",
+    community: "Kolektif Masa Depan Surya",
   },
   {
     id: "CRB003",
-    name: "Waste Management Program",
+    name: "Program Pengelolaan Sampah",
     image:
       "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?w=400&h=250&fit=crop&crop=center",
     address: "Surabaya, Indonesia",
@@ -64,14 +64,14 @@ const mockCarbonProjects = [
     },
     issueDate: "2024-04-20",
     retiredDate: "2024-08-15",
-    status: "Retired",
+    status: "Ditarik",
     description:
-      "Comprehensive waste management program that achieved carbon reduction targets and credits have been retired.",
-    community: "Clean City Initiative",
+      "Program pengelolaan sampah komprehensif yang mencapai target pengurangan karbon dan kredit telah ditarik.",
+    community: "Inisiatif Kota Bersih",
   },
   {
     id: "CRB004",
-    name: "Mangrove Restoration",
+    name: "Restorasi Mangrove",
     image:
       "https://images.unsplash.com/photo-1590845947670-c009801ffa74?w=400&h=250&fit=crop&crop=center",
     address: "Balikpapan, Indonesia",
@@ -85,14 +85,14 @@ const mockCarbonProjects = [
       end: "2024-11-30",
     },
     issueDate: "2024-12-10",
-    status: "Issued",
+    status: "Diterbitkan",
     description:
-      "Coastal mangrove ecosystem restoration that successfully generated verified carbon credits.",
-    community: "Coastal Guardians",
+      "Restorasi ekosistem mangrove pesisir yang berhasil menghasilkan kredit karbon terverifikasi.",
+    community: "Penjaga Pesisir",
   },
   {
     id: "CRB005",
-    name: "Wind Farm Development",
+    name: "Pengembangan Pembangkit Listrik Tenaga Angin",
     image:
       "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=400&h=250&fit=crop&crop=center",
     address: "Makassar, Indonesia",
@@ -185,9 +185,9 @@ export default function CarbonIssuedPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Issued":
+      case "Diterbitkan":
         return "bg-blue-100 text-blue-800";
-      case "Retired":
+      case "Ditarik":
         return "bg-gray-100 text-gray-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -195,7 +195,7 @@ export default function CarbonIssuedPage() {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("en-US", {
+    return new Date(dateString).toLocaleDateString("id-ID", {
       day: "numeric",
       month: "short",
       year: "numeric",
@@ -323,10 +323,12 @@ export default function CarbonIssuedPage() {
                   <tr key={project.id} className="hover:bg-gray-50">
                     <td className="px-6 py-4">
                       <div className="flex items-center">
-                        <img
+                        <Image
                           className="h-12 w-12 rounded-lg object-cover"
                           src={project.image}
                           alt={project.name}
+                          width={480}
+                          height={480}
                         />
                         <div className="ml-4">
                           <div className="text-sm font-medium text-gray-900">

@@ -80,7 +80,7 @@ export default async function RootLayout({
   };
 
   return (
-    <html lang="en">
+    <html lang="id">
       <head>
         <link rel="icon" href="/logo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/logo.png" />

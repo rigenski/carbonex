@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -53,10 +54,12 @@ export default function Home() {
             </div>
             <div className="relative">
               <div className="rounded-3xl bg-green-200 p-8">
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop&crop=center"
                   alt="Environmental sustainability"
                   className="h-80 w-full rounded-2xl object-cover"
+                  width={480}
+                  height={480}
                 />
               </div>
               <div className="absolute -bottom-6 -left-6 rounded-xl bg-white p-4 shadow-lg">
@@ -207,10 +210,12 @@ export default function Home() {
             ].map((client, index) => (
               <div key={index} className="group flex flex-col items-center">
                 <div className="mb-4 overflow-hidden rounded-xl bg-white p-6 shadow-sm transition-all duration-300 group-hover:shadow-md">
-                  <img
+                  <Image
                     src={client.image}
                     alt={client.name}
                     className="h-16 w-full object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-100"
+                    width={240}
+                    height={240}
                   />
                 </div>
                 <h3 className="mb-1 text-center text-sm font-semibold text-gray-900">
@@ -375,10 +380,12 @@ export default function Home() {
               </div>
             </div>
             <div>
-              <img
+              <Image
                 src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
                 alt="Get started"
                 className="h-64 w-full rounded-xl object-cover"
+                width={480}
+                height={480}
               />
             </div>
           </div>
@@ -403,10 +410,12 @@ export default function Home() {
                 key={project}
                 className="overflow-hidden rounded-lg bg-white shadow-md"
               >
-                <img
+                <Image
                   src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
                   alt={`Project ${project}`}
                   className="h-48 w-full object-cover"
+                  width={480}
+                  height={480}
                 />
                 <div className="p-6">
                   <div className="mb-2 flex items-center justify-between">

@@ -74,11 +74,11 @@ export default function DashboardPage() {
                   Restorasi Hutan Jakarta
                 </p>
                 <p className="text-sm text-gray-600">
-                  Status: Under Development
+                  Status: Dalam Pengembangan
                 </p>
               </div>
               <span className="rounded-full bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800">
-                Under Development
+                Dalam Pengembangan
               </span>
             </div>
             <div className="flex items-center justify-between rounded-lg bg-gray-50 p-3">
@@ -87,11 +87,11 @@ export default function DashboardPage() {
                   Solar Panel Community
                 </p>
                 <p className="text-sm text-gray-600">
-                  Status: Submitted for Registration
+                  Status: Dikirim untuk Pendaftaran
                 </p>
               </div>
               <span className="rounded-full bg-blue-100 px-2 py-1 text-xs font-medium text-blue-800">
-                Submitted
+                Dikirim
               </span>
             </div>
           </div>
