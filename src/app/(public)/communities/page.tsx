@@ -138,13 +138,13 @@ export default function CommunitiesPage() {
         <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl font-bold text-gray-900">
-              Success Communities
+              Komunitas Sukses
             </h1>
             <p className="mx-auto mt-2 max-w-3xl text-gray-600">
-              Connect with verified organizations already achieving exceptional
-              carbon impact results. Join 890+ communities that have
-              collectively offset over 56,789 tons of CO₂ through proven
-              sustainability initiatives.
+              Terhubung dengan organisasi terverifikasi yang sudah mencapai
+              hasil dampak karbon yang luar biasa. Bergabunglah dengan 890+
+              komunitas yang telah secara kolektif mengoffset lebih dari 56,789
+              ton CO₂ melalui inisiatif keberlanjutan yang terbukti.
             </p>
           </div>
         </div>
@@ -157,31 +157,31 @@ export default function CommunitiesPage() {
             {/* Search */}
             <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Search Communities
+                Cari Komunitas
               </label>
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Search by name, description, or location..."
+                placeholder="Cari berdasarkan nama, deskripsi, atau lokasi..."
               />
             </div>
 
             {/* Sort */}
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Sort By
+                Urutkan Berdasarkan
               </label>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
               >
-                <option value="name">Name</option>
-                <option value="projects">Projects</option>
-                <option value="carbon">Carbon Offset</option>
-                <option value="established">Established Date</option>
+                <option value="name">Nama</option>
+                <option value="projects">Proyek</option>
+                <option value="carbon">Offset Karbon</option>
+                <option value="established">Tanggal Berdiri</option>
               </select>
             </div>
           </div>
@@ -200,13 +200,13 @@ export default function CommunitiesPage() {
                 htmlFor="verified-only"
                 className="ml-2 text-sm text-gray-700"
               >
-                Show only verified communities
+                Tampilkan hanya komunitas terverifikasi
               </label>
             </div>
             <div className="mt-4 sm:mt-0">
               <span className="text-sm text-gray-600">
-                Showing {filteredCommunities.length} of {communities.length}{" "}
-                communities
+                Menampilkan {filteredCommunities.length} dari{" "}
+                {communities.length} komunitas
               </span>
             </div>
           </div>
@@ -227,7 +227,7 @@ export default function CommunitiesPage() {
               <div className="p-6">
                 <div className="mb-3 flex items-center justify-between">
                   <span className="rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-                    Community
+                    Komunitas
                   </span>
                   {community.verified && (
                     <div className="flex items-center">
@@ -239,7 +239,7 @@ export default function CommunitiesPage() {
                         <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       <span className="ml-1 text-xs text-green-600">
-                        Verified
+                        Terverifikasi
                       </span>
                     </div>
                   )}
@@ -282,7 +282,7 @@ export default function CommunitiesPage() {
                     >
                       <path d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                     </svg>
-                    {community.projectCount} projects
+                    {community.projectCount} proyek
                   </div>
                   <div className="flex items-center">
                     <svg
@@ -292,7 +292,7 @@ export default function CommunitiesPage() {
                     >
                       <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
                     </svg>
-                    {community.carbonOffset.toLocaleString()} tons CO₂ offset
+                    {community.carbonOffset.toLocaleString()} ton CO₂ offset
                   </div>
                 </div>
 
@@ -305,7 +305,7 @@ export default function CommunitiesPage() {
                     href={`/communities/${community.id}`}
                     className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
                   >
-                    View Details
+                    Lihat Detail
                   </Link>
                 </div>
               </div>
@@ -330,10 +330,10 @@ export default function CommunitiesPage() {
               />
             </svg>
             <h3 className="mt-4 text-lg font-medium text-gray-900">
-              No communities found
+              Tidak ada komunitas ditemukan
             </h3>
             <p className="mt-2 text-gray-600">
-              Try adjusting your search criteria or filters to find communities.
+              Coba sesuaikan kriteria pencarian atau filter untuk menemukan komunitas.
             </p>
           </div>
         )}
@@ -342,26 +342,26 @@ export default function CommunitiesPage() {
         {!user && (
           <div className="mt-12 rounded-lg border border-green-200 bg-green-50 p-8 text-center">
             <h3 className="mb-2 text-xl font-semibold text-gray-900">
-              Ready to Launch Your Impact Community?
+              Siap Meluncurkan Komunitas Dampak Anda?
             </h3>
             <p className="mb-6 text-gray-600">
-              Join 890+ successful organizations making measurable environmental
-              change. Start your community today and connect with thousands of
-              eco-conscious supporters ready to fund your sustainability
-              projects.
+              Bergabunglah dengan 890+ organisasi sukses yang membuat perubahan
+              lingkungan yang terukur. Mulai komunitas Anda hari ini dan
+              terhubung dengan ribuan pendukung yang sadar lingkungan siap
+              mendanai proyek keberlanjutan Anda.
             </p>
             <div className="space-x-4">
               <Link
                 href="/register"
                 className="rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700"
               >
-                Launch Community Free
+                Luncurkan Komunitas Gratis
               </Link>
               <Link
                 href="/login"
                 className="rounded-lg border border-green-600 px-6 py-3 font-semibold text-green-600 transition-colors hover:bg-green-50"
               >
-                Sign In
+                Masuk
               </Link>
             </div>
           </div>

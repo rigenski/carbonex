@@ -337,12 +337,12 @@ export default function ProjectsPage() {
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
-                Premium Carbon Credit Projects
+                Proyek Kredit Karbon Premium
               </h1>
               <p className="mt-2 text-gray-600">
-                Discover high-impact, triple-verified projects delivering
-                measurable results. Start offsetting your carbon footprint today
-                with projects that guarantee real environmental change.
+                Temukan proyek triple-verified berdampak tinggi yang memberikan
+                hasil terukur. Mulai offset jejak karbon Anda hari ini dengan
+                proyek yang menjamin perubahan lingkungan nyata.
               </p>
             </div>
             {user?.role === "community" && (
@@ -350,7 +350,7 @@ export default function ProjectsPage() {
                 href="/projects/create"
                 className="rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700"
               >
-                Launch Your Project
+                Luncurkan Proyek Anda
               </Link>
             )}
           </div>
@@ -364,14 +364,14 @@ export default function ProjectsPage() {
             {/* Search */}
             <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Search Projects
+                Cari Proyek
               </label>
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Search by name, location, or community..."
+                placeholder="Cari berdasarkan nama, lokasi, atau komunitas..."
               />
             </div>
 
@@ -396,7 +396,7 @@ export default function ProjectsPage() {
             {/* Volunteer Filter */}
             <div>
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Volunteer Status
+                Status Relawan
               </label>
               <select
                 value={selectedVolunteerFilter}
@@ -405,7 +405,11 @@ export default function ProjectsPage() {
               >
                 {volunteerOptions.map((option) => (
                   <option key={option} value={option}>
-                    {option}
+                    {option === "All"
+                      ? "Semua"
+                      : option === "Need Volunteers"
+                        ? "Butuh Relawan"
+                        : "Tidak Butuh Relawan"}
                   </option>
                 ))}
               </select>
@@ -416,20 +420,23 @@ export default function ProjectsPage() {
           <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Showing {filteredProjects.length} of {projects.length} projects
+                Menampilkan {filteredProjects.length} dari {projects.length}{" "}
+                proyek
               </span>
             </div>
             <div className="mt-4 flex items-center space-x-2 sm:mt-0">
-              <span className="text-sm text-gray-600">Sort by:</span>
+              <span className="text-sm text-gray-600">
+                Urutkan berdasarkan:
+              </span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
               >
-                <option value="name">Name</option>
-                <option value="carbon">Carbon Impact</option>
-                <option value="volunteers">Volunteers</option>
-                <option value="date">Start Date</option>
+                <option value="name">Nama</option>
+                <option value="carbon">Dampak Karbon</option>
+                <option value="volunteers">Relawan</option>
+                <option value="date">Tanggal Mulai</option>
               </select>
             </div>
           </div>
@@ -459,7 +466,7 @@ export default function ProjectsPage() {
                       <span
                         className={`rounded px-2.5 py-0.5 text-xs font-medium ${getVolunteerBadgeColor(project.needsVolunteers)}`}
                       >
-                        Need Volunteers
+                        Butuh Relawan
                       </span>
                     )}
                   </div>
@@ -504,7 +511,8 @@ export default function ProjectsPage() {
                     >
                       <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
                     </svg>
-                    {project.estimateCarbon.toLocaleString()} tons CO₂ estimated
+                    {project.estimateCarbon.toLocaleString()} ton CO₂
+                    diperkirakan
                   </div>
                   {project.needsVolunteers && (
                     <div className="space-y-2">
@@ -519,7 +527,7 @@ export default function ProjectsPage() {
                           </svg>
                           <span className="text-sm text-gray-600">
                             {project.registeredVolunteers}/
-                            {project.maxVolunteers} volunteers
+                            {project.maxVolunteers} relawan
                           </span>
                         </div>
                         <span className="text-xs text-gray-500">
@@ -551,7 +559,7 @@ export default function ProjectsPage() {
                     href={`/projects/${project.id}`}
                     className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
                   >
-                    View Details
+                    Lihat Detail
                   </Link>
                 </div>
               </div>
@@ -576,10 +584,11 @@ export default function ProjectsPage() {
               />
             </svg>
             <h3 className="mt-4 text-lg font-medium text-gray-900">
-              No projects found
+              Tidak ada proyek ditemukan
             </h3>
             <p className="mt-2 text-gray-600">
-              Try adjusting your search criteria or filters to find projects.
+              Coba sesuaikan kriteria pencarian atau filter untuk menemukan
+              proyek.
             </p>
           </div>
         )}

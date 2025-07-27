@@ -11,12 +11,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "CarbonEx - Premium Carbon Credits & Environmental Impact",
+  title: "CarbonEx - Kredit Karbon Premium & Dampak Lingkungan",
   description:
-    "Transform your carbon footprint into real environmental impact. Access triple-verified carbon credits from 890+ successful projects. Start offsetting today.",
+    "Ubah jejak karbon Anda menjadi dampak lingkungan nyata. Akses kredit karbon triple-verified dari 890+ proyek sukses. Mulai offset hari ini.",
   keywords:
-    "carbon credits, carbon offset, environmental impact, sustainability, climate change, carbon neutral, verified projects",
-  authors: [{ name: "CarbonEx Team" }],
+    "kredit karbon, offset karbon, dampak lingkungan, keberlanjutan, perubahan iklim, netral karbon, proyek terverifikasi",
+  authors: [{ name: "Tim CarbonEx" }],
   creator: "CarbonEx",
   publisher: "CarbonEx",
   formatDetection: {
@@ -30,26 +30,26 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: "id_ID",
     url: "https://carbonex.com",
-    title: "CarbonEx - Premium Carbon Credits & Environmental Impact",
+    title: "CarbonEx - Kredit Karbon Premium & Dampak Lingkungan",
     description:
-      "Transform your carbon footprint into real environmental impact. Access triple-verified carbon credits from 890+ successful projects.",
+      "Ubah jejak karbon Anda menjadi dampak lingkungan nyata. Akses kredit karbon triple-verified dari 890+ proyek sukses.",
     siteName: "CarbonEx",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "CarbonEx - Premium Carbon Credits Platform",
+        alt: "CarbonEx - Platform Kredit Karbon Premium",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CarbonEx - Premium Carbon Credits & Environmental Impact",
+    title: "CarbonEx - Kredit Karbon Premium & Dampak Lingkungan",
     description:
-      "Transform your carbon footprint into real environmental impact. Access triple-verified carbon credits from 890+ successful projects.",
+      "Ubah jejak karbon Anda menjadi dampak lingkungan nyata. Akses kredit karbon triple-verified dari 890+ proyek sukses.",
     images: ["/og-image.jpg"],
     creator: "@carbonex",
   },

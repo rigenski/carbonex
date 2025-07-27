@@ -210,13 +210,12 @@ export default function CarbonIssuedPage() {
           <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
             <div>
               <h1 className="text-3xl font-bold text-gray-900">
-                Premium Carbon Credits Marketplace
+                Pasar Kredit Karbon Premium
               </h1>
               <p className="mt-2 text-gray-600">
-                Access triple-verified, high-quality carbon credits ready for
-                immediate purchase. Each credit represents measurable CO₂
-                reduction with guaranteed authenticity and maximum environmental
-                impact.
+                Akses kredit karbon berkualitas tinggi triple-verified siap untuk
+                pembelian langsung. Setiap kredit mewakili pengurangan CO₂ yang
+                terukur dengan keaslian terjamin dan dampak lingkungan maksimal.
               </p>
             </div>
           </div>
@@ -230,14 +229,14 @@ export default function CarbonIssuedPage() {
             {/* Search */}
             <div className="md:col-span-2">
               <label className="mb-2 block text-sm font-medium text-gray-700">
-                Search Carbon Credits
+                Cari Kredit Karbon
               </label>
               <input
                 type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                placeholder="Search by name, location, or community..."
+                placeholder="Cari berdasarkan nama, lokasi, atau komunitas..."
               />
             </div>
 
@@ -253,7 +252,7 @@ export default function CarbonIssuedPage() {
               >
                 {projectStatuses.map((status) => (
                   <option key={status} value={status}>
-                    {status}
+                    {status === "All" ? "Semua" : status === "Issued" ? "Terbit" : "Pensiun"}
                   </option>
                 ))}
               </select>
@@ -264,20 +263,20 @@ export default function CarbonIssuedPage() {
           <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Showing {filteredProjects.length} of {projects.length} carbon
-                credit projects
+                Menampilkan {filteredProjects.length} dari {projects.length} proyek
+                kredit karbon
               </span>
             </div>
             <div className="mt-4 flex items-center space-x-2 sm:mt-0">
-              <span className="text-sm text-gray-600">Sort by:</span>
+              <span className="text-sm text-gray-600">Urutkan berdasarkan:</span>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
                 className="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
               >
-                <option value="issueDate">Issue Date</option>
-                <option value="name">Name</option>
-                <option value="carbon">Carbon Credits</option>
+                <option value="issueDate">Tanggal Terbit</option>
+                <option value="name">Nama</option>
+                <option value="carbon">Kredit Karbon</option>
               </select>
             </div>
           </div>
@@ -290,25 +289,25 @@ export default function CarbonIssuedPage() {
               <thead className="bg-gray-50">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Project
+                    Proyek
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Location
+                    Lokasi
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Carbon Credits
+                    Kredit Karbon
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
                     Status
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Dates
+                    Tanggal
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Community
+                    Komunitas
                   </th>
                   <th className="w-32 px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Actions
+                    Aksi
                   </th>
                 </tr>
               </thead>
@@ -349,7 +348,7 @@ export default function CarbonIssuedPage() {
                         {project.issuedCarbon.toLocaleString()} tons
                       </div>
                       <div className="text-xs text-gray-500">
-                        CO₂ credits issued
+                        Kredit CO₂ diterbitkan
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -361,9 +360,9 @@ export default function CarbonIssuedPage() {
                     </td>
                     <td className="px-6 py-4">
                       <div className="text-xs text-gray-500">
-                        <div>Issued: {formatDate(project.issueDate)}</div>
+                        <div>Terbit: {formatDate(project.issueDate)}</div>
                         {project.retiredDate && (
-                          <div>Retired: {formatDate(project.retiredDate)}</div>
+                          <div>Pensiun: {formatDate(project.retiredDate)}</div>
                         )}
                       </div>
                     </td>
@@ -377,7 +376,7 @@ export default function CarbonIssuedPage() {
                         href={`/projects/${project.id}`}
                         className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-blue-700"
                       >
-                        View Details
+                        Lihat Detail
                       </Link>
                     </td>
                   </tr>
