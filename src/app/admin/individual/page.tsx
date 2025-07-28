@@ -201,7 +201,7 @@ export default function AdminIndividual() {
             <div className="space-y-2">
               <Label htmlFor="status">Status</Label>
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -228,7 +228,7 @@ export default function AdminIndividual() {
                 Urutkan berdasarkan:
               </span>
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih pengurutan" />
                 </SelectTrigger>
                 <SelectContent>
@@ -456,7 +456,7 @@ export default function AdminIndividual() {
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
                   <Select defaultValue={selectedIndividual.status}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Pilih status" />
                     </SelectTrigger>
                     <SelectContent>

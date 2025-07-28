@@ -16,7 +16,6 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogFooter,
   DialogHeader,
   DialogTitle,
@@ -198,7 +197,7 @@ export default function IndividualProjects() {
             <div className="space-y-2">
               <Label htmlFor="status">Status</Label>
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -224,10 +223,10 @@ export default function IndividualProjects() {
               <span className="text-sm text-gray-600">
                 Urutkan berdasarkan:
               </span>
-              <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40">
-                  <SelectValue placeholder="Pilih pengurutan" />
-                </SelectTrigger>
+                              <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Pilih pengurutan" />
+                  </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="name">Nama</SelectItem>
                   <SelectItem value="status">Status</SelectItem>

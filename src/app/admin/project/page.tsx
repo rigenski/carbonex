@@ -303,7 +303,7 @@ export default function AdminProject() {
             <div className="space-y-2">
               <Label htmlFor="status">Status</Label>
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -330,7 +330,7 @@ export default function AdminProject() {
                 Urutkan berdasarkan:
               </span>
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih pengurutan" />
                 </SelectTrigger>
                 <SelectContent>
@@ -357,10 +357,8 @@ export default function AdminProject() {
                 <TableRow>
                   <TableHead className="w-64">Proyek</TableHead>
                   <TableHead className="w-48">Lokasi</TableHead>
-                  <TableHead className="w-32">Target</TableHead>
                   <TableHead className="w-32">Status</TableHead>
                   <TableHead className="w-40">Durasi</TableHead>
-                  <TableHead className="w-48">Komunitas</TableHead>
                   <TableHead className="w-24">Aksi</TableHead>
                 </TableRow>
               </TableHeader>
@@ -404,11 +402,7 @@ export default function AdminProject() {
                           </span>
                         </div>
                       </TableCell>
-                      <TableCell>
-                        <span className="text-sm font-medium">
-                          {project.targetTrees.toLocaleString()}
-                        </span>
-                      </TableCell>
+
                       <TableCell>
                         <Badge
                           variant={
@@ -423,11 +417,6 @@ export default function AdminProject() {
                           <div>{formatDate(project.startDate)}</div>
                           <div>s/d {formatDate(project.endDate)}</div>
                         </div>
-                      </TableCell>
-                      <TableCell>
-                        <span className="text-sm text-gray-600">
-                          {project.community}
-                        </span>
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center space-x-2">
@@ -542,7 +531,7 @@ export default function AdminProject() {
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
                   <Select defaultValue={selectedProject.status}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Pilih status" />
                     </SelectTrigger>
                     <SelectContent>

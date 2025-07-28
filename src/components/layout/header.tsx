@@ -13,15 +13,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import {
-  Menu,
-  User,
-  LogOut,
-  Home,
-  Users,
-  Leaf,
-  TrendingUp,
-} from "lucide-react";
+import { Menu, LogOut, Home, Users, Leaf, TrendingUp } from "lucide-react";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -53,7 +45,7 @@ export default function Header() {
 
           {/* Desktop Navigation - Centered */}
           <div className="hidden flex-1 justify-center md:flex">
-            <div className="flex items-baseline space-x-8">
+            <div className="flex items-baseline space-x-4">
               <Link
                 href="/projects"
                 className="hover:text-primary rounded-md px-3 py-2 text-sm font-medium text-nowrap text-gray-700 transition-colors"

@@ -184,7 +184,7 @@ export default function CommunitiesPage() {
               <div>
                 <Label htmlFor="sort">Urutkan Berdasarkan</Label>
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Pilih pengurutan" />
                   </SelectTrigger>
                   <SelectContent>
@@ -350,7 +350,7 @@ export default function CommunitiesPage() {
             <div className="space-x-4">
               <Link
                 href="/register"
-                className="rounded-lg bg-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-primary/90"
+                className="bg-primary hover:bg-primary/90 rounded-lg px-6 py-3 font-semibold text-white transition-colors"
               >
                 Luncurkan Komunitas Gratis
               </Link>

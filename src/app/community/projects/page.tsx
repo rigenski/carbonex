@@ -459,7 +459,7 @@ export default function CommunityProjects() {
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
                   <Select defaultValue={selectedProject.status}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Pilih status" />
                     </SelectTrigger>
                     <SelectContent>

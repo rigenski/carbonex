@@ -50,7 +50,8 @@ interface Individual {
 export default function DashboardAdminIndividuals() {
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
-  const [selectedIndividual, setSelectedIndividual] = useState<Individual | null>(null);
+  const [selectedIndividual, setSelectedIndividual] =
+    useState<Individual | null>(null);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("All");
   const [sortBy, setSortBy] = useState("name");
@@ -64,7 +65,8 @@ export default function DashboardAdminIndividuals() {
       location: "Jakarta, DKI Jakarta",
       projectsJoined: 3,
       status: "Aktif",
-      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND002",
@@ -73,7 +75,8 @@ export default function DashboardAdminIndividuals() {
       location: "Bandung, Jawa Barat",
       projectsJoined: 5,
       status: "Aktif",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND003",
@@ -82,7 +85,8 @@ export default function DashboardAdminIndividuals() {
       location: "Surabaya, Jawa Timur",
       projectsJoined: 2,
       status: "Nonaktif",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND004",
@@ -91,7 +95,8 @@ export default function DashboardAdminIndividuals() {
       location: "Semarang, Jawa Tengah",
       projectsJoined: 4,
       status: "Aktif",
-      avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND005",
@@ -100,7 +105,8 @@ export default function DashboardAdminIndividuals() {
       location: "Yogyakarta, DI Yogyakarta",
       projectsJoined: 1,
       status: "Aktif",
-      avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND006",
@@ -109,7 +115,8 @@ export default function DashboardAdminIndividuals() {
       location: "Malang, Jawa Timur",
       projectsJoined: 6,
       status: "Aktif",
-      avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
+      avatar:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
     },
   ];
 
@@ -125,7 +132,9 @@ export default function DashboardAdminIndividuals() {
 
   const handleDelete = (individual: Individual) => {
     if (
-      confirm(`Apakah Anda yakin ingin menghapus individu "${individual.name}"?`)
+      confirm(
+        `Apakah Anda yakin ingin menghapus individu "${individual.name}"?`,
+      )
     ) {
       alert(`Individu "${individual.name}" berhasil dihapus!`);
     }
@@ -163,9 +172,7 @@ export default function DashboardAdminIndividuals() {
     <div className="space-y-6">
       <div className="flex justify-between">
         <h2 className="text-xl font-semibold text-gray-900">Kelola Individu</h2>
-        <Button>
-          Tambah Individu
-        </Button>
+        <Button>Tambah Individu</Button>
       </div>
 
       {/* Filter and Search */}
@@ -176,10 +183,10 @@ export default function DashboardAdminIndividuals() {
         <CardContent>
           <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
             {/* Search */}
-            <div className="lg:col-span-2 space-y-2">
+            <div className="space-y-2 lg:col-span-2">
               <Label htmlFor="search">Cari Individu</Label>
               <div className="relative">
-                <MagnifyingGlassIcon className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <MagnifyingGlassIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
                 <Input
                   id="search"
                   type="text"
@@ -195,7 +202,7 @@ export default function DashboardAdminIndividuals() {
             <div className="space-y-2">
               <Label htmlFor="status">Status</Label>
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -213,8 +220,8 @@ export default function DashboardAdminIndividuals() {
           <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-600">
-                Menampilkan {filteredIndividuals.length} dari {individuals.length}{" "}
-                individu
+                Menampilkan {filteredIndividuals.length} dari{" "}
+                {individuals.length} individu
               </span>
             </div>
             <div className="mt-4 flex items-center space-x-2 sm:mt-0">
@@ -222,13 +229,15 @@ export default function DashboardAdminIndividuals() {
                 Urutkan berdasarkan:
               </span>
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih pengurutan" />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="name">Nama</SelectItem>
                   <SelectItem value="status">Status</SelectItem>
-                  <SelectItem value="projectsJoined">Proyek Bergabung</SelectItem>
+                  <SelectItem value="projectsJoined">
+                    Proyek Bergabung
+                  </SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -256,7 +265,7 @@ export default function DashboardAdminIndividuals() {
               <TableBody>
                 {filteredIndividuals.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={5} className="text-center py-8">
+                    <TableCell colSpan={5} className="py-8 text-center">
                       <div className="text-gray-500">
                         Tidak ada individu yang ditemukan
                       </div>
@@ -268,9 +277,15 @@ export default function DashboardAdminIndividuals() {
                       <TableCell>
                         <div className="flex items-center space-x-3">
                           <Avatar className="h-10 w-10">
-                            <AvatarImage src={individual.avatar} alt={individual.name} />
+                            <AvatarImage
+                              src={individual.avatar}
+                              alt={individual.name}
+                            />
                             <AvatarFallback>
-                              {individual.name.split(' ').map(n => n[0]).join('')}
+                              {individual.name
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")}
                             </AvatarFallback>
                           </Avatar>
                           <div>
@@ -297,7 +312,13 @@ export default function DashboardAdminIndividuals() {
                         </span>
                       </TableCell>
                       <TableCell>
-                        <Badge variant={individual.status === "Aktif" ? "default" : "secondary"}>
+                        <Badge
+                          variant={
+                            individual.status === "Aktif"
+                              ? "default"
+                              : "secondary"
+                          }
+                        >
                           {individual.status}
                         </Badge>
                       </TableCell>
@@ -345,32 +366,56 @@ export default function DashboardAdminIndividuals() {
             <div className="space-y-4">
               <div className="flex items-center space-x-4">
                 <Avatar className="h-16 w-16">
-                  <AvatarImage src={selectedIndividual.avatar} alt={selectedIndividual.name} />
+                  <AvatarImage
+                    src={selectedIndividual.avatar}
+                    alt={selectedIndividual.name}
+                  />
                   <AvatarFallback className="text-lg">
-                    {selectedIndividual.name.split(' ').map(n => n[0]).join('')}
+                    {selectedIndividual.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <h3 className="text-lg font-semibold">{selectedIndividual.name}</h3>
-                  <p className="text-sm text-gray-600">{selectedIndividual.email}</p>
+                  <h3 className="text-lg font-semibold">
+                    {selectedIndividual.name}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {selectedIndividual.email}
+                  </p>
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <Label className="text-sm font-medium">ID</Label>
-                  <p className="text-sm text-gray-600">{selectedIndividual.id}</p>
+                  <p className="text-sm text-gray-600">
+                    {selectedIndividual.id}
+                  </p>
                 </div>
                 <div>
                   <Label className="text-sm font-medium">Lokasi</Label>
-                  <p className="text-sm text-gray-600">{selectedIndividual.location}</p>
+                  <p className="text-sm text-gray-600">
+                    {selectedIndividual.location}
+                  </p>
                 </div>
                 <div>
-                  <Label className="text-sm font-medium">Proyek Bergabung</Label>
-                  <p className="text-sm text-gray-600">{selectedIndividual.projectsJoined} proyek</p>
+                  <Label className="text-sm font-medium">
+                    Proyek Bergabung
+                  </Label>
+                  <p className="text-sm text-gray-600">
+                    {selectedIndividual.projectsJoined} proyek
+                  </p>
                 </div>
                 <div>
                   <Label className="text-sm font-medium">Status</Label>
-                  <Badge variant={selectedIndividual.status === "Aktif" ? "default" : "secondary"}>
+                  <Badge
+                    variant={
+                      selectedIndividual.status === "Aktif"
+                        ? "default"
+                        : "secondary"
+                    }
+                  >
                     {selectedIndividual.status}
                   </Badge>
                 </div>
@@ -399,10 +444,7 @@ export default function DashboardAdminIndividuals() {
               <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-2">
                   <Label htmlFor="name">Nama</Label>
-                  <Input
-                    id="name"
-                    defaultValue={selectedIndividual.name}
-                  />
+                  <Input id="name" defaultValue={selectedIndividual.name} />
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
@@ -415,7 +457,7 @@ export default function DashboardAdminIndividuals() {
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
                   <Select defaultValue={selectedIndividual.status}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Pilih status" />
                     </SelectTrigger>
                     <SelectContent>

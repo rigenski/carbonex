@@ -203,17 +203,6 @@ export default function CarbonIssuedPage() {
     setFilteredProjects(filtered);
   }, [projects, searchTerm, selectedStatus, sortBy]);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Diterbitkan":
-        return "bg-blue-100 text-blue-800";
-      case "Ditarik":
-        return "bg-gray-100 text-gray-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("id-ID", {
       day: "numeric",
@@ -302,7 +291,7 @@ export default function CarbonIssuedPage() {
                   Urutkan berdasarkan:
                 </span>
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-40">
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Pilih pengurutan" />
                   </SelectTrigger>
                   <SelectContent>

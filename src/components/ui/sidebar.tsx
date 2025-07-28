@@ -157,7 +157,9 @@ const SidebarUser = React.forwardRef<
   >
     <div className="bg-primary/10 text-primary flex h-8 w-8 items-center justify-center rounded-full text-sm font-medium">
       {avatar ? (
-        <img src={avatar} alt={name} className="h-8 w-8 rounded-full" />
+        <div className="bg-primary/20 flex h-8 w-8 items-center justify-center rounded-full">
+          {name.charAt(0).toUpperCase()}
+        </div>
       ) : (
         name.charAt(0).toUpperCase()
       )}

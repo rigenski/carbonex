@@ -40,23 +40,6 @@ export default function IndividualDashboard() {
     },
   ];
 
-  const upcomingEvents = [
-    {
-      id: "EVT001",
-      name: "Hari Penanaman Pohon",
-      date: "2024-03-15",
-      location: "Bandung, Jawa Barat",
-      participants: 45,
-    },
-    {
-      id: "EVT002",
-      name: "Lokakarya Lingkungan",
-      date: "2024-03-20",
-      location: "Jakarta",
-      participants: 30,
-    },
-  ];
-
   return (
     <div className="space-y-6">
       {/* Stats Cards */}

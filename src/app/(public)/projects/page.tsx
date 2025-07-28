@@ -317,25 +317,6 @@ export default function ProjectsPage() {
     setFilteredProjects(filtered);
   }, [projects, searchTerm, selectedStatus, selectedVolunteerFilter, sortBy]);
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Aktif":
-        return "bg-green-100 text-green-800";
-      case "Perencanaan":
-        return "bg-yellow-100 text-yellow-800";
-      case "Selesai":
-        return "bg-blue-100 text-blue-800";
-      default:
-        return "bg-gray-100 text-gray-800";
-    }
-  };
-
-  const getVolunteerBadgeColor = (needsVolunteers: boolean) => {
-    return needsVolunteers
-      ? "bg-purple-100 text-purple-800"
-      : "bg-gray-100 text-gray-600";
-  };
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString("en-US", {
       month: "short",
@@ -395,7 +376,7 @@ export default function ProjectsPage() {
                   value={selectedStatus}
                   onValueChange={setSelectedStatus}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Pilih status" />
                   </SelectTrigger>
                   <SelectContent>
@@ -415,7 +396,7 @@ export default function ProjectsPage() {
                   value={selectedVolunteerFilter}
                   onValueChange={setSelectedVolunteerFilter}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Pilih status relawan" />
                   </SelectTrigger>
                   <SelectContent>
@@ -442,7 +423,7 @@ export default function ProjectsPage() {
                   Urutkan berdasarkan:
                 </span>
                 <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-40">
+                  <SelectTrigger className="w-full">
                     <SelectValue placeholder="Pilih pengurutan" />
                   </SelectTrigger>
                   <SelectContent>

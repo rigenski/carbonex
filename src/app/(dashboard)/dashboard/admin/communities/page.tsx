@@ -222,7 +222,7 @@ export default function DashboardAdminCommunities() {
             <div className="space-y-2">
               <Label htmlFor="status">Status</Label>
               <Select value={selectedStatus} onValueChange={setSelectedStatus}>
-                <SelectTrigger>
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih status" />
                 </SelectTrigger>
                 <SelectContent>
@@ -249,7 +249,7 @@ export default function DashboardAdminCommunities() {
                 Urutkan berdasarkan:
               </span>
               <Select value={sortBy} onValueChange={setSortBy}>
-                <SelectTrigger className="w-40">
+                <SelectTrigger className="w-full">
                   <SelectValue placeholder="Pilih pengurutan" />
                 </SelectTrigger>
                 <SelectContent>
@@ -311,9 +311,6 @@ export default function DashboardAdminCommunities() {
                           <div>
                             <div className="font-medium text-gray-900">
                               {community.name}
-                            </div>
-                            <div className="line-clamp-2 text-sm text-gray-500">
-                              {community.description}
                             </div>
                           </div>
                         </div>
@@ -478,7 +475,7 @@ export default function DashboardAdminCommunities() {
                 <div className="space-y-2">
                   <Label htmlFor="status">Status</Label>
                   <Select defaultValue={selectedCommunity.status}>
-                    <SelectTrigger>
+                    <SelectTrigger className="w-full">
                       <SelectValue placeholder="Pilih status" />
                     </SelectTrigger>
                     <SelectContent>
