@@ -4,6 +4,18 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuthStore } from "@/stores/auth";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 // Mock data for communities
 const mockCommunities = [
@@ -153,57 +165,56 @@ export default function CommunitiesPage() {
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Filters and Search */}
-        <div className="mb-8 rounded-lg bg-white p-6 shadow-sm">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-            {/* Search */}
-            <div className="md:col-span-2">
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Cari Komunitas
-              </label>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Cari berdasarkan nama, deskripsi, atau lokasi..."
-              />
+        <Card className="mb-8">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+              {/* Search */}
+              <div className="md:col-span-2">
+                <Label htmlFor="search">Cari Komunitas</Label>
+                <Input
+                  id="search"
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Cari berdasarkan nama, deskripsi, atau lokasi..."
+                />
+              </div>
+
+              {/* Sort */}
+              <div>
+                <Label htmlFor="sort">Urutkan Berdasarkan</Label>
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Pilih pengurutan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="name">Nama</SelectItem>
+                    <SelectItem value="projects">Proyek</SelectItem>
+                    <SelectItem value="carbon">Offset Karbon</SelectItem>
+                    <SelectItem value="established">Tanggal Berdiri</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
-            {/* Sort */}
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Urutkan Berdasarkan
-              </label>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-              >
-                <option value="name">Nama</option>
-                <option value="projects">Proyek</option>
-                <option value="carbon">Offset Karbon</option>
-                <option value="established">Tanggal Berdiri</option>
-              </select>
+            {/* Additional Filters */}
+            <div className="mt-6 flex flex-col items-start justify-end border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
+              <div className="mt-4 sm:mt-0">
+                <span className="text-sm text-gray-600">
+                  Menampilkan {filteredCommunities.length} dari{" "}
+                  {communities.length} komunitas
+                </span>
+              </div>
             </div>
-          </div>
-
-          {/* Additional Filters */}
-          <div className="mt-6 flex flex-col items-start justify-end border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
-            <div className="mt-4 sm:mt-0">
-              <span className="text-sm text-gray-600">
-                Menampilkan {filteredCommunities.length} dari{" "}
-                {communities.length} komunitas
-              </span>
-            </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Communities Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredCommunities.map((community) => (
-            <div
+            <Card
               key={community.id}
-              className="overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md"
+              className="overflow-hidden transition-shadow hover:shadow-md"
             >
               <Image
                 src={community.image}
@@ -212,11 +223,9 @@ export default function CommunitiesPage() {
                 width={480}
                 height={480}
               />
-              <div className="p-6">
+              <CardContent className="p-6">
                 <div className="mb-3 flex items-center justify-between">
-                  <span className="rounded bg-blue-100 px-2.5 py-0.5 text-xs font-medium text-blue-800">
-                    Komunitas
-                  </span>
+                  <Badge variant="secondary">Komunitas</Badge>
                   {community.verified && (
                     <div className="flex items-center">
                       <svg
@@ -289,15 +298,14 @@ export default function CommunitiesPage() {
                   <span className="text-xs text-gray-500">
                     Est. {community.establishedYear}
                   </span>
-                  <Link
-                    href={`/communities/${community.id}`}
-                    className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
-                  >
-                    Lihat Detail
-                  </Link>
+                  <Button asChild>
+                    <Link href={`/communities/${community.id}`}>
+                      Lihat Detail
+                    </Link>
+                  </Button>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
@@ -342,7 +350,7 @@ export default function CommunitiesPage() {
             <div className="space-x-4">
               <Link
                 href="/register"
-                className="rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700"
+                className="rounded-lg bg-primary px-6 py-3 font-semibold text-white transition-colors hover:bg-primary/90"
               >
                 Luncurkan Komunitas Gratis
               </Link>

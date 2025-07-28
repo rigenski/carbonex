@@ -19,17 +19,17 @@ export default function AdminDashboard() {
   const recentProjects = [
     {
       id: "PRJ001",
-      name: "Forest Restoration Initiative",
+      name: "Inisiatif Restorasi Hutan",
       community: "Green Earth Indonesia",
-      status: "Active",
+      status: "Aktif",
       volunteers: 45,
       targetTrees: 5000,
     },
     {
       id: "PRJ002",
-      name: "Solar Panel Community Project",
+      name: "Proyek Panel Surya Komunitas",
       community: "Solar Future Collective",
-      status: "Planning",
+      status: "Perencanaan",
       volunteers: 23,
       targetTrees: 3000,
     },
@@ -59,7 +59,7 @@ export default function AdminDashboard() {
         <div className="rounded-lg bg-white p-6 shadow-sm">
           <div className="flex items-center">
             <div className="flex-shrink-0">
-              <FolderIcon className="h-8 w-8 text-green-600" />
+                              <FolderIcon className="h-8 w-8 text-primary" />
             </div>
             <div className="ml-4">
               <p className="text-sm font-medium text-gray-500">Total Proyek</p>

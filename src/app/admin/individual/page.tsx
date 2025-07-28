@@ -1,7 +1,41 @@
 "use client";
 
 import { useState } from "react";
-import { EyeIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
+import {
+  EyeIcon,
+  PencilIcon,
+  TrashIcon,
+  MagnifyingGlassIcon,
+} from "@heroicons/react/24/outline";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface Individual {
   id: string;
@@ -10,6 +44,7 @@ interface Individual {
   location: string;
   projectsJoined: number;
   status: string;
+  avatar: string;
 }
 
 export default function AdminIndividual() {
@@ -17,6 +52,9 @@ export default function AdminIndividual() {
   const [showEditModal, setShowEditModal] = useState(false);
   const [selectedIndividual, setSelectedIndividual] =
     useState<Individual | null>(null);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("All");
+  const [sortBy, setSortBy] = useState("name");
 
   // Mock data
   const individuals: Individual[] = [
@@ -24,49 +62,61 @@ export default function AdminIndividual() {
       id: "IND001",
       name: "Ahmad Rizki",
       email: "ahmad.rizki@email.com",
-      location: "Jakarta, Indonesia",
-      projectsJoined: 5,
+      location: "Jakarta, DKI Jakarta",
+      projectsJoined: 3,
       status: "Aktif",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND002",
-      name: "Sarah Wijaya",
-      email: "sarah.wijaya@email.com",
-      location: "Bandung, Indonesia",
-      projectsJoined: 3,
+      name: "Sarah Putri",
+      email: "sarah.putri@email.com",
+      location: "Bandung, Jawa Barat",
+      projectsJoined: 5,
       status: "Aktif",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND003",
       name: "Budi Santoso",
       email: "budi.santoso@email.com",
-      location: "Surabaya, Indonesia",
-      projectsJoined: 7,
-      status: "Aktif",
+      location: "Surabaya, Jawa Timur",
+      projectsJoined: 2,
+      status: "Nonaktif",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND004",
-      name: "Dewi Kartika",
-      email: "dewi.kartika@email.com",
-      location: "Semarang, Indonesia",
-      projectsJoined: 2,
-      status: "Nonaktif",
+      name: "Dewi Sari",
+      email: "dewi.sari@email.com",
+      location: "Semarang, Jawa Tengah",
+      projectsJoined: 4,
+      status: "Aktif",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND005",
       name: "Rudi Hermawan",
       email: "rudi.hermawan@email.com",
-      location: "Yogyakarta, Indonesia",
-      projectsJoined: 4,
+      location: "Yogyakarta, DI Yogyakarta",
+      projectsJoined: 1,
       status: "Aktif",
+      avatar:
+        "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&h=150&fit=crop&crop=face",
     },
     {
       id: "IND006",
-      name: "Siti Nurhaliza",
-      email: "siti.nurhaliza@email.com",
-      location: "Medan, Indonesia",
+      name: "Nina Kartika",
+      email: "nina.kartika@email.com",
+      location: "Malang, Jawa Timur",
       projectsJoined: 6,
       status: "Aktif",
+      avatar:
+        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face",
     },
   ];
 
@@ -90,275 +140,344 @@ export default function AdminIndividual() {
     }
   };
 
+  // Filter and sort individuals
+  const filteredIndividuals = individuals
+    .filter((individual) => {
+      const matchesSearch =
+        individual.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        individual.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        individual.location.toLowerCase().includes(searchTerm.toLowerCase());
+
+      const matchesStatus =
+        selectedStatus === "All" || individual.status === selectedStatus;
+
+      return matchesSearch && matchesStatus;
+    })
+    .sort((a, b) => {
+      switch (sortBy) {
+        case "name":
+          return a.name.localeCompare(b.name);
+        case "status":
+          return a.status.localeCompare(b.status);
+        case "projectsJoined":
+          return b.projectsJoined - a.projectsJoined;
+        default:
+          return 0;
+      }
+    });
+
+  const statusOptions = ["All", "Aktif", "Nonaktif"];
+
   return (
     <div className="space-y-6">
       <div className="flex justify-between">
-        <h2 className="text-xl font-semibold text-gray-900">Daftar Individu</h2>
+        <h2 className="text-xl font-semibold text-gray-900">Kelola Individu</h2>
       </div>
 
-      <div className="rounded-lg bg-white shadow-sm">
-        <div className="border-b border-gray-200 px-6 py-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-medium text-gray-900">
-              Daftar Individu
-            </h3>
-            <input
-              type="text"
-              placeholder="Cari individu..."
-              className="rounded-md border border-gray-300 px-3 py-1 text-sm"
-            />
+      {/* Filter and Search */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Filter & Pencarian</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
+            {/* Search */}
+            <div className="space-y-2 lg:col-span-2">
+              <Label htmlFor="search">Cari Individu</Label>
+              <div className="relative">
+                <MagnifyingGlassIcon className="absolute top-1/2 left-3 h-4 w-4 -translate-y-1/2 text-gray-400" />
+                <Input
+                  id="search"
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Cari berdasarkan nama, email, atau lokasi..."
+                  className="pl-10"
+                />
+              </div>
+            </div>
+
+            {/* Status Filter */}
+            <div className="space-y-2">
+              <Label htmlFor="status">Status</Label>
+              <Select value={selectedStatus} onValueChange={setSelectedStatus}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Pilih status" />
+                </SelectTrigger>
+                <SelectContent>
+                  {statusOptions.map((status) => (
+                    <SelectItem key={status} value={status}>
+                      {status === "All" ? "Semua" : status}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-        </div>
-        <div className="overflow-hidden rounded-lg bg-white shadow-sm">
-          <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    ID
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Nama
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Email
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Lokasi
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+
+          {/* Sort and Results Count */}
+          <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-600">
+                Menampilkan {filteredIndividuals.length} dari{" "}
+                {individuals.length} individu
+              </span>
+            </div>
+            <div className="mt-4 flex items-center space-x-2 sm:mt-0">
+              <span className="text-sm text-gray-600">
+                Urutkan berdasarkan:
+              </span>
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-40">
+                  <SelectValue placeholder="Pilih pengurutan" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="name">Nama</SelectItem>
+                  <SelectItem value="status">Status</SelectItem>
+                  <SelectItem value="projectsJoined">
                     Proyek Bergabung
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Status
-                  </th>
-                  <th className="w-32 px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Aksi
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
-                {individuals.map((individual) => (
-                  <tr key={individual.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4 text-sm text-gray-900">
-                      {individual.id}
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {individual.name}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-500">
-                        {individual.email}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm text-gray-500">
-                        <svg
-                          className="mr-1 inline h-3 w-3"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                        </svg>
-                        {individual.location}
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="text-sm font-medium text-gray-900">
-                        {individual.projectsJoined}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        proyek bergabung
-                      </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span
-                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                          individual.status === "Aktif"
-                            ? "bg-green-100 text-green-800"
-                            : "bg-red-100 text-red-800"
-                        }`}
-                      >
-                        {individual.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
-                      <div className="flex space-x-2">
-                        <button
-                          onClick={() => handleViewDetail(individual)}
-                          className="text-blue-600 hover:text-blue-900"
-                          title="Lihat Detail"
-                        >
-                          <EyeIcon className="h-4 w-4" />
-                        </button>
-                        <button
-                          onClick={() => handleEdit(individual)}
-                          className="text-green-600 hover:text-green-900"
-                          title="Edit"
-                        >
-                          <PencilIcon className="h-4 w-4" />
-                        </button>
-                        <button
-                          onClick={() => handleDelete(individual)}
-                          className="text-red-600 hover:text-red-900"
-                          title="Hapus"
-                        >
-                          <TrashIcon className="h-4 w-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                  </SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
           </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
+
+      {/* Individuals Table */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Daftar Individu</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="overflow-x-auto">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead className="w-64">Individu</TableHead>
+                  <TableHead className="w-48">Lokasi</TableHead>
+                  <TableHead className="w-32">Proyek Bergabung</TableHead>
+                  <TableHead className="w-32">Status</TableHead>
+                  <TableHead className="w-24">Aksi</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredIndividuals.length === 0 ? (
+                  <TableRow>
+                    <TableCell colSpan={5} className="py-8 text-center">
+                      <div className="text-gray-500">
+                        Tidak ada individu yang ditemukan
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ) : (
+                  filteredIndividuals.map((individual) => (
+                    <TableRow key={individual.id}>
+                      <TableCell>
+                        <div className="flex items-center space-x-3">
+                          <Avatar className="h-10 w-10">
+                            <AvatarImage
+                              src={individual.avatar}
+                              alt={individual.name}
+                            />
+                            <AvatarFallback>
+                              {individual.name
+                                .split(" ")
+                                .map((n) => n[0])
+                                .join("")}
+                            </AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <div className="font-medium text-gray-900">
+                              {individual.name}
+                            </div>
+                            <div className="text-sm text-gray-500">
+                              {individual.email}
+                            </div>
+                          </div>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center space-x-2">
+                          <div className="h-4 w-4 rounded-full bg-gray-300" />
+                          <span className="text-sm text-gray-600">
+                            {individual.location}
+                          </span>
+                        </div>
+                      </TableCell>
+                      <TableCell>
+                        <span className="text-sm font-medium">
+                          {individual.projectsJoined} proyek
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        <Badge
+                          variant={
+                            individual.status === "Aktif"
+                              ? "default"
+                              : "secondary"
+                          }
+                        >
+                          {individual.status}
+                        </Badge>
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex items-center space-x-2">
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleViewDetail(individual)}
+                          >
+                            <EyeIcon className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleEdit(individual)}
+                          >
+                            <PencilIcon className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => handleDelete(individual)}
+                          >
+                            <TrashIcon className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))
+                )}
+              </TableBody>
+            </Table>
+          </div>
+        </CardContent>
+      </Card>
 
       {/* Detail Modal */}
-      {showDetailModal && selectedIndividual && (
-        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black">
-          <div className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-xl">
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Detail Individu
-              </h3>
-              <button
-                onClick={() => setShowDetailModal(false)}
-                className="rounded p-1 text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
-            </div>
+      <Dialog open={showDetailModal} onOpenChange={setShowDetailModal}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Detail Individu</DialogTitle>
+          </DialogHeader>
+          {selectedIndividual && (
             <div className="space-y-4">
-              <div>
-                <span className="text-sm font-medium text-gray-700">ID:</span>
-                <span className="ml-2 text-gray-900">
-                  {selectedIndividual.id}
-                </span>
+              <div className="flex items-center space-x-4">
+                <Avatar className="h-16 w-16">
+                  <AvatarImage
+                    src={selectedIndividual.avatar}
+                    alt={selectedIndividual.name}
+                  />
+                  <AvatarFallback className="text-lg">
+                    {selectedIndividual.name
+                      .split(" ")
+                      .map((n) => n[0])
+                      .join("")}
+                  </AvatarFallback>
+                </Avatar>
+                <div>
+                  <h3 className="text-lg font-semibold">
+                    {selectedIndividual.name}
+                  </h3>
+                  <p className="text-sm text-gray-600">
+                    {selectedIndividual.email}
+                  </p>
+                </div>
               </div>
-              <div>
-                <span className="text-sm font-medium text-gray-700">Nama:</span>
-                <span className="ml-2 text-gray-900">
-                  {selectedIndividual.name}
-                </span>
-              </div>
-              <div>
-                <span className="text-sm font-medium text-gray-700">
-                  Email:
-                </span>
-                <span className="ml-2 text-gray-900">
-                  {selectedIndividual.email}
-                </span>
-              </div>
-              <div>
-                <span className="text-sm font-medium text-gray-700">
-                  Lokasi:
-                </span>
-                <span className="ml-2 text-gray-900">
-                  {selectedIndividual.location}
-                </span>
-              </div>
-              <div>
-                <span className="text-sm font-medium text-gray-700">
-                  Proyek Bergabung:
-                </span>
-                <span className="ml-2 text-gray-900">
-                  {selectedIndividual.projectsJoined}
-                </span>
-              </div>
-              <div>
-                <span className="text-sm font-medium text-gray-700">
-                  Status:
-                </span>
-                <span
-                  className={`ml-2 inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                    selectedIndividual.status === "Aktif"
-                      ? "bg-green-100 text-green-800"
-                      : "bg-red-100 text-red-800"
-                  }`}
-                >
-                  {selectedIndividual.status}
-                </span>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label className="text-sm font-medium">ID</Label>
+                  <p className="text-sm text-gray-600">
+                    {selectedIndividual.id}
+                  </p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">Lokasi</Label>
+                  <p className="text-sm text-gray-600">
+                    {selectedIndividual.location}
+                  </p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">
+                    Proyek Bergabung
+                  </Label>
+                  <p className="text-sm text-gray-600">
+                    {selectedIndividual.projectsJoined} proyek
+                  </p>
+                </div>
+                <div>
+                  <Label className="text-sm font-medium">Status</Label>
+                  <Badge
+                    variant={
+                      selectedIndividual.status === "Aktif"
+                        ? "default"
+                        : "secondary"
+                    }
+                  >
+                    {selectedIndividual.status}
+                  </Badge>
+                </div>
               </div>
             </div>
-            <div className="mt-6 flex justify-end">
-              <button
-                onClick={() => setShowDetailModal(false)}
-                className="rounded-md bg-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-400"
-              >
-                Tutup
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowDetailModal(false)}>
+              Tutup
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
 
       {/* Edit Modal */}
-      {showEditModal && selectedIndividual && (
-        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black">
-          <div className="w-full max-w-2xl rounded-lg bg-white p-6 shadow-xl">
-            <div className="mb-4 flex items-center justify-between">
-              <h3 className="text-xl font-semibold text-gray-900">
-                Edit Individu
-              </h3>
-              <button
-                onClick={() => setShowEditModal(false)}
-                className="rounded p-1 text-gray-400 hover:text-gray-600"
-              >
-                ✕
-              </button>
-            </div>
+      <Dialog open={showEditModal} onOpenChange={setShowEditModal}>
+        <DialogContent className="max-w-2xl">
+          <DialogHeader>
+            <DialogTitle>Edit Individu</DialogTitle>
+            <DialogDescription>
+              Ubah informasi individu sesuai kebutuhan
+            </DialogDescription>
+          </DialogHeader>
+          {selectedIndividual && (
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Nama
-                </label>
-                <input
-                  type="text"
-                  defaultValue={selectedIndividual.name}
-                  className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-green-500 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  defaultValue={selectedIndividual.email}
-                  className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-green-500 focus:outline-none"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700">
-                  Status
-                </label>
-                <select
-                  defaultValue={selectedIndividual.status}
-                  className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-green-500 focus:outline-none"
-                >
-                  <option value="Aktif">Aktif</option>
-                  <option value="Nonaktif">Nonaktif</option>
-                </select>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Nama</Label>
+                  <Input id="name" defaultValue={selectedIndividual.name} />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    defaultValue={selectedIndividual.email}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="status">Status</Label>
+                  <Select defaultValue={selectedIndividual.status}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Pilih status" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="Aktif">Aktif</SelectItem>
+                      <SelectItem value="Nonaktif">Nonaktif</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
             </div>
-            <div className="mt-6 flex justify-end space-x-3">
-              <button
-                onClick={() => setShowEditModal(false)}
-                className="rounded-md bg-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-400"
-              >
-                Batal
-              </button>
-              <button className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700">
-                Simpan Perubahan
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+          )}
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowEditModal(false)}>
+              Batal
+            </Button>
+            <Button onClick={() => setShowEditModal(false)}>
+              Simpan Perubahan
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -234,7 +234,7 @@ export default function CommunityDetailPage() {
                     <button
                       onClick={handleFollowCommunity}
                       disabled={isLoading}
-                      className="rounded-lg bg-green-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
+                      className="bg-primary hover:bg-primary/90 rounded-lg px-6 py-2 font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {isLoading ? "Mengikuti..." : "Ikuti Komunitas"}
                     </button>
@@ -440,7 +440,7 @@ export default function CommunityDetailPage() {
                     </div>
                     <Link
                       href={`/projects/${project.id}`}
-                      className="block w-full rounded-md bg-green-600 py-2 text-center text-white transition-colors hover:bg-green-700"
+                      className="bg-primary hover:bg-primary/90 block w-full rounded-md py-2 text-center text-white transition-colors"
                     >
                       Lihat Proyek
                     </Link>

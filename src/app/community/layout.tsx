@@ -1,14 +1,20 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 import {
   ChartBarIcon,
   FolderIcon,
-  PlusIcon,
-  UsersIcon,
-  CalendarIcon,
+  Bars3Icon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarHeader,
+  SidebarNav,
+  SidebarNavItem,
+} from "@/components/ui/sidebar";
 
 export default function CommunityLayout({
   children,
@@ -16,6 +22,7 @@ export default function CommunityLayout({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navigation = [
     {
@@ -30,61 +37,67 @@ export default function CommunityLayout({
       icon: FolderIcon,
       current: pathname === "/community/projects",
     },
-    {
-      name: "Buat Proyek",
-      href: "/community/create-project",
-      icon: PlusIcon,
-      current: pathname === "/community/create-project",
-    },
-    {
-      name: "Relawan",
-      href: "/community/volunteers",
-      icon: UsersIcon,
-      current: pathname === "/community/volunteers",
-    },
-    {
-      name: "Acara",
-      href: "/community/events",
-      icon: CalendarIcon,
-      current: pathname === "/community/events",
-    },
   ];
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="flex">
-        {/* Sidebar - Fixed and Sticky */}
-        <div className="sidebar-fixed">
-          <div className="p-6">
+      {/* Mobile menu button */}
+      <div className="lg:hidden">
+        <button
+          type="button"
+          className="fixed top-4 left-4 z-50 rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+        >
+          <span className="sr-only">Open sidebar</span>
+          {sidebarOpen ? (
+            <XMarkIcon className="h-6 w-6" />
+          ) : (
+            <Bars3Icon className="h-6 w-6" />
+          )}
+        </button>
+      </div>
+
+      <div className="flex flex-col lg:flex-row">
+        <Sidebar
+          className={`${
+            sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          } fixed inset-y-0 left-0 z-40 min-w-[240px] transform transition-transform duration-300 ease-in-out lg:relative lg:inset-0 lg:translate-x-0`}
+        >
+          <SidebarHeader>
             <h1 className="text-xl font-semibold text-gray-900">
               Community Panel
             </h1>
-          </div>
-          <nav className="mt-6">
-            <div className="space-y-1 px-3">
+          </SidebarHeader>
+          <SidebarContent>
+            <SidebarNav>
               {navigation.map((item) => (
-                <Link
+                <SidebarNavItem
                   key={item.name}
                   href={item.href}
-                  className={`flex w-full items-center rounded-md px-3 py-2 text-sm font-medium ${
-                    item.current
-                      ? "bg-green-100 text-green-700"
-                      : "text-gray-700 hover:bg-gray-50"
-                  }`}
+                  onClick={() => setSidebarOpen(false)}
+                  active={item.current}
                 >
-                  <item.icon className="mr-3 h-5 w-5" />
+                  <item.icon className="h-4 w-4" />
                   {item.name}
-                </Link>
+                </SidebarNavItem>
               ))}
-            </div>
-          </nav>
-        </div>
+            </SidebarNav>
+          </SidebarContent>
+        </Sidebar>
 
-        {/* Main Content - With left margin to account for fixed sidebar */}
-        <div className="main-content-with-sidebar">
-          <div className="p-8">{children}</div>
+        {/* Main Content */}
+        <div className="flex-1">
+          <div className="p-4 lg:p-8">{children}</div>
         </div>
       </div>
+
+      {/* Overlay for mobile */}
+      {sidebarOpen && (
+        <div
+          className="bg-opacity-75 fixed inset-0 z-30 bg-gray-600 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
     </div>
   );
 }

@@ -20,8 +20,8 @@ export default function CommunityDashboard() {
   const projects = [
     {
       id: "PRJ001",
-      name: "Forest Restoration Initiative",
-      status: "Under Development",
+      name: "Inisiatif Restorasi Hutan",
+      status: "Dalam Pengembangan",
       projectType: "Reforestasi",
       country: "Indonesia",
       targetTrees: 5000,
@@ -51,8 +51,8 @@ export default function CommunityDashboard() {
     },
     {
       id: "PRJ002",
-      name: "Solar Panel Community Project",
-      status: "Submitted for Registration",
+      name: "Proyek Panel Surya Komunitas",
+      status: "Diajukan untuk Registrasi",
       projectType: "Energi Terbarukan",
       country: "Indonesia",
       targetTrees: 3000,

@@ -3,6 +3,10 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 
 export default function DashboardLayout({
   children,
@@ -79,9 +83,11 @@ export default function DashboardLayout({
               CarbonEx
             </span>
           </div>
-          <button
+          <Button
+            variant="ghost"
+            size="sm"
             onClick={() => setIsSidebarOpen(false)}
-            className="rounded-md p-2 text-gray-400 hover:text-gray-600 md:hidden"
+            className="md:hidden"
           >
             <svg
               className="h-6 w-6"
@@ -96,27 +102,27 @@ export default function DashboardLayout({
                 d="M6 18L18 6M6 6l12 12"
               />
             </svg>
-          </button>
+          </Button>
         </div>
 
         {/* User Info */}
         <div className="border-b px-6 py-4">
           <div className="flex items-center">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-green-100">
-              <span className="text-sm font-medium text-green-600">
+            <Avatar className="h-10 w-10">
+              <AvatarFallback className="bg-primary/10 text-primary">
                 {currentUser.name?.charAt(0) || "U"}
-              </span>
-            </div>
+              </AvatarFallback>
+            </Avatar>
             <div className="ml-3">
               <p className="text-sm font-medium text-gray-900">
                 {currentUser.name}
               </p>
               <p className="text-xs text-gray-500">{currentUser.email}</p>
-              <p className="text-xs font-medium text-green-600">
+              <Badge variant="secondary" className="mt-1">
                 {currentUser.role === "COMMUNITY" && "Komunitas"}
                 {currentUser.role === "INDIVIDUAL" && "Individu"}
                 {currentUser.role === "ADMIN" && "Admin"}
-              </p>
+              </Badge>
             </div>
           </div>
         </div>
@@ -128,7 +134,7 @@ export default function DashboardLayout({
               <li key={item.name}>
                 <Link
                   href={item.href}
-                  className="flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700 hover:bg-green-50 hover:text-green-600"
+                  className="hover:bg-primary/10 hover:text-primary flex items-center rounded-md px-3 py-2 text-sm font-medium text-gray-700"
                 >
                   <span className="mr-3">{item.icon}</span>
                   {item.name}
@@ -165,9 +171,11 @@ export default function DashboardLayout({
         {/* Top bar */}
         <div className="sticky top-0 z-30 border-b bg-white shadow-sm">
           <div className="flex h-16 items-center justify-between px-4 sm:px-6 lg:px-8">
-            <button
+            <Button
+              variant="ghost"
+              size="sm"
               onClick={() => setIsSidebarOpen(true)}
-              className="rounded-md p-2 text-gray-400 hover:text-gray-600 md:hidden"
+              className="md:hidden"
             >
               <svg
                 className="h-6 w-6"
@@ -182,7 +190,7 @@ export default function DashboardLayout({
                   d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
-            </button>
+            </Button>
             <div className="flex-1"></div>
             <div className="flex items-center space-x-4">
               <span className="text-sm text-gray-500">

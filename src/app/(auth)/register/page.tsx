@@ -5,6 +5,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Textarea } from "@/components/ui/textarea";
 
 type RegisterFormData = {
   role: "community" | "individual";
@@ -199,46 +204,46 @@ export default function RegisterPage() {
           <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
             {/* Role Selection */}
             <div>
-              <label className="mb-3 block text-sm font-medium text-gray-700">
+              <Label className="mb-3 block text-sm font-medium text-gray-700">
                 Saya mendaftar sebagai:
-              </label>
+              </Label>
               <div className="grid grid-cols-2 gap-3">
-                <button
+                <Button
                   type="button"
+                  variant={
+                    selectedRole === "individual" ? "default" : "outline"
+                  }
                   onClick={() => handleRoleChange("individual")}
-                  className={`rounded-lg border p-4 text-center transition-all ${
-                    selectedRole === "individual"
-                      ? "border-green-600 bg-green-50 text-green-700"
-                      : "border-gray-300 hover:border-gray-400"
-                  }`}
+                  className="h-auto p-4"
                 >
-                  <div className="font-semibold">Individu</div>
-                  <div className="text-xs text-gray-500">Akun pribadi</div>
-                </button>
-                <button
+                  <div className="text-center">
+                    <div className="font-semibold">Individu</div>
+                    <div className="text-xs">Akun pribadi</div>
+                  </div>
+                </Button>
+                <Button
                   type="button"
+                  variant={selectedRole === "community" ? "default" : "outline"}
                   onClick={() => handleRoleChange("community")}
-                  className={`rounded-lg border p-4 text-center transition-all ${
-                    selectedRole === "community"
-                      ? "border-green-600 bg-green-50 text-green-700"
-                      : "border-gray-300 hover:border-gray-400"
-                  }`}
+                  className="h-auto p-4"
                 >
-                  <div className="font-semibold">Komunitas</div>
-                  <div className="text-xs text-gray-500">Akun organisasi</div>
-                </button>
+                  <div className="text-center">
+                    <div className="font-semibold">Komunitas</div>
+                    <div className="text-xs">Akun organisasi</div>
+                  </div>
+                </Button>
               </div>
               <input type="hidden" {...register("role")} />
             </div>
 
             {/* ID Card Upload */}
             <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
+              <Label className="mb-2 block text-sm font-medium text-gray-700">
                 {selectedRole === "community"
                   ? "ID Organisasi/NPWP"
                   : "Kartu Identitas"}{" "}
                 *
-              </label>
+              </Label>
               <div
                 className={`relative rounded-lg border-2 border-dashed p-6 text-center transition-colors ${
                   isDragOver
@@ -259,13 +264,14 @@ export default function RegisterPage() {
                       height={240}
                     />
                     <div className="flex justify-center space-x-2">
-                      <button
+                      <Button
                         type="button"
+                        variant="ghost"
                         onClick={removeIdCard}
                         className="text-sm font-medium text-red-600 hover:text-red-700"
                       >
                         Hapus
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 ) : (
@@ -307,24 +313,22 @@ export default function RegisterPage() {
                 />
               </div>
               {errors.idCard && (
-                <p className="mt-1 text-sm text-red-600">
-                  {errors.idCard.message}
-                </p>
+                <p className="text-sm text-red-600">{errors.idCard.message}</p>
               )}
             </div>
 
             {/* Name */}
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">
+            <div className="space-y-2">
+              <Label htmlFor="name">
                 {selectedRole === "community"
                   ? "Nama Organisasi"
                   : "Nama Lengkap"}{" "}
                 *
-              </label>
-              <input
+              </Label>
+              <Input
+                id="name"
                 type="text"
                 {...register("name", { required: "Nama wajib diisi" })}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 placeholder={
                   selectedRole === "community"
                     ? "Masukkan nama organisasi"
@@ -332,38 +336,33 @@ export default function RegisterPage() {
                 }
               />
               {errors.name && (
-                <p className="mt-1 text-sm text-red-600">
-                  {errors.name.message}
-                </p>
+                <p className="text-sm text-red-600">{errors.name.message}</p>
               )}
             </div>
 
             {/* Phone Number */}
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">
-                Nomor Telepon *
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="phoneNumber">Nomor Telepon *</Label>
+              <Input
+                id="phoneNumber"
                 type="tel"
                 {...register("phoneNumber", {
                   required: "Nomor telepon wajib diisi",
                 })}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 placeholder="Masukkan nomor telepon Anda"
               />
               {errors.phoneNumber && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="text-sm text-red-600">
                   {errors.phoneNumber.message}
                 </p>
               )}
             </div>
 
             {/* Email */}
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">
-                Alamat Email *
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="email">Alamat Email *</Label>
+              <Input
+                id="email"
                 type="email"
                 {...register("email", {
                   required: "Email wajib diisi",
@@ -372,40 +371,32 @@ export default function RegisterPage() {
                     message: "Silakan masukkan alamat email yang valid",
                   },
                 })}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 placeholder="Masukkan alamat email Anda"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">
-                  {errors.email.message}
-                </p>
+                <p className="text-sm text-red-600">{errors.email.message}</p>
               )}
             </div>
 
             {/* Address */}
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">
-                Alamat *
-              </label>
-              <textarea
+            <div className="space-y-2">
+              <Label htmlFor="address">Alamat *</Label>
+              <Textarea
+                id="address"
                 {...register("address", { required: "Alamat wajib diisi" })}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                rows={3}
                 placeholder="Masukkan alamat lengkap Anda"
+                rows={3}
               />
               {errors.address && (
-                <p className="mt-1 text-sm text-red-600">
-                  {errors.address.message}
-                </p>
+                <p className="text-sm text-red-600">{errors.address.message}</p>
               )}
             </div>
 
             {/* Password */}
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">
-                Kata Sandi *
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="password">Kata Sandi *</Label>
+              <Input
+                id="password"
                 type="password"
                 {...register("password", {
                   required: "Kata sandi wajib diisi",
@@ -414,46 +405,39 @@ export default function RegisterPage() {
                     message: "Kata sandi minimal 8 karakter",
                   },
                 })}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 placeholder="Buat kata sandi"
               />
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="text-sm text-red-600">
                   {errors.password.message}
                 </p>
               )}
             </div>
 
             {/* Confirm Password */}
-            <div>
-              <label className="mb-1 block text-sm font-medium text-gray-700">
-                Konfirmasi Kata Sandi *
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="confirmPassword">Konfirmasi Kata Sandi *</Label>
+              <Input
+                id="confirmPassword"
                 type="password"
                 {...register("confirmPassword", {
                   required: "Silakan konfirmasi kata sandi Anda",
                   validate: (value) =>
                     value === password || "Kata sandi tidak cocok",
                 })}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 placeholder="Konfirmasi kata sandi Anda"
               />
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className="text-sm text-red-600">
                   {errors.confirmPassword.message}
                 </p>
               )}
             </div>
 
             {/* Submit Button */}
-            <button
-              type="submit"
-              disabled={isLoading}
-              className="w-full rounded-md bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-            >
+            <Button type="submit" disabled={isLoading} className="w-full">
               {isLoading ? "Membuat Akun..." : "Buat Akun"}
-            </button>
+            </Button>
 
             {/* Login Link */}
             <div className="text-center">

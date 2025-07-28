@@ -3,6 +3,26 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 // Mock data for carbon issued projects
 const mockCarbonProjects = [
   {
@@ -92,7 +112,7 @@ const mockCarbonProjects = [
   },
   {
     id: "CRB005",
-    name: "Pengembangan Pembangkit Listrik Tenaga Angin",
+    name: "Pengembangan Pembangkit Listrik",
     image:
       "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=400&h=250&fit=crop&crop=center",
     address: "Makassar, Indonesia",
@@ -107,14 +127,14 @@ const mockCarbonProjects = [
     },
     issueDate: "2024-02-15",
     retiredDate: "2024-09-20",
-    status: "Retired",
+    status: "Ditarik",
     description:
-      "Large-scale wind farm that generated clean energy and carbon credits, now retired by corporate buyer.",
-    community: "Wind Power Alliance",
+      "Pembangkit listrik tenaga angin skala besar yang menghasilkan energi bersih dan kredit karbon, sekarang telah ditarik oleh pembeli korporat.",
+    community: "Aliansi Tenaga Angin",
   },
   {
     id: "CRB006",
-    name: "Urban Tree Planting",
+    name: "Penanaman Pohon Perkotaan",
     image:
       "https://images.unsplash.com/photo-1574263867128-9c1a5c5f4cf3?w=400&h=250&fit=crop&crop=center",
     address: "Yogyakarta, Indonesia",
@@ -128,14 +148,14 @@ const mockCarbonProjects = [
       end: "2024-04-30",
     },
     issueDate: "2024-05-25",
-    status: "Issued",
+    status: "Diterbitkan",
     description:
-      "Community-driven urban tree planting initiative that successfully sequestered carbon in city areas.",
-    community: "Green City Movement",
+      "Inisiatif penanaman pohon perkotaan berbasis komunitas yang berhasil menyerap karbon di area kota.",
+    community: "Gerakan Kota Hijau",
   },
 ];
 
-const projectStatuses = ["All", "Issued", "Retired"];
+const projectStatuses = ["All", "Diterbitkan", "Ditarik"];
 
 export default function CarbonIssuedPage() {
   const [projects] = useState(mockCarbonProjects);
@@ -225,103 +245,96 @@ export default function CarbonIssuedPage() {
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Filters and Search */}
-        <div className="mb-8 rounded-lg bg-white p-6 shadow-sm">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-            {/* Search */}
-            <div className="md:col-span-2">
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Cari Kredit Karbon
-              </label>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                placeholder="Cari berdasarkan nama, lokasi, atau komunitas..."
-              />
+        <Card className="mb-8">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+              {/* Search */}
+              <div className="md:col-span-2">
+                <Label htmlFor="search" className="mb-2">
+                  Cari Kredit Karbon
+                </Label>
+                <Input
+                  id="search"
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Cari berdasarkan nama, lokasi, atau komunitas..."
+                />
+              </div>
+
+              {/* Status Filter */}
+              <div className="md:col-span-1">
+                <Label htmlFor="status" className="mb-2">
+                  Status
+                </Label>
+                <Select
+                  value={selectedStatus}
+                  onValueChange={setSelectedStatus}
+                >
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Pilih status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {projectStatuses.map((status) => (
+                      <SelectItem key={status} value={status}>
+                        {status === "All"
+                          ? "Semua"
+                          : status === "Diterbitkan"
+                            ? "Terbit"
+                            : "Ditarik"}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
-            {/* Status Filter */}
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Status
-              </label>
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              >
-                {projectStatuses.map((status) => (
-                  <option key={status} value={status}>
-                    {status === "All"
-                      ? "Semua"
-                      : status === "Issued"
-                        ? "Terbit"
-                        : "Pensiun"}
-                  </option>
-                ))}
-              </select>
+            {/* Sort and Results Count */}
+            <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">
+                  Menampilkan {filteredProjects.length} dari {projects.length}{" "}
+                  proyek kredit karbon
+                </span>
+              </div>
+              <div className="mt-4 flex items-center space-x-2 sm:mt-0">
+                <span className="text-sm text-gray-600">
+                  Urutkan berdasarkan:
+                </span>
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-40">
+                    <SelectValue placeholder="Pilih pengurutan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="issueDate">Tanggal Terbit</SelectItem>
+                    <SelectItem value="name">Nama</SelectItem>
+                    <SelectItem value="carbon">Kredit Karbon</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-          </div>
-
-          {/* Sort and Results Count */}
-          <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">
-                Menampilkan {filteredProjects.length} dari {projects.length}{" "}
-                proyek kredit karbon
-              </span>
-            </div>
-            <div className="mt-4 flex items-center space-x-2 sm:mt-0">
-              <span className="text-sm text-gray-600">
-                Urutkan berdasarkan:
-              </span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-transparent focus:ring-2 focus:ring-blue-500 focus:outline-none"
-              >
-                <option value="issueDate">Tanggal Terbit</option>
-                <option value="name">Nama</option>
-                <option value="carbon">Kredit Karbon</option>
-              </select>
-            </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Projects Table */}
-        <div className="overflow-hidden rounded-lg bg-white shadow-sm">
+        <Card>
           <div className="overflow-x-auto">
-            <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Proyek
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Lokasi
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Kredit Karbon
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Status
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Tanggal
-                  </th>
-                  <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Komunitas
-                  </th>
-                  <th className="w-32 px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                    Aksi
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-gray-200 bg-white">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Proyek</TableHead>
+                  <TableHead>Lokasi</TableHead>
+                  <TableHead>Kredit Karbon</TableHead>
+                  <TableHead>Status</TableHead>
+                  <TableHead>Tanggal</TableHead>
+                  <TableHead>Komunitas</TableHead>
+                  <TableHead>Aksi</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
                 {filteredProjects.map((project) => (
-                  <tr key={project.id} className="hover:bg-gray-50">
-                    <td className="px-6 py-4">
+                  <TableRow key={project.id}>
+                    <TableCell>
                       <div className="flex items-center">
                         <Image
                           className="h-12 w-12 rounded-lg object-cover"
@@ -339,8 +352,8 @@ export default function CarbonIssuedPage() {
                           </div>
                         </div>
                       </div>
-                    </td>
-                    <td className="px-6 py-4">
+                    </TableCell>
+                    <TableCell>
                       <div className="text-sm text-gray-500">
                         <svg
                           className="mr-1 inline h-3 w-3"
@@ -351,49 +364,52 @@ export default function CarbonIssuedPage() {
                         </svg>
                         {project.address}
                       </div>
-                    </td>
-                    <td className="px-6 py-4">
+                    </TableCell>
+                    <TableCell>
                       <div className="text-sm font-medium text-gray-900">
                         {project.issuedCarbon.toLocaleString()} tons
                       </div>
                       <div className="text-xs text-gray-500">
                         Kredit CO₂ diterbitkan
                       </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <span
-                        className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${getStatusColor(project.status)}`}
+                    </TableCell>
+                    <TableCell>
+                      <Badge
+                        variant={
+                          project.status === "Diterbitkan"
+                            ? "default"
+                            : "secondary"
+                        }
                       >
                         {project.status}
-                      </span>
-                    </td>
-                    <td className="px-6 py-4">
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
                       <div className="text-xs text-gray-500">
                         <div>Terbit: {formatDate(project.issueDate)}</div>
                         {project.retiredDate && (
                           <div>Pensiun: {formatDate(project.retiredDate)}</div>
                         )}
                       </div>
-                    </td>
-                    <td className="px-6 py-4">
+                    </TableCell>
+                    <TableCell>
                       <div className="text-sm text-gray-900">
                         {project.community}
                       </div>
-                    </td>
-                    <td className="px-6 py-4">
-                      <Link
-                        href={`/projects/${project.id}`}
-                        className="inline-flex items-center rounded-md bg-blue-600 px-3 py-2 text-sm font-semibold text-nowrap text-white shadow-sm hover:bg-blue-700"
-                      >
-                        Lihat Detail
-                      </Link>
-                    </td>
-                  </tr>
+                    </TableCell>
+                    <TableCell>
+                      <Button asChild>
+                        <Link href={`/projects/${project.id}`}>
+                          Lihat Detail
+                        </Link>
+                      </Button>
+                    </TableCell>
+                  </TableRow>
                 ))}
-              </tbody>
-            </table>
+              </TableBody>
+            </Table>
           </div>
-        </div>
+        </Card>
 
         {/* Empty State */}
         {filteredProjects.length === 0 && (
@@ -412,11 +428,11 @@ export default function CarbonIssuedPage() {
               />
             </svg>
             <h3 className="mt-4 text-lg font-medium text-gray-900">
-              No carbon credits found
+              Tidak ada kredit karbon yang ditemukan
             </h3>
             <p className="mt-2 text-gray-600">
-              Try adjusting your search criteria or filters to find carbon
-              credits.
+              Coba sesuaikan kriteria pencarian atau filter untuk menemukan
+              kredit karbon.
             </p>
           </div>
         )}

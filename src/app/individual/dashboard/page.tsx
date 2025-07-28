@@ -20,9 +20,9 @@ export default function IndividualDashboard() {
   const recentProjects = [
     {
       id: "PRJ001",
-      name: "Forest Restoration Initiative",
+      name: "Inisiatif Restorasi Hutan",
       community: "Green Earth Indonesia",
-      status: "Active",
+      status: "Aktif",
       treesPlanted: 45,
       hoursContributed: 24,
       coverImage:
@@ -30,9 +30,9 @@ export default function IndividualDashboard() {
     },
     {
       id: "PRJ002",
-      name: "Solar Panel Community Project",
+      name: "Proyek Panel Surya Komunitas",
       community: "Solar Future Collective",
-      status: "Completed",
+      status: "Selesai",
       treesPlanted: 32,
       hoursContributed: 18,
       coverImage:
@@ -43,14 +43,14 @@ export default function IndividualDashboard() {
   const upcomingEvents = [
     {
       id: "EVT001",
-      name: "Tree Planting Day",
+      name: "Hari Penanaman Pohon",
       date: "2024-03-15",
       location: "Bandung, Jawa Barat",
       participants: 45,
     },
     {
       id: "EVT002",
-      name: "Environmental Workshop",
+      name: "Lokakarya Lingkungan",
       date: "2024-03-20",
       location: "Jakarta",
       participants: 30,
@@ -149,7 +149,7 @@ export default function IndividualDashboard() {
                     <div className="mt-1 flex items-center space-x-4 text-xs text-gray-500">
                       <span
                         className={`inline-flex rounded-full px-2 py-1 text-xs font-semibold ${
-                          project.status === "Active"
+                          project.status === "Aktif"
                             ? "bg-green-100 text-green-800"
                             : "bg-blue-100 text-blue-800"
                         }`}
@@ -160,34 +160,6 @@ export default function IndividualDashboard() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Upcoming Events */}
-      <div className="rounded-lg bg-white shadow-sm">
-        <div className="border-b border-gray-200 px-6 py-4">
-          <h3 className="text-lg font-medium text-gray-900">Acara Mendatang</h3>
-        </div>
-        <div className="divide-y divide-gray-200">
-          {upcomingEvents.map((event) => (
-            <div key={event.id} className="px-6 py-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-sm font-medium text-gray-900">
-                    {event.name}
-                  </h4>
-                  <p className="text-sm text-gray-500">{event.location}</p>
-                  <div className="mt-1 flex items-center space-x-4 text-xs text-gray-500">
-                    <span>{event.date}</span>
-                    <span>{event.participants} peserta</span>
-                  </div>
-                </div>
-                <button className="rounded-md bg-green-600 px-3 py-1 text-xs font-medium text-white hover:bg-green-700">
-                  Lihat Detail
-                </button>
               </div>
             </div>
           ))}

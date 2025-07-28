@@ -1,75 +1,84 @@
 "use client";
 
-import { useAuthStore } from "@/stores/auth";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useAuthStore } from "@/stores/auth";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { toast } from "sonner";
 
-// Mock project data (in real app, this would come from API)
+// Mock project data
 const mockProject = {
   id: "PRJ001",
   name: "Inisiatif Restorasi Hutan",
+  shortDescription:
+    "Proyek restorasi hutan skala besar untuk memerangi deforestasi dan menciptakan penyerap karbon yang signifikan.",
+  longDescription:
+    "Proyek ini bertujuan untuk merestorasi 1000 hektar hutan yang telah mengalami deforestasi. Melalui penanaman pohon asli dan pemeliharaan ekosistem, kami berharap dapat menyerap 50.000 ton CO₂ dalam 10 tahun ke depan. Proyek ini juga melibatkan masyarakat lokal dalam upaya konservasi dan memberikan manfaat ekonomi berkelanjutan.",
+  status: "Aktif",
+  type: "Reforestasi",
+  treeStatus: "Dalam Penanaman",
+  estimateCarbon: 50000,
+  treesPlanted: 25000,
+  targetTrees: 100000,
+  location: "Kalimantan Tengah, Indonesia",
+  startDate: "2024-01-15",
+  endDate: "2034-01-15",
+  community: "Green Earth Indonesia",
   images: [
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop&crop=center",
-    "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&h=400&fit=crop&crop=center",
+    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=400&fit=crop&crop=center",
+    "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=400&fit=crop&crop=center",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop&crop=center",
   ],
-  address: {
-    full: "Jakarta, Indonesia",
-    regional: "Java",
-    province: "DKI Jakarta",
-    city: "Jakarta",
-    district: "Central Jakarta",
-    postalCode: "10110",
-  },
-  estimateCarbon: 1200,
-  totalVolunteers: 45,
-  currentVolunteers: 32,
-  estimateDate: {
-    start: "2024-12-01",
-    end: "2025-06-30",
-  },
-  status: "Aktif",
-  projectType: "Reforestasi",
-  treeStatus: "35.000 pohon ditanam",
-  shortDescription:
-    "Proyek restorasi hutan skala besar untuk memerangi deforestasi dan menciptakan penyerap karbon.",
-  fullDescription: `Inisiatif restorasi hutan komprehensif ini bertujuan untuk memulihkan 500 hektar lahan hutan yang terdegradasi di area metropolitan Jakarta. Proyek ini berfokus pada reforestasi spesies asli, rehabilitasi tanah, dan keterlibatan komunitas untuk menciptakan solusi penyerapan karbon yang berkelanjutan.
-
-Pendekatan kami menggabungkan penelitian ilmiah dengan pengetahuan ekologi tradisional untuk memastikan tingkat keberhasilan tertinggi untuk kelangsungan hidup pohon dan restorasi ekosistem. Proyek ini mencakup pengembangan pembibitan, program pelatihan komunitas, dan sistem pemantauan jangka panjang.
-
-Tujuan utama meliputi:
-- Memulihkan 500 hektar hutan yang terdegradasi
-- Menanam 100.000 pohon asli
-- Melibatkan 1.000+ anggota komunitas
-- Menciptakan 50 peluang kerja lokal
-- Menetapkan sistem pemantauan karbon yang berkelanjutan
-
-Proyek ini mengikuti standar kredit karbon internasional dan akan diverifikasi oleh organisasi pihak ketiga independen sepanjang implementasinya.`,
-  community: {
-    name: "Bumi Hijau Indonesia",
-    verified: true,
-    description:
-      "Organisasi lingkungan terkemuka yang berfokus pada konservasi dan restorasi hutan di seluruh Indonesia.",
-    projects: 23,
-  },
   volunteers: [
     {
+      name: "Ahmad Rizki",
+      role: "Koordinator Lapangan",
+      avatar:
+        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
+    },
+    {
+      name: "Sarah Putri",
+      role: "Ahli Konservasi",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
+    },
+    {
       name: "Budi Santoso",
-      role: "Ketua Tim",
-      joinDate: "2024-10-15",
-      hours: 120,
+      role: "Relawan Senior",
+      avatar:
+        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
     },
     {
-      name: "Siti Nurhaliza",
-      role: "Relawan",
-      joinDate: "2024-11-01",
-      hours: 45,
+      name: "Dewi Sari",
+      role: "Koordinator Komunitas",
+      avatar:
+        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
+    },
+  ],
+  keyStats: [
+    {
+      label: "Target Ton CO₂",
+      value: "50.000",
+      description: "Estimasi penyerapan karbon",
     },
     {
-      name: "Ahmad Rahman",
-      role: "Koordinator Lokal",
-      joinDate: "2024-10-01",
-      hours: 200,
+      label: "Pohon Tertanam",
+      value: "25.000",
+      description: "Dari target 100.000 pohon",
+    },
+    {
+      label: "Luas Area",
+      value: "1.000 ha",
+      description: "Area restorasi hutan",
+    },
+    {
+      label: "Relawan Aktif",
+      value: "45",
+      description: "Anggota tim lapangan",
     },
   ],
 };
@@ -191,10 +200,12 @@ export default function ProjectDetailPage() {
               </div>
               <div className="mt-4 flex space-x-2">
                 {project.images.map((image, index) => (
-                  <button
+                  <Button
                     key={index}
+                    variant="outline"
+                    size="sm"
                     onClick={() => setActiveImageIndex(index)}
-                    className={`h-20 w-20 overflow-hidden rounded-lg border-2 ${
+                    className={`h-20 w-20 overflow-hidden rounded-lg border-2 p-0 ${
                       activeImageIndex === index
                         ? "border-green-500"
                         : "border-gray-200"
@@ -207,7 +218,7 @@ export default function ProjectDetailPage() {
                       height={480}
                       width={480}
                     />
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>
@@ -215,11 +226,11 @@ export default function ProjectDetailPage() {
             {/* Project Info */}
             <div>
               <div className="mb-4 flex items-center justify-between">
-                <span
-                  className={`rounded-full px-3 py-1 text-sm font-medium ${getStatusColor(project.status)}`}
+                <Badge
+                  variant={project.status === "Aktif" ? "default" : "secondary"}
                 >
                   {project.status}
-                </span>
+                </Badge>
                 <span className="text-sm text-gray-500">{project.id}</span>
               </div>
 
@@ -232,231 +243,246 @@ export default function ProjectDetailPage() {
 
               {/* Key Stats */}
               <div className="mb-6 grid grid-cols-2 gap-4">
-                <div className="rounded-lg bg-green-50 p-4">
-                  <div className="text-2xl font-bold text-green-600">
-                    {project.estimateCarbon.toLocaleString()}
-                  </div>
-                  <div className="text-sm text-gray-600">Target Ton CO₂</div>
-                </div>
-                <div className="rounded-lg bg-blue-50 p-4">
-                  <div className="text-2xl font-bold text-blue-600">
-                    {project.currentVolunteers}/{project.totalVolunteers}
-                  </div>
-                  <div className="text-sm text-gray-600">Relawan</div>
-                </div>
-                <div className="rounded-lg bg-purple-50 p-4">
-                  <div className="text-2xl font-bold text-purple-600">
-                    {project.projectType}
-                  </div>
-                  <div className="text-sm text-gray-600">Jenis Proyek</div>
-                </div>
-                <div className="rounded-lg bg-orange-50 p-4">
-                  <div className="text-2xl font-bold text-orange-600">
-                    {project.treeStatus}
-                  </div>
-                  <div className="text-sm text-gray-600">Pohon Ditanam</div>
-                </div>
-              </div>
-
-              {/* Location */}
-              <div className="mb-6">
-                <h3 className="mb-2 font-semibold text-gray-900">Lokasi</h3>
-                <p className="text-gray-600">{project.address.full}</p>
-                <p className="text-sm text-gray-500">
-                  {project.address.district}, {project.address.city},{" "}
-                  {project.address.province}
-                </p>
-              </div>
-
-              {/* Duration */}
-              <div className="mb-6">
-                <h3 className="mb-2 font-semibold text-gray-900">
-                  Durasi Proyek
-                </h3>
-                <p className="text-gray-600">
-                  {formatDate(project.estimateDate.start)} -{" "}
-                  {formatDate(project.estimateDate.end)}
-                </p>
-              </div>
-
-              {/* Community */}
-              <div className="mb-6">
-                <h3 className="mb-2 font-semibold text-gray-900">
-                  Diselenggarakan Oleh
-                </h3>
-                <div className="flex items-center space-x-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                    <span className="font-semibold text-green-600">
-                      {project.community.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div>
-                    <div className="flex items-center">
-                      <span className="font-medium text-gray-900">
-                        {project.community.name}
-                      </span>
-                      {project.community.verified && (
-                        <svg
-                          className="ml-1 h-4 w-4 text-green-500"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      )}
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="text-2xl font-bold text-green-600">
+                      {project.estimateCarbon.toLocaleString()}
                     </div>
-                    <p className="text-sm text-gray-600">
-                      {project.community.projects} proyek
-                    </p>
-                  </div>
-                </div>
+                    <div className="text-sm text-gray-600">Target Ton CO₂</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="text-2xl font-bold text-green-600">
+                      {project.treesPlanted.toLocaleString()}
+                    </div>
+                    <div className="text-sm text-gray-600">Pohon Tertanam</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="text-2xl font-bold text-green-600">
+                      {project.targetTrees.toLocaleString()}
+                    </div>
+                    <div className="text-sm text-gray-600">Target Pohon</div>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-4">
+                    <div className="text-2xl font-bold text-green-600">
+                      {project.volunteers.length}
+                    </div>
+                    <div className="text-sm text-gray-600">Relawan</div>
+                  </CardContent>
+                </Card>
               </div>
 
               {/* Action Buttons */}
-              <div className="space-y-3">
-                {user?.role === "individual" && (
-                  <div>
-                    {!isJoined ? (
-                      <button
-                        onClick={handleJoinProject}
-                        disabled={isLoading}
-                        className="w-full rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:opacity-50"
-                      >
-                        {isLoading
-                          ? "Bergabung..."
-                          : "Bergabung dengan Proyek Ini"}
-                      </button>
-                    ) : (
-                      <div className="space-y-2">
-                        <div className="w-full rounded-lg bg-green-100 px-6 py-3 text-center font-semibold text-green-800">
-                          ✓ Anda Telah Bergabung dengan Proyek Ini
-                        </div>
-                        <button
-                          onClick={handleLeaveProject}
-                          disabled={isLoading}
-                          className="w-full rounded-lg border border-red-300 px-6 py-2 font-medium text-red-600 transition-colors hover:bg-red-50 disabled:cursor-not-allowed disabled:opacity-50"
-                        >
-                          {isLoading ? "Keluar..." : "Keluar dari Proyek"}
-                        </button>
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {user?.role === "community" && (
-                  <div className="space-y-2">
-                    <button className="w-full rounded-lg bg-blue-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-blue-700">
-                      Kelola Proyek
-                    </button>
-                    <button className="w-full rounded-lg border border-gray-300 px-6 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50">
-                      Lihat Analitik
-                    </button>
-                  </div>
-                )}
-
-                {!user && (
-                  <div className="space-y-2">
-                    <Link
-                      href="/register"
-                      className="block w-full rounded-lg bg-green-600 px-6 py-3 text-center font-semibold text-white transition-colors hover:bg-green-700"
+              <div className="flex space-x-4">
+                {user ? (
+                  isJoined ? (
+                    <Button
+                      variant="outline"
+                      onClick={handleLeaveProject}
+                      disabled={isLoading}
                     >
-                      Daftar untuk Bergabung
-                    </Link>
-                    <Link
-                      href="/login"
-                      className="block w-full rounded-lg border border-gray-300 px-6 py-2 text-center font-medium text-gray-700 transition-colors hover:bg-gray-50"
-                    >
-                      Masuk
-                    </Link>
-                  </div>
+                      {isLoading ? "Meninggalkan..." : "Tinggalkan Proyek"}
+                    </Button>
+                  ) : (
+                    <Button onClick={handleJoinProject} disabled={isLoading}>
+                      {isLoading ? "Bergabung..." : "Bergabung dengan Proyek"}
+                    </Button>
+                  )
+                ) : (
+                  <Button asChild>
+                    <Link href="/login">Masuk untuk Bergabung</Link>
+                  </Button>
                 )}
+                <Button variant="outline" asChild>
+                  <Link href={`/projects/${project.id}/donate`}>Donasi</Link>
+                </Button>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Tabs Section */}
-      <div className="border-t bg-white">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav className="flex space-x-8" aria-label="Tabs">
-            {[
-              { id: "overview", label: "Ringkasan" },
-              { id: "volunteers", label: "Relawan" },
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`border-b-2 px-1 py-4 text-sm font-medium ${
-                  activeTab === tab.id
-                    ? "border-green-500 text-green-600"
-                    : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </nav>
-        </div>
-      </div>
-
-      {/* Tab Content */}
+      {/* Content Section */}
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {activeTab === "overview" && (
-          <div className="prose max-w-none">
-            <h2 className="mb-4 text-2xl font-bold text-gray-900">
-              Ringkasan Proyek
-            </h2>
-            <div className="whitespace-pre-line text-gray-600">
-              {project.fullDescription}
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+          {/* Main Content */}
+          <div className="lg:col-span-2">
+            {/* Tabs */}
+            <div className="mb-6">
+              <nav className="flex space-x-8">
+                <button
+                  onClick={() => setActiveTab("overview")}
+                  className={`border-b-2 py-2 text-sm font-medium ${
+                    activeTab === "overview"
+                      ? "border-green-500 text-green-600"
+                      : "border-transparent text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  Gambaran Umum
+                </button>
+                <button
+                  onClick={() => setActiveTab("volunteers")}
+                  className={`border-b-2 py-2 text-sm font-medium ${
+                    activeTab === "volunteers"
+                      ? "border-green-500 text-green-600"
+                      : "border-transparent text-gray-500 hover:text-gray-700"
+                  }`}
+                >
+                  Tim Relawan
+                </button>
+              </nav>
             </div>
-          </div>
-        )}
 
-        {activeTab === "volunteers" && (
-          <div>
-            <h2 className="mb-6 text-2xl font-bold text-gray-900">
-              Relawan Proyek
-            </h2>
-            <div className="overflow-hidden rounded-lg bg-white shadow-sm">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-50">
-                  <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Relawan
-                    </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
-                      Tanggal Bergabung
-                    </th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200 bg-white">
-                  {project.volunteers.map((volunteer, index) => (
-                    <tr key={index}>
-                      <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center">
-                          <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
-                            <span className="text-sm font-medium text-gray-600">
-                              {volunteer.name.charAt(0)}
-                            </span>
-                          </div>
-                          <div className="ml-4">
-                            <div className="text-sm font-medium text-gray-900">
-                              {volunteer.name}
-                            </div>
-                          </div>
+            {/* Tab Content */}
+            {activeTab === "overview" && (
+              <div className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Tentang Proyek</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600">{project.longDescription}</p>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Detail Proyek</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <span className="text-sm font-medium text-gray-500">
+                          Jenis Proyek
+                        </span>
+                        <p className="text-gray-900">{project.type}</p>
+                      </div>
+                      <div>
+                        <span className="text-sm font-medium text-gray-500">
+                          Status Pohon
+                        </span>
+                        <p className="text-gray-900">{project.treeStatus}</p>
+                      </div>
+                      <div>
+                        <span className="text-sm font-medium text-gray-500">
+                          Lokasi
+                        </span>
+                        <p className="text-gray-900">{project.location}</p>
+                      </div>
+                      <div>
+                        <span className="text-sm font-medium text-gray-500">
+                          Komunitas
+                        </span>
+                        <p className="text-gray-900">{project.community}</p>
+                      </div>
+                      <div>
+                        <span className="text-sm font-medium text-gray-500">
+                          Tanggal Mulai
+                        </span>
+                        <p className="text-gray-900">
+                          {formatDate(project.startDate)}
+                        </p>
+                      </div>
+                      <div>
+                        <span className="text-sm font-medium text-gray-500">
+                          Tanggal Selesai
+                        </span>
+                        <p className="text-gray-900">
+                          {formatDate(project.endDate)}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            )}
+
+            {activeTab === "volunteers" && (
+              <Card>
+                <CardHeader>
+                  <CardTitle>Tim Relawan</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                    {project.volunteers.map((volunteer, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center space-x-3 rounded-lg border p-4"
+                      >
+                        <Image
+                          src={volunteer.avatar}
+                          alt={volunteer.name}
+                          className="h-12 w-12 rounded-full object-cover"
+                          width={48}
+                          height={48}
+                        />
+                        <div>
+                          <p className="font-medium text-gray-900">
+                            {volunteer.name}
+                          </p>
+                          <p className="text-sm text-gray-500">
+                            {volunteer.role}
+                          </p>
                         </div>
-                      </td>
-                      <td className="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
-                        {formatDate(volunteer.joinDate)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
           </div>
-        )}
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Statistik Kunci</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {project.keyStats.map((stat, index) => (
+                    <div key={index}>
+                      <div className="text-2xl font-bold text-green-600">
+                        {stat.value}
+                      </div>
+                      <div className="text-sm font-medium text-gray-900">
+                        {stat.label}
+                      </div>
+                      <div className="text-xs text-gray-500">
+                        {stat.description}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Bagikan Proyek</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="flex space-x-2">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      navigator.clipboard.writeText(window.location.href);
+                      toast.success("Link berhasil disalin!");
+                    }}
+                  >
+                    Salin Link
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
       </div>
     </div>
   );

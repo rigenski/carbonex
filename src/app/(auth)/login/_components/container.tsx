@@ -8,6 +8,10 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 
 export default function Container() {
   const form = useForm<TLoginRequest>();
@@ -113,54 +117,34 @@ export default function Container() {
 
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {/* Email */}
-            <div>
-              <label
-                htmlFor="email"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Alamat Email
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="email">Alamat Email</Label>
+              <Input
                 type="email"
                 id="email"
                 {...form.register("email", { required: true })}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 placeholder="Masukkan alamat email Anda"
               />
             </div>
 
             {/* Password */}
-            <div>
-              <label
-                htmlFor="password"
-                className="mb-1 block text-sm font-medium text-gray-700"
-              >
-                Kata Sandi
-              </label>
-              <input
+            <div className="space-y-2">
+              <Label htmlFor="password">Kata Sandi</Label>
+              <Input
                 type="password"
                 id="password"
                 {...form.register("password", { required: true })}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
                 placeholder="Masukkan kata sandi Anda"
               />
             </div>
 
             {/* Forgot Password */}
             <div className="flex items-center justify-between">
-              <div className="flex items-center">
-                <input
-                  id="remember-me"
-                  name="remember-me"
-                  type="checkbox"
-                  className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-                />
-                <label
-                  htmlFor="remember-me"
-                  className="ml-2 block text-sm text-gray-700"
-                >
+              <div className="flex items-center space-x-2">
+                <Checkbox id="remember-me" />
+                <Label htmlFor="remember-me" className="text-sm">
                   Ingat saya
-                </label>
+                </Label>
               </div>
               <div className="text-sm">
                 <Link
@@ -173,13 +157,13 @@ export default function Container() {
             </div>
 
             {/* Submit Button */}
-            <button
+            <Button
               type="submit"
               disabled={authLoginMutation.isPending}
-              className="w-full rounded-md bg-green-600 px-4 py-2 text-white transition-colors hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+              className="w-full"
             >
               {authLoginMutation.isPending ? "Sedang Masuk..." : "Masuk"}
-            </button>
+            </Button>
 
             {/* Register Link */}
             <div className="text-center">

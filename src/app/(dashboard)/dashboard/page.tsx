@@ -97,7 +97,7 @@ export default function DashboardPage() {
           </div>
           <Link
             href="/dashboard/projects"
-            className="mt-4 inline-flex items-center text-sm font-medium text-green-600 hover:text-green-700"
+            className="text-primary hover:text-primary/80 mt-4 inline-flex items-center text-sm font-medium"
           >
             Lihat Semua Proyek →
           </Link>

@@ -35,11 +35,11 @@ const mockProjects = [
       district: "Kebayoran Baru",
       postalCode: "12120",
     },
-    status: "Under Development",
+    status: "Dalam Pengembangan",
   },
   {
     id: "PRJ002",
-    projectName: "Solar Panel Community Project",
+    projectName: "Proyek Panel Surya Komunitas",
     projectType: "Energi Terbarukan",
     country: "Indonesia",
     estimatedTrees: 0,
@@ -66,11 +66,11 @@ const mockProjects = [
       district: "Cidadap",
       postalCode: "40162",
     },
-    status: "Submitted for Registration",
+    status: "Diajukan untuk Registrasi",
   },
   {
     id: "PRJ003",
-    projectName: "Waste Management Program",
+    projectName: "Program Pengelolaan Sampah",
     projectType: "Pengelolaan Sampah",
     country: "Indonesia",
     estimatedTrees: 1000,
@@ -97,7 +97,7 @@ const mockProjects = [
       district: "Gubeng",
       postalCode: "60281",
     },
-    status: "Under Development",
+    status: "Dalam Pengembangan",
   },
 ];
 
@@ -118,11 +118,11 @@ export default function CommunityProjectsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Under Development":
+      case "Dalam Pengembangan":
         return "bg-yellow-100 text-yellow-800";
-      case "Submitted for Registration":
+      case "Diajukan untuk Registrasi":
         return "bg-blue-100 text-blue-800";
-      case "Active":
+      case "Aktif":
         return "bg-green-100 text-green-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -131,11 +131,11 @@ export default function CommunityProjectsPage() {
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case "Under Development":
+      case "Dalam Pengembangan":
         return "Dalam Pengembangan";
-      case "Submitted for Registration":
+      case "Diajukan untuk Registrasi":
         return "Diajukan untuk Registrasi";
-      case "Active":
+      case "Aktif":
         return "Aktif";
       default:
         return status;
@@ -153,7 +153,7 @@ export default function CommunityProjectsPage() {
         </div>
         <Link
           href="/dashboard/projects/create"
-          className="mt-4 inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 sm:mt-0"
+          className="bg-primary hover:bg-primary/90 mt-4 inline-flex items-center rounded-md px-4 py-2 text-sm font-medium text-white sm:mt-0"
         >
           <span className="mr-2">➕</span>
           Buat Proyek Baru
@@ -189,7 +189,7 @@ export default function CommunityProjectsPage() {
               <option value="Submitted for Registration">
                 Diajukan untuk Registrasi
               </option>
-              <option value="Active">Aktif</option>
+              <option value="Aktif">Aktif</option>
             </select>
           </div>
           <div className="flex items-end">
@@ -300,7 +300,7 @@ export default function CommunityProjectsPage() {
                 </span>
                 <Link
                   href={`/dashboard/projects/${project.id}`}
-                  className="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-700"
+                  className="bg-primary hover:bg-primary/90 inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-white"
                 >
                   Lihat Detail
                 </Link>
@@ -324,7 +324,7 @@ export default function CommunityProjectsPage() {
           </p>
           <Link
             href="/dashboard/projects/create"
-            className="inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700"
+                                      className="inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary/90"
           >
             Buat Proyek Pertama
           </Link>

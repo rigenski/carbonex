@@ -4,6 +4,18 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuthStore } from "@/stores/auth";
 import Image from "next/image";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 
 // Mock data for projects
 const mockProjects = [
@@ -350,7 +362,7 @@ export default function ProjectsPage() {
             {user?.role === "community" && (
               <Link
                 href="/projects/create"
-                className="rounded-lg bg-green-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-green-700"
+                className="bg-primary hover:bg-primary/90 rounded-lg px-6 py-3 font-semibold text-white transition-colors"
               >
                 Luncurkan Proyek Anda
               </Link>
@@ -361,91 +373,96 @@ export default function ProjectsPage() {
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* Filters and Search */}
-        <div className="mb-8 rounded-lg bg-white p-6 shadow-sm">
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-            {/* Search */}
-            <div className="md:col-span-2">
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Cari Proyek
-              </label>
-              <input
-                type="text"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-                placeholder="Cari berdasarkan nama, lokasi, atau komunitas..."
-              />
+        <Card className="mb-8">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
+              {/* Search */}
+              <div className="md:col-span-2">
+                <Label htmlFor="search">Cari Proyek</Label>
+                <Input
+                  id="search"
+                  type="text"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  placeholder="Cari berdasarkan nama, lokasi, atau komunitas..."
+                />
+              </div>
+
+              {/* Status Filter */}
+              <div>
+                <Label htmlFor="status">Status</Label>
+                <Select
+                  value={selectedStatus}
+                  onValueChange={setSelectedStatus}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Pilih status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {projectStatuses.map((status) => (
+                      <SelectItem key={status} value={status}>
+                        {status}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {/* Volunteer Filter */}
+              <div>
+                <Label htmlFor="volunteer">Status Relawan</Label>
+                <Select
+                  value={selectedVolunteerFilter}
+                  onValueChange={setSelectedVolunteerFilter}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Pilih status relawan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {volunteerOptions.map((option) => (
+                      <SelectItem key={option} value={option}>
+                        {option}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
 
-            {/* Status Filter */}
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Status
-              </label>
-              <select
-                value={selectedStatus}
-                onChange={(e) => setSelectedStatus(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-              >
-                {projectStatuses.map((status) => (
-                  <option key={status} value={status}>
-                    {status}
-                  </option>
-                ))}
-              </select>
+            {/* Sort and Results Count */}
+            <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
+              <div className="flex items-center space-x-4">
+                <span className="text-sm text-gray-600">
+                  Menampilkan {filteredProjects.length} dari {projects.length}{" "}
+                  proyek
+                </span>
+              </div>
+              <div className="mt-4 flex items-center space-x-2 sm:mt-0">
+                <span className="text-sm text-gray-600">
+                  Urutkan berdasarkan:
+                </span>
+                <Select value={sortBy} onValueChange={setSortBy}>
+                  <SelectTrigger className="w-40">
+                    <SelectValue placeholder="Pilih pengurutan" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="name">Nama</SelectItem>
+                    <SelectItem value="carbon">Dampak Karbon</SelectItem>
+                    <SelectItem value="volunteers">Relawan</SelectItem>
+                    <SelectItem value="date">Tanggal Mulai</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
-
-            {/* Volunteer Filter */}
-            <div>
-              <label className="mb-2 block text-sm font-medium text-gray-700">
-                Status Relawan
-              </label>
-              <select
-                value={selectedVolunteerFilter}
-                onChange={(e) => setSelectedVolunteerFilter(e.target.value)}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-              >
-                {volunteerOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Sort and Results Count */}
-          <div className="mt-6 flex flex-col items-start justify-between border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
-            <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">
-                Menampilkan {filteredProjects.length} dari {projects.length}{" "}
-                proyek
-              </span>
-            </div>
-            <div className="mt-4 flex items-center space-x-2 sm:mt-0">
-              <span className="text-sm text-gray-600">
-                Urutkan berdasarkan:
-              </span>
-              <select
-                value={sortBy}
-                onChange={(e) => setSortBy(e.target.value)}
-                className="rounded-md border border-gray-300 px-3 py-1 text-sm focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
-              >
-                <option value="name">Nama</option>
-                <option value="carbon">Dampak Karbon</option>
-                <option value="volunteers">Relawan</option>
-                <option value="date">Tanggal Mulai</option>
-              </select>
-            </div>
-          </div>
-        </div>
+          </CardContent>
+        </Card>
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredProjects.map((project) => (
-            <div
+            <Card
               key={project.id}
-              className="overflow-hidden rounded-lg bg-white shadow-sm transition-shadow hover:shadow-md"
+              className="overflow-hidden transition-shadow hover:shadow-md"
             >
               <Image
                 src={project.image}
@@ -454,20 +471,18 @@ export default function ProjectsPage() {
                 width={480}
                 height={480}
               />
-              <div className="p-6">
+              <CardContent className="p-6">
                 <div className="mb-3 flex items-center justify-between">
                   <div className="flex items-center space-x-2">
-                    <span
-                      className={`rounded px-2.5 py-0.5 text-xs font-medium ${getStatusColor(project.status)}`}
+                    <Badge
+                      variant={
+                        project.status === "Aktif" ? "default" : "secondary"
+                      }
                     >
                       {project.status}
-                    </span>
+                    </Badge>
                     {project.needsVolunteers && (
-                      <span
-                        className={`rounded px-2.5 py-0.5 text-xs font-medium ${getVolunteerBadgeColor(project.needsVolunteers)}`}
-                      >
-                        Butuh Relawan
-                      </span>
+                      <Badge variant="default">Butuh Relawan</Badge>
                     )}
                   </div>
                   <span className="text-sm text-gray-500">{project.id}</span>
@@ -555,15 +570,12 @@ export default function ProjectsPage() {
                   <span className="text-xs text-gray-500">
                     oleh {project.community}
                   </span>
-                  <Link
-                    href={`/projects/${project.id}`}
-                    className="rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-green-700"
-                  >
-                    Lihat Detail
-                  </Link>
+                  <Button asChild>
+                    <Link href={`/projects/${project.id}`}>Lihat Detail</Link>
+                  </Button>
                 </div>
-              </div>
-            </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
 

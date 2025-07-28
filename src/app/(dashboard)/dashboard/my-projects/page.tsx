@@ -14,7 +14,7 @@ const mockJoinedProjects = [
     joinDate: "2024-01-20",
     volunteerHours: 12,
     treesPlanted: 15,
-    status: "Active",
+    status: "Aktif",
     coverImage:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&crop=center",
     shortDesc:
@@ -29,13 +29,13 @@ const mockJoinedProjects = [
   },
   {
     id: "PRJ002",
-    projectName: "Solar Panel Community Project",
+    projectName: "Proyek Panel Surya Komunitas",
     projectType: "Energi Terbarukan",
     community: "Solar Future Collective",
     joinDate: "2024-01-25",
     volunteerHours: 8,
     treesPlanted: 0,
-    status: "Active",
+    status: "Aktif",
     coverImage:
       "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=250&fit=crop&crop=center",
     shortDesc:
@@ -50,13 +50,13 @@ const mockJoinedProjects = [
   },
   {
     id: "PRJ003",
-    projectName: "Urban Tree Planting",
+    projectName: "Penanaman Pohon Perkotaan",
     projectType: "Penanaman Pohon",
     community: "Green City Movement",
     joinDate: "2024-01-30",
     volunteerHours: 6,
     treesPlanted: 8,
-    status: "Active",
+    status: "Aktif",
     coverImage:
       "https://images.unsplash.com/photo-1574263867128-9c1a5c5f4cf3?w=400&h=250&fit=crop&crop=center",
     shortDesc:
@@ -88,11 +88,11 @@ export default function MyProjectsPage() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "Active":
+      case "Aktif":
         return "bg-green-100 text-green-800";
-      case "Completed":
+      case "Selesai":
         return "bg-blue-100 text-blue-800";
-      case "Paused":
+      case "Dijeda":
         return "bg-yellow-100 text-yellow-800";
       default:
         return "bg-gray-100 text-gray-800";
@@ -101,11 +101,11 @@ export default function MyProjectsPage() {
 
   const getStatusText = (status: string) => {
     switch (status) {
-      case "Active":
+      case "Aktif":
         return "Aktif";
-      case "Completed":
+      case "Selesai":
         return "Selesai";
-      case "Paused":
+      case "Dijeda":
         return "Dijeda";
       default:
         return status;
@@ -308,7 +308,7 @@ export default function MyProjectsPage() {
                 </div>
                 <div className="h-2 w-full rounded-full bg-gray-200">
                   <div
-                    className="h-2 rounded-full bg-green-600 transition-all duration-300"
+                    className="bg-primary h-2 rounded-full transition-all duration-300"
                     style={{
                       width: `${(project.totalVolunteers / project.maxVolunteers) * 100}%`,
                     }}
@@ -323,7 +323,7 @@ export default function MyProjectsPage() {
                 </span>
                 <Link
                   href={`/projects/${project.id}`}
-                  className="inline-flex items-center rounded-md bg-green-600 px-3 py-2 text-sm font-medium text-white hover:bg-green-700"
+                  className="bg-primary hover:bg-primary/90 inline-flex items-center rounded-md px-3 py-2 text-sm font-medium text-white"
                 >
                   Lihat Detail
                 </Link>
@@ -347,7 +347,7 @@ export default function MyProjectsPage() {
           </p>
           <Link
             href="/projects"
-            className="inline-flex items-center rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700"
+            className="bg-primary hover:bg-primary/90 inline-flex items-center rounded-md px-4 py-2 text-sm font-medium text-white"
           >
             Jelajahi Proyek
           </Link>
