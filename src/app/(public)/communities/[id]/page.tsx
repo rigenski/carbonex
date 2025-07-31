@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useAuthStore } from "@/stores/auth";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 // Mock community data
 const mockCommunity = {
@@ -231,27 +232,26 @@ export default function CommunityDetailPage() {
               {user ? (
                 <div>
                   {!isFollowing ? (
-                    <button
+                    <Button
                       onClick={handleFollowCommunity}
                       disabled={isLoading}
-                      className="bg-primary hover:bg-primary/90 rounded-lg px-6 py-2 font-semibold text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                     >
                       {isLoading ? "Mengikuti..." : "Ikuti Komunitas"}
-                    </button>
+                    </Button>
                   ) : (
                     <div className="flex items-center space-x-2">
                       <span className="rounded-lg bg-green-100 px-4 py-2 font-semibold text-green-800">
                         ✓ Mengikuti
                       </span>
-                      <button
+                      <Button
+                        variant="outline"
                         onClick={handleUnfollowCommunity}
                         disabled={isLoading}
-                        className="rounded-lg border border-gray-300 px-4 py-2 font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                       >
                         {isLoading
                           ? "Berhenti Mengikuti..."
                           : "Berhenti Mengikuti"}
-                      </button>
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -278,17 +278,18 @@ export default function CommunityDetailPage() {
               { id: "overview", label: "Ringkasan" },
               { id: "projects", label: "Proyek" },
             ].map((tab) => (
-              <button
+              <Button
                 key={tab.id}
+                variant="ghost"
                 onClick={() => setActiveTab(tab.id)}
                 className={`border-b-2 px-1 py-4 text-sm font-medium ${
                   activeTab === tab.id
-                    ? "border-green-500 text-green-600"
+                    ? "border-primary text-primary"
                     : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                 }`}
               >
                 {tab.label}
-              </button>
+              </Button>
             ))}
           </nav>
         </div>

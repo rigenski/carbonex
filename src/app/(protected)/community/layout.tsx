@@ -15,8 +15,9 @@ import {
   SidebarNav,
   SidebarNavItem,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 
-export default function IndividualLayout({
+export default function CommunityLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -27,15 +28,15 @@ export default function IndividualLayout({
   const navigation = [
     {
       name: "Dashboard",
-      href: "/individual/dashboard",
+      href: "/community/dashboard",
       icon: ChartBarIcon,
-      current: pathname === "/individual/dashboard",
+      current: pathname === "/community/dashboard",
     },
     {
-      name: "Proyek Saya",
-      href: "/individual/projects",
+      name: "Daftar Proyek",
+      href: "/community/projects",
       icon: FolderIcon,
-      current: pathname === "/individual/projects",
+      current: pathname === "/community/projects",
     },
   ];
 
@@ -43,9 +44,11 @@ export default function IndividualLayout({
     <div className="min-h-screen bg-gray-50">
       {/* Mobile menu button */}
       <div className="lg:hidden">
-        <button
+        <Button
           type="button"
-          className="fixed top-4 left-4 z-50 rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+          variant="ghost"
+          size="icon"
+          className="fixed top-4 left-4 z-50"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           <span className="sr-only">Open sidebar</span>
@@ -54,11 +57,10 @@ export default function IndividualLayout({
           ) : (
             <Bars3Icon className="h-6 w-6" />
           )}
-        </button>
+        </Button>
       </div>
 
       <div className="flex flex-col lg:flex-row">
-        {/* Sidebar - Not Fixed */}
         <Sidebar
           className={`${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -66,7 +68,7 @@ export default function IndividualLayout({
         >
           <SidebarHeader>
             <h1 className="text-xl font-semibold text-gray-900">
-              Individual Panel
+              Community Panel
             </h1>
           </SidebarHeader>
           <SidebarContent>

@@ -5,8 +5,6 @@ import { useState } from "react";
 import {
   ChartBarIcon,
   FolderIcon,
-  UsersIcon,
-  UserIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -16,10 +14,10 @@ import {
   SidebarHeader,
   SidebarNav,
   SidebarNavItem,
-  SidebarNavSeparator,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 
-export default function AdminLayout({
+export default function IndividualLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -30,27 +28,15 @@ export default function AdminLayout({
   const navigation = [
     {
       name: "Dashboard",
-      href: "/admin/dashboard",
+      href: "/individual/dashboard",
       icon: ChartBarIcon,
-      current: pathname === "/admin/dashboard",
+      current: pathname === "/individual/dashboard",
     },
     {
-      name: "Proyek",
-      href: "/admin/project",
+      name: "Proyek Saya",
+      href: "/individual/projects",
       icon: FolderIcon,
-      current: pathname === "/admin/project",
-    },
-    {
-      name: "Komunitas",
-      href: "/admin/community",
-      icon: UsersIcon,
-      current: pathname === "/admin/community",
-    },
-    {
-      name: "Individu",
-      href: "/admin/individual",
-      icon: UserIcon,
-      current: pathname === "/admin/individual",
+      current: pathname === "/individual/projects",
     },
   ];
 
@@ -58,9 +44,11 @@ export default function AdminLayout({
     <div className="min-h-screen bg-gray-50">
       {/* Mobile menu button */}
       <div className="lg:hidden">
-        <button
+        <Button
           type="button"
-          className="fixed top-4 left-4 z-50 rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+          variant="ghost"
+          size="icon"
+          className="fixed top-4 left-4 z-50"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           <span className="sr-only">Open sidebar</span>
@@ -69,33 +57,24 @@ export default function AdminLayout({
           ) : (
             <Bars3Icon className="h-6 w-6" />
           )}
-        </button>
+        </Button>
       </div>
 
       <div className="flex flex-col lg:flex-row">
+        {/* Sidebar - Not Fixed */}
         <Sidebar
           className={`${
             sidebarOpen ? "translate-x-0" : "-translate-x-full"
           } fixed inset-y-0 left-0 z-40 min-w-[240px] transform transition-transform duration-300 ease-in-out lg:relative lg:inset-0 lg:translate-x-0`}
         >
           <SidebarHeader>
-            <h1 className="text-xl font-semibold text-gray-900">Admin Panel</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Individual Panel
+            </h1>
           </SidebarHeader>
           <SidebarContent>
             <SidebarNav>
-              {navigation.slice(0, 2).map((item) => (
-                <SidebarNavItem
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setSidebarOpen(false)}
-                  active={item.current}
-                >
-                  <item.icon className="h-4 w-4" />
-                  {item.name}
-                </SidebarNavItem>
-              ))}
-              <SidebarNavSeparator />
-              {navigation.slice(2).map((item) => (
+              {navigation.map((item) => (
                 <SidebarNavItem
                   key={item.name}
                   href={item.href}

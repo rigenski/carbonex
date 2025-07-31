@@ -302,26 +302,28 @@ export default function ProjectDetailPage() {
             {/* Tabs */}
             <div className="mb-6">
               <nav className="flex space-x-8">
-                <button
+                <Button
+                  variant="ghost"
                   onClick={() => setActiveTab("overview")}
                   className={`border-b-2 py-2 text-sm font-medium ${
                     activeTab === "overview"
-                      ? "border-green-500 text-green-600"
+                      ? "border-primary text-primary"
                       : "border-transparent text-gray-500 hover:text-gray-700"
                   }`}
                 >
                   Gambaran Umum
-                </button>
-                <button
+                </Button>
+                <Button
+                  variant="ghost"
                   onClick={() => setActiveTab("volunteers")}
                   className={`border-b-2 py-2 text-sm font-medium ${
                     activeTab === "volunteers"
-                      ? "border-green-500 text-green-600"
+                      ? "border-primary text-primary"
                       : "border-transparent text-gray-500 hover:text-gray-700"
                   }`}
                 >
                   Tim Relawan
-                </button>
+                </Button>
               </nav>
             </div>
 

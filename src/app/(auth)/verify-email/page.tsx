@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 export default function VerifyEmailPage() {
   const router = useRouter();
@@ -137,7 +139,7 @@ export default function VerifyEmailPage() {
           {/* OTP Input */}
           <div className="flex justify-center space-x-4">
             {otp.map((digit, index) => (
-              <input
+              <Input
                 key={index}
                 ref={(el) => {
                   inputRefs.current[index] = el;
@@ -148,33 +150,34 @@ export default function VerifyEmailPage() {
                 onChange={(e) => handleOtpChange(index, e.target.value)}
                 onKeyDown={(e) => handleKeyDown(index, e)}
                 onPaste={index === 0 ? handlePaste : undefined}
-                className="h-12 w-12 rounded-lg border border-gray-300 text-center text-xl font-semibold focus:border-transparent focus:ring-2 focus:ring-green-500 focus:outline-none"
+                className="h-12 w-12 text-center text-xl font-semibold"
                 placeholder="0"
               />
             ))}
           </div>
 
           {/* Submit Button */}
-          <button
+          <Button
             type="submit"
             disabled={isLoading || otp.join("").length !== 6}
-            className="bg-primary hover:bg-primary/90 focus:ring-primary w-full rounded-lg px-4 py-3 font-semibold text-white transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+            className="w-full"
           >
             {isLoading ? "Memverifikasi..." : "Verifikasi Email"}
-          </button>
+          </Button>
 
           {/* Resend Code */}
           <div className="text-center">
             <p className="mb-2 text-sm text-gray-600">Tidak menerima kode?</p>
             {canResend ? (
-              <button
+              <Button
                 type="button"
+                variant="link"
                 onClick={handleResend}
                 disabled={resendLoading}
-                className="text-sm font-medium text-green-600 hover:text-green-700 disabled:opacity-50"
+                className="h-auto p-0 text-sm font-medium text-green-600 hover:text-green-700 disabled:opacity-50"
               >
                 {resendLoading ? "Mengirim..." : "Kirim Ulang Kode"}
-              </button>
+              </Button>
             ) : (
               <span className="text-sm text-gray-500">
                 Kirim ulang kode dalam {countdown}s

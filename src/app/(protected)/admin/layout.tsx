@@ -5,6 +5,8 @@ import { useState } from "react";
 import {
   ChartBarIcon,
   FolderIcon,
+  UsersIcon,
+  UserIcon,
   Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -14,9 +16,11 @@ import {
   SidebarHeader,
   SidebarNav,
   SidebarNavItem,
+  SidebarNavSeparator,
 } from "@/components/ui/sidebar";
+import { Button } from "@/components/ui/button";
 
-export default function CommunityLayout({
+export default function AdminLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -27,15 +31,27 @@ export default function CommunityLayout({
   const navigation = [
     {
       name: "Dashboard",
-      href: "/community/dashboard",
+      href: "/admin/dashboard",
       icon: ChartBarIcon,
-      current: pathname === "/community/dashboard",
+      current: pathname === "/admin/dashboard",
     },
     {
-      name: "Daftar Proyek",
-      href: "/community/projects",
+      name: "Proyek",
+      href: "/admin/project",
       icon: FolderIcon,
-      current: pathname === "/community/projects",
+      current: pathname === "/admin/project",
+    },
+    {
+      name: "Komunitas",
+      href: "/admin/community",
+      icon: UsersIcon,
+      current: pathname === "/admin/community",
+    },
+    {
+      name: "Individu",
+      href: "/admin/individual",
+      icon: UserIcon,
+      current: pathname === "/admin/individual",
     },
   ];
 
@@ -43,9 +59,11 @@ export default function CommunityLayout({
     <div className="min-h-screen bg-gray-50">
       {/* Mobile menu button */}
       <div className="lg:hidden">
-        <button
+        <Button
           type="button"
-          className="fixed top-4 left-4 z-50 rounded-md bg-white p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500"
+          variant="ghost"
+          size="icon"
+          className="fixed top-4 left-4 z-50"
           onClick={() => setSidebarOpen(!sidebarOpen)}
         >
           <span className="sr-only">Open sidebar</span>
@@ -54,7 +72,7 @@ export default function CommunityLayout({
           ) : (
             <Bars3Icon className="h-6 w-6" />
           )}
-        </button>
+        </Button>
       </div>
 
       <div className="flex flex-col lg:flex-row">
@@ -64,13 +82,23 @@ export default function CommunityLayout({
           } fixed inset-y-0 left-0 z-40 min-w-[240px] transform transition-transform duration-300 ease-in-out lg:relative lg:inset-0 lg:translate-x-0`}
         >
           <SidebarHeader>
-            <h1 className="text-xl font-semibold text-gray-900">
-              Community Panel
-            </h1>
+            <h1 className="text-xl font-semibold text-gray-900">Admin Panel</h1>
           </SidebarHeader>
           <SidebarContent>
             <SidebarNav>
-              {navigation.map((item) => (
+              {navigation.slice(0, 2).map((item) => (
+                <SidebarNavItem
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setSidebarOpen(false)}
+                  active={item.current}
+                >
+                  <item.icon className="h-4 w-4" />
+                  {item.name}
+                </SidebarNavItem>
+              ))}
+              <SidebarNavSeparator />
+              {navigation.slice(2).map((item) => (
                 <SidebarNavItem
                   key={item.name}
                   href={item.href}

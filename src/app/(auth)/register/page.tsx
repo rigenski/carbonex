@@ -302,7 +302,7 @@ export default function RegisterPage() {
                     </div>
                   </div>
                 )}
-                <input
+                <Input
                   type="file"
                   accept="image/*"
                   {...register("idCard", {

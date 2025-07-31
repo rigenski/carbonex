@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 
 interface Message {
   id: string;
@@ -154,18 +156,18 @@ export default function Chatbot() {
           {/* Input */}
           <div className="border-t border-gray-200 p-4">
             <div className="flex space-x-2">
-              <input
+              <Input
                 type="text"
                 value={inputText}
                 onChange={(e) => setInputText(e.target.value)}
                 onKeyPress={handleKeyPress}
                 placeholder="Tanyakan saya tentang kredit karbon..."
-                className="flex-1 rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-green-500 focus:ring-2 focus:ring-green-500 focus:outline-none"
+                className="flex-1"
               />
-              <button
+              <Button
                 onClick={handleSendMessage}
                 disabled={!inputText.trim()}
-                className="bg-primary hover:bg-primary/90 rounded-md px-4 py-2 text-white transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                size="icon"
               >
                 <svg
                   className="h-4 w-4"
@@ -174,32 +176,35 @@ export default function Chatbot() {
                 >
                   <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
                 </svg>
-              </button>
+              </Button>
             </div>
           </div>
 
           {/* Floating Close Button */}
-          <button
+          <Button
             onClick={() => setIsOpen(false)}
-            className="bg-primary hover:bg-primary/90 absolute -top-2 -right-2 flex h-8 w-8 items-center justify-center rounded-full text-white shadow-lg transition-all hover:scale-110"
+            variant="ghost"
+            size="icon"
+            className="absolute -top-2 -right-2 h-8 w-8 rounded-full shadow-lg hover:scale-110"
           >
             <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
             </svg>
-          </button>
+          </Button>
         </div>
       )}
 
       {/* Chat Toggle Button */}
       {!isOpen ? (
-        <button
+        <Button
           onClick={() => setIsOpen(!isOpen)}
-          className="bg-primary hover:bg-primary/90 flex h-14 w-14 items-center justify-center rounded-full text-white shadow-lg transition-all hover:scale-110"
+          size="icon"
+          className="h-14 w-14 rounded-full shadow-lg hover:scale-110"
         >
           <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3.04 1.05 4.36L1 23l6.64-2.05C9.96 21.64 11.46 22 13 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.4 0-2.76-.3-4.05-.89L6 20l.89-1.95C6.3 16.76 6 15.4 6 14c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z" />
           </svg>
-        </button>
+        </Button>
       ) : null}
     </div>
   );
