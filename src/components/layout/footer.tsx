@@ -1,90 +1,104 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Icon } from "@iconify/react";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
+    <footer className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+      {/* Background Elements */}
+      <div className="absolute inset-0">
+        <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-teal-500/10 blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/5 blur-2xl"></div>
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-4">
           {/* Logo and Description */}
           <div className="col-span-1 md:col-span-2">
-            <div className="mb-4 flex items-center">
-              <Image
-                src="/logo.png"
-                alt="CarbonEx Logo"
-                width={32}
-                height={32}
-                className="h-8 w-8"
-              />
-              <span className="ml-2 text-xl font-bold">CarbonEx</span>
+            <div className="mb-6 flex items-center">
+              <div className="relative">
+                <Image
+                  src="/logo.png"
+                  alt="CarbonEx Logo"
+                  width={40}
+                  height={40}
+                  className="h-10 w-10"
+                />
+                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 opacity-20 blur"></div>
+              </div>
+              <span className="ml-3 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-2xl font-black text-transparent">
+                CarbonEx
+              </span>
             </div>
-            <p className="max-w-md text-gray-400">
-              Menghubungkan komunitas dan individu untuk menciptakan masa depan
-              yang berkelanjutan melalui proyek kredit karbon terverifikasi.
-              Bersama, kita dapat membuat perbedaan untuk planet kita.
+            <p className="max-w-lg text-lg leading-relaxed text-gray-300">
+              Connecting communities and individuals to create a sustainable
+              future through verified carbon credit projects. Together, we can
+              make a difference for our planet.
             </p>
-            <div className="mt-6 flex space-x-4">
+            <div className="mt-8 flex space-x-4">
               <a
                 href="#"
-                className="text-gray-400 transition-colors hover:text-white"
+                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z" />
-                </svg>
+                <Icon icon="mdi:twitter" className="h-6 w-6 text-white" />
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </a>
               <a
                 href="#"
-                className="text-gray-400 transition-colors hover:text-white"
+                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
               >
-                <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
+                <Icon icon="mdi:linkedin" className="h-6 w-6 text-white" />
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+              </a>
+              <a
+                href="#"
+                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
+              >
+                <Icon icon="mdi:instagram" className="h-6 w-6 text-white" />
+                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold">Tautan Cepat</h3>
-            <ul className="space-y-2">
+            <h3 className="mb-6 text-xl font-black text-white">Quick Links</h3>
+            <ul className="space-y-4">
               <li>
                 <Link
                   href="/"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
-                  Beranda
+                  Home
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/projects"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
-                  Proyek
+                  Projects
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/communities"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
-                  Komunitas
+                  Communities
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/about"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
-                  Tentang Kami
+                  About Us
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
             </ul>
@@ -92,48 +106,55 @@ export default function Footer() {
 
           {/* Support */}
           <div>
-            <h3 className="mb-4 text-lg font-semibold">Dukungan</h3>
-            <ul className="space-y-2">
+            <h3 className="mb-6 text-xl font-black text-white">Support</h3>
+            <ul className="space-y-4">
               <li>
                 <Link
                   href="/help"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
-                  Pusat Bantuan
+                  Help Center
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/contact"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
-                  Hubungi Kami
+                  Contact Us
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/privacy"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
-                  Kebijakan Privasi
+                  Privacy Policy
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
                 <Link
                   href="/terms"
-                  className="text-gray-400 transition-colors hover:text-white"
+                  className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
-                  Ketentuan Layanan
+                  Terms of Service
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
             </ul>
           </div>
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between border-t border-gray-800 pt-8 md:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between border-t border-white/10 pt-8 md:flex-row">
           <p className="text-sm text-gray-400">
-            © 2024 CarbonEx. Semua hak dilindungi.
+            © 2024 CarbonEx. All rights reserved.
           </p>
+          <div className="mt-4 flex items-center space-x-2 md:mt-0">
+            <span className="text-sm text-gray-400">Made by Skyline</span>
+          </div>
         </div>
       </div>
     </footer>

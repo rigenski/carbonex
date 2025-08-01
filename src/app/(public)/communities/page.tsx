@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useAuthStore } from "@/stores/auth";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
@@ -15,99 +15,95 @@ import {
 } from "@/components/ui/select";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
+import { Icon } from "@iconify/react";
 
-// Mock data for communities
-const mockCommunities = [
+// Mock data
+const communities = [
   {
     id: "COM001",
-    name: "Bumi Hijau Indonesia",
+    name: "Green Earth Indonesia",
     image:
-      "https://images.unsplash.com/photo-1556075798-4825dfaaf498?w=400&h=250&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1574263867128-9c1a5c5f4cf3?w=400&h=250&fit=crop&crop=center",
     location: "Jakarta, Indonesia",
-    projectCount: 23,
-    verified: true,
-    carbonOffset: 15420,
     establishedYear: 2019,
     description:
-      "Organisasi lingkungan terkemuka yang berfokus pada proyek restorasi hutan dan penyerapan karbon di seluruh Indonesia.",
+      "Leading environmental organization focused on forest restoration projects and carbon absorption across Indonesia.",
+    projects: 12,
+    carbonOffset: 5600,
+    members: 234,
   },
   {
     id: "COM002",
-    name: "Kolektif Masa Depan Surya",
+    name: "Solar Future Collective",
     image:
       "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=400&h=250&fit=crop&crop=center",
     location: "Bandung, Indonesia",
-    projectCount: 15,
-    verified: true,
-    carbonOffset: 9800,
     establishedYear: 2020,
     description:
-      "Inisiatif berbasis komunitas yang mempromosikan adopsi energi terbarukan melalui pemasangan panel surya.",
+      "Community-based initiative that promotes renewable energy adoption through solar panel installation.",
+    projects: 8,
+    carbonOffset: 3200,
+    members: 156,
   },
   {
     id: "COM003",
-    name: "Inisiatif Kota Bersih",
+    name: "Urban Sustainability Network",
     image:
-      "https://images.unsplash.com/photo-1573348722427-f1d6819fdf98?w=400&h=250&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&crop=center",
     location: "Surabaya, Indonesia",
-    projectCount: 31,
-    verified: true,
-    carbonOffset: 12650,
     establishedYear: 2018,
     description:
-      "Organisasi keberlanjutan perkotaan yang berfokus pada pengelolaan sampah dan solusi ekonomi sirkular.",
+      "Urban sustainability organization focused on waste management and circular economy solutions.",
+    projects: 15,
+    carbonOffset: 4200,
+    members: 189,
   },
   {
     id: "COM004",
-    name: "Penjaga Laut Bali",
+    name: "Marine Conservation Alliance",
     image:
       "https://images.unsplash.com/photo-1582967788606-a171c1080cb0?w=400&h=250&fit=crop&crop=center",
     location: "Bali, Indonesia",
-    projectCount: 12,
-    verified: true,
-    carbonOffset: 3400,
     establishedYear: 2021,
     description:
-      "Kelompok konservasi laut yang berdedikasi untuk melindungi ekosistem pesisir dan mengurangi sampah plastik laut.",
+      "Marine conservation group dedicated to protecting coastal ecosystems and reducing marine plastic waste.",
+    projects: 6,
+    carbonOffset: 2800,
+    members: 98,
   },
   {
     id: "COM005",
-    name: "Aliansi Tenaga Angin",
+    name: "Wind Energy Coalition",
     image:
       "https://images.unsplash.com/photo-1548337138-e87d889cc369?w=400&h=250&fit=crop&crop=center",
     location: "Makassar, Indonesia",
-    projectCount: 8,
-    verified: true,
-    carbonOffset: 18900,
     establishedYear: 2017,
     description:
-      "Koalisi regional yang mempromosikan pengembangan energi angin dan pembangkit listrik berkelanjutan.",
+      "Regional coalition promoting wind energy development and sustainable power generation.",
+    projects: 4,
+    carbonOffset: 1800,
+    members: 67,
   },
   {
     id: "COM006",
-    name: "Gerakan Kota Hijau",
+    name: "Green City Movement",
     image:
-      "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=400&h=250&fit=crop&crop=center",
+      "https://images.unsplash.com/photo-1574263867128-9c1a5c5f4cf3?w=400&h=250&fit=crop&crop=center",
     location: "Yogyakarta, Indonesia",
-    projectCount: 27,
-    verified: true,
-    carbonOffset: 7200,
     establishedYear: 2019,
     description:
-      "Gerakan keberlanjutan perkotaan yang menciptakan ruang hijau dan mempromosikan kesadaran lingkungan di kota-kota.",
+      "Urban sustainability movement creating green spaces and promoting environmental awareness in cities.",
+    projects: 10,
+    carbonOffset: 3400,
+    members: 145,
   },
 ];
 
 export default function CommunitiesPage() {
-  const { user } = useAuthStore();
-  const [communities] = useState(mockCommunities);
-  const [filteredCommunities, setFilteredCommunities] =
-    useState(mockCommunities);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortBy, setSortBy] = useState("name");
 
-  useEffect(() => {
+  const filteredCommunities = useMemo(() => {
     let filtered = communities;
 
     // Filter by search term
@@ -115,255 +111,236 @@ export default function CommunitiesPage() {
       filtered = filtered.filter(
         (community) =>
           community.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          community.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
           community.description
             .toLowerCase()
-            .includes(searchTerm.toLowerCase()),
+            .includes(searchTerm.toLowerCase()) ||
+          community.location.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
-    // Sort communities
-    filtered = filtered.sort((a, b) => {
+    // Sort
+    filtered.sort((a, b) => {
       switch (sortBy) {
         case "name":
           return a.name.localeCompare(b.name);
         case "projects":
-          return b.projectCount - a.projectCount;
+          return b.projects - a.projects;
         case "carbon":
           return b.carbonOffset - a.carbonOffset;
         case "established":
-          return (
-            new Date(a.establishedYear).getTime() -
-            new Date(b.establishedYear).getTime()
-          );
+          return b.establishedYear - a.establishedYear;
         default:
           return 0;
       }
     });
 
-    setFilteredCommunities(filtered);
+    return filtered;
   }, [communities, searchTerm, sortBy]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-white shadow-sm">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 py-16 sm:py-20">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-2xl"></div>
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900">
-              Komunitas Sukses
+            <div className="mb-6 inline-flex items-center rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
+              <Icon icon="mdi:account-group" className="mr-2 h-4 w-4" />
+              Join Impactful Communities
+            </div>
+            <h1 className="mb-6 text-4xl font-black text-white sm:text-5xl lg:text-6xl">
+              Environmental Communities
             </h1>
-            <p className="mx-auto mt-2 max-w-3xl text-gray-600">
-              Terhubung dengan organisasi terverifikasi yang sudah mencapai
-              hasil dampak karbon yang luar biasa. Bergabunglah dengan 890+
-              komunitas yang telah secara kolektif mengoffset lebih dari 56,789
-              ton CO₂ melalui inisiatif keberlanjutan yang terbukti.
+            <p className="mx-auto max-w-3xl text-lg text-white/90 sm:text-xl">
+              Connect with verified organizations that have achieved outstanding
+              carbon impact results. Join 890+ communities that have
+              collectively offset over 56,789 tons of CO₂ through proven
+              sustainability initiatives.
             </p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        {/* Filters and Search */}
-        <Card className="mb-8">
-          <CardContent className="p-6">
-            <div className="grid grid-cols-1 gap-4 md:grid-cols-4">
-              {/* Search */}
-              <div className="md:col-span-2">
-                <Label htmlFor="search">Cari Komunitas</Label>
-                <Input
-                  id="search"
-                  type="text"
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  placeholder="Cari berdasarkan nama, deskripsi, atau lokasi..."
-                />
+      {/* Filters Section */}
+      <section className="py-8">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+            <CardContent className="p-6">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <div className="md:col-span-2">
+                  <Label htmlFor="search" className="mb-2 text-sm font-bold">
+                    Search Communities
+                  </Label>
+                  <Input
+                    id="search"
+                    type="text"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    placeholder="Search by name, description, or location..."
+                    className="rounded-lg border-gray-200 bg-white/50 backdrop-blur-sm"
+                  />
+                </div>
+                <div>
+                  <Label
+                    htmlFor="sort"
+                    className="mb-2 text-sm font-bold text-nowrap"
+                  >
+                    Sort by
+                  </Label>
+                  <Select value={sortBy} onValueChange={setSortBy}>
+                    <SelectTrigger className="w-full rounded-lg border-gray-200 bg-white/50 backdrop-blur-sm">
+                      <SelectValue placeholder="Choose sort order" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="name">Name</SelectItem>
+                      <SelectItem value="projects">Projects</SelectItem>
+                      <SelectItem value="carbon">Carbon Offset</SelectItem>
+                      <SelectItem value="established">
+                        Established Date
+                      </SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
               </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
-              {/* Sort */}
-              <div>
-                <Label htmlFor="sort">Urutkan Berdasarkan</Label>
-                <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Pilih pengurutan" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="name">Nama</SelectItem>
-                    <SelectItem value="projects">Proyek</SelectItem>
-                    <SelectItem value="carbon">Offset Karbon</SelectItem>
-                    <SelectItem value="established">Tanggal Berdiri</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
+      {/* Communities Grid */}
+      <section className="pb-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-8 flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <span className="text-sm text-gray-600">
+                Showing {filteredCommunities.length} of {communities.length}{" "}
+                communities
+              </span>
             </div>
+          </div>
 
-            {/* Additional Filters */}
-            <div className="mt-6 flex flex-col items-start justify-end border-t border-gray-200 pt-6 sm:flex-row sm:items-center">
-              <div className="mt-4 sm:mt-0">
-                <span className="text-sm text-gray-600">
-                  Menampilkan {filteredCommunities.length} dari{" "}
-                  {communities.length} komunitas
-                </span>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+          {filteredCommunities.length > 0 ? (
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {filteredCommunities.map((community) => (
+                <Card
+                  key={community.id}
+                  className="group overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                >
+                  <div className="relative h-48 overflow-hidden">
+                    <Image
+                      src={community.image}
+                      alt={community.name}
+                      fill
+                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
+                      {community.establishedYear}
+                    </Badge>
+                  </div>
+                  <CardContent className="p-6">
+                    <h3 className="mb-2 text-xl font-black text-gray-900">
+                      {community.name}
+                    </h3>
+                    <p className="mb-4 text-sm text-gray-600">
+                      {community.description}
+                    </p>
 
-        {/* Communities Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {filteredCommunities.map((community) => (
-            <Card
-              key={community.id}
-              className="overflow-hidden transition-shadow hover:shadow-md"
-            >
-              <Image
-                src={community.image}
-                alt={community.name}
-                className="h-48 w-full object-cover"
-                width={480}
-                height={480}
-              />
-              <CardContent className="p-6">
-                <div className="mb-3 flex items-center justify-between">
-                  <Badge variant="secondary">Komunitas</Badge>
-                  {community.verified && (
-                    <div className="flex items-center">
-                      <svg
-                        className="h-4 w-4 text-green-500"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                      <span className="ml-1 text-xs text-green-600">
-                        Terverifikasi
-                      </span>
+                    <div className="mb-4 grid grid-cols-3 gap-4 text-sm">
+                      <div className="text-center">
+                        <div className="font-bold text-gray-900">
+                          {community.projects}
+                        </div>
+                        <div className="text-gray-500">Projects</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="font-bold text-gray-900">
+                          {community.carbonOffset}
+                        </div>
+                        <div className="text-gray-500">Tons CO₂</div>
+                      </div>
+                      <div className="text-center">
+                        <div className="font-bold text-gray-900">
+                          {community.members}
+                        </div>
+                        <div className="text-gray-500">Members</div>
+                      </div>
                     </div>
-                  )}
-                </div>
 
-                <h3 className="mb-2 text-lg font-semibold text-gray-900">
-                  {community.name}
-                </h3>
+                    <div className="mb-4 text-sm text-gray-500">
+                      <div className="font-medium">{community.location}</div>
+                    </div>
 
-                <p className="mb-4 line-clamp-3 text-sm text-gray-600">
-                  {community.description}
-                </p>
-
-                <div className="mb-4 space-y-2 text-sm text-gray-600">
-                  <div className="flex items-center">
-                    <svg
-                      className="mr-2 h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
+                    <Button
+                      asChild
+                      className="w-full rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                     >
-                      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" />
-                    </svg>
-                    {community.location}
-                  </div>
-                  <div className="flex items-center">
-                    <svg
-                      className="mr-2 h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z" />
-                    </svg>
-                    Est. {community.establishedYear}
-                  </div>
-                  <div className="flex items-center">
-                    <svg
-                      className="mr-2 h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                    </svg>
-                    {community.projectCount} proyek
-                  </div>
-                  <div className="flex items-center">
-                    <svg
-                      className="mr-2 h-4 w-4"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z" />
-                    </svg>
-                    {community.carbonOffset.toLocaleString()} ton CO₂ offset
-                  </div>
-                </div>
-
-                {/* Footer */}
-                <div className="flex items-center justify-between">
-                  <span className="text-xs text-gray-500">
-                    Est. {community.establishedYear}
-                  </span>
-                  <Button asChild>
-                    <Link href={`/communities/${community.id}`}>
-                      Lihat Detail
-                    </Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        {/* Empty State */}
-        {filteredCommunities.length === 0 && (
-          <div className="py-12 text-center">
-            <svg
-              className="mx-auto h-12 w-12 text-gray-400"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20a3 3 0 01-3-3v-2a3 3 0 013-3h4a3 3 0 013 3v2a3 3 0 01-3 3zM8 9a3 3 0 116 0 3 3 0 01-6 0z"
+                      <Link href={`/communities/${community.id}`}>
+                        <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />
+                        View Details
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          ) : (
+            <div className="py-12 text-center">
+              <Icon
+                icon="mdi:account-group-off"
+                className="mx-auto h-16 w-16 text-gray-400"
               />
-            </svg>
-            <h3 className="mt-4 text-lg font-medium text-gray-900">
-              Tidak ada komunitas ditemukan
-            </h3>
-            <p className="mt-2 text-gray-600">
-              Coba sesuaikan kriteria pencarian atau filter untuk menemukan
-              komunitas.
-            </p>
-          </div>
-        )}
+              <h3 className="mt-4 text-lg font-bold text-gray-900">
+                No communities found
+              </h3>
+              <p className="mt-2 text-gray-600">
+                Adjust your search criteria or filters to find communities.
+              </p>
+            </div>
+          )}
 
-        {/* Join Community CTA */}
-        {!user && (
-          <div className="mt-12 rounded-lg border border-green-200 bg-green-50 p-8 text-center">
-            <h3 className="mb-2 text-xl font-semibold text-gray-900">
-              Siap Meluncurkan Komunitas Dampak Anda?
-            </h3>
-            <p className="mb-6 text-gray-600">
-              Bergabunglah dengan 890+ organisasi sukses yang membuat perubahan
-              lingkungan yang terukur. Mulai komunitas Anda hari ini dan
-              terhubung dengan ribuan pendukung yang sadar lingkungan siap
-              mendanai proyek keberlanjutan Anda.
-            </p>
-            <div className="space-x-4">
-              <Link
-                href="/register"
-                className="bg-primary hover:bg-primary/90 rounded-lg px-6 py-3 font-semibold text-white transition-colors"
-              >
-                Luncurkan Komunitas Gratis
-              </Link>
-              <Link
-                href="/login"
-                className="rounded-lg border border-green-600 px-6 py-3 font-semibold text-green-600 transition-colors hover:bg-green-50"
-              >
-                Masuk
-              </Link>
+          {/* CTA Section */}
+          <div className="mt-16 text-center">
+            <div className="mx-auto max-w-2xl">
+              <h3 className="mb-4 text-2xl font-black text-gray-900">
+                Ready to Make a Difference?
+              </h3>
+              <p className="mb-6 text-gray-600">
+                Join 890+ successful organizations making change and connecting
+                with thousands of environmentally conscious supporters ready to
+                fund your sustainability projects.
+              </p>
+              <div className="space-x-4">
+                <Button
+                  asChild
+                  className="rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                >
+                  <Link href="/register">
+                    <Icon icon="mdi:account-plus" className="mr-2 h-4 w-4" />
+                    Start Your Community
+                  </Link>
+                </Button>
+                <Button
+                  variant="outline"
+                  asChild
+                  className="rounded-lg border-2 border-emerald-500 font-bold text-emerald-600 transition-all duration-300 hover:scale-105"
+                >
+                  <Link href="/about">
+                    <Icon icon="mdi:information" className="mr-2 h-4 w-4" />
+                    Learn More
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      </section>
     </div>
   );
 }

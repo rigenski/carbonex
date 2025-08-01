@@ -547,10 +547,10 @@ export default function CommunityProjects() {
               <h3 className="text-lg font-medium">Informasi Dasar</h3>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="project-status">Status Proyek</Label>
+                  <Label htmlFor="project-status">Project Status</Label>
                   <Select>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Pilih status" />
+                      <SelectValue placeholder="Select status" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="under-development">
@@ -563,35 +563,37 @@ export default function CommunityProjects() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="project-name">Nama Proyek</Label>
-                  <Input id="project-name" placeholder="Masukkan nama proyek" />
+                  <Label htmlFor="project-name">Project Name</Label>
+                  <Input id="project-name" placeholder="Enter project name" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="project-type">Tipe Proyek</Label>
+                  <Label htmlFor="project-type">Project Type</Label>
                   <Select>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Pilih tipe proyek" />
+                      <SelectValue placeholder="Select project type" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="reforestation">Reforestasi</SelectItem>
+                      <SelectItem value="reforestation">
+                        Reforestation
+                      </SelectItem>
                       <SelectItem value="urban-greening">
-                        Penghijauan Perkotaan
+                        Urban Greening
                       </SelectItem>
                       <SelectItem value="mangrove-conservation">
-                        Konservasi Mangrove
+                        Mangrove Conservation
                       </SelectItem>
                       <SelectItem value="community-garden">
-                        Taman Komunitas
+                        Community Garden
                       </SelectItem>
                       <SelectItem value="watershed-protection">
-                        Perlindungan DAS
+                        Watershed Protection
                       </SelectItem>
-                      <SelectItem value="other">Lainnya</SelectItem>
+                      <SelectItem value="other">Others</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="country">Negara</Label>
+                  <Label htmlFor="country">Country</Label>
                   <Input
                     id="country"
                     placeholder="Indonesia"
@@ -600,20 +602,20 @@ export default function CommunityProjects() {
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="target-trees">
-                    Estimasi Target Pohon yang Ditanam
+                    Estimated Target Trees to be Planted
                   </Label>
                   <Input
                     id="target-trees"
                     type="number"
-                    placeholder="Masukkan jumlah pohon"
+                    placeholder="Enter number of trees"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="start-date">Tanggal Mulai Proyek</Label>
+                  <Label htmlFor="start-date">Project Start Date</Label>
                   <Input id="start-date" type="date" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="end-date">Tanggal Selesai Proyek</Label>
+                  <Label htmlFor="end-date">Project End Date</Label>
                   <Input id="end-date" type="date" />
                 </div>
               </div>
@@ -637,19 +639,19 @@ export default function CommunityProjects() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="short-description">Deskripsi Singkat</Label>
+                  <Label htmlFor="short-description">Short Description</Label>
                   <Textarea
                     id="short-description"
-                    placeholder="Deskripsi singkat proyek (maksimal 200 karakter)"
+                    placeholder="Short project description (max 200 characters)"
                     maxLength={200}
                     className="min-h-[80px]"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="full-description">Deskripsi Lengkap</Label>
+                  <Label htmlFor="full-description">Full Description</Label>
                   <Textarea
                     id="full-description"
-                    placeholder="Deskripsi lengkap proyek"
+                    placeholder="Full project description"
                     className="min-h-[120px]"
                   />
                 </div>
@@ -658,30 +660,30 @@ export default function CommunityProjects() {
 
             {/* Volunteer Information */}
             <div className="space-y-4">
-              <h3 className="text-lg font-medium">Informasi Relawan</h3>
+              <h3 className="text-lg font-medium">Volunteer Information</h3>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="looking-for-volunteers">
-                    Mencari Relawan?
+                    Looking for Volunteers?
                   </Label>
                   <Select>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Pilih opsi" />
+                      <SelectValue placeholder="Select option" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="yes">Ya</SelectItem>
-                      <SelectItem value="no">Tidak</SelectItem>
+                      <SelectItem value="yes">Yes</SelectItem>
+                      <SelectItem value="no">No</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="total-volunteers">
-                    Total Relawan yang Dibutuhkan
+                    Total Volunteers Needed
                   </Label>
                   <Input
                     id="total-volunteers"
                     type="number"
-                    placeholder="Masukkan jumlah relawan"
+                    placeholder="Enter number of volunteers"
                   />
                 </div>
               </div>
@@ -689,13 +691,13 @@ export default function CommunityProjects() {
 
             {/* Location Information */}
             <div className="space-y-4">
-              <h3 className="text-lg font-medium">Informasi Lokasi</h3>
+              <h3 className="text-lg font-medium">Location Information</h3>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
                   <Label htmlFor="region">Regional</Label>
                   <Select>
                     <SelectTrigger className="w-full">
-                      <SelectValue placeholder="Pilih regional" />
+                      <SelectValue placeholder="Select regional" />
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="sumatra">Sumatra</SelectItem>
@@ -712,30 +714,30 @@ export default function CommunityProjects() {
                   </Select>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="province">Provinsi</Label>
-                  <Input id="province" placeholder="Masukkan nama provinsi" />
+                  <Label htmlFor="province">Province</Label>
+                  <Input id="province" placeholder="Enter province name" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="city">Kota/Kabupaten</Label>
-                  <Input id="city" placeholder="Masukkan nama kota/kabupaten" />
+                  <Label htmlFor="city">City/Regency</Label>
+                  <Input id="city" placeholder="Enter city/regency name" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="district">Kecamatan</Label>
-                  <Input id="district" placeholder="Masukkan nama kecamatan" />
+                  <Label htmlFor="district">District</Label>
+                  <Input id="district" placeholder="Enter district name" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="postal-code">Kode Pos</Label>
-                  <Input id="postal-code" placeholder="Masukkan kode pos" />
+                  <Label htmlFor="postal-code">Postal Code</Label>
+                  <Input id="postal-code" placeholder="Enter postal code" />
                 </div>
               </div>
             </div>
 
             {/* System Information */}
             <div className="space-y-4">
-              <h3 className="text-lg font-medium">Informasi Sistem</h3>
+              <h3 className="text-lg font-medium">System Information</h3>
               <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div className="space-y-2">
-                  <Label htmlFor="registration-date">Tanggal Registrasi</Label>
+                  <Label htmlFor="registration-date">Registration Date</Label>
                   <Input
                     id="registration-date"
                     type="date"
@@ -744,10 +746,10 @@ export default function CommunityProjects() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="project-owner">Pemilik Proyek</Label>
+                  <Label htmlFor="project-owner">Project Owner</Label>
                   <Input
                     id="project-owner"
-                    placeholder="Sistem (by submitted user)"
+                    placeholder="System (by submitted user)"
                     disabled
                   />
                 </div>
@@ -756,10 +758,10 @@ export default function CommunityProjects() {
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowCreateModal(false)}>
-              Batal
+              Cancel
             </Button>
             <Button onClick={() => setShowCreateModal(false)}>
-              Buat Proyek
+              Create Project
             </Button>
           </DialogFooter>
         </DialogContent>

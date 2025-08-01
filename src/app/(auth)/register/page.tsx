@@ -2,458 +2,450 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { useMutation } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
 import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { Icon } from "@iconify/react";
 
-type RegisterFormData = {
-  role: "community" | "individual";
-  idCard: FileList | null;
+interface RegisterForm {
+  role: "individual" | "community";
   name: string;
   phoneNumber: string;
   email: string;
   address: string;
   password: string;
   confirmPassword: string;
-};
+  idCard: File | null;
+}
 
 export default function RegisterPage() {
-  const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
-  const [selectedRole, setSelectedRole] = useState<"community" | "individual">(
+  const [selectedRole, setSelectedRole] = useState<"individual" | "community">(
     "individual",
   );
-  const [idCardPreview, setIdCardPreview] = useState<string | null>(null);
-  const [isDragOver, setIsDragOver] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+
+  const form = useForm<RegisterForm>({
+    defaultValues: {
+      role: "individual",
+      name: "",
+      phoneNumber: "",
+      email: "",
+      address: "",
+      password: "",
+      confirmPassword: "",
+      idCard: null,
+    },
+  });
 
   const {
     register,
     handleSubmit,
-    formState: { errors },
-    watch,
     setValue,
-  } = useForm<RegisterFormData>({
-    defaultValues: {
-      role: "individual",
+    watch,
+    formState: { errors },
+  } = form;
+  const password = watch("password");
+
+  const registerMutation = useMutation({
+    mutationFn: async (data: RegisterForm) => {
+      // Simulate API call
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+      console.log("Register data:", data);
+      return { success: true };
+    },
+    onSuccess: () => {
+      // Handle successful registration
+      console.log("Registration successful");
     },
   });
 
-  const password = watch("password");
+  const onSubmit = (data: RegisterForm) => {
+    registerMutation.mutate(data);
+  };
 
-  const onSubmit = async (data: RegisterFormData) => {
-    setIsLoading(true);
-    try {
-      // Here you would typically make an API call to register the user
-      console.log("Registration data:", data);
-
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
-      // Redirect to email verification
-      router.push("/verify-email");
-    } catch (error) {
-      console.error("Registration failed:", error);
-    } finally {
-      setIsLoading(false);
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setValue("idCard", file);
     }
   };
 
-  const handleRoleChange = (role: "community" | "individual") => {
-    setSelectedRole(role);
-    setValue("role", role);
-  };
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (files && files.length > 0) {
-      const file = files[0];
-      if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setIdCardPreview(reader.result as string);
-        };
-        reader.readAsDataURL(file);
-      }
-      setValue("idCard", files);
-    }
-  };
-
-  const handleDrop = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-
-    const files = e.dataTransfer.files;
-    if (files && files.length > 0) {
-      const file = files[0];
-      if (file.type.startsWith("image/")) {
-        const reader = new FileReader();
-        reader.onload = () => {
-          setIdCardPreview(reader.result as string);
-        };
-        reader.readAsDataURL(file);
-
-        // Create a new FileList for the form
-        const dt = new DataTransfer();
-        dt.items.add(file);
-        setValue("idCard", dt.files);
-      }
-    }
-  };
-
-  const handleDragOver = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(true);
-  };
-
-  const handleDragLeave = (e: React.DragEvent) => {
-    e.preventDefault();
-    setIsDragOver(false);
-  };
-
-  const removeIdCard = () => {
-    setIdCardPreview(null);
-    setValue("idCard", null);
-  };
+  const isLoading = registerMutation.isPending;
 
   return (
-    <div className="flex min-h-screen">
-      {/* Left Side - Image */}
-      <div className="relative hidden bg-gradient-to-br from-green-600 to-green-800 lg:flex lg:w-1/2">
-        <div className="bg-opacity-20 absolute inset-0 bg-black"></div>
-        <div className="relative z-10 flex flex-col justify-center px-12 text-white">
-          <div className="mb-8">
-            <div className="mb-6 flex items-center">
-              <Image
-                src="/logo.png"
-                alt="CarbonEx Logo"
-                width={40}
-                height={40}
-                className="h-10 w-10"
-              />
-              <span className="ml-3 text-2xl font-bold">CarbonEx</span>
-            </div>
-            <h1 className="mb-4 text-4xl font-bold">
-              Bergabung dengan Gerakan Aksi Iklim
-            </h1>
-            <p className="mb-8 text-xl text-green-100">
-              Terhubung dengan komunitas dan individu di seluruh dunia untuk
-              menciptakan proyek offset karbon terverifikasi dan membuat dampak
-              nyata pada masa depan planet kita.
-            </p>
-          </div>
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+      {/* Hero Section */}
+      <section className="relative bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 py-16 sm:py-20">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-2xl"></div>
+        </div>
 
-          <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500">
-                <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <span>Proyek kredit karbon terverifikasi</span>
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <div className="mb-6 inline-flex items-center rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
+              <Icon icon="mdi:account-plus" className="mr-2 h-4 w-4" />
+              Join the Climate Action Movement
             </div>
-            <div className="flex items-center space-x-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500">
-                <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <span>Inisiatif berbasis komunitas</span>
-            </div>
-            <div className="flex items-center space-x-3">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-green-500">
-                <svg
-                  className="h-5 w-5"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <span>Pelacakan dampak real-time</span>
-            </div>
+            <h1 className="mb-6 text-4xl font-black text-white sm:text-5xl lg:text-6xl">
+              Join the Climate Action Movement
+            </h1>
+            <p className="mx-auto max-w-3xl text-lg text-white/90 sm:text-xl">
+              Connect with communities and individuals worldwide to create
+              verified carbon offset projects and make a real impact on our
+              planet&apos;s future.
+            </p>
           </div>
         </div>
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black opacity-20"></div>
-      </div>
+      </section>
 
-      {/* Right Side - Form */}
-      <div className="flex w-full items-center justify-center bg-white p-8 lg:w-1/2">
-        <div className="w-full max-w-md">
-          <div className="mb-8 text-center">
-            <h2 className="mb-2 text-3xl font-bold text-gray-900">
-              Buat Akun Anda
-            </h2>
-            <p className="text-gray-600">
-              Mulai perjalanan Anda menuju masa depan yang berkelanjutan
-            </p>
-          </div>
-
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-            {/* Role Selection */}
-            <div>
-              <Label className="mb-3 block text-sm font-medium text-gray-700">
-                Saya mendaftar sebagai:
-              </Label>
-              <div className="grid grid-cols-2 gap-3">
-                <Button
-                  type="button"
-                  variant={
-                    selectedRole === "individual" ? "default" : "outline"
-                  }
-                  onClick={() => handleRoleChange("individual")}
-                  className="h-auto p-4"
-                >
-                  <div className="text-center">
-                    <div className="font-semibold">Individu</div>
-                    <div className="text-xs">Akun pribadi</div>
-                  </div>
-                </Button>
-                <Button
-                  type="button"
-                  variant={selectedRole === "community" ? "default" : "outline"}
-                  onClick={() => handleRoleChange("community")}
-                  className="h-auto p-4"
-                >
-                  <div className="text-center">
-                    <div className="font-semibold">Komunitas</div>
-                    <div className="text-xs">Akun organisasi</div>
-                  </div>
-                </Button>
+      {/* Register Form Section */}
+      <section className="py-16">
+        <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8">
+          <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+            <CardContent className="p-8">
+              <div className="mb-8 text-center">
+                <h2 className="mb-2 text-3xl font-black text-gray-900">
+                  Create Your Account
+                </h2>
+                <p className="text-gray-600">
+                  Start your journey towards a sustainable future
+                </p>
               </div>
-              <input type="hidden" {...register("role")} />
-            </div>
 
-            {/* ID Card Upload */}
-            <div>
-              <Label className="mb-2 block text-sm font-medium text-gray-700">
-                {selectedRole === "community"
-                  ? "ID Organisasi/NPWP"
-                  : "Kartu Identitas"}{" "}
-                *
-              </Label>
-              <div
-                className={`relative rounded-lg border-2 border-dashed p-6 text-center transition-colors ${
-                  isDragOver
-                    ? "border-green-500 bg-green-50"
-                    : "border-gray-300 hover:border-gray-400"
-                } ${errors.idCard ? "border-red-300" : ""}`}
-                onDrop={handleDrop}
-                onDragOver={handleDragOver}
-                onDragLeave={handleDragLeave}
-              >
-                {idCardPreview ? (
-                  <div className="space-y-4">
-                    <Image
-                      src={idCardPreview}
-                      alt="ID Card Preview"
-                      className="mx-auto h-32 w-auto rounded-lg border object-cover"
-                      width={240}
-                      height={240}
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                {/* Role Selection */}
+                <div>
+                  <Label className="mb-3 block text-sm font-bold text-gray-700">
+                    <span>I&apos;m registering as:</span>
+                  </Label>
+                  <div className="grid grid-cols-2 gap-4">
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedRole("individual");
+                        setValue("role", "individual");
+                      }}
+                      className={`relative rounded-lg border-2 p-4 text-center transition-all duration-300 ${
+                        selectedRole === "individual"
+                          ? "border-emerald-500 bg-emerald-50"
+                          : "border-gray-200 bg-white hover:border-emerald-300"
+                      }`}
+                    >
+                      <Icon
+                        icon="mdi:account"
+                        className={`mx-auto mb-2 h-8 w-8 ${
+                          selectedRole === "individual"
+                            ? "text-emerald-600"
+                            : "text-gray-400"
+                        }`}
+                      />
+                      <div className="font-bold text-gray-900">Individual</div>
+                      <div className="text-xs text-gray-500">
+                        Personal account
+                      </div>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedRole("community");
+                        setValue("role", "community");
+                      }}
+                      className={`relative rounded-lg border-2 p-4 text-center transition-all duration-300 ${
+                        selectedRole === "community"
+                          ? "border-emerald-500 bg-emerald-50"
+                          : "border-gray-200 bg-white hover:border-emerald-300"
+                      }`}
+                    >
+                      <Icon
+                        icon="mdi:account-group"
+                        className={`mx-auto mb-2 h-8 w-8 ${
+                          selectedRole === "community"
+                            ? "text-emerald-600"
+                            : "text-gray-400"
+                        }`}
+                      />
+                      <div className="font-bold text-gray-900">Community</div>
+                      <div className="text-xs text-gray-500">
+                        Organization account
+                      </div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* ID Card Upload */}
+                <div>
+                  <Label className="mb-2 block text-sm font-bold text-gray-700">
+                    {selectedRole === "community"
+                      ? "Organization Name/NPWP"
+                      : "ID Card"}{" "}
+                    *
+                  </Label>
+                  <div className="relative">
+                    <input
+                      type="file"
+                      accept="image/*,.pdf"
+                      onChange={handleFileChange}
+                      className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
                     />
-                    <div className="flex justify-center space-x-2">
+                    <div className="flex items-center justify-center rounded-lg border-2 border-dashed border-gray-300 bg-gray-50 p-6 hover:border-emerald-400 hover:bg-emerald-50">
+                      <div className="text-center">
+                        <Icon
+                          icon="mdi:upload"
+                          className="mx-auto mb-2 h-8 w-8 text-gray-400"
+                        />
+                        <p className="text-gray-600">
+                          <span className="font-bold text-emerald-600">
+                            Click to upload
+                          </span>{" "}
+                          or drag and drop
+                        </p>
+                        <p className="text-sm text-gray-500">
+                          PNG, JPG, JPEG up to 10MB
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  {form.watch("idCard") && (
+                    <div className="mt-2 flex items-center justify-between rounded-lg bg-emerald-50 p-3">
+                      <span className="text-sm text-emerald-700">
+                        {form.watch("idCard")?.name}
+                      </span>
                       <Button
                         type="button"
-                        variant="ghost"
-                        onClick={removeIdCard}
-                        className="text-sm font-medium text-red-600 hover:text-red-700"
+                        onClick={() => setValue("idCard", null)}
+                        className="text-sm font-bold text-red-600 hover:text-red-700"
                       >
-                        Hapus
+                        Remove
                       </Button>
                     </div>
-                  </div>
-                ) : (
-                  <div className="space-y-4">
-                    <svg
-                      className="mx-auto h-12 w-12 text-gray-400"
-                      stroke="currentColor"
-                      fill="none"
-                      viewBox="0 0 48 48"
+                  )}
+                  {errors.idCard && (
+                    <p className="mt-1 text-sm text-red-600">
+                      ID card is required
+                    </p>
+                  )}
+                </div>
+
+                {/* Name */}
+                <div>
+                  <Label htmlFor="name" className="mb-2 text-sm font-bold">
+                    {selectedRole === "community"
+                      ? "Organization Name"
+                      : "Full Name"}{" "}
+                    *
+                  </Label>
+                  <Input
+                    id="name"
+                    type="text"
+                    {...register("name", { required: "Name is required" })}
+                    placeholder={
+                      selectedRole === "community"
+                        ? "Enter organization name"
+                        : "Enter your full name"
+                    }
+                    className="rounded-lg border-gray-200 bg-white/50 backdrop-blur-sm"
+                  />
+                  {errors.name && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.name.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Phone Number */}
+                <div>
+                  <Label
+                    htmlFor="phoneNumber"
+                    className="mb-2 text-sm font-bold"
+                  >
+                    Phone Number *
+                  </Label>
+                  <Input
+                    id="phoneNumber"
+                    type="tel"
+                    {...register("phoneNumber", {
+                      required: "Phone number is required",
+                    })}
+                    placeholder="Enter your phone number"
+                    className="rounded-lg border-gray-200 bg-white/50 backdrop-blur-sm"
+                  />
+                  {errors.phoneNumber && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.phoneNumber.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Email */}
+                <div>
+                  <Label htmlFor="email" className="mb-2 text-sm font-bold">
+                    Email Address *
+                  </Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    {...register("email", {
+                      required: "Email is required",
+                      pattern: {
+                        value: /^\S+@\S+$/i,
+                        message: "Please enter a valid email address",
+                      },
+                    })}
+                    placeholder="Enter your email address"
+                    className="rounded-lg border-gray-200 bg-white/50 backdrop-blur-sm"
+                  />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.email.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Address */}
+                <div>
+                  <Label htmlFor="address" className="mb-2 text-sm font-bold">
+                    Address *
+                  </Label>
+                  <Textarea
+                    id="address"
+                    {...register("address", {
+                      required: "Address is required",
+                    })}
+                    placeholder="Enter your full address"
+                    rows={3}
+                    className="rounded-lg border-gray-200 bg-white/50 backdrop-blur-sm"
+                  />
+                  {errors.address && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.address.message}
+                    </p>
+                  )}
+                </div>
+
+                {/* Password */}
+                <div>
+                  <Label htmlFor="password" className="mb-2 text-sm font-bold">
+                    Password *
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="password"
+                      type={showPassword ? "text" : "password"}
+                      {...register("password", {
+                        required: "Password is required",
+                        minLength: {
+                          value: 8,
+                          message: "Password must be at least 8 characters",
+                        },
+                      })}
+                      placeholder="Create password"
+                      className="rounded-lg border-gray-200 bg-white/50 pr-10 backdrop-blur-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
                     >
-                      <path
-                        d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+                      <Icon
+                        icon={showPassword ? "mdi:eye-off" : "mdi:eye"}
+                        className="h-5 w-5"
                       />
-                    </svg>
-                    <div>
-                      <p className="text-gray-600">
-                        <span className="font-medium text-green-600">
-                          Klik untuk unggah
-                        </span>{" "}
-                        atau seret dan lepas
-                      </p>
-                      <p className="text-sm text-gray-500">
-                        PNG, JPG, JPEG hingga 10MB
-                      </p>
-                    </div>
+                    </button>
                   </div>
-                )}
-                <Input
-                  type="file"
-                  accept="image/*"
-                  {...register("idCard", {
-                    required: "Kartu identitas wajib diisi",
-                  })}
-                  onChange={handleFileChange}
-                  className="absolute inset-0 h-full w-full cursor-pointer opacity-0"
-                />
-              </div>
-              {errors.idCard && (
-                <p className="text-sm text-red-600">{errors.idCard.message}</p>
-              )}
-            </div>
+                  {errors.password && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
 
-            {/* Name */}
-            <div className="space-y-2">
-              <Label htmlFor="name">
-                {selectedRole === "community"
-                  ? "Nama Organisasi"
-                  : "Nama Lengkap"}{" "}
-                *
-              </Label>
-              <Input
-                id="name"
-                type="text"
-                {...register("name", { required: "Nama wajib diisi" })}
-                placeholder={
-                  selectedRole === "community"
-                    ? "Masukkan nama organisasi"
-                    : "Masukkan nama lengkap Anda"
-                }
-              />
-              {errors.name && (
-                <p className="text-sm text-red-600">{errors.name.message}</p>
-              )}
-            </div>
+                {/* Confirm Password */}
+                <div>
+                  <Label
+                    htmlFor="confirmPassword"
+                    className="mb-2 text-sm font-bold"
+                  >
+                    Confirm Password *
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="confirmPassword"
+                      type={showConfirmPassword ? "text" : "password"}
+                      {...register("confirmPassword", {
+                        required: "Please confirm your password",
+                        validate: (value) =>
+                          value === password || "Passwords do not match",
+                      })}
+                      placeholder="Confirm your password"
+                      className="rounded-lg border-gray-200 bg-white/50 pr-10 backdrop-blur-sm"
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setShowConfirmPassword(!showConfirmPassword)
+                      }
+                      className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    >
+                      <Icon
+                        icon={showConfirmPassword ? "mdi:eye-off" : "mdi:eye"}
+                        className="h-5 w-5"
+                      />
+                    </button>
+                  </div>
+                  {errors.confirmPassword && (
+                    <p className="mt-1 text-sm text-red-600">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
+                </div>
 
-            {/* Phone Number */}
-            <div className="space-y-2">
-              <Label htmlFor="phoneNumber">Nomor Telepon *</Label>
-              <Input
-                id="phoneNumber"
-                type="tel"
-                {...register("phoneNumber", {
-                  required: "Nomor telepon wajib diisi",
-                })}
-                placeholder="Masukkan nomor telepon Anda"
-              />
-              {errors.phoneNumber && (
-                <p className="text-sm text-red-600">
-                  {errors.phoneNumber.message}
-                </p>
-              )}
-            </div>
-
-            {/* Email */}
-            <div className="space-y-2">
-              <Label htmlFor="email">Alamat Email *</Label>
-              <Input
-                id="email"
-                type="email"
-                {...register("email", {
-                  required: "Email wajib diisi",
-                  pattern: {
-                    value: /^\S+@\S+$/i,
-                    message: "Silakan masukkan alamat email yang valid",
-                  },
-                })}
-                placeholder="Masukkan alamat email Anda"
-              />
-              {errors.email && (
-                <p className="text-sm text-red-600">{errors.email.message}</p>
-              )}
-            </div>
-
-            {/* Address */}
-            <div className="space-y-2">
-              <Label htmlFor="address">Alamat *</Label>
-              <Textarea
-                id="address"
-                {...register("address", { required: "Alamat wajib diisi" })}
-                placeholder="Masukkan alamat lengkap Anda"
-                rows={3}
-              />
-              {errors.address && (
-                <p className="text-sm text-red-600">{errors.address.message}</p>
-              )}
-            </div>
-
-            {/* Password */}
-            <div className="space-y-2">
-              <Label htmlFor="password">Kata Sandi *</Label>
-              <Input
-                id="password"
-                type="password"
-                {...register("password", {
-                  required: "Kata sandi wajib diisi",
-                  minLength: {
-                    value: 8,
-                    message: "Kata sandi minimal 8 karakter",
-                  },
-                })}
-                placeholder="Buat kata sandi"
-              />
-              {errors.password && (
-                <p className="text-sm text-red-600">
-                  {errors.password.message}
-                </p>
-              )}
-            </div>
-
-            {/* Confirm Password */}
-            <div className="space-y-2">
-              <Label htmlFor="confirmPassword">Konfirmasi Kata Sandi *</Label>
-              <Input
-                id="confirmPassword"
-                type="password"
-                {...register("confirmPassword", {
-                  required: "Silakan konfirmasi kata sandi Anda",
-                  validate: (value) =>
-                    value === password || "Kata sandi tidak cocok",
-                })}
-                placeholder="Konfirmasi kata sandi Anda"
-              />
-              {errors.confirmPassword && (
-                <p className="text-sm text-red-600">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
-            </div>
-
-            {/* Submit Button */}
-            <Button type="submit" disabled={isLoading} className="w-full">
-              {isLoading ? "Membuat Akun..." : "Buat Akun"}
-            </Button>
-
-            {/* Login Link */}
-            <div className="text-center">
-              <p className="text-sm text-gray-600">
-                Sudah punya akun?{" "}
-                <Link
-                  href="/login"
-                  className="font-medium text-green-600 hover:text-green-700"
+                {/* Submit Button */}
+                <Button
+                  type="submit"
+                  disabled={isLoading}
+                  className="w-full rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
-                  Masuk di sini
-                </Link>
-              </p>
-            </div>
-          </form>
+                  {isLoading ? (
+                    <div className="flex items-center">
+                      <Icon
+                        icon="mdi:loading"
+                        className="mr-2 h-4 w-4 animate-spin"
+                      />
+                      Creating Account...
+                    </div>
+                  ) : (
+                    <div className="flex items-center">
+                      <Icon icon="mdi:account-plus" className="mr-2 h-4 w-4" />
+                      Create Account
+                    </div>
+                  )}
+                </Button>
+
+                {/* Login Link */}
+                <div className="text-center">
+                  <p className="text-sm text-gray-600">
+                    Already have an account?{" "}
+                    <Link
+                      href="/login"
+                      className="font-bold text-emerald-600 hover:text-emerald-700"
+                    >
+                      Login here
+                    </Link>
+                  </p>
+                </div>
+              </form>
+            </CardContent>
+          </Card>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

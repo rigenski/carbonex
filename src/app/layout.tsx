@@ -1,6 +1,5 @@
 import Providers from "@/components/providers";
 import Chatbot from "@/components/chatbot";
-import { TConfig } from "@/stores/config";
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
@@ -11,12 +10,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "CarbonEx - Kredit Karbon Premium & Dampak Lingkungan",
+  title: "CarbonEx - Premium Carbon Credits & Environmental Impact",
   description:
-    "Ubah jejak karbon Anda menjadi dampak lingkungan nyata. Akses kredit karbon triple-verified dari 890+ proyek sukses. Mulai offset hari ini.",
+    "Transform your carbon footprint into real environmental impact. Access triple-verified carbon credits from 890+ successful projects. Start offsetting today.",
   keywords:
-    "kredit karbon, offset karbon, dampak lingkungan, keberlanjutan, perubahan iklim, netral karbon, proyek terverifikasi",
-  authors: [{ name: "Tim CarbonEx" }],
+    "carbon credits, carbon offset, environmental impact, sustainability, climate change, carbon neutral, verified projects",
+  authors: [{ name: "CarbonEx Team" }],
   creator: "CarbonEx",
   publisher: "CarbonEx",
   formatDetection: {
@@ -30,64 +29,53 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "id_ID",
+    locale: "en_US",
     url: "https://carbonex.com",
-    title: "CarbonEx - Kredit Karbon Premium & Dampak Lingkungan",
+    title: "CarbonEx - Premium Carbon Credits & Environmental Impact",
     description:
-      "Ubah jejak karbon Anda menjadi dampak lingkungan nyata. Akses kredit karbon triple-verified dari 890+ proyek sukses.",
+      "Transform your carbon footprint into real environmental impact. Access triple-verified carbon credits from 890+ successful projects.",
     siteName: "CarbonEx",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "CarbonEx - Platform Kredit Karbon Premium",
+        alt: "CarbonEx - Premium Carbon Credit Platform",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "CarbonEx - Kredit Karbon Premium & Dampak Lingkungan",
+    title: "CarbonEx - Premium Carbon Credits & Environmental Impact",
     description:
-      "Ubah jejak karbon Anda menjadi dampak lingkungan nyata. Akses kredit karbon triple-verified dari 890+ proyek sukses.",
+      "Transform your carbon footprint into real environmental impact. Access triple-verified carbon credits from 890+ successful projects.",
     images: ["/og-image.jpg"],
     creator: "@carbonex",
   },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  verification: {
-    google: "your-google-verification-code",
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   const config = {
-    title: metadata?.title,
-    description: metadata?.description,
+    title: "CarbonEx - Premium Carbon Credits & Environmental Impact",
+    description:
+      "Transform your carbon footprint into real environmental impact. Access triple-verified carbon credits from 890+ successful projects. Start offsetting today.",
   };
 
   return (
-    <html lang="id">
-      <head>
-        <link rel="icon" href="/logo.png" type="image/png" />
-        <link rel="apple-touch-icon" href="/logo.png" />
-      </head>
-      <body className={`${plusJakartaSans.variable} antialiased`}>
-        <Providers config={config as TConfig}>{children}</Providers>
-        <Chatbot />
+    <html lang="en">
+      <body className={plusJakartaSans.variable}>
+        <Providers config={config}>
+          {children}
+          <Chatbot />
+        </Providers>
       </body>
     </html>
   );

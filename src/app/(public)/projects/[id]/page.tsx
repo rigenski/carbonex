@@ -1,478 +1,393 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
+import { useState } from "react";
 import Image from "next/image";
-import { useAuthStore } from "@/stores/auth";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { toast } from "sonner";
+import { Badge } from "@/components/ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Icon } from "@iconify/react";
 
-// Mock project data
-const mockProject = {
+// Mock data for project details
+const project = {
   id: "PRJ001",
-  name: "Inisiatif Restorasi Hutan",
-  shortDescription:
-    "Proyek restorasi hutan skala besar untuk memerangi deforestasi dan menciptakan penyerap karbon yang signifikan.",
-  longDescription:
-    "Proyek ini bertujuan untuk merestorasi 1000 hektar hutan yang telah mengalami deforestasi. Melalui penanaman pohon asli dan pemeliharaan ekosistem, kami berharap dapat menyerap 50.000 ton CO₂ dalam 10 tahun ke depan. Proyek ini juga melibatkan masyarakat lokal dalam upaya konservasi dan memberikan manfaat ekonomi berkelanjutan.",
-  status: "Aktif",
-  type: "Reforestasi",
-  treeStatus: "Dalam Penanaman",
-  estimateCarbon: 50000,
-  treesPlanted: 25000,
-  targetTrees: 100000,
-  location: "Kalimantan Tengah, Indonesia",
-  startDate: "2024-01-15",
-  endDate: "2034-01-15",
-  community: "Green Earth Indonesia",
-  images: [
-    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=800&h=400&fit=crop&crop=center",
-    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=400&fit=crop&crop=center",
-    "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=800&h=400&fit=crop&crop=center",
-    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=400&fit=crop&crop=center",
+  name: "Forest Restoration Initiative",
+  status: "Active",
+  type: "Reforestation",
+  treeStatus: "In Planting",
+  description:
+    "Corporate-funded reforestation project with professional management team. This project aims to restore degraded forest areas and create sustainable carbon sinks through strategic tree planting and ecosystem restoration.",
+  community: "Ecological Balance Corporation",
+  carbonOffset: 1200,
+  volunteers: 45,
+  maxVolunteers: 80,
+  startDate: "2024-12-01",
+  endDate: "2025-06-30",
+  location: "Sumatra, Indonesia",
+  image:
+    "https://images.unsplash.com/photo-1574263867128-9c1a5c5f4cf3?w=800&h=400&fit=crop&crop=center",
+  gallery: [
+    "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&crop=center",
+    "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop&crop=center",
+    "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=250&fit=crop&crop=center",
   ],
-  volunteers: [
-    {
-      name: "Ahmad Rizki",
-      role: "Koordinator Lapangan",
-      avatar:
-        "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop&crop=face",
-    },
-    {
-      name: "Sarah Putri",
-      role: "Ahli Konservasi",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108755-2616b612b786?w=150&h=150&fit=crop&crop=face",
-    },
-    {
-      name: "Budi Santoso",
-      role: "Relawan Senior",
-      avatar:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face",
-    },
-    {
-      name: "Dewi Sari",
-      role: "Koordinator Komunitas",
-      avatar:
-        "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face",
-    },
+  volunteersList: [
+    { name: "Sarah Johnson", role: "Senior Volunteer", avatar: "SJ" },
+    { name: "Michael Chen", role: "Team Leader", avatar: "MC" },
+    { name: "Emma Davis", role: "Volunteer", avatar: "ED" },
+    { name: "Alex Rodriguez", role: "Volunteer", avatar: "AR" },
   ],
-  keyStats: [
+  updates: [
     {
-      label: "Target Ton CO₂",
-      value: "50.000",
-      description: "Estimasi penyerapan karbon",
+      date: "2024-12-15",
+      title: "Project Launch",
+      description:
+        "Successfully launched the forest restoration project with initial tree planting phase.",
     },
     {
-      label: "Pohon Tertanam",
-      value: "25.000",
-      description: "Dari target 100.000 pohon",
+      date: "2024-12-20",
+      title: "Volunteer Training",
+      description:
+        "Completed training session for 45 volunteers on proper tree planting techniques.",
     },
     {
-      label: "Luas Area",
-      value: "1.000 ha",
-      description: "Area restorasi hutan",
-    },
-    {
-      label: "Relawan Aktif",
-      value: "45",
-      description: "Anggota tim lapangan",
+      date: "2024-12-25",
+      title: "First Milestone",
+      description:
+        "Reached 25% of target tree planting goal with excellent survival rates.",
     },
   ],
 };
 
 export default function ProjectDetailPage() {
-  const { user } = useAuthStore();
-  const [project] = useState(mockProject);
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState("overview");
-  const [isJoined, setIsJoined] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    // Check if user has already joined this project
-    if (user && user.role === "individual") {
-      // This would be an API call in real app
-      setIsJoined(false);
-    }
-  }, [user]);
-
-  const handleJoinProject = async () => {
-    if (!user) {
-      // Redirect to login
-      return;
-    }
-
-    setIsLoading(true);
-    try {
-      // API call to join project
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setIsJoined(true);
-    } catch (error) {
-      console.error("Failed to join project:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleLeaveProject = async () => {
-    setIsLoading(true);
-    try {
-      // API call to leave project
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      setIsJoined(false);
-    } catch (error) {
-      console.error("Failed to leave project:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString("id-ID", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-  };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
       {/* Hero Section */}
-      <div className="bg-white">
-        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-          {/* Breadcrumb */}
-          <nav className="mb-4 flex" aria-label="Breadcrumb">
-            <ol className="flex items-center space-x-4">
-              <li>
-                <Link href="/" className="text-gray-500 hover:text-gray-700">
-                  Beranda
-                </Link>
-              </li>
-              <li>
-                <span className="text-gray-400">/</span>
-              </li>
-              <li>
-                <Link
-                  href="/projects"
-                  className="text-gray-500 hover:text-gray-700"
-                >
-                  Proyek
-                </Link>
-              </li>
-              <li>
-                <span className="text-gray-400">/</span>
-              </li>
-              <li>
-                <span className="font-medium text-gray-900">
-                  {project.name}
-                </span>
-              </li>
-            </ol>
-          </nav>
+      <section className="relative bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 py-16 sm:py-20">
+        {/* Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-2xl"></div>
+        </div>
 
+        <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-            {/* Images */}
-            <div>
-              <div className="relative">
-                <Image
-                  src={project.images[activeImageIndex]}
-                  alt={project.name}
-                  className="h-96 w-full rounded-lg object-cover"
-                  height={480}
-                  width={480}
-                />
-              </div>
-              <div className="mt-4 flex space-x-2">
-                {project.images.map((image, index) => (
-                  <Button
-                    key={index}
-                    variant="outline"
-                    size="sm"
-                    onClick={() => setActiveImageIndex(index)}
-                    className={`h-20 w-20 overflow-hidden rounded-lg border-2 p-0 ${
-                      activeImageIndex === index
-                        ? "border-green-500"
-                        : "border-gray-200"
-                    }`}
-                  >
-                    <Image
-                      src={image}
-                      alt={`${project.name} ${index + 1}`}
-                      className="h-full w-full object-cover"
-                      height={480}
-                      width={480}
-                    />
-                  </Button>
-                ))}
-              </div>
+            {/* Project Image */}
+            <div className="relative h-64 overflow-hidden rounded-2xl lg:h-80">
+              <Image
+                src={project.image}
+                alt={project.name}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
+                {project.status}
+              </Badge>
             </div>
 
             {/* Project Info */}
-            <div>
-              <div className="mb-4 flex items-center justify-between">
-                <Badge
-                  variant={project.status === "Aktif" ? "default" : "secondary"}
-                >
-                  {project.status}
-                </Badge>
-                <span className="text-sm text-gray-500">{project.id}</span>
+            <div className="flex flex-col justify-center">
+              <div className="mb-6 inline-flex items-center rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
+                <Icon icon="mdi:leaf" className="mr-2 h-4 w-4" />
+                {project.type}
               </div>
-
-              <h1 className="mb-4 text-3xl font-bold text-gray-900">
+              <h1 className="mb-4 text-4xl font-black text-white sm:text-5xl">
                 {project.name}
               </h1>
-              <p className="mb-6 text-lg text-gray-600">
-                {project.shortDescription}
+              <p className="mb-6 text-lg text-white/90">
+                {project.description}
               </p>
-
-              {/* Key Stats */}
-              <div className="mb-6 grid grid-cols-2 gap-4">
-                <Card>
-                  <CardContent className="p-4">
-                    <div className="text-2xl font-bold text-green-600">
-                      {project.estimateCarbon.toLocaleString()}
-                    </div>
-                    <div className="text-sm text-gray-600">Target Ton CO₂</div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-4">
-                    <div className="text-2xl font-bold text-green-600">
-                      {project.treesPlanted.toLocaleString()}
-                    </div>
-                    <div className="text-sm text-gray-600">Pohon Tertanam</div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-4">
-                    <div className="text-2xl font-bold text-green-600">
-                      {project.targetTrees.toLocaleString()}
-                    </div>
-                    <div className="text-sm text-gray-600">Target Pohon</div>
-                  </CardContent>
-                </Card>
-                <Card>
-                  <CardContent className="p-4">
-                    <div className="text-2xl font-bold text-green-600">
-                      {project.volunteers.length}
-                    </div>
-                    <div className="text-sm text-gray-600">Relawan</div>
-                  </CardContent>
-                </Card>
-              </div>
-
-              {/* Action Buttons */}
-              <div className="flex space-x-4">
-                {user ? (
-                  isJoined ? (
-                    <Button
-                      variant="outline"
-                      onClick={handleLeaveProject}
-                      disabled={isLoading}
-                    >
-                      {isLoading ? "Meninggalkan..." : "Tinggalkan Proyek"}
-                    </Button>
-                  ) : (
-                    <Button onClick={handleJoinProject} disabled={isLoading}>
-                      {isLoading ? "Bergabung..." : "Bergabung dengan Proyek"}
-                    </Button>
-                  )
-                ) : (
-                  <Button asChild>
-                    <Link href="/login">Masuk untuk Bergabung</Link>
-                  </Button>
-                )}
-                <Button variant="outline" asChild>
-                  <Link href={`/projects/${project.id}/donate`}>Donasi</Link>
-                </Button>
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                <div className="text-center">
+                  <div className="text-2xl font-black text-white">
+                    {project.carbonOffset}
+                  </div>
+                  <div className="text-sm text-white/70">Tons CO₂</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-black text-white">
+                    {project.volunteers}
+                  </div>
+                  <div className="text-sm text-white/70">Volunteers</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-black text-white">
+                    {project.treeStatus}
+                  </div>
+                  <div className="text-sm text-white/70">Tree Status</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-black text-white">
+                    {project.community}
+                  </div>
+                  <div className="text-sm text-white/70">Community</div>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Content Section */}
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Main Content */}
-          <div className="lg:col-span-2">
-            {/* Tabs */}
-            <div className="mb-6">
-              <nav className="flex space-x-8">
-                <Button
-                  variant="ghost"
-                  onClick={() => setActiveTab("overview")}
-                  className={`border-b-2 py-2 text-sm font-medium ${
-                    activeTab === "overview"
-                      ? "border-primary text-primary"
-                      : "border-transparent text-gray-500 hover:text-gray-700"
-                  }`}
-                >
-                  Gambaran Umum
-                </Button>
-                <Button
-                  variant="ghost"
-                  onClick={() => setActiveTab("volunteers")}
-                  className={`border-b-2 py-2 text-sm font-medium ${
-                    activeTab === "volunteers"
-                      ? "border-primary text-primary"
-                      : "border-transparent text-gray-500 hover:text-gray-700"
-                  }`}
-                >
-                  Tim Relawan
-                </Button>
-              </nav>
-            </div>
+      {/* Project Details */}
+      <section className="py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <Tabs
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="space-y-8"
+          >
+            <TabsList className="grid w-full grid-cols-4 rounded-xl bg-white/90 p-2 shadow-lg backdrop-blur-md">
+              <TabsTrigger
+                value="overview"
+                className="flex items-center space-x-2 rounded-lg px-4 py-3 text-sm font-semibold transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-md"
+              >
+                <Icon icon="mdi:eye" className="h-4 w-4" />
+                <span>Overview</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="milestones"
+                className="flex items-center space-x-2 rounded-lg px-4 py-3 text-sm font-semibold transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-md"
+              >
+                <Icon icon="mdi:flag-checkered" className="h-4 w-4" />
+                <span>Milestones</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="volunteers"
+                className="flex items-center space-x-2 rounded-lg px-4 py-3 text-sm font-semibold transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-md"
+              >
+                <Icon icon="mdi:account-multiple" className="h-4 w-4" />
+                <span>Volunteers</span>
+              </TabsTrigger>
+              <TabsTrigger
+                value="updates"
+                className="flex items-center space-x-2 rounded-lg px-4 py-3 text-sm font-semibold transition-all duration-200 data-[state=active]:bg-gradient-to-r data-[state=active]:from-blue-500 data-[state=active]:to-indigo-500 data-[state=active]:text-white data-[state=active]:shadow-md"
+              >
+                <Icon icon="mdi:newspaper" className="h-4 w-4" />
+                <span>Updates</span>
+              </TabsTrigger>
+            </TabsList>
 
-            {/* Tab Content */}
-            {activeTab === "overview" && (
-              <div className="space-y-6">
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Tentang Proyek</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600">{project.longDescription}</p>
-                  </CardContent>
-                </Card>
-
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Detail Proyek</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-2 gap-4">
-                      <div>
-                        <span className="text-sm font-medium text-gray-500">
-                          Jenis Proyek
-                        </span>
-                        <p className="text-gray-900">{project.type}</p>
+            <TabsContent value="overview" className="space-y-6">
+              <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+                {/* Project Details */}
+                <div className="space-y-6 lg:col-span-2">
+                  <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+                    <CardHeader>
+                      <CardTitle className="text-2xl font-black text-gray-900">
+                        Project Details
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <span className="text-sm font-bold text-gray-500">
+                            Start Date
+                          </span>
+                          <div className="text-lg font-bold text-gray-900">
+                            {project.startDate}
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-sm font-bold text-gray-500">
+                            End Date
+                          </span>
+                          <div className="text-lg font-bold text-gray-900">
+                            {project.endDate}
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-sm font-bold text-gray-500">
+                            Location
+                          </span>
+                          <div className="text-lg font-bold text-gray-900">
+                            {project.location}
+                          </div>
+                        </div>
+                        <div>
+                          <span className="text-sm font-bold text-gray-500">
+                            Type
+                          </span>
+                          <div className="text-lg font-bold text-gray-900">
+                            {project.type}
+                          </div>
+                        </div>
                       </div>
                       <div>
-                        <span className="text-sm font-medium text-gray-500">
-                          Status Pohon
+                        <span className="text-sm font-bold text-gray-500">
+                          Description
                         </span>
-                        <p className="text-gray-900">{project.treeStatus}</p>
-                      </div>
-                      <div>
-                        <span className="text-sm font-medium text-gray-500">
-                          Lokasi
-                        </span>
-                        <p className="text-gray-900">{project.location}</p>
-                      </div>
-                      <div>
-                        <span className="text-sm font-medium text-gray-500">
-                          Komunitas
-                        </span>
-                        <p className="text-gray-900">{project.community}</p>
-                      </div>
-                      <div>
-                        <span className="text-sm font-medium text-gray-500">
-                          Tanggal Mulai
-                        </span>
-                        <p className="text-gray-900">
-                          {formatDate(project.startDate)}
+                        <p className="mt-2 text-gray-700">
+                          {project.description}
                         </p>
                       </div>
-                      <div>
-                        <span className="text-sm font-medium text-gray-500">
-                          Tanggal Selesai
-                        </span>
-                        <p className="text-gray-900">
-                          {formatDate(project.endDate)}
-                        </p>
+                    </CardContent>
+                  </Card>
+
+                  {/* Project Gallery */}
+                  <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+                    <CardHeader>
+                      <CardTitle className="text-2xl font-black text-gray-900">
+                        Project Gallery
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        {project.gallery.map((image, index) => (
+                          <div
+                            key={index}
+                            className="relative h-48 overflow-hidden rounded-lg"
+                          >
+                            <Image
+                              src={image}
+                              alt={`Project image ${index + 1}`}
+                              fill
+                              className="object-cover transition-transform duration-300 hover:scale-110"
+                            />
+                          </div>
+                        ))}
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Project Stats */}
+                <div className="space-y-6">
+                  <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+                    <CardHeader>
+                      <CardTitle className="text-xl font-black text-gray-900">
+                        Project Stats
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div className="text-center">
+                        <div className="text-3xl font-black text-emerald-600">
+                          {project.carbonOffset}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          Tons CO₂ Offset
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-black text-emerald-600">
+                          {project.volunteers}/{project.maxVolunteers}
+                        </div>
+                        <div className="text-sm text-gray-500">
+                          Active Volunteers
+                        </div>
+                      </div>
+                      <div className="text-center">
+                        <div className="text-3xl font-black text-emerald-600">
+                          {project.treeStatus}
+                        </div>
+                        <div className="text-sm text-gray-500">Tree Status</div>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+                    <CardHeader>
+                      <CardTitle className="text-xl font-black text-gray-900">
+                        Quick Actions
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <Button className="w-full rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl">
+                        <Icon
+                          icon="mdi:account-plus"
+                          className="mr-2 h-4 w-4"
+                        />
+                        Join as Volunteer
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="w-full rounded-lg border-2 border-emerald-500 font-bold text-emerald-600 transition-all duration-300 hover:scale-105"
+                      >
+                        <Icon icon="mdi:share" className="mr-2 h-4 w-4" />
+                        Share Project
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="w-full rounded-lg border-2 border-emerald-500 font-bold text-emerald-600 transition-all duration-300 hover:scale-105"
+                      >
+                        <Icon icon="mdi:heart" className="mr-2 h-4 w-4" />
+                        Follow Project
+                      </Button>
+                    </CardContent>
+                  </Card>
+                </div>
               </div>
-            )}
+            </TabsContent>
 
-            {activeTab === "volunteers" && (
-              <Card>
+            <TabsContent value="volunteers" className="space-y-6">
+              <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
                 <CardHeader>
-                  <CardTitle>Tim Relawan</CardTitle>
+                  <CardTitle className="text-2xl font-black text-gray-900">
+                    Volunteer Team
+                  </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    {project.volunteers.map((volunteer, index) => (
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    {project.volunteersList.map((volunteer, index) => (
                       <div
                         key={index}
-                        className="flex items-center space-x-3 rounded-lg border p-4"
+                        className="flex items-center space-x-3 rounded-lg bg-gray-50 p-4"
                       >
-                        <Image
-                          src={volunteer.avatar}
-                          alt={volunteer.name}
-                          className="h-12 w-12 rounded-full object-cover"
-                          width={48}
-                          height={48}
-                        />
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white">
+                          {volunteer.avatar}
+                        </div>
                         <div>
-                          <p className="font-medium text-gray-900">
+                          <div className="font-bold text-gray-900">
                             {volunteer.name}
-                          </p>
-                          <p className="text-sm text-gray-500">
+                          </div>
+                          <div className="text-sm text-gray-500">
                             {volunteer.role}
-                          </p>
+                          </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </CardContent>
               </Card>
-            )}
-          </div>
+            </TabsContent>
 
-          {/* Sidebar */}
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Statistik Kunci</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {project.keyStats.map((stat, index) => (
-                    <div key={index}>
-                      <div className="text-2xl font-bold text-green-600">
-                        {stat.value}
+            <TabsContent value="updates" className="space-y-6">
+              <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-black text-gray-900">
+                    Project Updates
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    {project.updates.map((update, index) => (
+                      <div
+                        key={index}
+                        className="border-l-4 border-emerald-500 pl-4"
+                      >
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-lg font-bold text-gray-900">
+                            {update.title}
+                          </h3>
+                          <span className="text-sm text-gray-500">
+                            {update.date}
+                          </span>
+                        </div>
+                        <p className="mt-2 text-gray-600">
+                          {update.description}
+                        </p>
                       </div>
-                      <div className="text-sm font-medium text-gray-900">
-                        {stat.label}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {stat.description}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            <Card>
-              <CardHeader>
-                <CardTitle>Bagikan Proyek</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex space-x-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={() => {
-                      navigator.clipboard.writeText(window.location.href);
-                      toast.success("Link berhasil disalin!");
-                    }}
-                  >
-                    Salin Link
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+          </Tabs>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

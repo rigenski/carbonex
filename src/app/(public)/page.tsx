@@ -1,81 +1,162 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { Icon } from "@iconify/react";
 
 export default function Home() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    setIsVisible(true);
+  }, []);
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen overflow-hidden">
       {/* Hero Section */}
-      <section className="flex min-h-screen items-center bg-gradient-to-br from-green-50 to-blue-50">
-        <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
-            <div>
-              <h1 className="mb-6 text-5xl font-bold text-gray-900">
-                Ubah Jejak Karbon Anda Menjadi{" "}
-                <span className="text-green-600">Dampak Nyata</span>
-              </h1>
-              <p className="mb-8 text-xl text-gray-600">
-                Akses proyek offset karbon terverifikasi premium yang memberikan
-                hasil lingkungan yang terukur. Bergabunglah dengan 890+
-                organisasi yang sudah membuat perbedaan melalui platform kami
-                yang terbukti.
-              </p>
-              <div className="flex flex-col gap-4 sm:flex-row">
-                <Link
-                  href="/projects"
-                  className="bg-primary hover:bg-primary/90 rounded-lg px-8 py-3 text-center font-semibold text-white transition-colors"
-                >
-                  Mulai Kontribusi
-                </Link>
-                <Link
-                  href="/communities"
-                  className="rounded-lg border border-green-600 px-8 py-3 text-center font-semibold text-green-600 transition-colors hover:bg-green-50"
-                >
-                  Lihat Komunitas
-                </Link>
-              </div>
-              <div className="mt-8 flex items-center space-x-8">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">
-                    1,234+
-                  </div>
-                  <div className="text-gray-600">Proyek Terverifikasi</div>
+      <section className="relative min-h-screen bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600">
+        {/* Animated Background Elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute -bottom-40 -left-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
+          <div className="absolute top-1/2 left-1/2 h-60 w-60 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white/5 blur-2xl"></div>
+        </div>
+
+        <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex min-h-screen items-center">
+            <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
+              {/* Left Content */}
+              <div
+                className={`transition-all duration-1000 ${
+                  isVisible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0"
+                }`}
+              >
+                {/* Badge */}
+                <div className="mb-6 inline-flex items-center rounded-full bg-white/20 px-4 py-2 text-sm font-medium text-white backdrop-blur-sm">
+                  <Icon icon="mdi:leaf" className="mr-2 h-4 w-4" />
+                  Save the Planet, One Click at a Time
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">
-                    56,789
-                  </div>
-                  <div className="text-gray-600">Ton CO₂ Dihilangkan</div>
+
+                {/* Main Heading */}
+                <h1 className="mb-6 text-4xl leading-tight font-black text-white sm:text-5xl lg:text-6xl">
+                  Make Your Carbon <br />
+                  Footprint Matter
+                </h1>
+
+                {/* Description */}
+                <p className="mb-8 text-lg leading-relaxed text-white/90 sm:text-xl">
+                  Join the climate revolution!{" "}
+                  <Icon icon="mdi:rocket-launch" className="inline h-5 w-5" />{" "}
+                  Access verified carbon offset projects that actually make a
+                  difference. No boring corporate stuff - just real impact for
+                  our future.
+                </p>
+
+                {/* CTA Buttons */}
+                <div className="mb-12 flex flex-col gap-4 sm:flex-row">
+                  <Link
+                    href="/projects"
+                    className="group relative overflow-hidden rounded-2xl bg-white px-6 py-3 text-center font-bold text-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:px-8 sm:py-4"
+                  >
+                    <Icon
+                      icon="mdi:rocket-launch"
+                      className="mr-2 inline h-5 w-5"
+                    />
+                    Start Contributing
+                  </Link>
+                  <Link
+                    href="/communities"
+                    className="rounded-2xl border-2 border-white/30 px-6 py-3 text-center font-bold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/10 sm:px-8 sm:py-4"
+                  >
+                    <Icon
+                      icon="mdi:account-group"
+                      className="mr-2 inline h-5 w-5"
+                    />
+                    Explore Communities
+                  </Link>
                 </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-green-600">890+</div>
-                  <div className="text-gray-600">Mitra Sukses</div>
+
+                {/* Stats */}
+                <div className="grid grid-cols-3 gap-4 sm:gap-6">
+                  <div className="text-center">
+                    <div className="text-2xl font-black text-white sm:text-3xl">
+                      1,234+
+                    </div>
+                    <div className="text-xs text-white/70 sm:text-sm">
+                      <Icon
+                        icon="mdi:fire"
+                        className="mr-1 inline h-3 w-3 sm:h-4 sm:w-4"
+                      />
+                      Verified Projects
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-black text-white sm:text-3xl">
+                      56,789
+                    </div>
+                    <div className="text-xs text-white/70 sm:text-sm">
+                      <Icon
+                        icon="mdi:earth"
+                        className="mr-1 inline h-3 w-3 sm:h-4 sm:w-4"
+                      />
+                      Tons CO₂ Removed
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-black text-white sm:text-3xl">
+                      890+
+                    </div>
+                    <div className="text-xs text-white/70 sm:text-sm">
+                      <Icon
+                        icon="mdi:arm-flex"
+                        className="mr-1 inline h-3 w-3 sm:h-4 sm:w-4"
+                      />
+                      Successful Partners
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="relative">
-              <div className="rounded-3xl bg-green-200 p-8">
-                <Image
-                  src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop&crop=center"
-                  alt="Environmental sustainability"
-                  className="h-80 w-full rounded-2xl object-cover"
-                  width={480}
-                  height={480}
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 rounded-xl bg-white p-4 shadow-lg">
-                <div className="flex items-center space-x-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
-                    <svg
-                      className="h-6 w-6 text-green-600"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M12 2L2 7v10c0 5.55 3.84 9.95 9 11 5.16-1.05 9-5.45 9-11V7l-10-5z" />
-                    </svg>
+
+              {/* Right Content - Image */}
+              <div
+                className={`transition-all delay-300 duration-1000 ${
+                  isVisible
+                    ? "translate-y-0 opacity-100"
+                    : "translate-y-10 opacity-0"
+                }`}
+              >
+                <div className="relative">
+                  <div className="relative overflow-hidden rounded-3xl backdrop-blur-sm">
+                    <Image
+                      src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop&crop=center"
+                      alt="Environmental sustainability"
+                      className="h-64 w-full rounded-2xl object-cover transition-transform duration-500 hover:scale-105 sm:h-80"
+                      width={480}
+                      height={480}
+                    />
                   </div>
-                  <div>
-                    <div className="font-semibold">Proyek Terverifikasi</div>
-                    <div className="text-sm text-gray-600">100% Transparan</div>
+
+                  {/* Floating Card */}
+                  <div className="absolute -bottom-4 -left-4 rounded-2xl bg-white/95 p-4 shadow-2xl backdrop-blur-sm sm:-bottom-6 sm:-left-6 sm:p-6">
+                    <div className="flex items-center space-x-3 sm:space-x-4">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 sm:h-14 sm:w-14">
+                        <Icon
+                          icon="mdi:check-circle"
+                          className="h-6 w-6 text-white sm:h-8 sm:w-8"
+                        />
+                      </div>
+                      <div>
+                        <div className="text-sm font-bold text-gray-900 sm:text-base">
+                          100% Verified
+                        </div>
+                        <div className="text-xs text-gray-600 sm:text-sm">
+                          Transparent AF
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -84,72 +165,82 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Excellence Section */}
-      <section className="bg-white py-20">
+      {/* Why Choose Us Section */}
+      <section className="bg-gradient-to-br from-gray-50 to-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Mengapa 890+ Organisasi Memilih CarbonEx
+          <div className="mb-12 text-center sm:mb-16">
+            <div className="mb-4 inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
+              <Icon icon="mdi:target" className="mr-2 h-4 w-4" />
+              Why 890+ Organizations Choose CarbonEx
+            </div>
+            <h2 className="mb-6 text-3xl font-black text-gray-900 sm:text-4xl lg:text-5xl">
+              The Only Platform You Need for
+              <span className="block bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
+                Premium Carbon Credits
+              </span>
             </h2>
-            <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Satu-satunya platform yang Anda butuhkan untuk kredit karbon
-              premium dengan ROI terjamin pada investasi keberlanjutan Anda.
+            <p className="mx-auto max-w-3xl text-lg text-gray-600 sm:text-xl">
+              Get guaranteed ROI on your sustainability investment. No BS, just
+              real results.{" "}
+              <Icon
+                icon="mdi:check-circle"
+                className="inline h-5 w-5 text-emerald-600"
+              />
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-            <div className="p-6 text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-green-100">
-                <svg
-                  className="h-8 w-8 text-green-600"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
+
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
+            {/* Feature Card 1 */}
+            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 sm:h-20 sm:w-20">
+                <Icon
+                  icon="mdi:check-circle"
+                  className="h-8 w-8 text-white sm:h-10 sm:w-10"
+                />
               </div>
-              <h3 className="mb-3 text-xl font-semibold">
-                Kualitas Triple-Verified
+              <h3 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">
+                Triple-Verified Quality
               </h3>
-              <p className="text-gray-600">
-                Setiap proyek memenuhi standar internasional dengan verifikasi
-                pihak ketiga. Investasi Anda dilindungi dengan 100% transparansi
-                dan hasil yang terukur.
+              <p className="leading-relaxed text-gray-600">
+                Every project meets international standards with third-party
+                verification. Your investment is protected with 100%
+                transparency and measurable results.
               </p>
             </div>
-            <div className="p-6 text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-blue-100">
-                <svg
-                  className="h-8 w-8 text-blue-600"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20a3 3 0 01-3-3v-2a3 3 0 013-3h4a3 3 0 013 3v2a3 3 0 01-3 3zM8 9a3 3 0 116 0 3 3 0 01-6 0z" />
-                </svg>
+
+            {/* Feature Card 2 */}
+            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-400 to-cyan-500 sm:h-20 sm:w-20">
+                <Icon
+                  icon="mdi:lightning-bolt"
+                  className="h-8 w-8 text-white sm:h-10 sm:w-10"
+                />
               </div>
-              <h3 className="mb-3 text-xl font-semibold">
-                Skala & Dampak Instan
+              <h3 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">
+                Scale & Instant Impact
               </h3>
-              <p className="text-gray-600">
-                Luncurkan program karbon Anda dalam hitungan menit, bukan bulan.
-                Terhubung dengan komunitas yang telah diverifikasi dan lihat
-                dampak lingkungan langsung dengan pelacakan real-time.
+              <p className="leading-relaxed text-gray-600">
+                Launch your carbon program in minutes, not months. Connect with
+                verified communities and see real environmental impact with
+                real-time tracking.
               </p>
             </div>
-            <div className="p-6 text-center">
-              <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-purple-100">
-                <svg
-                  className="h-8 w-8 text-purple-600"
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
+
+            {/* Feature Card 3 */}
+            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-purple-400 to-pink-500 sm:h-20 sm:w-20">
+                <Icon
+                  icon="mdi:trending-up"
+                  className="h-8 w-8 text-white sm:h-10 sm:w-10"
+                />
               </div>
-              <h3 className="mb-3 text-xl font-semibold">Hasil ROI Terbukti</h3>
-              <p className="text-gray-600">
-                Tingkatkan nilai merek, penuhi persyaratan kepatuhan, dan
-                menarik pelanggan yang sadar lingkungan. Klien kami melaporkan
-                peningkatan 40% dalam metrik keberlanjutan.
+              <h3 className="mb-4 text-xl font-bold text-gray-900 sm:text-2xl">
+                Proven ROI Results
+              </h3>
+              <p className="leading-relaxed text-gray-600">
+                Boost brand value, meet compliance requirements, and attract
+                eco-conscious customers. Our clients report 40% improvement in
+                sustainability metrics.
               </p>
             </div>
           </div>
@@ -157,95 +248,99 @@ export default function Home() {
       </section>
 
       {/* Client Section */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black py-16 text-white sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Bergabung dengan Pemimpin Industri yang Membuat Perubahan Nyata
+          <div className="mb-12 text-center sm:mb-16">
+            <div className="mb-4 inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur-sm">
+              <Icon icon="mdi:star" className="mr-2 h-4 w-4" />
+              Join Industry Leaders Making Real Change
+            </div>
+            <h2 className="mb-6 text-3xl font-black sm:text-4xl lg:text-5xl">
+              From Fortune 500 to Fast-Growing Startups
             </h2>
-            <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Dari perusahaan Fortune 500 hingga startup yang berkembang - lihat
-              bagaimana organisasi di seluruh dunia mencapai tujuan
-              keberlanjutan mereka lebih cepat dengan CarbonEx.
+            <p className="mx-auto max-w-3xl text-lg text-gray-300 sm:text-xl">
+              See how organizations worldwide achieve their sustainability goals
+              faster with CarbonEx.
             </p>
           </div>
-          <div className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-6">
+
+          <div className="grid grid-cols-2 gap-6 sm:gap-8 md:grid-cols-3 lg:grid-cols-6">
             {[
               {
                 name: "EcoTech Solutions",
-                image:
-                  "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=200&h=100&fit=crop&crop=center",
-                description: "Technology Leader",
+                icon: "mdi:laptop",
+                desc: "Tech Leader",
               },
               {
                 name: "Green Industries",
-                image:
-                  "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=200&h=100&fit=crop&crop=center",
-                description: "Manufacturing",
+                icon: "mdi:factory",
+                desc: "Manufacturing",
               },
               {
                 name: "Sustainable Corp",
-                image:
-                  "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=200&h=100&fit=crop&crop=center",
-                description: "Financial Services",
+                icon: "mdi:currency-usd",
+                desc: "Financial Services",
               },
               {
                 name: "Clean Energy Co",
-                image:
-                  "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=200&h=100&fit=crop&crop=center",
-                description: "Energy Sector",
+                icon: "mdi:lightning-bolt",
+                desc: "Energy Sector",
               },
               {
                 name: "Global Logistics",
-                image:
-                  "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=200&h=100&fit=crop&crop=center",
-                description: "Transportation",
+                icon: "mdi:truck",
+                desc: "Transportation",
               },
               {
                 name: "Future Retail",
-                image:
-                  "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=200&h=100&fit=crop&crop=center",
-                description: "Retail Chain",
+                icon: "mdi:shopping",
+                desc: "Retail Chain",
               },
             ].map((client, index) => (
-              <div key={index} className="group flex flex-col items-center">
-                <div className="mb-4 overflow-hidden rounded-xl bg-white p-6 shadow-sm transition-all duration-300 group-hover:shadow-md">
-                  <Image
-                    src={client.image}
-                    alt={client.name}
-                    className="h-16 w-full object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-100"
-                    width={240}
-                    height={240}
+              <div
+                key={index}
+                className="group flex flex-col items-center text-center"
+              >
+                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-white/20 sm:h-20 sm:w-20">
+                  <Icon
+                    icon={client.icon}
+                    className="h-8 w-8 text-white sm:h-10 sm:w-10"
                   />
                 </div>
-                <h3 className="mb-1 text-center text-sm font-semibold text-gray-900">
+                <h3 className="mb-1 text-xs font-bold sm:text-sm">
                   {client.name}
                 </h3>
-                <p className="text-center text-xs text-gray-500">
-                  {client.description}
+                <p className="text-xs text-gray-400 sm:text-xs">
+                  {client.desc}
                 </p>
               </div>
             ))}
           </div>
-          <div className="mt-16 text-center">
-            <div className="mx-auto grid max-w-4xl grid-cols-1 gap-8 md:grid-cols-3">
-              <div className="rounded-lg bg-white p-6 shadow-sm">
-                <div className="mb-2 text-3xl font-bold text-green-600">
-                  500+
-                </div>
-                <div className="text-gray-600">Mitra Korporat</div>
+
+          {/* Stats */}
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:mt-16 sm:gap-8 md:grid-cols-3">
+            <div className="rounded-2xl bg-white/10 p-6 text-center backdrop-blur-sm sm:p-8">
+              <div className="mb-2 text-3xl font-black text-emerald-400 sm:text-4xl">
+                500+
               </div>
-              <div className="rounded-lg bg-white p-6 shadow-sm">
-                <div className="mb-2 text-3xl font-bold text-green-600">
-                  95%
-                </div>
-                <div className="text-gray-600">Kepuasan Klien</div>
+              <div className="text-sm text-gray-300 sm:text-base">
+                Corporate Partners
               </div>
-              <div className="rounded-lg bg-white p-6 shadow-sm">
-                <div className="mb-2 text-3xl font-bold text-green-600">
-                  150M
-                </div>
-                <div className="text-gray-600">Ton CO₂ Offset Bersama</div>
+            </div>
+            <div className="rounded-2xl bg-white/10 p-6 text-center backdrop-blur-sm sm:p-8">
+              <div className="mb-2 text-3xl font-black text-emerald-400 sm:text-4xl">
+                95%
+              </div>
+              <div className="text-sm text-gray-300 sm:text-base">
+                Client Satisfaction
+              </div>
+            </div>
+            <div className="rounded-2xl bg-white/10 p-6 text-center backdrop-blur-sm sm:p-8">
+              <div className="mb-2 text-3xl font-black text-emerald-400 sm:text-4xl">
+                150M
+              </div>
+              <div className="text-sm text-gray-300 sm:text-base">
+                Tons CO₂ Offset Together
               </div>
             </div>
           </div>
@@ -253,240 +348,278 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gradient-to-br from-emerald-50 to-teal-50 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Cara Kerjanya
+          <div className="mb-12 text-center sm:mb-16">
+            <div className="mb-4 inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
+              <Icon icon="mdi:rocket-launch" className="mr-2 h-4 w-4" />
+              How It Works
+            </div>
+            <h2 className="mb-6 text-3xl font-black text-gray-900 sm:text-4xl lg:text-5xl">
+              Simple Steps to Make a Difference
             </h2>
-            <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Langkah sederhana untuk mulai membuat perbedaan dalam melawan
-              perubahan iklim.
+            <p className="mx-auto max-w-3xl text-lg text-gray-600 sm:text-xl">
+              Easy peasy steps to start fighting climate change like a boss!{" "}
+              <Icon
+                icon="mdi:arm-flex"
+                className="inline h-5 w-5 text-emerald-600"
+              />
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-4">
-            <div className="text-center">
-              <div className="bg-primary mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full text-2xl font-bold text-white">
-                1
+
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-4">
+            {[
+              {
+                step: "1",
+                title: "Sign Up",
+                desc: "Register as community or individual to start your carbon offset journey.",
+                icon: "mdi:account-plus",
+              },
+              {
+                step: "2",
+                title: "Explore Projects",
+                desc: "Browse verified carbon credit projects in your area or create your own.",
+                icon: "mdi:magnify",
+              },
+              {
+                step: "3",
+                title: "Get Involved",
+                desc: "Join projects as volunteer or contribute to community initiatives.",
+                icon: "mdi:handshake",
+              },
+              {
+                step: "4",
+                title: "Track Impact",
+                desc: "Monitor your carbon offset contributions and see real impact.",
+                icon: "mdi:chart-line",
+              },
+            ].map((item, index) => (
+              <div key={index} className="group text-center">
+                <div className="relative mb-6">
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-r from-emerald-400 to-teal-500 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl sm:h-24 sm:w-24">
+                    <Icon
+                      icon={item.icon}
+                      className="h-10 w-10 text-white sm:h-12 sm:w-12"
+                    />
+                  </div>
+                  <div className="absolute -top-2 -right-2 flex h-6 w-6 items-center justify-center rounded-full bg-white text-xs font-bold text-emerald-600 shadow-md sm:h-8 sm:w-8 sm:text-sm">
+                    {item.step}
+                  </div>
+                </div>
+                <h3 className="mb-3 text-lg font-bold text-gray-900 sm:text-xl">
+                  {item.title}
+                </h3>
+                <p className="leading-relaxed text-gray-600">{item.desc}</p>
               </div>
-              <h3 className="mb-3 text-lg font-semibold">Daftar</h3>
-              <p className="text-gray-600">
-                Daftar sebagai komunitas atau individu untuk memulai perjalanan
-                offset karbon Anda.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full text-2xl font-bold text-white">
-                2
-              </div>
-              <h3 className="mb-3 text-lg font-semibold">Jelajahi Proyek</h3>
-              <p className="text-gray-600">
-                Jelajahi proyek kredit karbon terverifikasi di area Anda atau
-                buat proyek Anda sendiri.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full text-2xl font-bold text-white">
-                3
-              </div>
-              <h3 className="mb-3 text-lg font-semibold">Berpartisipasi</h3>
-              <p className="text-gray-600">
-                Bergabung dengan proyek sebagai relawan atau berkontribusi pada
-                inisiatif komunitas.
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-primary mx-auto mb-4 flex h-20 w-20 items-center justify-center rounded-full text-2xl font-bold text-white">
-                4
-              </div>
-              <h3 className="mb-3 text-lg font-semibold">Lacak Dampak</h3>
-              <p className="text-gray-600">
-                Pantau kontribusi offset karbon Anda dan lihat dampak nyata.
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="bg-white py-20">
+      <section className="bg-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
-              <h2 className="mb-6 text-4xl font-bold text-gray-900">
-                Fitur Kuat untuk Aksi Iklim
+              <div className="mb-4 inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
+                <Icon icon="mdi:lightning-bolt" className="mr-2 h-4 w-4" />
+                Powerful Features
+              </div>
+              <h2 className="mb-8 text-3xl font-black text-gray-900 sm:text-4xl lg:text-5xl">
+                Strong Features for Climate Action
               </h2>
-              <div className="space-y-6">
+              <div className="space-y-6 sm:space-y-8">
                 <div className="flex items-start space-x-4">
-                  <div className="bg-primary/10 mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full">
-                    <svg
-                      className="text-primary h-5 w-5"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 13l4 4L19 7" />
-                    </svg>
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 sm:h-12 sm:w-12">
+                    <Icon
+                      icon="mdi:check-circle"
+                      className="h-5 w-5 text-white sm:h-6 sm:w-6"
+                    />
                   </div>
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold">
-                      Verifikasi Proyek
+                    <h3 className="mb-3 text-lg font-bold text-gray-900 sm:text-xl">
+                      Project Verification
                     </h3>
-                    <p className="text-gray-600">
-                      Verifikasi independen memastikan semua proyek memenuhi
-                      standar kredit karbon internasional.
+                    <p className="leading-relaxed text-gray-600">
+                      Independent verification ensures all projects meet
+                      international carbon credit standards.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-100">
-                    <svg
-                      className="h-5 w-5 text-green-600"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 13l4 4L19 7" />
-                    </svg>
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-400 to-cyan-500 sm:h-12 sm:w-12">
+                    <Icon
+                      icon="mdi:chart-line"
+                      className="h-5 w-5 text-white sm:h-6 sm:w-6"
+                    />
                   </div>
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold">
-                      Pemantauan Real-time
+                    <h3 className="mb-3 text-lg font-bold text-gray-900 sm:text-xl">
+                      Real-time Monitoring
                     </h3>
-                    <p className="text-gray-600">
-                      Lacak kemajuan proyek dan pengurangan karbon secara
-                      real-time dengan analitik detail.
+                    <p className="leading-relaxed text-gray-600">
+                      Track project progress and carbon reduction in real-time
+                      with detailed analytics.
                     </p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="mt-1 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-full bg-green-100">
-                    <svg
-                      className="h-5 w-5 text-green-600"
-                      fill="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M5 13l4 4L19 7" />
-                    </svg>
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-purple-400 to-pink-500 sm:h-12 sm:w-12">
+                    <Icon
+                      icon="mdi:account-group"
+                      className="h-5 w-5 text-white sm:h-6 sm:w-6"
+                    />
                   </div>
                   <div>
-                    <h3 className="mb-2 text-lg font-semibold">
-                      Koneksi Komunitas
+                    <h3 className="mb-3 text-lg font-bold text-gray-900 sm:text-xl">
+                      Community Connection
                     </h3>
-                    <p className="text-gray-600">
-                      Terhubung dengan komunitas dan individu yang berpikiran
-                      sama untuk dampak yang lebih besar.
+                    <p className="leading-relaxed text-gray-600">
+                      Connect with like-minded communities and individuals for
+                      greater impact.
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div>
-              <Image
-                src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
-                alt="Get started"
-                className="h-64 w-full rounded-xl object-cover"
-                width={480}
-                height={480}
-              />
+            <div className="relative">
+              <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-400 to-teal-500 p-2">
+                <Image
+                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
+                  alt="Get started"
+                  className="h-64 w-full rounded-2xl object-cover transition-transform duration-500 hover:scale-105 sm:h-80"
+                  width={480}
+                  height={480}
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Latest Projects Section */}
-      <section className="bg-gray-50 py-20">
+      <section className="bg-gradient-to-br from-gray-50 to-white py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Proyek Terbaru
+          <div className="mb-12 text-center sm:mb-16">
+            <div className="mb-4 inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
+              <Icon icon="mdi:fire" className="mr-2 h-4 w-4" />
+              Latest Projects
+            </div>
+            <h2 className="mb-6 text-3xl font-black text-gray-900 sm:text-4xl lg:text-5xl">
+              Discover Fresh Carbon Credit Projects
             </h2>
-            <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Temukan proyek kredit karbon terbaru yang membuat perbedaan di
-              seluruh dunia.
+            <p className="mx-auto max-w-3xl text-lg text-gray-600 sm:text-xl">
+              Find the latest carbon credit projects making a difference
+              worldwide.
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+
+          <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
             {[1, 2, 3].map((project) => (
               <div
                 key={project}
-                className="overflow-hidden rounded-lg bg-white shadow-md"
+                className="group overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
               >
-                <Image
-                  src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
-                  alt={`Project ${project}`}
-                  className="h-48 w-full object-cover"
-                  width={480}
-                  height={480}
-                />
+                <div className="relative overflow-hidden">
+                  <Image
+                    src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
+                    alt={`Project ${project}`}
+                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    width={480}
+                    height={480}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                </div>
                 <div className="p-6">
-                  <div className="mb-2 flex items-center justify-between">
-                    <span className="rounded bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
-                      Aktif
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">
+                      <Icon icon="mdi:fire" className="mr-1 inline h-3 w-3" />
+                      Active
                     </span>
                     <span className="text-sm text-gray-500">
-                      Proyek #{project}23
+                      Project #{project}23
                     </span>
                   </div>
-                  <h3 className="mb-2 text-lg font-semibold">
-                    Inisiatif Restorasi Hutan
+                  <h3 className="mb-3 text-lg font-bold text-gray-900 sm:text-xl">
+                    Forest Restoration Initiative
                   </h3>
-                  <p className="mb-3 text-sm text-gray-600">
-                    Jakarta, Indonesia • 1,200 ton CO₂ diperkirakan
+                  <p className="mb-4 text-sm text-gray-600">
+                    Jakarta, Indonesia • 1,200 tons CO₂ estimated
                   </p>
-                  <div className="mb-4 flex items-center justify-between text-sm text-gray-500">
-                    <span>45 relawan</span>
-                    <span>Des 2024 - Jun 2025</span>
+                  <div className="mb-6 flex items-center justify-between text-sm text-gray-500">
+                    <span>
+                      <Icon
+                        icon="mdi:account-group"
+                        className="mr-1 inline h-4 w-4"
+                      />
+                      45 volunteers
+                    </span>
+                    <span>Dec 2024 - Jun 2025</span>
                   </div>
                   <Link
                     href={`/projects/${project}`}
-                    className="bg-primary hover:bg-primary/90 block w-full rounded-md py-2 text-center text-white transition-colors"
+                    className="block w-full rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 py-3 text-center font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
                   >
-                    Lihat Detail
+                    View Details
                   </Link>
                 </div>
               </div>
             ))}
           </div>
+
           <div className="mt-12 text-center">
             <Link
               href="/projects"
-              className="bg-primary hover:bg-primary/90 rounded-lg px-8 py-3 font-semibold text-white transition-colors"
+              className="inline-flex items-center rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 px-6 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:px-8 sm:py-4"
             >
-              Lihat Semua Proyek
+              <Icon icon="mdi:rocket-launch" className="mr-2 h-5 w-5" />
+              View All Projects
             </Link>
           </div>
         </div>
       </section>
 
       {/* Validators Section */}
-      <section className="bg-white py-20">
+      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black py-16 text-white sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <h2 className="mb-4 text-4xl font-bold text-gray-900">
-              Jaminan Kualitas yang Diakui Secara Global
+          <div className="mb-12 text-center sm:mb-16">
+            <div className="mb-4 inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur-sm">
+              <Icon icon="mdi:earth" className="mr-2 h-4 w-4" />
+              Global Quality Assurance
+            </div>
+            <h2 className="mb-6 text-3xl font-black sm:text-4xl lg:text-5xl">
+              Quality Guarantee Recognized Worldwide
             </h2>
-            <p className="mx-auto max-w-3xl text-xl text-gray-600">
-              Investasi karbon Anda didukung oleh badan sertifikasi paling
-              terpercaya di dunia. Setiap kredit memenuhi standar internasional
-              untuk dampak dan kredibilitas maksimal.
+            <p className="mx-auto max-w-3xl text-lg text-gray-300 sm:text-xl">
+              Your carbon investment is backed by the world&apos;s most trusted
+              certification bodies. Every credit meets international standards
+              for maximum impact and credibility.
             </p>
           </div>
-          <div className="grid grid-cols-2 items-center gap-8 md:grid-cols-4">
+
+          <div className="grid grid-cols-2 items-center gap-6 sm:gap-8 md:grid-cols-4">
             {[
-              "Verra",
-              "Gold Standard",
-              "Climate Action Reserve",
-              "American Carbon Registry",
+              { name: "Verra", icon: "mdi:check-circle" },
+              { name: "Gold Standard", icon: "mdi:trophy" },
+              { name: "Climate Action Reserve", icon: "mdi:leaf" },
+              { name: "American Carbon Registry", icon: "mdi:flag" },
             ].map((validator, index) => (
-              <div key={index} className="text-center">
-                <div className="mb-4 rounded-lg bg-gray-100 p-6">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded bg-gray-300">
-                    <span className="text-sm font-semibold text-gray-600">
-                      {validator.charAt(0)}
-                    </span>
-                  </div>
+              <div
+                key={index}
+                className="group flex flex-col items-center text-center"
+              >
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-white/20 sm:h-20 sm:w-20">
+                  <Icon
+                    icon={validator.icon}
+                    className="h-8 w-8 text-white sm:h-10 sm:w-10"
+                  />
                 </div>
-                <h3 className="font-semibold text-gray-900">{validator}</h3>
-                <p className="text-sm text-gray-600">Sertifikasi Premium</p>
+                <h3 className="mb-2 text-sm font-bold text-white sm:text-base">
+                  {validator.name}
+                </h3>
+                <p className="text-xs text-gray-400 sm:text-sm">
+                  Premium Certification
+                </p>
               </div>
             ))}
           </div>
@@ -494,28 +627,34 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-primary py-20">
+      <section className="bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
-          <h2 className="mb-4 text-4xl font-bold text-white">
-            Mulai Perjalanan Dampak Karbon Anda Hari Ini
+          <div className="mb-4 inline-flex items-center rounded-full bg-white/20 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm">
+            <Icon icon="mdi:rocket-launch" className="mr-2 h-4 w-4" />
+            Start Your Carbon Impact Journey Today
+          </div>
+          <h2 className="mb-6 text-3xl font-black text-white sm:text-4xl lg:text-5xl">
+            Join 890+ Organizations Making Real Change
           </h2>
-          <p className="mx-auto mb-8 max-w-3xl text-xl text-green-100">
-            Bergabunglah dengan 890+ organisasi yang sudah mencapai tujuan
-            keberlanjutan mereka. Dapatkan akses instan ke kredit karbon premium
-            dan lihat hasil terukur dalam hitungan minggu, bukan tahun.
+          <p className="mx-auto mb-12 max-w-3xl text-lg text-white/90 sm:text-xl">
+            Get instant access to premium carbon credits and see measurable
+            results in weeks, not years. No corporate BS, just real impact!{" "}
+            <Icon icon="mdi:check-circle" className="inline h-5 w-5" />
           </p>
-          <div className="flex flex-col justify-center gap-4 sm:flex-row">
+          <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-6">
             <Link
               href="/register"
-              className="rounded-lg bg-white px-8 py-3 font-semibold text-green-600 transition-colors hover:bg-gray-100"
+              className="group relative overflow-hidden rounded-2xl bg-white px-6 py-3 font-bold text-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:px-8 sm:py-4"
             >
-              Mulai Gratis Hari Ini
+              <Icon icon="mdi:party-popper" className="mr-2 inline h-5 w-5" />
+              Start Free Today
             </Link>
             <Link
               href="/projects"
-              className="rounded-lg border border-white px-8 py-3 font-semibold text-white transition-colors hover:bg-green-700"
+              className="rounded-2xl border-2 border-white/30 px-6 py-3 font-bold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/10 sm:px-8 sm:py-4"
             >
-              Jelajahi Proyek Premium
+              <Icon icon="mdi:fire" className="mr-2 inline h-5 w-5" />
+              Explore Premium Projects
             </Link>
           </div>
         </div>

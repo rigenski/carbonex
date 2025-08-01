@@ -167,7 +167,9 @@ export default function VerifyEmailPage() {
 
           {/* Resend Code */}
           <div className="text-center">
-            <p className="mb-2 text-sm text-gray-600">Tidak menerima kode?</p>
+            <p className="mb-2 text-sm text-gray-600">
+              Didn&apos;t receive the code?
+            </p>
             {canResend ? (
               <Button
                 type="button"
@@ -218,7 +220,9 @@ export default function VerifyEmailPage() {
               </h3>
               <div className="mt-2 text-sm text-blue-700">
                 <ul className="list-disc space-y-1 pl-5">
-                  <li>Periksa folder spam jika Anda tidak melihat email</li>
+                  <li>
+                    Check your spam folder if you don&apos;t see the email
+                  </li>
                   <li>Kode berlaku selama 10 menit</li>
                   <li>Anda dapat meminta kode baru setelah 60 detik</li>
                 </ul>

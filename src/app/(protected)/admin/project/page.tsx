@@ -119,7 +119,7 @@ export default function AdminProject() {
       startDate: "2024-02-15",
       endDate: "2024-11-30",
       description:
-        "Konservasi mangrove untuk melindungi garis pantai dan ekosistem laut.",
+        "Mangrove conservation to protect coastlines and marine ecosystems.",
     },
     {
       id: "PRJ005",

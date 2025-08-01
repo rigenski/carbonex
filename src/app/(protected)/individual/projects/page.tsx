@@ -57,7 +57,7 @@ export default function IndividualProjects() {
   const projects: Project[] = [
     {
       id: "PRJ001",
-      name: "Inisiatif Restorasi Hutan",
+      name: "Mangrove Conservation",
       community: "Green Earth Indonesia",
       status: "Aktif",
       targetTrees: 5000,
@@ -68,7 +68,7 @@ export default function IndividualProjects() {
       startDate: "2024-01-15",
       endDate: "2024-12-31",
       description:
-        "Proyek restorasi hutan skala besar untuk memerangi deforestasi dan menciptakan penyerap karbon.",
+        "Mangrove conservation to protect coastlines and marine ecosystems.",
       joinedDate: "2024-02-01",
     },
     {
@@ -223,10 +223,10 @@ export default function IndividualProjects() {
               <span className="text-sm text-gray-600">
                 Urutkan berdasarkan:
               </span>
-                              <Select value={sortBy} onValueChange={setSortBy}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Pilih pengurutan" />
-                  </SelectTrigger>
+              <Select value={sortBy} onValueChange={setSortBy}>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Pilih pengurutan" />
+                </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="name">Nama</SelectItem>
                   <SelectItem value="status">Status</SelectItem>
@@ -305,9 +305,7 @@ export default function IndividualProjects() {
                       <TableCell>
                         <Badge
                           variant={
-                            project.status === "Aktif"
-                              ? "default"
-                              : "secondary"
+                            project.status === "Aktif" ? "default" : "secondary"
                           }
                         >
                           {project.status}
