@@ -39,9 +39,8 @@ export default function Header() {
                   height={32}
                   className="h-8 w-8 transition-transform duration-300 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 opacity-0 blur transition-opacity duration-300 group-hover:opacity-20"></div>
               </div>
-              <span className="ml-3 text-xl font-black text-emerald-400">
+              <span className="ml-3 text-xl font-black text-emerald-600">
                 CARBONEX
               </span>
             </Link>
@@ -55,21 +54,18 @@ export default function Header() {
                 className="group relative rounded-lg px-4 py-2 text-sm font-bold text-nowrap text-gray-700 transition-all duration-300 hover:bg-emerald-50 hover:text-emerald-600"
               >
                 Projects
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </Link>
               <Link
                 href="/carbon-issued"
                 className="group relative rounded-lg px-4 py-2 text-sm font-bold text-nowrap text-gray-700 transition-all duration-300 hover:bg-emerald-50 hover:text-emerald-600"
               >
                 Carbon Issued
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </Link>
               <Link
                 href="/communities"
                 className="group relative rounded-lg px-4 py-2 text-sm font-bold text-nowrap text-gray-700 transition-all duration-300 hover:bg-emerald-50 hover:text-emerald-600"
               >
                 Communities
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </Link>
             </div>
           </div>
@@ -82,7 +78,7 @@ export default function Header() {
                   {user.role === "community" && (
                     <Button
                       asChild
-                      className="rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                      className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-emerald-700"
                     >
                       <Link href="/projects/create">
                         <Icon icon="mdi:plus" className="mr-2 h-4 w-4" />
@@ -97,7 +93,7 @@ export default function Header() {
                         className="flex items-center space-x-2 rounded-lg hover:bg-emerald-50"
                       >
                         <Avatar className="h-8 w-8 ring-2 ring-emerald-100">
-                          <AvatarFallback className="bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white">
+                          <AvatarFallback className="bg-emerald-600 font-bold text-white">
                             {(user.name || user.fullName || "U").charAt(0)}
                           </AvatarFallback>
                         </Avatar>
@@ -147,7 +143,7 @@ export default function Header() {
                   </Button>
                   <Button
                     asChild
-                    className="rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                    className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-emerald-700"
                   >
                     <Link href="/individual/dashboard">Individual</Link>
                   </Button>
@@ -177,9 +173,8 @@ export default function Header() {
                           height={32}
                           className="h-8 w-8"
                         />
-                        <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 opacity-20 blur"></div>
                       </div>
-                      <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-xl font-black text-transparent">
+                      <span className="text-xl font-black text-emerald-600">
                         CarbonEx
                       </span>
                     </div>
@@ -240,7 +235,7 @@ export default function Header() {
                       <div className="space-y-3 border-t border-gray-200 pt-6">
                         <div className="flex items-center space-x-3 px-2">
                           <Avatar className="h-10 w-10 ring-2 ring-emerald-100">
-                            <AvatarFallback className="bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white">
+                            <AvatarFallback className="bg-emerald-600 font-bold text-white">
                               {(user.name || user.fullName || "U").charAt(0)}
                             </AvatarFallback>
                           </Avatar>
@@ -251,7 +246,7 @@ export default function Header() {
                         {user.role === "community" && (
                           <Button
                             asChild
-                            className="w-full justify-start rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white"
+                            className="w-full justify-start rounded-lg bg-emerald-600 font-bold text-white hover:bg-emerald-700"
                           >
                             <Link href="/projects/create">
                               <Icon icon="mdi:plus" className="mr-2 h-4 w-4" />
@@ -299,7 +294,7 @@ export default function Header() {
                         </Button>
                         <Button
                           asChild
-                          className="w-full justify-start rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white"
+                          className="w-full justify-start rounded-lg bg-emerald-600 font-bold text-white hover:bg-emerald-700"
                         >
                           <Link href="/individual/dashboard">Individual</Link>
                         </Button>

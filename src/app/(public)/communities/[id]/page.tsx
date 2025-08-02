@@ -65,9 +65,9 @@ export default function CommunityDetailPage() {
   const [activeTab, setActiveTab] = useState("overview");
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 py-16 sm:py-20">
+      <section className="relative bg-emerald-600 py-16 sm:py-20">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
@@ -85,7 +85,7 @@ export default function CommunityDetailPage() {
                 fill
                 className="object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+              <div className="absolute inset-0 bg-black/50"></div>
               <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
                 {community.establishedYear}
               </Badge>
@@ -142,17 +142,17 @@ export default function CommunityDetailPage() {
             onValueChange={setActiveTab}
             className="space-y-8"
           >
-            <TabsList className="grid h-10 grid-cols-2 rounded-xl border border-white/20 bg-gradient-to-r from-white/90 to-white/70 shadow-lg backdrop-blur-md">
+            <TabsList className="grid h-10 grid-cols-2 rounded-xl border border-white/20 bg-white/90 shadow-lg backdrop-blur-md">
               <TabsTrigger
                 value="overview"
-                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 hover:scale-102 data-[state=active]:scale-105 data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 hover:scale-102 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 <Icon icon="mdi:information-outline" className="mr-2 h-4 w-4" />
                 Overview
               </TabsTrigger>
               <TabsTrigger
                 value="projects"
-                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 hover:scale-102 data-[state=active]:scale-105 data-[state=active]:bg-gradient-to-r data-[state=active]:from-emerald-500 data-[state=active]:to-teal-500 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 hover:scale-102 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 <Icon
                   icon="mdi:folder-multiple-outline"
@@ -291,7 +291,7 @@ export default function CommunityDetailPage() {
                             fill
                             className="object-cover transition-transform duration-300 group-hover:scale-110"
                           />
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                          <div className="absolute inset-0 bg-black/50"></div>
                           <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
                             {project.status}
                           </Badge>
@@ -316,7 +316,7 @@ export default function CommunityDetailPage() {
                           </div>
                           <Button
                             asChild
-                            className="w-full rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                            className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
                           >
                             <Link href={`/projects/${project.id}`}>
                               <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />

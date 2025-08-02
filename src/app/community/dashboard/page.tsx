@@ -113,12 +113,12 @@ export default function CommunityDashboardPage() {
   const [selectedPeriod, setSelectedPeriod] = useState("7d");
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+    <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div className="w-64 border-r border-gray-200 bg-white/80 backdrop-blur-md">
         <div className="p-6">
           <div className="mb-8 flex items-center space-x-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500">
+                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
               <Icon icon="mdi:account-group" className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -238,7 +238,7 @@ export default function CommunityDashboardPage() {
                           </span>
                         </div>
                       </div>
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600">
                         <Icon icon={stat.icon} className="h-6 w-6 text-white" />
                       </div>
                     </div>
@@ -296,7 +296,7 @@ export default function CommunityDashboardPage() {
                           </div>
                           <div className="mt-1 h-2 w-full rounded-full bg-gray-200">
                             <div
-                              className="h-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all duration-300"
+                              className="h-2 rounded-full bg-emerald-600 transition-all duration-300"
                               style={{ width: `${project.progress}%` }}
                             ></div>
                           </div>
@@ -321,7 +321,7 @@ export default function CommunityDashboardPage() {
                   <div className="space-y-3">
                     {recentMembers.map((member, index) => (
                       <div key={index} className="flex items-center space-x-3">
-                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-sm font-bold text-white">
+                        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-emerald-600 text-sm font-bold text-white">
                           {member.avatar}
                         </div>
                         <div className="flex-1">

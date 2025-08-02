@@ -163,9 +163,9 @@ export default function CarbonIssuedPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 py-16 sm:py-20">
+      <section className="relative bg-emerald-600 py-16 sm:py-20">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
@@ -347,7 +347,7 @@ export default function CarbonIssuedPage() {
                         <TableCell>
                           <Button
                             asChild
-                            className="rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                            className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
                           >
                             <Link href={`/projects/${project.id}`}>
                               <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />

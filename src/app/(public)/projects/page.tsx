@@ -173,9 +173,9 @@ export default function ProjectsPage() {
   }, [projects, searchTerm, selectedStatus, selectedType, sortBy]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+    <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 py-16 sm:py-20">
+      <section className="relative bg-emerald-600 py-16 sm:py-20">
         {/* Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
@@ -304,7 +304,7 @@ export default function ProjectsPage() {
                       fill
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                    <div className="absolute inset-0 bg-black/50"></div>
                     <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
                       {project.status}
                     </Badge>
@@ -341,7 +341,7 @@ export default function ProjectsPage() {
 
                     <Button
                       asChild
-                      className="w-full rounded-lg bg-gradient-to-r from-emerald-500 to-teal-500 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                      className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-emerald-700"
                     >
                       <Link href={`/projects/${project.id}`}>
                         <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />

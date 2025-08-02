@@ -4,7 +4,7 @@ import { Icon } from "@iconify/react";
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+    <footer className="relative overflow-hidden bg-gray-900 text-white">
       {/* Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-emerald-500/10 blur-3xl"></div>
@@ -25,10 +25,9 @@ export default function Footer() {
                   height={40}
                   className="h-10 w-10"
                 />
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 opacity-20 blur"></div>
               </div>
-              <span className="ml-3 bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-2xl font-black text-transparent">
-                CarbonEx
+              <span className="ml-3 text-2xl font-black text-emerald-400">
+                CARBONEX
               </span>
             </div>
             <p className="max-w-lg text-lg leading-relaxed text-gray-300">
@@ -42,21 +41,18 @@ export default function Footer() {
                 className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
               >
                 <Icon icon="mdi:twitter" className="h-6 w-6 text-white" />
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </a>
               <a
                 href="#"
                 className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
               >
                 <Icon icon="mdi:linkedin" className="h-6 w-6 text-white" />
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </a>
               <a
                 href="#"
                 className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
               >
                 <Icon icon="mdi:instagram" className="h-6 w-6 text-white" />
-                <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-emerald-400/20 to-teal-400/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
               </a>
             </div>
           </div>
@@ -71,7 +67,7 @@ export default function Footer() {
                   className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
                   Home
-                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
@@ -80,7 +76,7 @@ export default function Footer() {
                   className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
                   Projects
-                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
@@ -89,7 +85,7 @@ export default function Footer() {
                   className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
                   Communities
-                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
@@ -98,7 +94,7 @@ export default function Footer() {
                   className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
                   About Us
-                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
             </ul>
@@ -114,7 +110,7 @@ export default function Footer() {
                   className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
                   Help Center
-                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
@@ -123,7 +119,7 @@ export default function Footer() {
                   className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
                   Contact Us
-                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
@@ -132,7 +128,7 @@ export default function Footer() {
                   className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
                   Privacy Policy
-                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
               <li>
@@ -141,7 +137,7 @@ export default function Footer() {
                   className="group relative inline-flex items-center text-gray-300 transition-all duration-300 hover:text-white"
                 >
                   Terms of Service
-                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-gradient-to-r from-emerald-400 to-teal-400 transition-all duration-300 group-hover:w-full"></div>
+                  <div className="absolute -bottom-1 left-0 h-0.5 w-0 bg-emerald-400 transition-all duration-300 group-hover:w-full"></div>
                 </Link>
               </li>
             </ul>

@@ -95,12 +95,12 @@ export default function AdminDashboardPage() {
   const [selectedPeriod, setSelectedPeriod] = useState("7d");
 
   return (
-    <div className="flex h-screen bg-gradient-to-br from-gray-50 via-white to-emerald-50">
+    <div className="flex h-screen bg-gray-50">
       {/* Sidebar */}
       <div className="w-64 border-r border-gray-200 bg-white/80 backdrop-blur-md">
         <div className="p-6">
           <div className="mb-8 flex items-center space-x-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500">
+                                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
               <Icon icon="mdi:shield-crown" className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -218,7 +218,7 @@ export default function AdminDashboardPage() {
                           </span>
                         </div>
                       </div>
-                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600">
                         <Icon icon={stat.icon} className="h-6 w-6 text-white" />
                       </div>
                     </div>
@@ -308,7 +308,7 @@ export default function AdminDashboardPage() {
                           </span>
                         </div>
                       </div>
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-500">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
                         <Icon
                           icon="mdi:account-group"
                           className="h-5 w-5 text-white"

@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="min-h-screen overflow-hidden">
       {/* Hero Section */}
-      <section className="relative min-h-screen bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600">
+      <section className="relative min-h-screen bg-emerald-600">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-40 h-80 w-80 rounded-full bg-white/10 blur-3xl"></div>
@@ -142,7 +142,7 @@ export default function Home() {
                   {/* Floating Card */}
                   <div className="absolute -bottom-4 -left-4 rounded-2xl bg-white/95 p-4 shadow-2xl backdrop-blur-sm sm:-bottom-6 sm:-left-6 sm:p-6">
                     <div className="flex items-center space-x-3 sm:space-x-4">
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-emerald-400 to-teal-500 sm:h-14 sm:w-14">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500 sm:h-14 sm:w-14">
                         <Icon
                           icon="mdi:check-circle"
                           className="h-6 w-6 text-white sm:h-8 sm:w-8"
@@ -166,7 +166,7 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-white py-16 sm:py-20 lg:py-24">
+      <section className="bg-gray-50 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center sm:mb-16">
             <div className="mb-4 inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
@@ -175,7 +175,7 @@ export default function Home() {
             </div>
             <h2 className="mb-6 text-3xl font-black text-gray-900 sm:text-4xl lg:text-5xl">
               The Only Platform You Need for
-              <span className="block bg-gradient-to-r from-emerald-500 to-teal-600 bg-clip-text text-transparent">
+              <span className="block text-emerald-600">
                 Premium Carbon Credits
               </span>
             </h2>
@@ -192,7 +192,7 @@ export default function Home() {
           <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
             {/* Feature Card 1 */}
             <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 sm:h-20 sm:w-20">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500 sm:h-20 sm:w-20">
                 <Icon
                   icon="mdi:check-circle"
                   className="h-8 w-8 text-white sm:h-10 sm:w-10"
@@ -210,7 +210,7 @@ export default function Home() {
 
             {/* Feature Card 2 */}
             <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-400 to-cyan-500 sm:h-20 sm:w-20">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500 sm:h-20 sm:w-20">
                 <Icon
                   icon="mdi:lightning-bolt"
                   className="h-8 w-8 text-white sm:h-10 sm:w-10"
@@ -228,7 +228,7 @@ export default function Home() {
 
             {/* Feature Card 3 */}
             <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
-              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-r from-purple-400 to-pink-500 sm:h-20 sm:w-20">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-500 sm:h-20 sm:w-20">
                 <Icon
                   icon="mdi:trending-up"
                   className="h-8 w-8 text-white sm:h-10 sm:w-10"
@@ -248,7 +248,7 @@ export default function Home() {
       </section>
 
       {/* Client Section */}
-      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black py-16 text-white sm:py-20 lg:py-24">
+      <section className="bg-gray-900 py-16 text-white sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center sm:mb-16">
             <div className="mb-4 inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur-sm">
@@ -348,7 +348,7 @@ export default function Home() {
       </section>
 
       {/* How It Works Section */}
-      <section className="bg-gradient-to-br from-emerald-50 to-teal-50 py-16 sm:py-20 lg:py-24">
+      <section className="bg-emerald-50 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center sm:mb-16">
             <div className="mb-4 inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
@@ -396,7 +396,7 @@ export default function Home() {
             ].map((item, index) => (
               <div key={index} className="group text-center">
                 <div className="relative mb-6">
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-gradient-to-r from-emerald-400 to-teal-500 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl sm:h-24 sm:w-24">
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-emerald-500 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl sm:h-24 sm:w-24">
                     <Icon
                       icon={item.icon}
                       className="h-10 w-10 text-white sm:h-12 sm:w-12"
@@ -430,7 +430,7 @@ export default function Home() {
               </h2>
               <div className="space-y-6 sm:space-y-8">
                 <div className="flex items-start space-x-4">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 sm:h-12 sm:w-12">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-emerald-600 sm:h-12 sm:w-12">
                     <Icon
                       icon="mdi:check-circle"
                       className="h-5 w-5 text-white sm:h-6 sm:w-6"
@@ -447,7 +447,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-blue-400 to-cyan-500 sm:h-12 sm:w-12">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-blue-600 sm:h-12 sm:w-12">
                     <Icon
                       icon="mdi:chart-line"
                       className="h-5 w-5 text-white sm:h-6 sm:w-6"
@@ -464,7 +464,7 @@ export default function Home() {
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
-                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-gradient-to-r from-purple-400 to-pink-500 sm:h-12 sm:w-12">
+                  <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-2xl bg-purple-600 sm:h-12 sm:w-12">
                     <Icon
                       icon="mdi:account-group"
                       className="h-5 w-5 text-white sm:h-6 sm:w-6"
@@ -483,7 +483,7 @@ export default function Home() {
               </div>
             </div>
             <div className="relative">
-              <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-emerald-400 to-teal-500 p-2">
+              <div className="overflow-hidden rounded-3xl bg-emerald-600 p-2">
                 <Image
                   src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
                   alt="Get started"
@@ -498,7 +498,7 @@ export default function Home() {
       </section>
 
       {/* Latest Projects Section */}
-      <section className="bg-gradient-to-br from-gray-50 to-white py-16 sm:py-20 lg:py-24">
+      <section className="bg-gray-50 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center sm:mb-16">
             <div className="mb-4 inline-flex items-center rounded-full bg-emerald-100 px-4 py-2 text-sm font-bold text-emerald-700">
@@ -528,7 +528,7 @@ export default function Home() {
                     width={480}
                     height={480}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                  <div className="absolute inset-0 bg-black/20"></div>
                 </div>
                 <div className="p-6">
                   <div className="mb-4 flex items-center justify-between">
@@ -558,7 +558,7 @@ export default function Home() {
                   </div>
                   <Link
                     href={`/projects/${project}`}
-                    className="block w-full rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 py-3 text-center font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                    className="block w-full rounded-2xl bg-emerald-600 py-3 text-center font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-emerald-700"
                   >
                     View Details
                   </Link>
@@ -570,7 +570,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link
               href="/projects"
-              className="inline-flex items-center rounded-2xl bg-gradient-to-r from-emerald-400 to-teal-500 px-6 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:px-8 sm:py-4"
+              className="inline-flex items-center rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-emerald-700 sm:px-8 sm:py-4"
             >
               <Icon icon="mdi:rocket-launch" className="mr-2 h-5 w-5" />
               View All Projects
@@ -580,7 +580,7 @@ export default function Home() {
       </section>
 
       {/* Validators Section */}
-      <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-black py-16 text-white sm:py-20 lg:py-24">
+      <section className="bg-gray-900 py-16 text-white sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-12 text-center sm:mb-16">
             <div className="mb-4 inline-flex items-center rounded-full bg-white/10 px-4 py-2 text-sm font-bold backdrop-blur-sm">
@@ -627,7 +627,7 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-emerald-400 via-teal-500 to-cyan-600 py-16 sm:py-20 lg:py-24">
+      <section className="bg-emerald-600 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-7xl px-4 text-center sm:px-6 lg:px-8">
           <div className="mb-4 inline-flex items-center rounded-full bg-white/20 px-4 py-2 text-sm font-bold text-white backdrop-blur-sm">
             <Icon icon="mdi:rocket-launch" className="mr-2 h-4 w-4" />
