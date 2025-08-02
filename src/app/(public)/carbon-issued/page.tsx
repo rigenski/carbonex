@@ -194,7 +194,7 @@ export default function CarbonIssuedPage() {
       {/* Filters Section */}
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+          <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
             <CardContent className="p-6">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div className="md:col-span-2">
@@ -268,7 +268,7 @@ export default function CarbonIssuedPage() {
           </div>
 
           {filteredProjects.length > 0 ? (
-            <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+            <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
               <CardContent className="p-0">
                 <Table>
                   <TableHeader>

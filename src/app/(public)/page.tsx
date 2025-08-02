@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { Badge } from "@/components/ui/badge";
 import { Icon } from "@iconify/react";
 
 export default function Home() {
@@ -518,48 +519,49 @@ export default function Home() {
             {[1, 2, 3].map((project) => (
               <div
                 key={project}
-                className="group overflow-hidden rounded-3xl bg-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                className="group overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
               >
-                <div className="relative overflow-hidden">
+                <div className="relative h-48 overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
                     alt={`Project ${project}`}
-                    className="h-48 w-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    width={480}
-                    height={480}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className="absolute inset-0 bg-black/50"></div>
+                  <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
+                    Active
+                  </Badge>
                 </div>
                 <div className="p-6">
-                  <div className="mb-4 flex items-center justify-between">
-                    <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-700">
-                      <Icon icon="mdi:fire" className="mr-1 inline h-3 w-3" />
-                      Active
-                    </span>
-                    <span className="text-sm text-gray-500">
-                      Project #{project}23
-                    </span>
-                  </div>
-                  <h3 className="mb-3 text-lg font-bold text-gray-900 sm:text-xl">
+                  <h3 className="mb-2 text-xl font-black text-gray-900">
                     Forest Restoration Initiative
                   </h3>
                   <p className="mb-4 text-sm text-gray-600">
                     Jakarta, Indonesia • 1,200 tons CO₂ estimated
                   </p>
-                  <div className="mb-6 flex items-center justify-between text-sm text-gray-500">
-                    <span>
-                      <Icon
-                        icon="mdi:account-group"
-                        className="mr-1 inline h-4 w-4"
-                      />
-                      45 volunteers
-                    </span>
-                    <span>Dec 2024 - Jun 2025</span>
+
+                  <div className="mb-4 grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <div className="font-bold text-gray-900">1,200 tons</div>
+                      <div className="text-gray-500">CO₂ Offset</div>
+                    </div>
+                    <div>
+                      <div className="font-bold text-gray-900">45</div>
+                      <div className="text-gray-500">Volunteers</div>
+                    </div>
                   </div>
+
+                  <div className="mb-4 text-sm text-gray-500">
+                    <div className="font-medium">Ecological Balance Corp</div>
+                    <div>Dec 2024 - Jun 2025</div>
+                  </div>
+
                   <Link
                     href={`/projects/${project}`}
-                    className="block w-full rounded-2xl bg-emerald-600 py-3 text-center font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-emerald-700"
+                    className="block w-full rounded-lg bg-emerald-600 py-3 text-center font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
                   >
+                    <Icon icon="mdi:eye" className="mr-2 inline h-4 w-4" />
                     View Details
                   </Link>
                 </div>
@@ -570,7 +572,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link
               href="/projects"
-              className="inline-flex items-center rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:bg-emerald-700 sm:px-8 sm:py-4"
+              className="inline-flex items-center rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-2xl sm:px-8 sm:py-4"
             >
               <Icon icon="mdi:rocket-launch" className="mr-2 h-5 w-5" />
               View All Projects

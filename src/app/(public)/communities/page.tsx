@@ -30,7 +30,6 @@ const communities = [
       "Leading environmental organization focused on forest restoration projects and carbon absorption across Indonesia.",
     projects: 12,
     carbonOffset: 5600,
-    members: 234,
   },
   {
     id: "COM002",
@@ -43,7 +42,6 @@ const communities = [
       "Community-based initiative that promotes renewable energy adoption through solar panel installation.",
     projects: 8,
     carbonOffset: 3200,
-    members: 156,
   },
   {
     id: "COM003",
@@ -56,7 +54,6 @@ const communities = [
       "Urban sustainability organization focused on waste management and circular economy solutions.",
     projects: 15,
     carbonOffset: 4200,
-    members: 189,
   },
   {
     id: "COM004",
@@ -69,7 +66,6 @@ const communities = [
       "Marine conservation group dedicated to protecting coastal ecosystems and reducing marine plastic waste.",
     projects: 6,
     carbonOffset: 2800,
-    members: 98,
   },
   {
     id: "COM005",
@@ -82,7 +78,6 @@ const communities = [
       "Regional coalition promoting wind energy development and sustainable power generation.",
     projects: 4,
     carbonOffset: 1800,
-    members: 67,
   },
   {
     id: "COM006",
@@ -95,7 +90,6 @@ const communities = [
       "Urban sustainability movement creating green spaces and promoting environmental awareness in cities.",
     projects: 10,
     carbonOffset: 3400,
-    members: 145,
   },
 ];
 
@@ -170,7 +164,7 @@ export default function CommunitiesPage() {
       {/* Filters Section */}
       <section className="py-8">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+          <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
             <CardContent className="p-6">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <div className="md:col-span-2">
@@ -252,7 +246,7 @@ export default function CommunitiesPage() {
                       {community.description}
                     </p>
 
-                    <div className="mb-4 grid grid-cols-3 gap-4 text-sm">
+                    <div className="mb-4 grid grid-cols-2 gap-4 text-sm">
                       <div className="text-center">
                         <div className="font-bold text-gray-900">
                           {community.projects}
@@ -265,12 +259,6 @@ export default function CommunitiesPage() {
                         </div>
                         <div className="text-gray-500">Tons CO₂</div>
                       </div>
-                      <div className="text-center">
-                        <div className="font-bold text-gray-900">
-                          {community.members}
-                        </div>
-                        <div className="text-gray-500">Members</div>
-                      </div>
                     </div>
 
                     <div className="mb-4 text-sm text-gray-500">
@@ -279,7 +267,7 @@ export default function CommunitiesPage() {
 
                     <Button
                       asChild
-                      className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-emerald-700"
+                      className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
                     >
                       <Link href={`/communities/${community.id}`}>
                         <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />
@@ -319,21 +307,11 @@ export default function CommunitiesPage() {
               <div className="space-x-4">
                 <Button
                   asChild
-                  className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-emerald-700"
+                  className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
                 >
                   <Link href="/register">
                     <Icon icon="mdi:account-plus" className="mr-2 h-4 w-4" />
                     Start Your Community
-                  </Link>
-                </Button>
-                <Button
-                  variant="outline"
-                  asChild
-                  className="rounded-lg border-2 border-emerald-500 font-bold text-emerald-600 transition-all duration-300 hover:scale-105"
-                >
-                  <Link href="/about">
-                    <Icon icon="mdi:information" className="mr-2 h-4 w-4" />
-                    Learn More
                   </Link>
                 </Button>
               </div>

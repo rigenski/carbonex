@@ -100,7 +100,7 @@ export default function AdminDashboardPage() {
       <div className="w-64 border-r border-gray-200 bg-white/80 backdrop-blur-md">
         <div className="p-6">
           <div className="mb-8 flex items-center space-x-3">
-                                  <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
               <Icon icon="mdi:shield-crown" className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -196,7 +196,7 @@ export default function AdminDashboardPage() {
               {stats.map((stat, index) => (
                 <Card
                   key={index}
-                  className="border-0 bg-white/80 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                  className="border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
@@ -231,7 +231,7 @@ export default function AdminDashboardPage() {
           {/* Content Grid */}
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
             {/* Recent Projects */}
-            <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+            <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
               <CardHeader>
                 <CardTitle className="text-2xl font-black text-gray-900">
                   Recent Projects
@@ -242,33 +242,41 @@ export default function AdminDashboardPage() {
                   {recentProjects.map((project) => (
                     <div
                       key={project.id}
-                      className="flex items-center justify-between rounded-lg bg-gray-50 p-4"
+                      className="group overflow-hidden rounded-lg border-0 bg-white/80 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
                     >
-                      <div className="flex-1">
-                        <h3 className="font-bold text-gray-900">
-                          {project.name}
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                          {project.community}
-                        </p>
-                        <div className="mt-2 flex items-center space-x-4 text-sm">
-                          <span className="text-gray-500">
-                            {project.carbonOffset} tons CO₂
-                          </span>
-                          <span className="text-gray-500">
-                            {project.volunteers} volunteers
-                          </span>
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h3 className="font-bold text-gray-900">
+                            {project.name}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            {project.community}
+                          </p>
+                          <div className="mt-2 grid grid-cols-2 gap-4 text-sm">
+                            <div>
+                              <div className="font-bold text-gray-900">
+                                {project.carbonOffset} tons
+                              </div>
+                              <div className="text-gray-500">CO₂ Offset</div>
+                            </div>
+                            <div>
+                              <div className="font-bold text-gray-900">
+                                {project.volunteers}
+                              </div>
+                              <div className="text-gray-500">Volunteers</div>
+                            </div>
+                          </div>
                         </div>
+                        <Badge
+                          className={`${
+                            project.status === "Active"
+                              ? "bg-emerald-500 text-white"
+                              : "bg-yellow-500 text-white"
+                          }`}
+                        >
+                          {project.status}
+                        </Badge>
                       </div>
-                      <Badge
-                        className={`${
-                          project.status === "Active"
-                            ? "bg-emerald-500 text-white"
-                            : "bg-yellow-500 text-white"
-                        }`}
-                      >
-                        {project.status}
-                      </Badge>
                     </div>
                   ))}
                 </div>
@@ -276,7 +284,7 @@ export default function AdminDashboardPage() {
             </Card>
 
             {/* Recent Communities */}
-            <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+            <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
               <CardHeader>
                 <CardTitle className="text-2xl font-black text-gray-900">
                   Recent Communities
@@ -287,32 +295,43 @@ export default function AdminDashboardPage() {
                   {recentCommunities.map((community) => (
                     <div
                       key={community.id}
-                      className="flex items-center justify-between rounded-lg bg-gray-50 p-4"
+                      className="group overflow-hidden rounded-lg border-0 bg-white/80 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
                     >
-                      <div className="flex-1">
-                        <h3 className="font-bold text-gray-900">
-                          {community.name}
-                        </h3>
-                        <p className="text-sm text-gray-500">
-                          {community.location}
-                        </p>
-                        <div className="mt-2 flex items-center space-x-4 text-sm">
-                          <span className="text-gray-500">
-                            {community.projects} projects
-                          </span>
-                          <span className="text-gray-500">
-                            {community.members} members
-                          </span>
-                          <span className="text-gray-500">
-                            {community.carbonOffset} tons CO₂
-                          </span>
+                      <div className="flex items-center justify-between">
+                        <div className="flex-1">
+                          <h3 className="font-bold text-gray-900">
+                            {community.name}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            {community.location}
+                          </p>
+                          <div className="mt-2 grid grid-cols-3 gap-4 text-sm">
+                            <div>
+                              <div className="font-bold text-gray-900">
+                                {community.projects}
+                              </div>
+                              <div className="text-gray-500">Projects</div>
+                            </div>
+                            <div>
+                              <div className="font-bold text-gray-900">
+                                {community.members}
+                              </div>
+                              <div className="text-gray-500">Members</div>
+                            </div>
+                            <div>
+                              <div className="font-bold text-gray-900">
+                                {community.carbonOffset} tons
+                              </div>
+                              <div className="text-gray-500">CO₂ Offset</div>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
-                        <Icon
-                          icon="mdi:account-group"
-                          className="h-5 w-5 text-white"
-                        />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
+                          <Icon
+                            icon="mdi:account-group"
+                            className="h-5 w-5 text-white"
+                          />
+                        </div>
                       </div>
                     </div>
                   ))}

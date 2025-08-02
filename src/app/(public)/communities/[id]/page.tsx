@@ -23,7 +23,6 @@ const community = {
     "Green Earth Indonesia is a pioneering environmental organization dedicated to combating climate change through innovative forest restoration and carbon absorption projects. Founded in 2019, we have successfully implemented over 50 projects across Indonesia, working closely with local communities to ensure sustainable environmental impact.",
   projects: 12,
   carbonOffset: 5600,
-  members: 234,
   activeVolunteers: 89,
   gallery: [
     "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&crop=center",
@@ -37,6 +36,8 @@ const community = {
       status: "Active",
       carbonOffset: 1200,
       volunteers: 45,
+      description:
+        "Protecting coastal mangrove ecosystems to prevent erosion and support marine life.",
       image:
         "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop&crop=center",
     },
@@ -46,6 +47,8 @@ const community = {
       status: "Active",
       carbonOffset: 800,
       volunteers: 32,
+      description:
+        "Creating green spaces in urban areas to improve air quality and biodiversity.",
       image:
         "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&crop=center",
     },
@@ -55,6 +58,8 @@ const community = {
       status: "Completed",
       carbonOffset: 2000,
       volunteers: 67,
+      description:
+        "Large-scale forest restoration project to combat deforestation and climate change.",
       image:
         "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=250&fit=crop&crop=center",
     },
@@ -103,7 +108,7 @@ export default function CommunityDetailPage() {
               <p className="mb-6 text-lg text-white/90">
                 {community.description}
               </p>
-              <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              <div className="grid grid-cols-3 gap-4">
                 <div className="text-center">
                   <div className="text-2xl font-black text-white">
                     {community.projects}
@@ -115,12 +120,6 @@ export default function CommunityDetailPage() {
                     {community.carbonOffset}
                   </div>
                   <div className="text-sm text-white/70">Tons CO₂</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-black text-white">
-                    {community.members}
-                  </div>
-                  <div className="text-sm text-white/70">Members</div>
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-black text-white">
@@ -166,7 +165,7 @@ export default function CommunityDetailPage() {
               <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
                 {/* Community Details */}
                 <div className="space-y-6 lg:col-span-2">
-                  <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+                  <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
                     <CardHeader>
                       <CardTitle className="text-2xl font-black text-gray-900">
                         About Us
@@ -180,7 +179,7 @@ export default function CommunityDetailPage() {
                   </Card>
 
                   {/* Community Gallery */}
-                  <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+                  <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
                     <CardHeader>
                       <CardTitle className="text-2xl font-black text-gray-900">
                         Community Gallery
@@ -208,49 +207,7 @@ export default function CommunityDetailPage() {
 
                 {/* Community Stats */}
                 <div className="space-y-6">
-                  <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
-                    <CardHeader>
-                      <CardTitle className="text-xl font-black text-gray-900">
-                        Community Stats
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                      <div className="text-center">
-                        <div className="text-3xl font-black text-emerald-600">
-                          {community.projects}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          Active Projects
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-black text-emerald-600">
-                          {community.carbonOffset}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          Tons CO₂ Offset
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-black text-emerald-600">
-                          {community.members}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          Total Members
-                        </div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-black text-emerald-600">
-                          {community.activeVolunteers}
-                        </div>
-                        <div className="text-sm text-gray-500">
-                          Active Volunteers
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+                  <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
                     <CardHeader>
                       <CardTitle className="text-xl font-black text-gray-900">
                         Quick Actions
@@ -271,7 +228,7 @@ export default function CommunityDetailPage() {
             </TabsContent>
 
             <TabsContent value="projects" className="space-y-6">
-              <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+              <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
                 <CardHeader>
                   <CardTitle className="text-2xl font-black text-gray-900">
                     Community Projects
@@ -300,6 +257,10 @@ export default function CommunityDetailPage() {
                           <h3 className="mb-2 text-xl font-black text-gray-900">
                             {project.name}
                           </h3>
+                          <p className="mb-4 text-sm text-gray-600">
+                            {project.description}
+                          </p>
+
                           <div className="mb-4 grid grid-cols-2 gap-4 text-sm">
                             <div>
                               <div className="font-bold text-gray-900">
@@ -314,13 +275,19 @@ export default function CommunityDetailPage() {
                               <div className="text-gray-500">Volunteers</div>
                             </div>
                           </div>
+
+                          <div className="mb-4 text-sm text-gray-500">
+                            <div className="font-medium">{community.name}</div>
+                            <div>Active Project</div>
+                          </div>
+
                           <Button
                             asChild
                             className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
                           >
                             <Link href={`/projects/${project.id}`}>
                               <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />
-                              View Project
+                              View Details
                             </Link>
                           </Button>
                         </CardContent>

@@ -118,7 +118,7 @@ export default function CommunityDashboardPage() {
       <div className="w-64 border-r border-gray-200 bg-white/80 backdrop-blur-md">
         <div className="p-6">
           <div className="mb-8 flex items-center space-x-3">
-                            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
+            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-600">
               <Icon icon="mdi:account-group" className="h-6 w-6 text-white" />
             </div>
             <div>
@@ -216,7 +216,7 @@ export default function CommunityDashboardPage() {
               {stats.map((stat, index) => (
                 <Card
                   key={index}
-                  className="border-0 bg-white/80 shadow-xl backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+                  className="border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
                 >
                   <CardContent className="p-6">
                     <div className="flex items-center justify-between">
@@ -252,7 +252,7 @@ export default function CommunityDashboardPage() {
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
             {/* Active Projects */}
             <div className="lg:col-span-2">
-              <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+              <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
                 <CardHeader>
                   <CardTitle className="text-2xl font-black text-gray-900">
                     Active Projects
@@ -263,7 +263,7 @@ export default function CommunityDashboardPage() {
                     {activeProjects.map((project) => (
                       <div
                         key={project.id}
-                        className="rounded-lg bg-gray-50 p-4"
+                        className="group overflow-hidden rounded-lg border-0 bg-white/80 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
                       >
                         <div className="mb-3 flex items-center justify-between">
                           <h3 className="font-bold text-gray-900">
@@ -279,13 +279,19 @@ export default function CommunityDashboardPage() {
                             {project.status}
                           </Badge>
                         </div>
-                        <div className="mb-3 flex items-center space-x-4 text-sm">
-                          <span className="text-gray-500">
-                            {project.carbonOffset} tons CO₂
-                          </span>
-                          <span className="text-gray-500">
-                            {project.volunteers} volunteers
-                          </span>
+                        <div className="mb-3 grid grid-cols-2 gap-4 text-sm">
+                          <div>
+                            <div className="font-bold text-gray-900">
+                              {project.carbonOffset} tons
+                            </div>
+                            <div className="text-gray-500">CO₂ Offset</div>
+                          </div>
+                          <div>
+                            <div className="font-bold text-gray-900">
+                              {project.volunteers}
+                            </div>
+                            <div className="text-gray-500">Volunteers</div>
+                          </div>
                         </div>
                         <div className="mb-2">
                           <div className="flex justify-between text-sm">
@@ -311,7 +317,7 @@ export default function CommunityDashboardPage() {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Recent Members */}
-              <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+              <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
                 <CardHeader>
                   <CardTitle className="text-xl font-black text-gray-900">
                     Recent Members
@@ -339,7 +345,7 @@ export default function CommunityDashboardPage() {
               </Card>
 
               {/* Upcoming Events */}
-              <Card className="border-0 bg-white/80 shadow-xl backdrop-blur-md">
+              <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
                 <CardHeader>
                   <CardTitle className="text-xl font-black text-gray-900">
                     Upcoming Events
