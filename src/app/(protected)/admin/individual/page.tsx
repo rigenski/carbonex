@@ -7,62 +7,71 @@ import { Button } from "@/components/ui/button";
 import { Icon } from "@iconify/react";
 
 // Mock data
-const projects = [
+const individuals = [
   {
-    id: "PRJ001",
-    name: "Forest Restoration Initiative",
-    community: "Green Earth Indonesia",
+    id: "IND001",
+    name: "Sarah Johnson",
+    email: "sarah.johnson@email.com",
     status: "Active",
+    joinDate: "2024-01-15",
+    projectsJoined: 8,
+    carbonOffset: 2400,
+    location: "Jakarta, Indonesia",
+  },
+  {
+    id: "IND002",
+    name: "Michael Chen",
+    email: "michael.chen@email.com",
+    status: "Active",
+    joinDate: "2024-01-20",
+    projectsJoined: 5,
+    carbonOffset: 1800,
+    location: "Bandung, Indonesia",
+  },
+  {
+    id: "IND003",
+    name: "Emma Davis",
+    email: "emma.davis@email.com",
+    status: "Inactive",
+    joinDate: "2024-01-25",
+    projectsJoined: 3,
     carbonOffset: 1200,
-    volunteers: 45,
-    budget: 50000,
-    startDate: "2024-01-15",
-    endDate: "2024-12-31",
+    location: "Surabaya, Indonesia",
   },
   {
-    id: "PRJ002",
-    name: "Urban Tree Planting",
-    community: "City Green Initiative",
+    id: "IND004",
+    name: "David Wilson",
+    email: "david.wilson@email.com",
     status: "Active",
-    carbonOffset: 800,
-    volunteers: 32,
-    budget: 35000,
-    startDate: "2024-02-01",
-    endDate: "2024-11-30",
-  },
-  {
-    id: "PRJ003",
-    name: "Mangrove Conservation",
-    community: "Coastal Guardians",
-    status: "Planning",
-    carbonOffset: 1500,
-    volunteers: 28,
-    budget: 75000,
-    startDate: "2024-03-01",
-    endDate: "2025-02-28",
-  },
-  {
-    id: "PRJ004",
-    name: "Solar Panel Installation",
-    community: "Solar Future Collective",
-    status: "Completed",
-    carbonOffset: 2000,
-    volunteers: 60,
-    budget: 100000,
-    startDate: "2023-06-01",
-    endDate: "2024-01-31",
+    joinDate: "2024-02-01",
+    projectsJoined: 12,
+    carbonOffset: 3600,
+    location: "Medan, Indonesia",
   },
 ];
 
-export default function AdminProjectPage() {
+export default function AdminIndividualPage() {
   const [selectedStatus, setSelectedStatus] = useState("all");
 
-  const filteredProjects =
+  const filteredIndividuals =
     selectedStatus === "all"
-      ? projects
-      : projects.filter(
-          (project) => project.status.toLowerCase() === selectedStatus,
+      ? individuals
+      : individuals.filter(
+          (ind) => ind.status.toLowerCase() === selectedStatus,
         );
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Active":
+        return "bg-emerald-500 text-white";
+      case "Inactive":
+        return "bg-gray-500 text-white";
+      case "Suspended":
+        return "bg-red-500 text-white";
+      default:
+        return "bg-gray-500 text-white";
+    }
+  };
 
   return (
     <div className="flex-1 overflow-auto">
@@ -71,15 +80,15 @@ export default function AdminProjectPage() {
         <div className="flex items-center justify-between">
           <div>
             <h1 className="text-2xl font-black text-gray-900">
-              Project Management
+              Individual Management
             </h1>
             <p className="text-gray-600">
-              Manage all carbon credit projects across the platform
+              Manage individual users and their contributions
             </p>
           </div>
           <Button className="bg-emerald-600 hover:bg-emerald-700">
             <Icon icon="mdi:plus" className="mr-2 h-4 w-4" />
-            Add New Project
+            Add New Individual
           </Button>
         </div>
       </div>
@@ -96,71 +105,63 @@ export default function AdminProjectPage() {
             onChange={(e) => setSelectedStatus(e.target.value)}
             className="rounded-lg border-gray-200 bg-white px-3 py-2 text-sm"
           >
-            <option value="all">All Projects</option>
+            <option value="all">All Individuals</option>
             <option value="active">Active</option>
-            <option value="planning">Planning</option>
-            <option value="completed">Completed</option>
+            <option value="inactive">Inactive</option>
+            <option value="suspended">Suspended</option>
           </select>
         </div>
 
-        {/* Projects Grid */}
+        {/* Individuals Grid */}
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {filteredProjects.map((project) => (
+          {filteredIndividuals.map((individual) => (
             <Card
-              key={project.id}
+              key={individual.id}
               className="border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
             >
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-xl font-black text-gray-900">
-                    {project.name}
+                    {individual.name}
                   </CardTitle>
-                  <Badge
-                    className={`${
-                      project.status === "Active"
-                        ? "bg-emerald-500 text-white"
-                        : project.status === "Completed"
-                          ? "bg-blue-500 text-white"
-                          : "bg-yellow-500 text-white"
-                    }`}
-                  >
-                    {project.status}
+                  <Badge className={getStatusColor(individual.status)}>
+                    {individual.status}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-500">{project.community}</p>
+                <p className="text-sm text-gray-500">{individual.email}</p>
               </CardHeader>
               <CardContent>
                 <div className="mb-4 grid grid-cols-2 gap-4">
                   <div>
                     <div className="text-sm font-bold text-gray-500">
+                      Location
+                    </div>
+                    <div className="text-lg font-black text-gray-900">
+                      {individual.location}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-gray-500">
+                      Join Date
+                    </div>
+                    <div className="text-sm text-gray-900">
+                      {individual.joinDate}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-gray-500">
+                      Projects Joined
+                    </div>
+                    <div className="text-lg font-black text-gray-900">
+                      {individual.projectsJoined}
+                    </div>
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-gray-500">
                       Carbon Offset
                     </div>
                     <div className="text-lg font-black text-gray-900">
-                      {project.carbonOffset} tons
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-gray-500">
-                      Volunteers
-                    </div>
-                    <div className="text-lg font-black text-gray-900">
-                      {project.volunteers}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-gray-500">
-                      Budget
-                    </div>
-                    <div className="text-lg font-black text-gray-900">
-                      ${project.budget.toLocaleString()}
-                    </div>
-                  </div>
-                  <div>
-                    <div className="text-sm font-bold text-gray-500">
-                      Duration
-                    </div>
-                    <div className="text-sm text-gray-900">
-                      {project.startDate} - {project.endDate}
+                      {individual.carbonOffset} tons
                     </div>
                   </div>
                 </div>

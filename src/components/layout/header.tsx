@@ -78,7 +78,7 @@ export default function Header() {
                   {user.role === "community" && (
                     <Button
                       asChild
-                      className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-emerald-700"
+                      className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
                     >
                       <Link href="/projects/create">
                         <Icon icon="mdi:plus" className="mr-2 h-4 w-4" />
@@ -142,8 +142,9 @@ export default function Header() {
                     <Link href="/community/dashboard">Community</Link>
                   </Button>
                   <Button
+                    variant="ghost"
                     asChild
-                    className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:bg-emerald-700"
+                    className="rounded-lg font-bold hover:bg-emerald-50"
                   >
                     <Link href="/individual/dashboard">Individual</Link>
                   </Button>

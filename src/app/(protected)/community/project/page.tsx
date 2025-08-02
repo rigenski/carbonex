@@ -11,50 +11,50 @@ const projects = [
   {
     id: "PRJ001",
     name: "Forest Restoration Initiative",
-    community: "Green Earth Indonesia",
     status: "Active",
     carbonOffset: 1200,
     volunteers: 45,
     budget: 50000,
     startDate: "2024-01-15",
     endDate: "2024-12-31",
+    description: "Restoring degraded forest areas and planting native trees",
   },
   {
     id: "PRJ002",
     name: "Urban Tree Planting",
-    community: "City Green Initiative",
     status: "Active",
     carbonOffset: 800,
     volunteers: 32,
     budget: 35000,
     startDate: "2024-02-01",
     endDate: "2024-11-30",
+    description: "Planting trees in urban areas to improve air quality",
   },
   {
     id: "PRJ003",
     name: "Mangrove Conservation",
-    community: "Coastal Guardians",
     status: "Planning",
     carbonOffset: 1500,
     volunteers: 28,
     budget: 75000,
     startDate: "2024-03-01",
     endDate: "2025-02-28",
+    description: "Protecting and restoring mangrove ecosystems",
   },
   {
     id: "PRJ004",
-    name: "Solar Panel Installation",
-    community: "Solar Future Collective",
+    name: "Community Garden",
     status: "Completed",
-    carbonOffset: 2000,
-    volunteers: 60,
-    budget: 100000,
+    carbonOffset: 400,
+    volunteers: 20,
+    budget: 15000,
     startDate: "2023-06-01",
     endDate: "2024-01-31",
+    description: "Creating community gardens for sustainable food production",
   },
 ];
 
-export default function AdminProjectPage() {
+export default function CommunityProjectPage() {
   const [selectedStatus, setSelectedStatus] = useState("all");
 
   const filteredProjects =
@@ -63,6 +63,21 @@ export default function AdminProjectPage() {
       : projects.filter(
           (project) => project.status.toLowerCase() === selectedStatus,
         );
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Active":
+        return "bg-emerald-500 text-white";
+      case "Planning":
+        return "bg-yellow-500 text-white";
+      case "Completed":
+        return "bg-blue-500 text-white";
+      case "On Hold":
+        return "bg-gray-500 text-white";
+      default:
+        return "bg-gray-500 text-white";
+    }
+  };
 
   return (
     <div className="flex-1 overflow-auto">
@@ -74,12 +89,12 @@ export default function AdminProjectPage() {
               Project Management
             </h1>
             <p className="text-gray-600">
-              Manage all carbon credit projects across the platform
+              Manage your community's carbon credit projects
             </p>
           </div>
           <Button className="bg-emerald-600 hover:bg-emerald-700">
             <Icon icon="mdi:plus" className="mr-2 h-4 w-4" />
-            Add New Project
+            Create New Project
           </Button>
         </div>
       </div>
@@ -100,6 +115,7 @@ export default function AdminProjectPage() {
             <option value="active">Active</option>
             <option value="planning">Planning</option>
             <option value="completed">Completed</option>
+            <option value="on hold">On Hold</option>
           </select>
         </div>
 
@@ -115,19 +131,11 @@ export default function AdminProjectPage() {
                   <CardTitle className="text-xl font-black text-gray-900">
                     {project.name}
                   </CardTitle>
-                  <Badge
-                    className={`${
-                      project.status === "Active"
-                        ? "bg-emerald-500 text-white"
-                        : project.status === "Completed"
-                          ? "bg-blue-500 text-white"
-                          : "bg-yellow-500 text-white"
-                    }`}
-                  >
+                  <Badge className={getStatusColor(project.status)}>
                     {project.status}
                   </Badge>
                 </div>
-                <p className="text-sm text-gray-500">{project.community}</p>
+                <p className="text-sm text-gray-600">{project.description}</p>
               </CardHeader>
               <CardContent>
                 <div className="mb-4 grid grid-cols-2 gap-4">

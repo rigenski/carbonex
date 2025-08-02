@@ -22,27 +22,9 @@ export default function IndividualLayout({
     },
     {
       name: "My Projects",
-      href: "/individual/projects",
+      href: "/individual/project",
       icon: "mdi:leaf",
-      current: pathname === "/individual/projects",
-    },
-    {
-      name: "My Contributions",
-      href: "/individual/contributions",
-      icon: "mdi:handshake",
-      current: pathname === "/individual/contributions",
-    },
-    {
-      name: "Carbon Credits",
-      href: "/individual/credits",
-      icon: "mdi:trending-up",
-      current: pathname === "/individual/credits",
-    },
-    {
-      name: "Profile",
-      href: "/individual/profile",
-      icon: "mdi:account",
-      current: pathname === "/individual/profile",
+      current: pathname === "/individual/project",
     },
   ];
 

@@ -22,27 +22,9 @@ export default function CommunityLayout({
     },
     {
       name: "Projects",
-      href: "/community/projects",
+      href: "/community/project",
       icon: "mdi:leaf",
-      current: pathname === "/community/projects",
-    },
-    {
-      name: "Members",
-      href: "/community/members",
-      icon: "mdi:account-group",
-      current: pathname === "/community/members",
-    },
-    {
-      name: "Carbon Credits",
-      href: "/community/credits",
-      icon: "mdi:trending-up",
-      current: pathname === "/community/credits",
-    },
-    {
-      name: "Settings",
-      href: "/community/settings",
-      icon: "mdi:cog",
-      current: pathname === "/community/settings",
+      current: pathname === "/community/project",
     },
   ];
 

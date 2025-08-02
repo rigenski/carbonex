@@ -3,9 +3,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Icon } from "@iconify/react";
-import { useState } from "react";
 
-// Mock data
+// Mock data - hanya data yang relevan untuk individual
 const stats = [
   {
     title: "Projects Joined",
@@ -37,7 +36,7 @@ const stats = [
   },
 ];
 
-const recentProjects = [
+const myActiveProjects = [
   {
     id: "PRJ001",
     name: "Forest Restoration Initiative",
@@ -46,6 +45,7 @@ const recentProjects = [
     carbonOffset: 1200,
     volunteers: 45,
     role: "Volunteer",
+    hoursContributed: 156,
   },
   {
     id: "PRJ002",
@@ -55,6 +55,7 @@ const recentProjects = [
     carbonOffset: 800,
     volunteers: 32,
     role: "Team Leader",
+    hoursContributed: 89,
   },
   {
     id: "PRJ003",
@@ -64,59 +65,23 @@ const recentProjects = [
     carbonOffset: 1500,
     volunteers: 28,
     role: "Volunteer",
-  },
-];
-
-const achievements = [
-  {
-    title: "First Project",
-    description: "Joined your first environmental project",
-    icon: "mdi:trophy",
-    date: "2024-01-15",
-  },
-  {
-    title: "100 Hours",
-    description: "Completed 100 volunteer hours",
-    icon: "mdi:clock-check",
-    date: "2024-02-20",
-  },
-  {
-    title: "Carbon Hero",
-    description: "Helped offset 1 ton of CO₂",
-    icon: "mdi:leaf-circle",
-    date: "2024-03-10",
+    hoursContributed: 45,
   },
 ];
 
 export default function IndividualDashboardPage() {
-  const [selectedPeriod, setSelectedPeriod] = useState("7d");
-
   return (
     <div className="flex-1 overflow-auto">
       {/* Header */}
       <div className="border-b border-gray-200 bg-white/80 p-6 backdrop-blur-md">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-black text-gray-900">
-              Welcome Back, Sarah!
-            </h1>
-            <p className="text-gray-600">
-              Track your environmental impact and continue making a difference
-              through carbon credit projects.
-            </p>
-          </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-gray-600">Period:</span>
-            <select
-              value={selectedPeriod}
-              onChange={(e) => setSelectedPeriod(e.target.value)}
-              className="rounded-lg border-gray-200 bg-white/50 px-3 py-1 text-sm backdrop-blur-sm"
-            >
-              <option value="7d">Last 7 days</option>
-              <option value="30d">Last 30 days</option>
-              <option value="90d">Last 90 days</option>
-            </select>
-          </div>
+        <div>
+          <h1 className="text-2xl font-black text-gray-900">
+            Welcome Back, Sarah!
+          </h1>
+          <p className="text-gray-600">
+            Track your environmental impact and continue making a difference
+            through carbon credit projects.
+          </p>
         </div>
       </div>
 
@@ -164,17 +129,17 @@ export default function IndividualDashboardPage() {
         </div>
 
         {/* Content Grid */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          {/* Active Projects */}
+        <div className="grid grid-cols-1 gap-8">
+          {/* My Active Projects */}
           <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
             <CardHeader>
               <CardTitle className="text-2xl font-black text-gray-900">
-                Your Active Projects
+                My Active Projects
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                {recentProjects.map((project) => (
+                {myActiveProjects.map((project) => (
                   <div
                     key={project.id}
                     className="group overflow-hidden rounded-lg border-0 bg-white/80 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
@@ -196,9 +161,9 @@ export default function IndividualDashboardPage() {
                           </div>
                           <div>
                             <div className="font-bold text-gray-900">
-                              {project.volunteers}
+                              {project.hoursContributed}h
                             </div>
-                            <div className="text-gray-500">Volunteers</div>
+                            <div className="text-gray-500">Hours</div>
                           </div>
                         </div>
                         <div className="mt-2">
@@ -216,43 +181,6 @@ export default function IndividualDashboardPage() {
                       >
                         {project.status}
                       </Badge>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* Achievements */}
-          <Card className="border-0 bg-white/80 shadow-lg backdrop-blur-md">
-            <CardHeader>
-              <CardTitle className="text-2xl font-black text-gray-900">
-                Your Achievements
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {achievements.map((achievement, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center space-x-4 rounded-lg bg-gray-50 p-4"
-                  >
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-emerald-600">
-                      <Icon
-                        icon={achievement.icon}
-                        className="h-6 w-6 text-white"
-                      />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-bold text-gray-900">
-                        {achievement.title}
-                      </h3>
-                      <p className="text-sm text-gray-500">
-                        {achievement.description}
-                      </p>
-                      <p className="text-xs text-gray-400">
-                        {achievement.date}
-                      </p>
                     </div>
                   </div>
                 ))}

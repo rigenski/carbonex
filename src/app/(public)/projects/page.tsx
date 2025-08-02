@@ -23,13 +23,16 @@ const projects = [
     id: "PRJ001",
     name: "Forest Restoration Initiative",
     status: "Active",
+    type: "Reforestation",
     description:
-      "Corporate-funded reforestation project with professional management team.",
+      "Corporate-funded reforestation project with professional management team. This project aims to restore degraded forest areas and create sustainable carbon sinks through strategic tree planting and ecosystem restoration.",
     community: "Ecological Balance Corporation",
     carbonOffset: 1200,
     volunteers: 45,
+    maxVolunteers: 80,
     startDate: "2024-12-01",
     endDate: "2025-06-30",
+    location: "Sumatra, Indonesia",
     image:
       "https://images.unsplash.com/photo-1574263867128-9c1a5c5f4cf3?w=400&h=250&fit=crop&crop=center",
   },
@@ -37,13 +40,16 @@ const projects = [
     id: "PRJ002",
     name: "Urban Green Spaces",
     status: "Active",
+    type: "Urban Greening",
     description:
-      "Creating green spaces in urban areas to improve air quality and biodiversity.",
+      "Creating green spaces in urban areas to improve air quality and biodiversity. This initiative focuses on transforming concrete jungles into vibrant, sustainable ecosystems that benefit both humans and wildlife.",
     community: "City Green Initiative",
     carbonOffset: 800,
     volunteers: 32,
+    maxVolunteers: 60,
     startDate: "2024-11-15",
     endDate: "2025-05-15",
+    location: "Jakarta, Indonesia",
     image:
       "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=250&fit=crop&crop=center",
   },
@@ -51,13 +57,16 @@ const projects = [
     id: "PRJ003",
     name: "Mangrove Conservation",
     status: "Active",
+    type: "Mangrove Conservation",
     description:
-      "Protecting coastal mangrove ecosystems to prevent erosion and support marine life.",
+      "Protecting coastal mangrove ecosystems to prevent erosion and support marine life. This project focuses on preserving critical coastal habitats that serve as natural barriers against climate change impacts.",
     community: "Coastal Guardians",
     carbonOffset: 1500,
     volunteers: 28,
+    maxVolunteers: 50,
     startDate: "2024-10-01",
     endDate: "2025-09-30",
+    location: "Bali, Indonesia",
     image:
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop&crop=center",
   },
@@ -65,13 +74,16 @@ const projects = [
     id: "PRJ004",
     name: "Community Garden Network",
     status: "Active",
+    type: "Community Garden",
     description:
-      "Establishing community gardens to promote local food production and education.",
+      "Establishing community gardens to promote local food production and education. This project empowers communities to grow their own food while creating green spaces and fostering social connections.",
     community: "Green Thumb Collective",
     carbonOffset: 600,
     volunteers: 55,
+    maxVolunteers: 100,
     startDate: "2024-09-01",
     endDate: "2025-08-31",
+    location: "Bandung, Indonesia",
     image:
       "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=400&h=250&fit=crop&crop=center",
   },
@@ -79,13 +91,16 @@ const projects = [
     id: "PRJ005",
     name: "Watershed Protection",
     status: "Active",
+    type: "Watershed Protection",
     description:
-      "Protecting watershed areas to ensure clean water supply and prevent flooding.",
+      "Protecting watershed areas to ensure clean water supply and prevent flooding. This critical project safeguards water resources and maintains ecosystem balance in vulnerable watershed regions.",
     community: "Water Guardians",
     carbonOffset: 2000,
     volunteers: 40,
+    maxVolunteers: 75,
     startDate: "2024-08-15",
     endDate: "2025-07-15",
+    location: "Yogyakarta, Indonesia",
     image:
       "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=250&fit=crop&crop=center",
   },
@@ -93,13 +108,16 @@ const projects = [
     id: "PRJ006",
     name: "Renewable Energy Installation",
     status: "Active",
+    type: "Renewable Energy",
     description:
-      "Installing solar panels and wind turbines in rural communities.",
+      "Installing solar panels and wind turbines in rural communities. This project brings clean, sustainable energy to underserved areas while reducing carbon emissions and energy costs.",
     community: "Clean Energy Alliance",
     carbonOffset: 3000,
     volunteers: 25,
+    maxVolunteers: 40,
     startDate: "2024-07-01",
     endDate: "2025-06-30",
+    location: "Surabaya, Indonesia",
     image:
       "https://images.unsplash.com/photo-1466611653911-95081537e5b7?w=400&h=250&fit=crop&crop=center",
   },
@@ -133,7 +151,9 @@ export default function ProjectsPage() {
           project.description
             .toLowerCase()
             .includes(searchTerm.toLowerCase()) ||
-          project.community.toLowerCase().includes(searchTerm.toLowerCase()),
+          project.community.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          project.type.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          project.location.toLowerCase().includes(searchTerm.toLowerCase()),
       );
     }
 
@@ -144,11 +164,9 @@ export default function ProjectsPage() {
       );
     }
 
-    // Filter by type (simplified for demo)
+    // Filter by type
     if (selectedType !== "All") {
-      filtered = filtered.filter((project) =>
-        project.name.includes(selectedType),
-      );
+      filtered = filtered.filter((project) => project.type === selectedType);
     }
 
     // Sort
@@ -305,15 +323,21 @@ export default function ProjectsPage() {
                       className="object-cover transition-transform duration-300 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-black/50"></div>
-                    <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
-                      {project.status}
-                    </Badge>
                   </div>
                   <CardContent className="p-6">
+                    <div className="mb-3 flex items-center justify-between">
+                      <Badge className="bg-emerald-100 text-emerald-800">
+                        {project.type}
+                      </Badge>
+                      <Badge className="bg-emerald-500 text-white">
+                        {project.status}
+                      </Badge>
+                    </div>
+
                     <h3 className="mb-2 text-xl font-black text-gray-900">
                       {project.name}
                     </h3>
-                    <p className="mb-4 text-sm text-gray-600">
+                    <p className="mb-4 line-clamp-3 text-sm text-gray-600">
                       {project.description}
                     </p>
 
@@ -326,16 +350,29 @@ export default function ProjectsPage() {
                       </div>
                       <div>
                         <div className="font-bold text-gray-900">
-                          {project.volunteers}
+                          {project.volunteers}/{project.maxVolunteers}
                         </div>
                         <div className="text-gray-500">Volunteers</div>
                       </div>
                     </div>
 
-                    <div className="mb-4 text-sm text-gray-500">
-                      <div className="font-medium">{project.community}</div>
-                      <div>
-                        {project.startDate} - {project.endDate}
+                    <div className="mb-4 space-y-2 text-sm text-gray-500">
+                      <div className="flex items-center">
+                        <Icon
+                          icon="mdi:account-group"
+                          className="mr-2 h-4 w-4"
+                        />
+                        <span className="font-medium">{project.community}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Icon icon="mdi:map-marker" className="mr-2 h-4 w-4" />
+                        <span>{project.location}</span>
+                      </div>
+                      <div className="flex items-center">
+                        <Icon icon="mdi:calendar" className="mr-2 h-4 w-4" />
+                        <span>
+                          {project.startDate} - {project.endDate}
+                        </span>
                       </div>
                     </div>
 

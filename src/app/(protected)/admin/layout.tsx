@@ -27,28 +27,22 @@ export default function AdminLayout({
       current: pathname === "/admin/project",
     },
     {
+      name: "Transactions",
+      href: "/admin/transaction",
+      icon: "mdi:bank-transfer",
+      current: pathname === "/admin/transaction",
+    },
+    {
+      name: "Individuals",
+      href: "/admin/individual",
+      icon: "mdi:account",
+      current: pathname === "/admin/individual",
+    },
+    {
       name: "Communities",
       href: "/admin/community",
       icon: "mdi:account-group",
       current: pathname === "/admin/community",
-    },
-    {
-      name: "Users",
-      href: "/admin/users",
-      icon: "mdi:account-multiple",
-      current: pathname === "/admin/users",
-    },
-    {
-      name: "Analytics",
-      href: "/admin/analytics",
-      icon: "mdi:chart-line",
-      current: pathname === "/admin/analytics",
-    },
-    {
-      name: "Settings",
-      href: "/admin/settings",
-      icon: "mdi:cog",
-      current: pathname === "/admin/settings",
     },
   ];
 
