@@ -1,7 +1,5 @@
-import { authVerifyToken } from "@/services/auth";
 import { TAuthIsLogin, TAuthUser } from "@/stores/auth";
 import { getSession } from "@/utils/session";
-import { redirect } from "next/navigation";
 import React from "react";
 import Providers from "./_components/providers";
 
@@ -12,26 +10,26 @@ type TLayoutProps = {
 export default async function Layout({ children }: TLayoutProps) {
   const session = await getSession();
 
-  let isLogin: TAuthIsLogin = false;
-  let user: TAuthUser | null = null;
+  const isLogin: TAuthIsLogin = false;
+  const user: TAuthUser | null = null;
 
-  if (session?.accessToken) {
-    await authVerifyToken({ token: session?.accessToken })
-      .then((response) => {
-        isLogin = true;
-        user = response?.content?.user?.email ? response?.content?.user : null;
-      })
-      .catch(async () => {
-        isLogin = false;
-        user = null;
+  // if (session?.accessToken) {
+  //   await authVerifyToken({ token: session?.accessToken })
+  //     .then((response) => {
+  //       isLogin = true;
+  //       user = response?.content?.user?.email ? response?.content?.user : null;
+  //     })
+  //     .catch(async () => {
+  //       isLogin = false;
+  //       user = null;
 
-        redirect("/api/logout");
-      });
-  }
+  //       redirect("/api/logout");
+  //     });
+  // }
 
-  if (isLogin) {
-    redirect("/dashboard");
-  }
+  // if (isLogin) {
+  //   redirect("/dashboard");
+  // }
 
   return (
     <Providers
