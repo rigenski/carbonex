@@ -134,7 +134,7 @@ export default function AdminDashboardPage() {
             {stats.map((stat, index) => (
               <Card
                 key={index}
-                className="border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                className="border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl"
               >
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
@@ -180,7 +180,7 @@ export default function AdminDashboardPage() {
                 {recentProjects.map((project) => (
                   <div
                     key={project.id}
-                    className="group overflow-hidden rounded-lg border-0 bg-white/80 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                    className="group overflow-hidden rounded-lg border-0 bg-white/80 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">
@@ -233,7 +233,7 @@ export default function AdminDashboardPage() {
                 {recentCommunities.map((community) => (
                   <div
                     key={community.id}
-                    className="group overflow-hidden rounded-lg border-0 bg-white/80 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                    className="group overflow-hidden rounded-lg border-0 bg-white/80 p-4 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex-1">

@@ -37,7 +37,7 @@ export default function Header() {
                   alt="CarbonEx Logo"
                   width={32}
                   height={32}
-                  className="h-8 w-8 transition-transform duration-300 group-hover:scale-110"
+                  className="h-8 w-8 transition-transform duration-300"
                 />
               </div>
               <span className="ml-3 text-xl font-black text-emerald-600">
@@ -78,7 +78,7 @@ export default function Header() {
                   {user.role === "community" && (
                     <Button
                       asChild
-                      className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
+                      className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl"
                     >
                       <Link href="/projects/create">
                         <Icon icon="mdi:plus" className="mr-2 h-4 w-4" />

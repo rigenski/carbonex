@@ -165,14 +165,14 @@ export default function ProjectDetailPage() {
             <TabsList className="grid h-10 grid-cols-2 rounded-xl border border-gray-200 bg-white shadow-lg">
               <TabsTrigger
                 value="overview"
-                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 hover:scale-102 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />
                 <span>Overview</span>
               </TabsTrigger>
               <TabsTrigger
                 value="volunteers"
-                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 hover:scale-102 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 <Icon icon="mdi:account-multiple" className="mr-2 h-4 w-4" />
                 <span>Volunteers</span>
@@ -245,7 +245,7 @@ export default function ProjectDetailPage() {
                       </CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <Button className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl">
+                      <Button className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl">
                         <Icon
                           icon="mdi:account-plus"
                           className="mr-2 h-4 w-4"
@@ -254,7 +254,7 @@ export default function ProjectDetailPage() {
                       </Button>
                       <Button
                         variant="outline"
-                        className="w-full rounded-lg border-2 border-emerald-500 font-bold text-emerald-600 transition-all duration-300 hover:scale-105"
+                        className="w-full rounded-lg border-2 border-emerald-500 font-bold text-emerald-600 transition-all duration-300"
                       >
                         <Icon icon="mdi:share" className="mr-2 h-4 w-4" />
                         Share Project

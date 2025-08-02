@@ -38,19 +38,19 @@ export default function Footer() {
             <div className="mt-8 flex space-x-4">
               <a
                 href="#"
-                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
+                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-500/20"
               >
                 <Icon icon="mdi:twitter" className="h-6 w-6 text-white" />
               </a>
               <a
                 href="#"
-                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
+                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-500/20"
               >
                 <Icon icon="mdi:linkedin" className="h-6 w-6 text-white" />
               </a>
               <a
                 href="#"
-                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:scale-110 hover:bg-emerald-500/20"
+                className="group relative flex h-12 w-12 items-center justify-center rounded-lg bg-white/10 backdrop-blur-sm transition-all duration-300 hover:bg-emerald-500/20"
               >
                 <Icon icon="mdi:instagram" className="h-6 w-6 text-white" />
               </a>

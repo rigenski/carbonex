@@ -174,7 +174,7 @@ export default function LoginContainer() {
             <Button
               type="submit"
               disabled={authLoginMutation.isPending}
-              className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
+              className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl"
             >
               {authLoginMutation.isPending ? (
                 <div className="flex items-center">

@@ -124,7 +124,7 @@ export default function CommunityProjectPage() {
           {filteredProjects.map((project) => (
             <Card
               key={project.id}
-              className="border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              className="border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl"
             >
               <CardHeader>
                 <div className="flex items-center justify-between">

@@ -60,7 +60,7 @@ export default function Home() {
                 <div className="mb-12 flex flex-col gap-4 sm:flex-row">
                   <Link
                     href="/projects"
-                    className="group relative overflow-hidden rounded-2xl bg-white px-6 py-3 text-center font-bold text-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:px-8 sm:py-4"
+                    className="group relative overflow-hidden rounded-2xl bg-white px-6 py-3 text-center font-bold text-emerald-600 transition-all duration-300 hover:shadow-2xl sm:px-8 sm:py-4"
                   >
                     <Icon
                       icon="mdi:rocket-launch"
@@ -70,7 +70,7 @@ export default function Home() {
                   </Link>
                   <Link
                     href="/communities"
-                    className="rounded-2xl border-2 border-white/30 px-6 py-3 text-center font-bold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/10 sm:px-8 sm:py-4"
+                    className="rounded-2xl border-2 border-white/30 px-6 py-3 text-center font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10 sm:px-8 sm:py-4"
                   >
                     <Icon
                       icon="mdi:account-group"
@@ -134,7 +134,7 @@ export default function Home() {
                     <Image
                       src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&h=400&fit=crop&crop=center"
                       alt="Environmental sustainability"
-                      className="h-64 w-full rounded-2xl object-cover transition-transform duration-500 hover:scale-105 sm:h-80"
+                      className="h-64 w-full rounded-2xl object-cover transition-transform duration-500 sm:h-80"
                       width={480}
                       height={480}
                     />
@@ -192,7 +192,7 @@ export default function Home() {
 
           <div className="grid grid-cols-1 gap-6 sm:gap-8 md:grid-cols-3">
             {/* Feature Card 1 */}
-            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
+            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-2xl sm:p-8">
               <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-emerald-500 sm:h-20 sm:w-20">
                 <Icon
                   icon="mdi:check-circle"
@@ -210,7 +210,7 @@ export default function Home() {
             </div>
 
             {/* Feature Card 2 */}
-            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
+            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-2xl sm:p-8">
               <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-blue-500 sm:h-20 sm:w-20">
                 <Icon
                   icon="mdi:lightning-bolt"
@@ -228,7 +228,7 @@ export default function Home() {
             </div>
 
             {/* Feature Card 3 */}
-            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:p-8">
+            <div className="group rounded-3xl bg-white p-6 shadow-lg transition-all duration-300 hover:shadow-2xl sm:p-8">
               <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-purple-500 sm:h-20 sm:w-20">
                 <Icon
                   icon="mdi:trending-up"
@@ -302,7 +302,7 @@ export default function Home() {
                 key={index}
                 className="group flex flex-col items-center text-center"
               >
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-white/20 sm:h-20 sm:w-20">
+                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/20 sm:h-20 sm:w-20">
                   <Icon
                     icon={client.icon}
                     className="h-8 w-8 text-white sm:h-10 sm:w-10"
@@ -397,7 +397,7 @@ export default function Home() {
             ].map((item, index) => (
               <div key={index} className="group text-center">
                 <div className="relative mb-6">
-                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-emerald-500 shadow-lg transition-all duration-300 group-hover:scale-110 group-hover:shadow-2xl sm:h-24 sm:w-24">
+                  <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-3xl bg-emerald-500 shadow-lg transition-all duration-300 group-hover:shadow-2xl sm:h-24 sm:w-24">
                     <Icon
                       icon={item.icon}
                       className="h-10 w-10 text-white sm:h-12 sm:w-12"
@@ -488,7 +488,7 @@ export default function Home() {
                 <Image
                   src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
                   alt="Get started"
-                  className="h-64 w-full rounded-2xl object-cover transition-transform duration-500 hover:scale-105 sm:h-80"
+                  className="h-64 w-full rounded-2xl object-cover transition-transform duration-500 sm:h-80"
                   width={480}
                   height={480}
                 />
@@ -519,14 +519,14 @@ export default function Home() {
             {[1, 2, 3].map((project) => (
               <div
                 key={project}
-                className="group overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                className="group overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl"
               >
                 <div className="relative h-48 overflow-hidden">
                   <Image
                     src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=400&h=250&fit=crop&crop=center"
                     alt={`Project ${project}`}
                     fill
-                    className="object-cover transition-transform duration-300 group-hover:scale-110"
+                    className="object-cover transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black/50"></div>
                   <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
@@ -559,7 +559,7 @@ export default function Home() {
 
                   <Link
                     href={`/projects/${project}`}
-                    className="block w-full rounded-lg bg-emerald-600 py-3 text-center font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
+                    className="block w-full rounded-lg bg-emerald-600 py-3 text-center font-bold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl"
                   >
                     <Icon icon="mdi:eye" className="mr-2 inline h-4 w-4" />
                     View Details
@@ -572,7 +572,7 @@ export default function Home() {
           <div className="mt-12 text-center">
             <Link
               href="/projects"
-              className="inline-flex items-center rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-2xl sm:px-8 sm:py-4"
+              className="inline-flex items-center rounded-2xl bg-emerald-600 px-6 py-3 font-bold text-white transition-all duration-300 hover:bg-emerald-700 hover:shadow-2xl sm:px-8 sm:py-4"
             >
               <Icon icon="mdi:rocket-launch" className="mr-2 h-5 w-5" />
               View All Projects
@@ -610,7 +610,7 @@ export default function Home() {
                 key={index}
                 className="group flex flex-col items-center text-center"
               >
-                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:scale-110 group-hover:bg-white/20 sm:h-20 sm:w-20">
+                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-sm transition-all duration-300 group-hover:bg-white/20 sm:h-20 sm:w-20">
                   <Icon
                     icon={validator.icon}
                     className="h-8 w-8 text-white sm:h-10 sm:w-10"
@@ -646,14 +646,14 @@ export default function Home() {
           <div className="flex flex-col justify-center gap-4 sm:flex-row sm:gap-6">
             <Link
               href="/register"
-              className="group relative overflow-hidden rounded-2xl bg-white px-6 py-3 font-bold text-emerald-600 transition-all duration-300 hover:scale-105 hover:shadow-2xl sm:px-8 sm:py-4"
+              className="group relative overflow-hidden rounded-2xl bg-white px-6 py-3 font-bold text-emerald-600 transition-all duration-300 hover:shadow-2xl sm:px-8 sm:py-4"
             >
               <Icon icon="mdi:party-popper" className="mr-2 inline h-5 w-5" />
               Start Free Today
             </Link>
             <Link
               href="/projects"
-              className="rounded-2xl border-2 border-white/30 px-6 py-3 font-bold text-white backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:bg-white/10 sm:px-8 sm:py-4"
+              className="rounded-2xl border-2 border-white/30 px-6 py-3 font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10 sm:px-8 sm:py-4"
             >
               <Icon icon="mdi:fire" className="mr-2 inline h-5 w-5" />
               Explore Premium Projects

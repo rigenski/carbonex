@@ -347,7 +347,7 @@ export default function CarbonIssuedPage() {
                         <TableCell>
                           <Button
                             asChild
-                            className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
+                            className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl"
                           >
                             <Link href={`/projects/${project.id}`}>
                               <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />

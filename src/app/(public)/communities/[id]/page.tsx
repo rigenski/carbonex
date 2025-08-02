@@ -144,14 +144,14 @@ export default function CommunityDetailPage() {
             <TabsList className="grid h-10 grid-cols-2 rounded-xl border border-white/20 bg-white/90 shadow-lg backdrop-blur-md">
               <TabsTrigger
                 value="overview"
-                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 hover:scale-102 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 <Icon icon="mdi:information-outline" className="mr-2 h-4 w-4" />
                 Overview
               </TabsTrigger>
               <TabsTrigger
                 value="projects"
-                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 hover:scale-102 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
+                className="rounded-lg px-8 py-2 font-semibold transition-all duration-300 data-[state=active]:scale-105 data-[state=active]:bg-emerald-600 data-[state=active]:text-white data-[state=active]:shadow-lg"
               >
                 <Icon
                   icon="mdi:folder-multiple-outline"
@@ -196,7 +196,7 @@ export default function CommunityDetailPage() {
                               src={image}
                               alt={`Community image ${index + 1}`}
                               fill
-                              className="object-cover transition-transform duration-300 hover:scale-110"
+                              className="object-cover transition-transform duration-300"
                             />
                           </div>
                         ))}
@@ -216,7 +216,7 @@ export default function CommunityDetailPage() {
                     <CardContent className="space-y-3">
                       <Button
                         variant="outline"
-                        className="w-full rounded-lg border-2 border-emerald-500 font-bold text-emerald-600 transition-all duration-300 hover:scale-105"
+                        className="w-full rounded-lg border-2 border-emerald-500 font-bold text-emerald-600 transition-all duration-300"
                       >
                         <Icon icon="mdi:share" className="mr-2 h-4 w-4" />
                         Share Community
@@ -239,14 +239,14 @@ export default function CommunityDetailPage() {
                     {community.projectsList.map((project) => (
                       <Card
                         key={project.id}
-                        className="group overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                        className="group overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl"
                       >
                         <div className="relative h-48 overflow-hidden">
                           <Image
                             src={project.image}
                             alt={project.name}
                             fill
-                            className="object-cover transition-transform duration-300 group-hover:scale-110"
+                            className="object-cover transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-black/50"></div>
                           <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
@@ -283,7 +283,7 @@ export default function CommunityDetailPage() {
 
                           <Button
                             asChild
-                            className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
+                            className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl"
                           >
                             <Link href={`/projects/${project.id}`}>
                               <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />

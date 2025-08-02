@@ -224,14 +224,14 @@ export default function CommunitiesPage() {
               {filteredCommunities.map((community) => (
                 <Card
                   key={community.id}
-                  className="group overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:scale-105 hover:shadow-xl"
+                  className="group overflow-hidden border-0 bg-white/80 shadow-lg backdrop-blur-md transition-all duration-300 hover:shadow-xl"
                 >
                   <div className="relative h-48 overflow-hidden">
                     <Image
                       src={community.image}
                       alt={community.name}
                       fill
-                      className="object-cover transition-transform duration-300 group-hover:scale-110"
+                      className="object-cover transition-transform duration-300"
                     />
                     <div className="absolute inset-0 bg-black/50"></div>
                     <Badge className="absolute top-4 right-4 bg-emerald-500 text-white">
@@ -267,7 +267,7 @@ export default function CommunitiesPage() {
 
                     <Button
                       asChild
-                      className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
+                      className="w-full rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl"
                     >
                       <Link href={`/communities/${community.id}`}>
                         <Icon icon="mdi:eye" className="mr-2 h-4 w-4" />
@@ -307,7 +307,7 @@ export default function CommunitiesPage() {
               <div className="space-x-4">
                 <Button
                   asChild
-                  className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:scale-105 hover:bg-emerald-700 hover:shadow-xl"
+                  className="rounded-lg bg-emerald-600 font-bold text-white shadow-lg transition-all duration-300 hover:bg-emerald-700 hover:shadow-xl"
                 >
                   <Link href="/register">
                     <Icon icon="mdi:account-plus" className="mr-2 h-4 w-4" />
