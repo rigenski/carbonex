@@ -67,6 +67,12 @@ export default function Header() {
               >
                 Communities
               </Link>
+              <Link
+                href="/news"
+                className="group relative rounded-lg px-4 py-2 text-sm font-bold text-nowrap text-gray-700 transition-all duration-300 hover:bg-emerald-50 hover:text-emerald-600"
+              >
+                News
+              </Link>
             </div>
           </div>
 
@@ -228,6 +234,16 @@ export default function Header() {
                             className="mr-3 h-5 w-5"
                           />
                           Communities
+                        </Link>
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        asChild
+                        className="w-full justify-start rounded-lg font-bold hover:bg-emerald-50"
+                      >
+                        <Link href="/news" className="flex items-center">
+                          <Icon icon="mdi:newspaper" className="mr-3 h-5 w-5" />
+                          News
                         </Link>
                       </Button>
                     </div>

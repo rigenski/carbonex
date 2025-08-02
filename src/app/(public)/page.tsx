@@ -658,6 +658,13 @@ export default function Home() {
               <Icon icon="mdi:fire" className="mr-2 inline h-5 w-5" />
               Explore Premium Projects
             </Link>
+            <Link
+              href="/news"
+              className="rounded-2xl border-2 border-white/30 px-6 py-3 font-bold text-white backdrop-blur-sm transition-all duration-300 hover:bg-white/10 sm:px-8 sm:py-4"
+            >
+              <Icon icon="mdi:newspaper" className="mr-2 inline h-5 w-5" />
+              Read Latest News
+            </Link>
           </div>
         </div>
       </section>
